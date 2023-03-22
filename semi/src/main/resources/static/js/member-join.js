@@ -9,11 +9,12 @@ $(function(){
 		memberPwReValid:false,	//비밀번호 확인 (일치)
 		memberNickValid:false,		//닉네임 (형식 + 중복)
 		memberTelValid:false,		//전화번호 (형식)
+		memberEmailValid:false,		//이메일(형식 + 중복)
 		memberBirthValid:false, 	//생년월일 (형식)
 		memberAddressValid:true,		//주소 (애매한 입력)
 		isAllValid:function(){
 			return this.memberIdValid && this.memberPwValid && this.memberPwReValid && this.memberNickValid
-						&& this.memberTelValid && this.memberBirthValid && this.memberAddressValid;
+						&& this.memberTelValid && this.memberBirthValid &&this.memberEmailValid && this.memberAddressValid;
 		}
 	};
 	
@@ -101,6 +102,42 @@ $(function(){
 		
 		$.ajax({
 			url:"/rest/member/memberNick/"+memberNick,
+			method:"get",
+			success:function(response){
+				if(response == "Y"){
+					target.removeClass("valid invalid invalid2")
+								.addClass("valid");
+				}
+				else{
+					target.removeClass("valid invalid invalid2")
+								.addClass("invalid2");
+				}
+			},
+			error:function(){
+				alert("통신 오류");
+			}
+		});
+		
+		
+	});
+	
+	//이메일 검사
+	$("[name=memberEmail]").blur(function(){
+		var regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+		var target = $(this);
+		var memberEmail = target.val();
+		var isValid = regex.test(memberEmail);
+		
+		valid.memberEmailValid = isValid;
+		
+		if (!isValid){
+			target.removeClass("valid invalid invalid2")
+						.addClass("invalid");
+			return
+		}
+		
+		$.ajax({
+			url:"/rest/member/memberEmail/"+memberEmail,
 			method:"get",
 			success:function(response){
 				if(response == "Y"){

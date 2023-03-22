@@ -25,4 +25,9 @@ public class MemberRestController {
 		return memberDao.selectByNickname(memberNick) == null ? "Y":"N";
 	}
 	
+	@GetMapping("/memberEmail/{memberEmail}")
+	public String findTel(@PathVariable String memberEmail) {
+		return memberDao.selectByEmail(memberEmail) == null ? "Y":"N";
+	}
+	
 }
