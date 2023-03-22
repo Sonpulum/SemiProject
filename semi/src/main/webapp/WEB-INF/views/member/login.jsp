@@ -73,8 +73,8 @@
         <img src="/static/image/backpack.jpg" alt="배낭 챙겨">
     </div>
     <form class="form" action="/member/login" method="post" autocomplete="off">
-        <input type="text" placeholder="아이디">
-        <input type="password" placeholder="비밀번호">
+        <input type="text" name="memberId" placeholder="아이디">
+        <input type="password" name="memberPw" placeholder="비밀번호">
         <button type="submit">로그인</button>
         <p><a href="#">아이디/비밀번호 찾기</a></p>
         <p><a href="/member/join">회원가입</a></p>
