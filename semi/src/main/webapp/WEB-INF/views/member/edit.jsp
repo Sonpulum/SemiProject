@@ -4,7 +4,7 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<form action="edit" method="post" autocomplete="off">
+<form action="/member/edit" method="post" autocomplete="off">
 <div class=container-300>
    <div class="row center mb-20">
       <h2>개인정보 변경</h2>
