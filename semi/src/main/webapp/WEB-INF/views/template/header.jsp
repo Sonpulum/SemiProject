@@ -34,7 +34,7 @@
         <header>
             <div class="flex-box">
                 <div class="row w-10">
-                    <img src="https://via.placeholder.com/70x70?text=LOGO" alt="로고">
+                    <img src="/static/image/backpack.jpg" alt="배낭 챙겨" width="70px" height="70px">
                 </div>
                 <div class="row w-15">
                     <h1>배낭챙겨</h1>
@@ -57,7 +57,7 @@
 		            </ul>
 		        </nav>
 		        <div class="row">
-	            	<a href="#" class="form-btn neutral">로그인</a>
+	            	<a href="/member/login" class="form-btn neutral">로그인</a>
             	</div>
             </div>
         </header>
