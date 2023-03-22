@@ -3,6 +3,8 @@ package com.kh.semi.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.semi.component.RandomComponent;
 import com.kh.semi.dao.MemberDao;
 import com.kh.semi.dto.MemberDto;
 
@@ -20,6 +23,12 @@ import com.kh.semi.dto.MemberDto;
 public class MemberController {
 	@Autowired
 	private MemberDao memberDao;
+	
+	@Autowired
+	private JavaMailSender sender;
+	
+	@Autowired
+	private RandomComponent randomComponent;
 	
 	// 회원 가입
 	@GetMapping("/join")
@@ -151,4 +160,63 @@ public class MemberController {
 	 public String exitFinish() {
 		 return "/WEB-INF/views/member/exitFinish.jsp";
 	 }
+	 
+   //아이디 찾기
+   @GetMapping("/find")
+   public String find() {
+      return "/WEB-INF/views/member/find.jsp";
+   }
+   
+   @PostMapping("/find")
+   public String find(@ModelAttribute MemberDto memberDto,
+         Model model, RedirectAttributes attr) {
+      try {
+         String memberId = memberDao.findId(memberDto);
+         model.addAttribute("findId", memberId);
+         return "/WEB-INF/views/member/findResult.jsp";
+      }
+      catch(Exception e) {
+         attr.addAttribute("mode", "error");
+         return "redirect:find";
+      }
+   }
+   
+   //비밀번호 찾기
+   @GetMapping("/findPw")
+   public String findPw() {
+      return "/WEB-INF/views/member/findPw.jsp";
+   }
+   
+   @PostMapping("/findPw")
+   public String findPw(@ModelAttribute MemberDto memberDto,
+         @RequestParam String memberId,
+         RedirectAttributes attr) {
+      try {
+         MemberDto userDto = memberDao.selectOne(memberId);
+         
+         String memberEmail = userDto.getMemberEmail();
+         String userId = userDto.getMemberId();
+         
+         String temporaryPw = randomComponent.generateString(10);
+         
+         if(userDto.getMemberId().equals(userId)) {
+            //1회용 비밀번호 이메일로 발급
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setTo(memberEmail);
+            message.setSubject("일회용 비밀번호 발급");
+            message.setText(temporaryPw);
+            
+            sender.send(message);
+            
+            //비밀번호 변경
+            memberDao.changePassword(temporaryPw, memberId);
+         }
+         
+         return "/WEB-INF/views/member/findPwResult.jsp";
+      }
+      catch(Exception e) {
+         attr.addAttribute("mode", "error");
+         return "redirect:findPw";
+      }
+   }
 }
