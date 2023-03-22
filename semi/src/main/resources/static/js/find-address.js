@@ -1,3 +1,4 @@
+// 우편번호 찾기 주소 구현
 $(function(){
     document.querySelector(".find-address-btn")
             .addEventListener("click", findAddress);
