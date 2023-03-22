@@ -98,4 +98,11 @@ public class MemberDao {
 		List<MemberDto> list = jdbcTemplate.query(sql, mapper, param);
 		return list.isEmpty() ? null : list.get(0);
 	}
+	
+	public MemberDto selectByEmail(String memberEmail) {
+		String sql = "select * from member where member_email = ?";
+		Object[] param = {memberEmail};
+		List<MemberDto> list = jdbcTemplate.query(sql, mapper, param);
+		return list.isEmpty() ? null : list.get(0);
+	}
 }

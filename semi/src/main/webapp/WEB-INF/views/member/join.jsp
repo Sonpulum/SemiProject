@@ -50,6 +50,9 @@
     <div class="row">
         <label class="form-label w-100">이메일</label>
         <input name="memberEmail" type="text" class="form-input w-100">
+        <div class="valid-message">사용 가능한 이메일입니다</div>
+        <div class="invalid-message">잘못된 형식의 이메일입니다</div>
+        <div class="invalid-message2">이미 사용중인 이메일입니다</div>
     </div>
     <div class="row">
         <label class="form-label w-100">휴대전화</label>
@@ -72,7 +75,7 @@
         <div class="invalid-message">주소는 비워두거나 모두 작성해야 합니다</div>
     </div>
     <div class="row">
-        <button type="submit" class="form-btn positive w-100">회원가입</button>
+        <button type="submit" class="form-btn join-btn positive w-100">회원가입</button>
     </div>
 </div>
 </form>
