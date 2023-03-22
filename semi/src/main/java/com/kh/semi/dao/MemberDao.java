@@ -91,4 +91,11 @@ public class MemberDao {
 		Object[]param = {memberDto.getMemberNick(), memberDto.getMemberTel(), memberDto.getMemberBirth()};
 		return jdbcTemplate.queryForObject(sql, String.class, param);
 	}
+
+	public MemberDto selectByNickname(String memberNick) {
+		String sql = "select * from member where member_nick = ?";
+		Object[] param = {memberNick};
+		List<MemberDto> list = jdbcTemplate.query(sql, mapper, param);
+		return list.isEmpty() ? null : list.get(0);
+	}
 }
