@@ -5,20 +5,21 @@
 
 <div class="container-500">
    <div class="row center">
-      <h1>아이디 찾기</h1>
+      <h1>비밀번호 찾기</h1>
     </div>
     
    <div class="row center">
-      <form action="find" method="post">
-         <input type ="text" name="memberNick" required 
-         placeholder="닉네임을 입력하세요" class="form-input"><br><br>
+      <form action="findPw" method="post">
+      
+         <input type ="text" name="memberId" required 
+         placeholder="아이디를 입력하세요" class="form-input w-100"><br><br>
          
-         <input type ="tel" name="memberTel" required 
-         placeholder="전화번호를 입력하세요" class="form-input"><br><br>
+         <input type ="email" name="memberEmail" required 
+         placeholder="이메일을 입력하세요" class="form-input w-100"><br><br>
+
+         <button type="submit" class="form-btn positive w-100">확인</button><br><br>
          
-         생년월일 : <input type ="date" name="memberBirth" required class="form-input"><br><br>
-         
-         <button type="submit" class="form-btn neutral">아이디 찾기</button>
+         <a href="login" class="form-btn neutral w-100">로그인 페이지로 이동</a>
       </form>
    </div>
    
