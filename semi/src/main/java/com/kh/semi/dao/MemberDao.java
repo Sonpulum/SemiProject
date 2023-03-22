@@ -37,11 +37,11 @@ public class MemberDao {
 	};
 	
 	public void insert(MemberDto memberDto) {
-		String sql = "insert into member(member_id, member_pw, member_nick, member_tel,"
-				+ "member_email, member_birth, member_post, member_basic_addr,"
+		String sql = "insert into member(member_id, member_pw, member_nick, member_tel, "
+				+ "member_email, member_birth, member_post, member_basic_addr, "
 				+ "member_detail_addr, member_level) "
 				+ "values("
-				+ "?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "?, ?, ?, ?, ?, ?, ?, ?, ?, '일반회원')";
 		Object[] param = {
 				memberDto.getMemberId(), memberDto.getMemberPw(), memberDto.getMemberNick(),
 				memberDto.getMemberTel(), memberDto.getMemberEmail(), memberDto.getMemberBirth(),
