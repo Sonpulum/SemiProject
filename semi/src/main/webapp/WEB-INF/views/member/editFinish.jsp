@@ -3,9 +3,17 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<h1>개인정보 변경 완료</h1>
+<div class="container-400">
+	<div class="row center mt-40 mb-40">
+		<h2>개인정보 변경 완료</h2>
+	</div>
 
-<h2><a href="/">홈으로</a></h2>
-<h2><a href="mypage">마이페이지</a></h2>
+	<div class="row center mb-20">
+		<h3><a class="link" href="/">홈으로</a></h3>
+	</div>
+	<div class="row center">
+		<h3><a class="link" href="mypage">마이페이지</a></h3>
+	</div>
+</div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
