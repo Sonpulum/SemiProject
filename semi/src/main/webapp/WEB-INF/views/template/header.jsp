@@ -33,32 +33,46 @@
     <main>
         <header>
             <div class="flex-box">
-                <div class="row w-10">
-                    <img src="/static/image/backpack.jpg" alt="배낭 챙겨" width="70px" height="70px">
+                <div class="row w-10 center">
+                	<a href="/">
+                    <img src="/static/image/backpack.jpg" alt="배낭 챙겨" width="80px" height="80px" class="pb-10">
+                	</a>
                 </div>
-                <div class="row w-15">
-                    <h1>배낭챙겨</h1>
+                <div class="row w-15 center">
+                    <h1 class="mt-5 me-20">배낭챙겨</h1>
                 </div>
-                <div class="row">
+                <div class="row center">
                 	<input type="search" class="form-input" placeholder="검색">
                 </div>
-		        <nav>
+		        <nav class="mt-10">
 		        	<!-- 메뉴를 상태에 따라 다르게 나오도록 처리 -->
 		            <ul class="menu">
-		                <li><a href="#">추천</a>
+		                <li class="center"><a href="#">추천</a>
 		                	<ul>
 		                		<li><a href="#">지역</a></li>
 		                		<li><a href="#">계절</a></li>
 		                		<li><a href="#">테마</a></li>
 		                	</ul>
 		                	</li>
-		                <li><a href="#">후기</a></li>
-		                <li><a href="#">Q&A</a></li>
-		            </ul>
-		        </nav>
-		        <div class="row">
-	            	<a href="/member/login" class="form-btn neutral">로그인</a>
-            	</div>
+		                <li class="center"><a href="#">후기</a></li>
+		                <li class="center"><a href="#">Q&A</a></li>
+		                
+		            <li class="center"><a>회원메뉴</a>
+                    <ul>
+                    	<!-- 로그아웃 상태 -->
+                    	<c:if test="${memberId == null }">
+                        <li class="center"><a href="/member/login">로그인</a></li>
+                        <li class="center"><a href="/member/join">회원가입</a></li>
+                    	<!-- 로그인 상태 -->
+                    	</c:if>
+                    	<c:if test="${memberId !=null }">
+                        <li class="center"><a href="/member/logout">로그아웃</a></li>
+                        <li class="center"><a href="/member/mypage">내정보</a></li>
+                    	</c:if>
+                    </ul>
+                </li>
+		       </ul>
+		    </nav>
             </div>
         </header>
         <section>

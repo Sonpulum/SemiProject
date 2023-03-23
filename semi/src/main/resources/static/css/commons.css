@@ -203,6 +203,7 @@ a.form-btn {
 .mv-40 { margin:40px 0; }
 .mv-50 { margin:50px 0; }
 
+.mt-5 { margin-top: 5px; }
 .mt-10 { margin-top: 10px; }
 .mt-20 { margin-top: 20px; }
 .mt-30 { margin-top: 30px; }
@@ -555,7 +556,7 @@ input.form-input.form-input-bg {
     list-style: none;
     margin: 0;
     padding: 0;
-    font-size: 25px;
+    font-size: 20px;
     font-weight:bold;
 
 }
