@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.semi.dto.ReviewDto;
+import com.kh.semi.vo.ReviewPaginationVO;
 
 @Repository
 public class ReviewDao {
@@ -61,6 +62,47 @@ public class ReviewDao {
 		
 	}
 	
+	//페이징 적용된 조회 및 카운트
+		public int selectCount(ReviewPaginationVO vo) {
+			if(vo.isSearch()) {
+				String sql = "select count(*) from review where instr(#1,?)>0";
+				sql=sql.replace("#1", vo.getColumn());
+				Object[] param = {vo.getKeyword()};
+				return jdbcTemplate.queryForObject(sql, int.class, param);
+			}
+			else {
+				String sql = "select count(*) from review";
+				return jdbcTemplate.queryForObject(sql, int.class);
+			}
+		}
+		
+		//페이징 적용
+		public List<ReviewDto> selectList(ReviewPaginationVO vo){
+			if(vo.isSearch()) {
+				String sql = "select * from ( "
+						+ "select rownum rn, TMP.* from ( "
+						+ "select * from review "
+						+ "where instr(#1,?)>0"
+						+ "order by review_no asc"
+						+ ")TMP"
+						+ ") where rn between ? and ?";
+				sql = sql.replace("#1", vo.getColumn());
+				Object[] param = {vo.getKeyword(), vo.getBegin(), vo.getEnd()};
+				return jdbcTemplate.query(sql, mapper, param);
+			}
+			else {
+				String sql = "select * from ( "
+						+ "select rownum rn, TMP.* from ( "
+						+ "select * from review "
+						+ "order by review_no asc"
+						+ ")TMP"
+						+ ") where rn between ? and ?";
+				Object[] param = {vo.getBegin(), vo.getEnd()};
+				return jdbcTemplate.query(sql, mapper,param);			
+			}
+			
+		}
+	
 	//게시물 등록
 	public int sequence() {
 			String sql = "select review_seq.nextval from dual";
@@ -77,6 +119,7 @@ public class ReviewDao {
 				reviewDto.getReviewLocation(), reviewDto.getReviewLike(), reviewDto.getReviewReply(), reviewDto.getReviewRead()};
 		jdbcTemplate.update(sql,param);	
 	}
+	
 	
 	//수정
 	public boolean update(ReviewDto reviewDto) {
