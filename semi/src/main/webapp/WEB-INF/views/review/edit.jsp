@@ -62,7 +62,39 @@
 <input type="hidden" name="reviewNo" value="${reviewDto.reviewNo}">
 
 <div class="container-800">
+
+	<!-- 말머리 -->
+	<div class="row">
+		<label class="form-label">지역</label>
+		<select class="form-input" name="reviewLocation">
+			<option value="">없음</option>
+			<option>수도권</option>
+			<option>강원도</option>
+			<option>충청도</option>
+			<option>경상도</option>
+			<option>전라도</option>
+			<option>제주도</option>
+		</select>
+		
+		<label class="form-label">계절</label>
+		<select class="form-input" name="reviewSeason">
+			<option value="">없음</option>
+			<option>봄</option>
+			<option>여름</option>
+			<option>가을</option>
+			<option>겨울</option>
+		</select>
+
+		<label class="form-label">테마</label>
+		<select class="form-input" name="reviewTheme">
+			<option value="">없음</option>
+			<option>레저</option>
+			<option>관광</option>
+			<option>식도락</option>
+		</select>
+	</div>
 	
+	<!-- 제목 -->
 	<div class="row">
 		<label class="form-label w-100">제목</label>
 		<input class="form-input w-100" type="text" name="reviewTitle" value="${reviewDto.reviewTitle}" required>
