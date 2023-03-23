@@ -77,7 +77,24 @@ public class ReviewDao {
 				reviewDto.getReviewLocation(), reviewDto.getReviewLike(), reviewDto.getReviewReply(), reviewDto.getReviewRead()};
 		jdbcTemplate.update(sql,param);	
 	}
-		
 	
+	//수정
+	public boolean update(ReviewDto reviewDto) {
+		String sql = "update review set "
+				+ "review_title = ?, review_content = ? "
+				+ "where review_no = ?";
+		Object[] param = {
+			reviewDto.getReviewTitle(), reviewDto.getReviewContent(),
+			reviewDto.getReviewNo()
+		};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
+	
+	//삭제
+	public boolean delete(int reviewNo) {
+		String sql = "delete review where review_no = ?";
+		Object[] param = {reviewNo};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
 	
 }
