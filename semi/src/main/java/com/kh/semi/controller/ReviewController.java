@@ -1,5 +1,7 @@
 package com.kh.semi.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.semi.dao.ReviewDao;
 import com.kh.semi.dto.ReviewDto;
+import com.kh.semi.vo.ReviewPaginationVO;
 
 @Controller
 @RequestMapping("/review")
@@ -22,6 +25,21 @@ public class ReviewController {
 	
 	@Autowired ReviewDao reviewDao;
 	
+	//후기 게시판 목록
+	@GetMapping("/list")
+	public String list(@ModelAttribute("vo") ReviewPaginationVO vo,
+			Model model) {
+		//게시글 개수(목록/검색이 다름)
+		int totalCount = reviewDao.selectCount(vo);
+		vo.setCount(totalCount);
+		
+		
+		//게시글
+		List<ReviewDto> list = reviewDao.selectList(vo);
+		model.addAttribute("list", list);
+		
+		return "/WEB-INF/views/review/list.jsp";
+	}
 
 	//후기 게시판 등록
 	@GetMapping("/write")
@@ -35,16 +53,16 @@ public class ReviewController {
 			HttpSession session, RedirectAttributes attr
 			) {
 		
-		int reviewNo = reviewDao.sequence();
 		String memberId = (String)session.getAttribute("memberId");
+		int reviewNo = reviewDao.sequence();
 		
 		reviewDto.setReviewNo(reviewNo);
 		reviewDto.setReviewWriter(memberId);
 		
 		reviewDao.insert(reviewDto);
 		
-		attr.addAttribute("reviewNo", reviewNo);
-		return "redirect:detail";
+		//attr.addAttribute("reviewNo", reviewNo);
+		return "redirect:list";
 	}
 	
 	//후기 게시판 수정
