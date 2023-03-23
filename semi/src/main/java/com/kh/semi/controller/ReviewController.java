@@ -40,30 +40,24 @@ public class ReviewController {
 		
 		return "/WEB-INF/views/review/list.jsp";
 	}
-
-	//후기 게시판 등록
+	
+	//후기 게시판 게시글 등록
 	@GetMapping("/write")
 	public String write() {
 		return "/WEB-INF/views/review/write.jsp";
 	}
 	
 	@PostMapping("/write")
-	public String write(
-			@ModelAttribute ReviewDto reviewDto,
-			HttpSession session, RedirectAttributes attr
-			) {
-		
+	public String write(@ModelAttribute ReviewDto reviewDto,
+			HttpSession session) {
 		String memberId = (String)session.getAttribute("memberId");
 		int reviewNo = reviewDao.sequence();
-		
 		reviewDto.setReviewNo(reviewNo);
 		reviewDto.setReviewWriter(memberId);
-		
 		reviewDao.insert(reviewDto);
-		
-		//attr.addAttribute("reviewNo", reviewNo);
 		return "redirect:list";
 	}
+	
 	
 	//후기 게시판 수정
 	@GetMapping("/edit")
