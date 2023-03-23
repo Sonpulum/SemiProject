@@ -55,7 +55,7 @@
 		                	</ul>
 		                	</li>
 		                <li class="center"><a href="#">후기</a></li>
-		                <li class="center"><a href="#">Q&A</a></li>
+		                <li class="center"><a href="/qna/list">Q&A</a></li>
 		                
 		            <li class="center"><a>회원메뉴</a>
                     <ul>
