@@ -50,10 +50,7 @@ public class QnaDao {
             + "values(?, ?, ?, ?, sysdate, 0, 0, ?, ?, 0)";
       Object[] param = {
             qnaDto.getQnaNo(), qnaDto.getQnaWriter(), qnaDto.getQnaTitle(),
-            qnaDto.getQnaContent(), qnaDto.getQnaTime(), qnaDto.getQnaRead(),
-            qnaDto.getQnaLike(), qnaDto.getQnaGroup(),
-            qnaDto.getQnaParent(), qnaDto.getQnaDepth()
-            };
+            qnaDto.getQnaContent(), qnaDto.getQnaGroup(), qnaDto.getQnaParent()};
       jdbcTemplate.update(sql, param);
    }
    
@@ -137,4 +134,18 @@ public class QnaDao {
       Object[] param = {qnaNo};
       return jdbcTemplate.update(sql, param) > 0;
    }
+   
+   	//Q&A 게시글 삭제
+ 	public boolean delete(int qnaNo) {
+ 		String sql ="delete qna where qna_no = ?";
+ 		Object[] param = {qnaNo};
+ 		return jdbcTemplate.update(sql, param) > 0;
+ 	}
+ 	
+ 	//Q&A 게시글 수정
+	public boolean edit(QnaDto qnaDto) {
+		String sql = "update qna set qna_title = ?, qna_content = ? where qna_no = ?";
+		Object[] param = {qnaDto.getQnaTitle(), qnaDto.getQnaContent(), qnaDto.getQnaNo()};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
 }

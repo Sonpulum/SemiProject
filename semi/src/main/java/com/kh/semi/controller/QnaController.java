@@ -41,7 +41,7 @@ public class QnaController {
    
    @PostMapping("/write")
    public String write(@ModelAttribute QnaDto qnaDto,
-         @RequestParam List<Integer> attachmentNo,
+		   @RequestParam(required=false) List<Integer> attachmentNo,
          HttpSession session,
          RedirectAttributes attr) {
       String memberId = (String)session.getAttribute("memberId");
@@ -108,4 +108,34 @@ public class QnaController {
       model.addAttribute("qnaDto", qnaDto);
       return "/WEB-INF/views/qna/detail.jsp";
    }
+   
+   	//게시글 삭제
+ 	@GetMapping("/delete")
+ 	public String delete(@RequestParam int qnaNo) {
+ 		qnaDao.delete(qnaNo);
+ 		return "redirect:list";
+ 	}
+ 	
+ 	//Q&A 게시글 수정
+	@GetMapping("/edit")
+	public String edit(@RequestParam int qnaNo,
+			Model model) {
+		qnaDao.selectOne(qnaNo);
+		model.addAttribute("qnaDto", qnaDao.selectOne(qnaNo));
+		return "/WEB-INF/views/qna/edit.jsp";
+	}
+	
+	@PostMapping("/edit")
+	public String edit(
+			@ModelAttribute QnaDto qnaDto,
+			Model model, RedirectAttributes attr,
+			HttpSession session) {
+		qnaDao.edit(qnaDto);
+		attr.addAttribute("qnaNo", qnaDto.getQnaNo());
+		
+		String memberLevel = (String)session.getAttribute("memberLevel");
+		attr.addAttribute("memberLevel", memberLevel);
+		
+		return "redirect:detail";
+	}
 }
