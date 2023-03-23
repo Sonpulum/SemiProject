@@ -74,21 +74,15 @@ public class ReviewController {
 			RedirectAttributes attr) {
 		reviewDao.update(reviewDto);
 		attr.addAttribute("reviewNo", reviewDto.getReviewNo());
-		return "redirect:detail";
+		return "redirect:list";
 	}
 	
 	//후기 게시판 삭제
 	@GetMapping("/delete")
 	public String delete(@RequestParam int reviewNo) {
 		reviewDao.delete(reviewNo);
-		return "redirect:datail";
+		return "redirect:list";
 	}
 	
-	//후기 게시판 삭제 - 경로 변수 방식
-	@GetMapping("/delete/{reviewNo}")
-	public String delete2(@PathVariable int reviewNo) {
-		reviewDao.delete(reviewNo);
-		return "redirect:../list"; //상대경로
-	}
 	
 }
