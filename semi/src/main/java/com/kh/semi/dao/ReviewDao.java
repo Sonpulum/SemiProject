@@ -103,21 +103,22 @@ public class ReviewDao {
 			
 		}
 	
-	//게시물 등록
+	//등록
 	public int sequence() {
-			String sql = "select review_seq.nextval from dual";
-			return jdbcTemplate.queryForObject(sql, int.class);
+		String sql = "select review_seq.nextval from dual";
+		return jdbcTemplate.queryForObject(sql, int.class);
 	}
 	
 	public void insert(ReviewDto reviewDto) {
-		String sql = "insert into review(review_no, review_writer,review_title,"
-				+ "review_content,review_season,review_theme,review_location, review_like,review_reply,"
-				+ "review_read)"
-				+ "values(?,?,?,?,?,?,?,0,0,0)";
+		String sql = "insert into review("
+				+ "review_no, review_writer, review_title, review_content,"
+				+ "review_theme, review_location, review_season, review_read, review_reply,review_like)"
+				+ "values ("
+				+ "?, ?, ?, ?, ?, ?, ?,0,0,0)";
 		Object[] param = {reviewDto.getReviewNo(), reviewDto.getReviewWriter(), reviewDto.getReviewTitle(),
-				reviewDto.getReviewContent(), reviewDto.getReviewSeason(), reviewDto.getReviewTheme(),
-				reviewDto.getReviewLocation(), reviewDto.getReviewLike(), reviewDto.getReviewReply(), reviewDto.getReviewRead()};
-		jdbcTemplate.update(sql,param);	
+							reviewDto.getReviewContent(), reviewDto.getReviewTheme(),
+							reviewDto.getReviewLocation(),reviewDto.getReviewSeason()};
+		jdbcTemplate.update(sql, param);
 	}
 	
 	
