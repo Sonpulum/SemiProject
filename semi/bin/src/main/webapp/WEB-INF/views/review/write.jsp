@@ -1,31 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+    
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<!-- summernote cdn -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
 <script type="text/javascript">
     $(function(){
         $('[name=reviewContent]').summernote({
-            placeholder: '내용 작성',
+            placeholder: '내용을 입력해주세요',
             tabsize: 4,
-            height: 350,
-            toolbar: [//메뉴 설정
+            height: 600,
+            toolbar: [
                 ['style', ['style']],
                 ['font', ['bold', 'underline', 'clear']],
                 ['color', ['color']],
                 ['para', ['ul', 'ol', 'paragraph']],
                 ['table', ['table']],
                 ['insert', ['link', 'picture']]
-           	],
-	        callbacks: {
+            ],
+            callbacks: {
 				onImageUpload: function(files) {
 					if(files.length != 1) return;
 					
+					//console.log("비동기 파일 업로드 시작");
 					//[1] FormData [2] processData [3] contentType
 					var fd = new FormData();
 					fd.append("attach", files[0]);
@@ -37,79 +36,80 @@
 						processData:false,
 						contentType:false,
 						success:function(response){
-	            			
-	            			//서버로 전송할 이미지 번호 정보 생성
-	            			var input = $("<input>").attr("type", "hidden")
-	            									.attr("name", "attachmentNo")
-	            									.val(response.attachmentNo);
-	            			$("form").prepend(input);
-	            			
-	            			//에디터에 추가할 이미지 생성
-	            			var imgNode = $("<img>").attr("src", "/rest/attachment/download/"+response.attachmentNo);
-	            			//이미지 추가 명령
-	            			$("[name=reviewContent]").summernote('insertNode', imgNode.get(0));
+							var input = $("<input>").attr("type", "hidden")
+																.attr("name", "attachmentNo")
+																.val(response.attachmentNo);
+							$("form").prepend(input);
+
+							var imgNode = $("<img>").attr("src", "/rest/attachment/download/"+response.attachmentNo);
+							$("[name=reviewContent]").summernote('insertNode', imgNode.get(0));
 						},
-	            		error:function(){}
-	            	});
-	            	
-	            }
-	       	}
+						error:function(){}
+					});
+					
+				}
+			}
         });
     });
 </script>
 
+<style>
+	.form-input {
+	    font-size: 18px;
+	    padding: 0.5em;
+	    outline: none;/*선택 시 강조 효과 제거*/
+	    border: 1px solid #636e72;
+	    border-radius: 0.5em;
+	}
+	
+	
+	.form-btn{
+		border-radius:0.5em;
+	}
+	.form-btn.positive{
+		background-color: rgb(64, 165, 187);
+	   	border-color: rgb(64, 165, 187);
+	   	color: white;
+	}
+</style>
 
 <form action="write" method="post" autocomplete="off">
 <div class="container-800">
-	
-	<!-- 말머리 -->
-	<div class="row">
-		<label class="form-label">지역</label>
-		<select class="form-input" name="reviewLocation">
-			<option value="">없음</option>
-			<option>수도권</option>
-			<option>강원도</option>
-			<option>충청도</option>
-			<option>경상도</option>
-			<option>전라도</option>
-			<option>제주도</option>
-		</select>
-		
-		<label class="form-label">계절</label>
-		<select class="form-input" name="reviewSeason">
-			<option value="">없음</option>
-			<option>봄</option>
-			<option>여름</option>
-			<option>가을</option>
-			<option>겨울</option>
-		</select>
-
-		<label class="form-label">테마</label>
-		<select class="form-input" name="reviewTheme">
-			<option value="">없음</option>
-			<option>레저</option>
-			<option>관광</option>
-			<option>식도락</option>
-		</select>
-	</div>
-	
-	<!-- 제목 -->
-	<div class="row">
-		<label class="form-label w-100">제목</label>
-		<input class="form-input w-100" type="text" name="reviewTitle" required>
-	</div>
-	
-	<div class="row">
-		<label class="form-label w-100">내용</label>
-		<textarea class="form-input w-100" name="reviewContent" style=min-height:20em; required></textarea>
-	</div>
-	
-	<div class="row right">
-		<button type="submit" class="form-btn neutral">목록으로</button>
-		<button type="submit" class="form-btn positive">등록하기</button>
-	</div>
+    <div class="row mb-40">
+<!--         <label class="form-label w-100">제목</label> -->
+        
+        <input name="reviewTitle" class="form-input w-50 me-10" type="text" placeholder="제목을 입력해주세요">
+        <select name="reviewLocation" class="form-input w-15">
+            <option value="">지역</option>
+            <option value="수도권">수도권</option>
+            <option value="강원도">강원도</option>
+            <option value="충청도">충청도</option>
+            <option value="전라도">전라도</option>
+            <option value="경상도">경상도</option>
+            <option value="제주">제주</option>
+        </select>
+        <select name="reviewSeason" class="form-input w-15">
+            <option value="">계절</option>
+            <option value="봄">봄</option>
+            <option value="여름">여름</option>
+            <option value="가을">가을</option>
+            <option value="겨울">겨울</option>
+        </select>
+        <select name="reviewTheme" class="form-input w-15">
+            <option value="">테마</option>
+            <option value="레저">레저</option>
+            <option value="관광">관광</option>
+            <option value="식도락">식도락</option>
+        </select>
+    </div>
+    <div class="row">
+<!--         <label class="form-label w-100">내용</label> -->
+        <textarea name="reviewContent"></textarea>
+    </div>
+    <div class="row right">
+        <a href="/review/list" class="form-btn neutral me-10">목록으로</a>
+        <button type="submit" class="form-btn positive">등록하기</button>
+    </div>
 </div>
 </form>
-
-
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
