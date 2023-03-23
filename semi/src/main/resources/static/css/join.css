@@ -1,0 +1,396 @@
+@charset "UTF-8";
+
+/*
+    commons.css
+
+    이 파일에는 자주 사용하는 작은 화면에 대한 클래스가 존재
+
+    제작일자 : 2023-02-22
+    제작자 : 피카츄
+*/
+
+
+
+* {
+    box-sizing: border-box;
+    font-family: '빙그레 메로나체';
+}
+
+/* 
+    container는 표시될 폭과 정렬방식을 가운데로 설정 
+    가운데라고만 하면 너무 애매하므로 다음과 같이 세분화
+    1. 내용물을 가운데 정렬한다 (text-align)
+    2. 자신을 가운데 정렬한다 (margin auto)
+        - auto는 자동으로 계산해서 가능한 값을 부여하라는 의미
+*/
+.container-200 {
+    width:200px;
+    margin:0 auto;
+}
+.container-300 {
+    width:300px;
+    margin:0 auto;
+}
+.container-400 {
+    width:400px;
+    margin:0 auto;
+}
+.container-500 {
+    width:500px;
+    margin:0 auto;
+}
+.container-600 {
+    width:600px;
+    margin:0 auto;
+}
+.container-700 {
+    width:700px;
+    margin:0 auto;
+}
+.container-800 {
+    width:800px;
+    margin:0 auto;
+}
+.container-900 {
+    width:900px;
+    margin:0 auto;
+}
+.container-1000 {
+    width:1000px;
+    margin:0 auto;
+}
+
+/* row와 row 사이에는 일정한 간격을 설정 */
+.row {
+    margin:10px 0px;
+}
+
+/*
+    입력창, 버튼에 관련된 디자인
+    .form-input - 입력창
+    .form-btn - 버튼
+    같은 형태로 쓰기 때문에 색상 등을 제외한 나머지 크기가 동일해야함
+*/
+.form-input {
+    font-size: 20px;
+    color : black;
+    padding: 0.5em;
+    outline: none;/*선택 시 강조 효과 제거*/
+    border: 1px solid lightgray;
+    border-radius: 0.5em;
+}
+.form-input:focus {/*커서가 위치했을 때*/
+    border-color: gray;
+}
+input.form-input, select.form-input, .form-btn {
+    height:2.3em;
+}
+
+/*
+    textarea는 리사이즈(resize)에 대한 설정이 필요하다
+    - resize:vertical 은 수직 변경만 가능
+    - resize:none 은 변경 불가
+
+    만약 resize가 vertical이면 최소높이(min-height)가 지정되어야 한다
+*/
+textarea.form-input {
+    resize: vertical;
+    min-height: 10em;
+}
+
+/*
+    추가 스타일
+    - 파일 선택창은 테두리를 나오게 하지 않겠다
+*/
+input[type=file].form-input {
+    border-color: transparent;
+}
+
+/*
+    버튼은 역할에 따라 색상이 다르다
+    - 긍정 버튼은 초록~파랑 계열
+    - 부정 버튼은 주황~빨강 계열
+    - 중립 버튼은 흑백 계열
+*/
+.form-btn {
+    font-size: 18px;
+    padding: 0.5em;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 0.5em;
+    cursor: pointer;
+}
+
+/*
+    a 태그를 버튼과 동일한 모양으로 만들 수 있도록 개조
+    - display=inline 이므로 block 속성이 들어가게 개조(폭 설정)
+    - text-align으로 글자를 가운데 정렬
+    - text-decoration으로 밑줄을 제거
+*/
+a.form-btn {
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+}
+
+/* 버튼 스타일 */
+/*.form-btn과 .positive가 같이 있으면*/
+.form-btn.positive {
+    background-color: rgb(64, 165, 187);
+    border-color: rgb(64, 165, 187);
+    color: white;
+}
+.form-btn.negative {
+    background-color: #d63031;
+    border-color: #d63031;
+    color: white;
+}
+.form-btn.neutral {
+    background-color: #dfe6e9;
+    border-color: #dfe6e9;
+    color: black;
+}
+
+.form-btn:hover {
+    filter:brightness(105%);/*원래보다 5% 밝게 처리*/
+}
+
+/* 폭 설정 클래스 */
+.w-100 {width:100%;}
+.w-90 {width:90%;}
+.w-80 {width:80%;}
+.w-75 {width:75%;}
+.w-70 {width:70%;}
+.w-60 {width:60%;}
+.w-50 {width:50%;}
+.w-40 {width:40%;}
+.w-33 {width:33.3333%;}
+.w-30 {width:30%;}
+.w-25 {width:25%;}
+.w-20 {width:20%;}
+.w-15 {width:15%;}
+.w-10 {width:10%;}
+
+/* 내부 요소 정렬 클래스 */
+.center {text-align: center;}
+.left {text-align: left;}
+.right {text-align: right;}
+
+/*
+    외부 여백(margin)을 부여할 수 있도록 설정(10~50px)
+    .mv - margin vertical
+    .mt - margin top
+    .mb - margin bottom
+    .ms - margin start(left)
+    .me - margin end(right)
+
+    내부 여백(padding)을 부여할 수 있도록 설정(10~50px)
+    .p - padding
+    .pt - padding top
+    .pb - padding bottom
+    .ps - padding start(left)
+    .pe - padding end(right)
+*/
+.mv-10 { margin:10px 0; }
+.mv-20 { margin:20px 0; }
+.mv-30 { margin:30px 0; }
+.mv-40 { margin:40px 0; }
+.mv-50 { margin:50px 0; }
+
+.mt-10 { margin-top: 10px; }
+.mt-20 { margin-top: 20px; }
+.mt-30 { margin-top: 30px; }
+.mt-40 { margin-top: 40px; }
+.mt-50 { margin-top: 50px; }
+
+.mb-10 { margin-bottom: 10px; }
+.mb-20 { margin-bottom: 20px; }
+.mb-30 { margin-bottom: 30px; }
+.mb-40 { margin-bottom: 40px; }
+.mb-50 { margin-bottom: 50px; }
+
+.ms-10 { margin-left: 10px; }
+.ms-20 { margin-left: 20px; }
+.ms-30 { margin-left: 30px; }
+.ms-40 { margin-left: 40px; }
+.ms-50 { margin-left: 50px; }
+
+.me-10 { margin-right: 10px; }
+.me-20 { margin-right: 20px; }
+.me-30 { margin-right: 30px; }
+.me-40 { margin-right: 40px; }
+.me-50 { margin-right: 50px; }
+
+.p-10 { padding: 10px; }
+.p-20 { padding: 20px; }
+.p-30 { padding: 30px; }
+.p-40 { padding: 40px; }
+.p-50 { padding: 50px; }
+
+.pt-10 { padding-top: 10px; }
+.pt-20 { padding-top: 20px; }
+.pt-30 { padding-top: 30px; }
+.pt-40 { padding-top: 40px; }
+.pt-50 { padding-top: 50px; }
+
+.pb-10 { padding-bottom: 10px; }
+.pb-20 { padding-bottom: 20px; }
+.pb-30 { padding-bottom: 30px; }
+.pb-40 { padding-bottom: 40px; }
+.pb-50 { padding-bottom: 50px; }
+
+.ps-10 { padding-left: 10px; }
+.ps-20 { padding-left: 20px; }
+.ps-30 { padding-left: 30px; }
+.ps-40 { padding-left: 40px; }
+.ps-50 { padding-left: 50px; }
+
+.pe-10 { padding-right: 10px; }
+.pe-20 { padding-right: 20px; }
+.pe-30 { padding-right: 30px; }
+.pe-40 { padding-right: 40px; }
+.pe-50 { padding-right: 50px; }
+
+/*
+    label 디자인
+    - label은 inline이 기본값이다
+    - .form-label은 inline-block으로 변경
+*/
+.form-label {
+    display: inline-block;
+    color: gray;
+}
+
+/*
+    메인 클래스를 .table로 설정
+    서브 클래스를 지정
+    - .table-border : 테두리 구현
+*/
+
+/*
+    이미지를 표시하는 방법
+    [1] <img> 사용
+        - 이미지는 크기 표준화가 어려우므로 width, height 속성 사용
+    [2] background-image 사용
+*/
+.image {}
+
+/* 테두리 부여 */
+.image.image-border-hover:hover,
+.image.image-border {
+    box-shadow: 0 0 0 2px #2d3436;
+}
+/* 그림자 처리 */
+.image.image-shadow-hover:hover,
+.image.image-shadow {
+    box-shadow: 2px 2px 0 0 #2d3436;
+}
+/* 둥근/원형 이미지 */
+.image.image-round {
+    border-radius: 5px;
+}
+.image.image-circle {
+    border-radius: 50%;
+}
+/* 불투명도(opacity) */
+.image.image-blur {
+    opacity: 0.75;
+}
+.image.image-blur:hover,
+.image.image-blur.on {
+    opacity: 1;
+}
+
+
+input.form-input.form-input-bg {
+    /*
+        cover - 큰 쪽에 이미지를 맞춤
+        contain - 작은 쪽에 이미지를 맞춤
+        두 개 부여하면 앞이 폭, 뒤가 높이
+    */
+    background-size: auto 75%;
+    background-repeat: no-repeat;
+    /*
+        위치 선정은 x, y 순으로 하며
+        - px
+        - %
+        - 키워드(x - left/center/right , y - top/center/bottom)
+    */
+    background-position: left 5px center;
+
+    /* 글자 입력란을 오른쪽으로 밀기 위해 여백을 부여 */
+    padding-left: 2.5em;
+}
+
+
+.valid-message {
+    color: forestgreen;
+    display: none;
+}
+.invalid-message,
+.invalid-message2,
+.invalid-message3 {
+    color: red;
+    display: none;
+}
+/* 
+    입력창이 성공상태(.valid)일 경우 
+    뒤에 있는 성공메세지(.valid-message)를 표시 
+*/
+.valid ~ .valid-message {
+    display: block;
+}
+/* 
+    입력창이 실패상태(.invalid)일 경우 
+    뒤에 있는 실패메세지(.invalid-message)를 표시 
+*/
+.invalid ~ .invalid-message {
+    display: block;
+}
+.invalid2 ~ .invalid-message2 {
+    display: block;
+}
+.invalid3 ~ .invalid-message3 {
+    display: block;
+}
+
+/* 입력창 디자인 */
+.valid, .invalid {
+    background-position: top 50% right 3%;
+    background-size: auto 60%;
+    background-repeat: no-repeat;
+}
+.valid {
+    border-color: forestgreen;
+    background-image: url("image/valid.png");
+}
+
+.invalid, .invalid2, .invalid3 {
+    border-color: red;
+    background-image: url("image/invalid.png");
+}
+
+/* 비활성 상태 디자인 */
+.form-btn.positive[disabled],
+.form-btn.positive[disabled]:hover {
+    cursor: not-allowed;
+    background-color: #cae7fd;
+    border-color: #cae7fd;
+    filter:none;
+}
+.logo{
+	width:100px;
+	height:100px;
+	display: inline;
+}
+body{
+	background-color: #f6f6f6;
+}
+.container {
+            background-color: #ffffff;
+            border: 1px solid #ebebeb;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            border-radius: 5px;
+            padding: 0px 50px;
+        }

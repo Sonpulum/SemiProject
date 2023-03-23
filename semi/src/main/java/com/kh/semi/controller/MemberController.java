@@ -39,12 +39,7 @@ public class MemberController {
 	@PostMapping("/join")
 	 public String join(@ModelAttribute MemberDto memberDto) {
 		 memberDao.insert(memberDto);
-		 return "redirect:joinFinish";
-	 }
-	 
-	 @GetMapping("/joinFinish")
-	 public String joinFinish() { 
-		 return "/WEB-INF/views/member/joinFinish.jsp";
+		 return "redirect:login";
 	 }
 	 
 	 //로그인
