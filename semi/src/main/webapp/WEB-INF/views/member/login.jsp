@@ -246,12 +246,16 @@
             <p1>이메일 주소로 로그인</p1>
         </div>
     </form>
-    <form class="form">
-        <input type="text" placeholder="아이디">
-        <input type="password" placeholder="비밀번호">
+    <form class="form" action="login" method="post">
+        <input type="text" name="memberId" placeholder="아이디">
+        <input type="password" name="memberPw" placeholder="비밀번호">
+		<c:if test="${param.mode == 'error'}">
+			<h5 class="row center" style=color:red>아이디 또는 비밀번호를 잘못 입력했습니다. 
+			입력하신 내용을 다시 확인해주세요.</h5>
+		</c:if>
         <button type="submit">로그인</button>
-        <p><a href="#">아이디/비밀번호 찾기</a></p>
-        <p><a href="#">회원가입</a></p>
+        <p><a href="find">아이디/비밀번호 찾기</a></p>
+        <p><a href="join">회원가입</a></p>
     </form>
 </div>
 </body>
