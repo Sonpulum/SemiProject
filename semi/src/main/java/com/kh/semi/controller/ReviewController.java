@@ -35,6 +35,8 @@ public class ReviewController {
 		int totalCount = reviewDao.selectCount(vo);
 		vo.setCount(totalCount);
 		
+		//인기 게시글 조회
+		model.addAttribute("topList",reviewDao.selectTopList(3));
 		
 		//게시글
 		List<ReviewDto> list = reviewDao.selectList(vo);

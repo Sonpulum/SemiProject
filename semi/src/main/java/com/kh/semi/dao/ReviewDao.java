@@ -38,6 +38,14 @@ public class ReviewDao {
 		}
 	};
 	
+	//인기 게시물 조회
+	public List<ReviewDto> selectTopList(int count){
+		String sql = "select * from (select * from review order by review_read desc)\r\n"
+				+ "where rownum<=?";
+		Object[] param = {count};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
+	
 	//목록
 	public List<ReviewDto> selectList(){
 		String sql = "select*from review order by review_no desc";
