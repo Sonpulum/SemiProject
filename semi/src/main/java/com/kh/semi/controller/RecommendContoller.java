@@ -1,5 +1,9 @@
 package com.kh.semi.controller;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.semi.dao.RecommendDao;
 import com.kh.semi.dto.RecommendDto;
@@ -28,23 +33,46 @@ public class RecommendContoller {
 	
 	@PostMapping("/write")
 	public String write(@ModelAttribute RecommendDto recommendDto,
-			HttpSession session) {
+			HttpSession session, @RequestParam(required=false) List<Integer> attachmentNo,
+			RedirectAttributes attr) {
 		String memberId = (String)session.getAttribute("memberId");
 		int recoNo = recommendDao.sequence();
 		recommendDto.setRecoNo(recoNo);
 		recommendDto.setRecoWriter(memberId);
 		recommendDao.insert(recommendDto);
-		return "redirect:writeFinish";
+		
+		if (attachmentNo != null) {
+			for(int no : attachmentNo) {
+				recommendDao.connect(recoNo,no);
+			}
+		}
+		
+		attr.addAttribute("recoNo",recoNo);
+		return "redirect:detail";
 	}
 	
-	@GetMapping("/writeFinish")
-	public String wirteFinish() {
-		return "/WEB-INF/views/recommend/writeFinish.jsp";
-	}
-	
-	@GetMapping("detail")
-	public String detail(@RequestParam int recoNo, Model model) {
-		RecommendDto recommendDto = recommendDao.selectOne(recoNo);
+	@GetMapping("/detail")
+	public String detail(@RequestParam int recoNo, Model model, HttpSession session) {
+		String memberId = (String)session.getAttribute("memberId");
+		RecommendDto recoDto = recommendDao.selectOne(recoNo);
+		
+		boolean owner = recoDto.getRecoWriter() != null && recoDto.getRecoWriter().equals(memberId);
+		if(!owner) {
+			Set<Integer> memory = (Set<Integer>)session.getAttribute("memory");
+			if(memory == null) {
+				memory = new HashSet<>();
+			}
+			
+			if(!memory.contains(recoNo)) {//읽은 적이 없는가(기억에 없는가)
+				recommendDao.updateReadcount(recoNo);
+				recoDto.setRecoRead(recoDto.getRecoRead()+1); //DTO 조회수 1증가
+				memory.add(recoNo);//저장소에 추가(기억에 추가)
+			}
+			//System.out.println("memory = " + memory);
+			session.setAttribute("memory", memory);//저장소 갱신
+		}
+		
+		model.addAttribute("recoDto",recoDto);
 		return "/WEB-INF/views/recommend/detail.jsp";
 	}
 }
