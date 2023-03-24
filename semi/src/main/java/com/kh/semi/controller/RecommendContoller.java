@@ -69,7 +69,7 @@ public class RecommendContoller {
 		
 		boolean owner = recoDto.getRecoWriter() != null && recoDto.getRecoWriter().equals(memberId);
 		if(!owner) {
-			Set<Integer> memory = (Set<Integer>)session.getAttribute("recommend_memory");
+			Set<Integer> memory = (Set<Integer>)session.getAttribute("recommendMemory");
 			if(memory == null) {
 				memory = new HashSet<>();
 			}
@@ -79,7 +79,7 @@ public class RecommendContoller {
 				recoDto.setRecoRead(recoDto.getRecoRead()+1);
 				memory.add(recoNo);
 			}
-			session.setAttribute("recommend_memory", memory);//저장소 갱신
+			session.setAttribute("recommendMemory", memory);//저장소 갱신
 		}
 		
 		model.addAttribute("recoDto",recoDto);
