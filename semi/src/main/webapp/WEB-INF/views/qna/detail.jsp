@@ -96,23 +96,17 @@
             <a href="/qna/write" class="form-btn positive">글쓰기</a>
             <a href="/qna/write?qnaParent=${qnaDto.qnaNo}" class="form-btn positive">답글쓰기</a>
             
-            <c:if test="${owner}">
             <!--  내가 작성한 글이라면 수정과 삭제 메뉴를 출력 -->
-            <a href="/qna/edit?qnaNo=${qnaDto.qnaNo}" class="form-btn neutral">수정</a>
+            <c:if test="${owner}">
+            	<a href="/qna/edit?qnaNo=${qnaDto.qnaNo}" class="form-btn neutral">수정</a>
             </c:if>
             
-            <c:if test="${owner || admin}">
             <!-- 파라미터 방식일 경우의 링크 -->
-            <a href="/qna/delete?qnaNo=${qnaDto.qnaNo}" class="form-btn negative">삭제</a>
-            <!-- 경로 변수 방식일 경우의 링크 -->
-<%--             <a href="/qna/delete/${qnaDto.qnaNo}">삭제</a> --%>
+            <c:if test="${owner || admin}">
+            	<a href="/qna/delete?qnaNo=${qnaDto.qnaNo}" class="form-btn negative">삭제</a>
             </c:if>
             
             <a href="/qna/list" class="form-btn neutral">목록보기</a>
-            </div>
-<%-- (+추가) 오늘 읽은 글(memory) 목록을 출력 --%>
-<%-- <c:forEach var="number" items="${sessionScope.memory}"> --%>
-<%--    ${number}<br> --%>
-<%-- </c:forEach> --%>
+	</div>
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

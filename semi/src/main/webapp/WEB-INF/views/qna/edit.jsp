@@ -8,6 +8,25 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
 
+<style>
+    .form-input {
+        font-size: 18px;
+        padding: 0.5em;
+        outline: none;/*선택 시 강조 효과 제거*/
+        border: 1px solid #636e72;
+        border-radius: 0.5em;
+    }
+    .form-btn{
+        font-size: 20px;
+        border-radius:0.5em;
+    }
+    .form-btn.qna{
+        background-color: rgb(64, 165, 187);
+           border-color: rgb(64, 165, 187);
+           color: white;
+    }
+</style>
+
 <script type="text/javascript">
     $(function(){
         $('[name=qnaContent]').summernote({
@@ -33,11 +52,14 @@
 	</div>
 
 	<form action="edit" method="post"><br><br>
-		제목 : <input type="text" name="qnaTitle" value="${qnaDto.qnaTitle}" class="form-input w-100"><br><br>
+		<input type="text" name="qnaTitle" value="${qnaDto.qnaTitle}" class="form-input w-100"><br><br>
 		<!-- textarea는 value가 없다 -->
 		<textarea name="qnaContent" required style="min-height: 500px;" class="form-input w-100">${qnaDto.qnaContent}</textarea>
 		<br><br>
-		<button class="form-btn neutral">수정</button>
+		<div class="row right">
+			<a type="submit" href="/qna/detail?qnaNo=${qnaDto.qnaNo}" class="form-btn neutral me-10">취소</a>
+			<button type="submit" class="form-btn qna">등록</button>
+		</div>
 	</form>
 </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

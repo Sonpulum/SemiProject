@@ -64,5 +64,3 @@ public class QnaService {
 		return qnaNo;
 	}
 }
-
-

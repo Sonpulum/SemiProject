@@ -321,7 +321,7 @@ a.form-btn {
     hover 서브 스타일
 */
 .table.table-hover > tbody > tr:hover {
-    background-color: black;
+    background-color: #cfd5de;
     color: white;
 }
 

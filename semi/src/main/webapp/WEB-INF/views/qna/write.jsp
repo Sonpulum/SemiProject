@@ -4,10 +4,35 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="css/load.css">
+<link rel="stylesheet" type="text/css" href="css/reset.css">
+<link rel="stylesheet" type="text/css" href="css/commons.css">
+<link rel="stylesheet" type="text/css" href="css/layout.css">
+<link rel="stylesheet" type="text/css" href="css/test.css">
 
 <!-- summernote cdn -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
+
+<style>
+    .form-input {
+        font-size: 18px;
+        padding: 0.5em;
+        outline: none;/*선택 시 강조 효과 제거*/
+        border: 1px solid #636e72;
+        border-radius: 0.5em;
+    }
+    .form-btn{
+        font-size: 20px;
+        border-radius:0.5em;
+    }
+    .form-btn.qna{
+        background-color: rgb(64, 165, 187);
+           border-color: rgb(64, 165, 187);
+           color: white;
+    }
+</style>
 
 <script type="text/javascript">
     $(function(){
@@ -65,52 +90,44 @@
 </script>
     
 <form action="write" method="post" name="content">
-   <%-- 이미지를 첨부하면 첨부한 이미지의 번호를 hidden으로 추가 --%>
-   
-   <%-- 답글일 때는 정보가 한 개 더 전송되어야 한다(qnaParent) --%>
-   <c:if test="${qnaParent != null}">
-      <input type="hidden" name="qnaParent" value="${qnaParent}">
-   </c:if>
-   <div class="container-700 mt-50">
-      <div class="row center">
-         <c:choose>
-            <c:when test="${qnaParent == null}">
-               <h2>새글 작성</h2>
-            </c:when>
-            <c:otherwise>
-               <h2>답글 작성</h2>
-            </c:otherwise>
-         </c:choose>
-      </div>
+	<c:if test="${qnaParent != null}">
+		<input type="hidden" name="qnaParent" value="${qnaParent}">
+	</c:if>
+	<div class="container-800">
+		<div class="row center mb-30">
+			<c:choose>
+				<c:when test="${qnaParent == null}">
+					<h1>Q&A</h1>
+					<h5>양식에 맞게 작성해주세요</h5>
+				</c:when>
+				<c:otherwise>
+					<h1>Q&A 답글 작성</h1>
+					<h4>양식에 맞게 작성해주세요</h4>
+				</c:otherwise>
+			</c:choose>
+		</div>
+		
+		<div class="empty"></div>
+		
+		<div class="row">
+			<c:choose>
+				<c:when test="${qnaParent == null}">
+					<input type="text" name="qnaTitle" required placeholder="제목을 입력하세요" autocomplete="off" class="form-input w-100">
+				</c:when>
+				<c:otherwise>
+					<input type="text" name="qnaTitle" required placeholder="제목을 입력하세요" autocomplete="off" value="RE : " class="form-input w-100">
+				</c:otherwise>
+			</c:choose>
+		</div>
 
-      <div class="row">
-         <c:choose>
-            <c:when test="${qnaParent == null}">
-               <label>제목</label>
-               <input type="text" name="qnaTitle" required
-                  placeholder="제목을 입력하세요" autocomplete="off"
-                  class="form-input w-100">
-            </c:when>
-            <c:otherwise>
-               <label>제목</label>
-               <input type="text" name="qnaTitle" required
-                  placeholder="제목을 입력하세요" autocomplete="off" value="RE : "
-                  class="form-input w-100">
-            </c:otherwise>
-         </c:choose>
-      </div>
-
-      <div class="row">
-         <label>내용</label>
-         <!-- textarea 디자인 시 cols는 width와 충돌이 발생하므로 하나만 사용
-             rows 역시 줄이는 것이 가능하므로 디자인 적인 가치가 별로 없다
-          -->
-         <textarea name="qnaContent" required class="form-input w-100"></textarea>
-      </div>
-      <div class="row">
-         <button class="form-btn positive w-100">등록</button>
-      </div>
-   </div>
+		<div class="row">
+			<textarea name="qnaContent" required class="form-input w-100"></textarea>
+		</div>
+		<div class="row right">
+			<a type="submit" href="/qna/list" class="form-btn neutral me-10">목록으로</a>
+			<button type="submit" class="form-btn qna">등록</button>
+		</div>
+	</div>
 </form>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

@@ -51,7 +51,7 @@
         </div>
 
         <div class="row">
-            <a href="#" class="form-btn neutral">비밀번호 변경</a>
+            <a href="/member/password" class="form-btn neutral">비밀번호 변경</a>
             <a href="/member/edit" class="form-btn neutral">개인정보 변경</a>
             <a href="/member/exit" class="form-btn negative">회원 탈퇴</a>
         </div>
