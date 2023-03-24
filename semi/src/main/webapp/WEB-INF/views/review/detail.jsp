@@ -4,6 +4,17 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<c:if test="${sessionScope.memberId != null}">
+<script src="/static/js/review-like.js"></script>
+</c:if>
+
+<style>
+	.fa-thumbs-up {
+	color:red;
+	cursor: pointer;
+	}
+</style>
+
 <div class="container-800">
 
 	<div class="row">
@@ -29,18 +40,26 @@
 	
 	<div class="row">
 		좋아요 
-		<span class="heart-count">${reviewDto.reviewLike}</span>
-		
+		<span class="thumbs-count">${reviewDto.reviewLike}</span>
+				 
 		<c:if test="${sessionScope.memberId != null}">
-		<i class="fa-heart"></i>
-		댓글 
+		<i class="fa-regular fa-thumbs-up"></i>
+		댓글
 		<span class="reply-count">${reviewDto.reviewRead}</span>
 		</c:if>
 	</div>
 	
 	<div class="row right">
-		<a href="/review/list" class="form-btn neutral">목록보기</a>	
-		<a href="/review/edit?reviewNo=${reviewDto.reviewNo}" class="form-btn positive">수정하기</a>	
+		<a href="/review/list" class="form-btn neutral">목록보기</a>
+		
+		<!-- 관리자 or 작성자만 삭제 -->
+		<c:if test="${owner || admin}">	
+			<a href="/review/delete?reviewNo=${reviewDto.reviewNo}" class="form-btn negative">삭제</a>	
+		</c:if>
+		<!-- 작성자만 수정 -->
+		<c:if test="${owner}">
+			<a href="/review/edit?reviewNo=${reviewDto.reviewNo}" class="form-btn positive">수정</a>	
+		</c:if>
 	</div>
 </div>
 

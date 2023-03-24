@@ -49,10 +49,9 @@
             	
                 <tr>
                     <th style="width: 10%;"></th>
-                    <th style="width: 60%;">제목</th>
+                    <th style="width: 70%;">제목</th>
                     <th>조회수</th>
                     <th>좋아요</th>
-                    <th>댓글</th>
                 </tr>
                   
             </thead>
@@ -60,25 +59,35 @@
 			<c:forEach var="reviewDto" items="${topList}">
 			<tr>
 				<td style="width: 10%;">인기</td>
-           		<td style="width: 60%;">${reviewDto.reviewTitle }</td>
-                <td>조회수 : ${reviewDto.reviewRead }</td>
-                <td>좋아요 : ${reviewDto.reviewLike }</td>
-                <td>댓글 : ${reviewDto.reviewReply }</td>
+           		<td style="width: 70%;">
+           			<a class="link" href="detail?reviewNo=${reviewDto.reviewNo}">
+           				${reviewDto.reviewTitle}</a>
+           			<c:if test="${reviewDto.reviewReply > 0}">
+           				[${reviewDto.reviewReply}]
+           			</c:if>
+           		</td>
+                <td><i class="fa-regular fa-eye"></i> ${reviewDto.reviewRead }</td>
+                <td><i class="fa-regular fa-thumbs-up"></i> ${reviewDto.reviewLike }</td>
 			</tr>
            </c:forEach> 
 			<c:forEach var="reviewDto" items="${list}">
                 <tr>
                 	<td style="width: 10%;">${reviewDto.reviewNo }</td>
-                    <td style="width: 60%;">${reviewDto.reviewTitle }</td>
-                    <td>조회수 : ${reviewDto.reviewRead }</td>
-                    <td>좋아요 : ${reviewDto.reviewLike }</td>
-                    <td>댓글 : ${reviewDto.reviewReply }</td>
+                    <td style="width: 70%;">
+                    	<a class="link" href="detail?reviewNo=${reviewDto.reviewNo}">
+           					${reviewDto.reviewTitle}</a>
+           				<c:if test="${reviewDto.reviewReply > 0}">
+           					[${reviewDto.reviewReply}]
+           				</c:if>
+                    </td>
+                    <td><i class="fa-regular fa-eye"></i> ${reviewDto.reviewRead }</td>
+                	<td><i class="fa-regular fa-thumbs-up"></i> ${reviewDto.reviewLike }</td>
                 </tr>
         	</c:forEach>
             </tbody>
         </table>
         
-        <!-- 페이지 네이게이터 - vo에 있는 데이터를 기반으로 구현 -->
+<!-- 페이지 네이게이터 - vo에 있는 데이터를 기반으로 구현 -->
 <div class="row">
 
 	<div class="pagination">
@@ -128,7 +137,7 @@
  	</c:choose>
 	</div>
 </div>
-    </div>
+</div>
 
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

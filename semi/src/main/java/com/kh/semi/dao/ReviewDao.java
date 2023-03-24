@@ -132,7 +132,7 @@ public class ReviewDao {
 				+ "review_theme, review_location, review_season, review_read, "
 				+ "review_reply,review_like, review_time)"
 				+ "values ("
-				+ "?, ?, ?, ?, ?, ?, ?, 0, 0, 0, sysdate)";
+				+ "?, ?, ?, ?, ?, ?, ?,0,0,0, sysdate)";
 		Object[] param = {reviewDto.getReviewNo(), reviewDto.getReviewWriter(), reviewDto.getReviewTitle(),
 							reviewDto.getReviewContent(), reviewDto.getReviewTheme(),
 							reviewDto.getReviewLocation(),reviewDto.getReviewSeason()};
@@ -158,5 +158,13 @@ public class ReviewDao {
 		Object[] param = {reviewNo};
 		return jdbcTemplate.update(sql, param) > 0;
 	}
+	
+	//좋아요 개수 갱신 기능
+	public void updateLikeCount(int reviewNo, int count) {
+		String sql = "update review set review_like = ? where review_no = ?";
+		Object[] param = {count, reviewNo};
+		jdbcTemplate.update(sql, param);
+	}
+	
 	
 }
