@@ -19,12 +19,23 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.semi.dao.RecommendDao;
 import com.kh.semi.dto.RecommendDto;
 
+
 @Controller
 @RequestMapping("/recommend")
 public class RecommendContoller {
 
 	@Autowired
 	private RecommendDao recommendDao;
+	
+//	목록 및 검색
+	@GetMapping("/list")
+	public String list(Model model, 
+			@RequestParam(required = false, defaultValue = "boardTitle") String column, 
+			@RequestParam(required = false, defaultValue = "") String keyword) {
+
+		model.addAttribute("list", recommendDao.selectList());
+		return "/WEB-INF/views/recommend/list.jsp";
+	}
 	
 	@GetMapping("/write")
 	public String write() {
