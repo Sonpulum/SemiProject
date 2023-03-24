@@ -1,33 +1,50 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+
+<c:if test="${sessionScope.memberId != null}">
+<script src="/static/js/recommend-like.js"></script>
+</c:if>
 
 <style>
 main section article h1 {
         font-size: 2em;
 }
 </style>
+
 <div class="container-800">
         <div class="row">
-            <h1>강릉 남대천</h1>
+            <h1 class="mb-50">${recoDto.recoTitle}</h1>
         </div>
         <div class="row">
-            <span>#강원도</span>
-            <span>#여름</span>
-            <span>#레저</span>
-        </div>
-        <div class="row">
-            <h2>자연과 조화를 이룬 최고의 예술품. 남대천</h2>
+            <span >#${recoDto.recoLocation}</span>
+            <span>#${recoDto.recoSeason}</span>
+            <span>#${recoDto.recoTheme}</span>
         </div>
         <hr>
         <div class="row">
-            어쩌고 저쩌고
+            ${recoDto.recoContent}
         </div>
-        <hr class="w-90">
+        <hr>
         <div class="row">
-            작성일 조회수 좋아요
+            <span class="me-10">
+            	<fmt:formatDate value="${recoDto.recoTime}" pattern="y년 M월 d일 HH:mm"/>
+           	</span>
+            <span>${recoDto.recoRead}</span>
+            <c:if test="${sessionScope.memberId != null}">
+			<!-- 조회자리 -->
+			<i class="fa-regular fa-eye"></i>
+			</c:if> 
+            <span class="like-count ms-10">${recoDto.recoLike}</span>
+            <c:if test="${sessionScope.memberId != null}">
+			<!-- 좋아요자리 -->
+			<i class="fa-thumbs-up"></i>
+			</c:if>
         </div>
-        <hr class="w-90">
+        <hr>
     </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
