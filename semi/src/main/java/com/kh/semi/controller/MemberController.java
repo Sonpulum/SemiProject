@@ -72,24 +72,24 @@ public class MemberController {
 	    }
 	 
 	//로그아웃 - 세션에 저장된 데이터를 삭제하는 작업
-		@GetMapping("/logout")
-		public String logout(HttpSession session) {
-			session.removeAttribute("memberId");
-			session.removeAttribute("memberLevel");
-			return "redirect:/";
-			
-		}
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("memberId");
+		session.removeAttribute("memberLevel");
+		return "redirect:/";
+		
+	}
 
 	 
 	//마이페이지
-		@GetMapping("/mypage")
-		public String mypage(Model model, HttpSession session) {
-				String memberId = (String)session.getAttribute("memberId");
-				MemberDto memberDto = memberDao.selectOne(memberId);
-				model.addAttribute("memberDto",memberDto);
-				
-				return "/WEB-INF/views/member/mypage.jsp";
-		}
+	@GetMapping("/mypage")
+	public String mypage(Model model, HttpSession session) {
+			String memberId = (String)session.getAttribute("memberId");
+			MemberDto memberDto = memberDao.selectOne(memberId);
+			model.addAttribute("memberDto",memberDto);
+			
+			return "/WEB-INF/views/member/mypage.jsp";
+	}
 		
 	//비밀번호를 제외한 나머지 개인정보 변경
     @GetMapping("/edit")
@@ -223,4 +223,35 @@ public class MemberController {
          return "redirect:findPw";
       }
    }
+   
+   //비밀번호 재설정
+   @GetMapping("/password")
+   public String password() {
+	   return "/WEB-INF/views/member/password.jsp";
+	}
+   
+   @PostMapping("/password")
+   public String password(
+			@RequestParam String currentPw,//현재 비밀번호
+			@RequestParam String newPw,//변경할 비밀번호
+			HttpSession session,
+			RedirectAttributes attr) {
+		String memberId = (String)session.getAttribute("memberId");
+		MemberDto memberDto = memberDao.selectOne(memberId);
+		
+		if(!memberDto.getMemberPw().equals(currentPw)) {
+			attr.addAttribute("mode", "error");
+			return "redirect:password";
+		}
+		
+		//비밀번호가 일치한다면 → 비밀번호 변경 처리
+		memberDao.changePassword(memberId, newPw);
+
+		return "redirect:passwordFinish";
+	}
+   
+   @GetMapping("/passwordFinish")
+   public String passwordFinish() {
+	   return "/WEB-INF/views/member/passwordFinish.jsp";
+	}
 }

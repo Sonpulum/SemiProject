@@ -47,10 +47,11 @@ public class QnaDao {
       String sql = "insert into qna(qna_no, qna_writer, qna_title, "
             + "qna_content, qna_time, qna_read, "
             + "qna_like, qna_group, qna_parent, qna_depth) "
-            + "values(?, ?, ?, ?, sysdate, 0, 0, ?, ?, 0)";
+            + "values(?, ?, ?, ?, sysdate, 0, 0, ?, ?, ?)";
       Object[] param = {
             qnaDto.getQnaNo(), qnaDto.getQnaWriter(), qnaDto.getQnaTitle(),
-            qnaDto.getQnaContent(), qnaDto.getQnaGroup(), qnaDto.getQnaParent()};
+            qnaDto.getQnaContent(), qnaDto.getQnaGroup(), qnaDto.getQnaParent(),
+            qnaDto.getQnaDepth()};
       jdbcTemplate.update(sql, param);
    }
    

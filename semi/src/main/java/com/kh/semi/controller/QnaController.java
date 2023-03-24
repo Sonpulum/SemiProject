@@ -31,6 +31,7 @@ public class QnaController {
    @Autowired
    private QnaService qnaService;
    
+   //Q&A 작성
    @GetMapping("/write")
    public String write(
          @RequestParam(required = false) Integer qnaParent,
@@ -56,12 +57,13 @@ public class QnaController {
       return "redirect:detail";
    }
    
+   //Q&A 목록
    @GetMapping("/list")
    public String list(@ModelAttribute("vo") QnaPaginationVO vo,
          Model model) {
       int totalCount = qnaDao.selectCount(vo);
       vo.setCount(totalCount);
-      
+
       //게시글
       List<QnaDto> list = qnaDao.selectList(vo);
       model.addAttribute("list", list);
@@ -69,6 +71,7 @@ public class QnaController {
       return "/WEB-INF/views/qna/list.jsp";
    }
    
+   //Q&A 상세
    @GetMapping("/detail")
    public String detail(
          @RequestParam int qnaNo, 
@@ -88,28 +91,26 @@ public class QnaController {
       model.addAttribute("admin", admin);
       
       //조회수 증가
-      if(!owner) {//내가 작성한 글이 아니라면(시나리오 1번)
-         
-         //시나리오 2번 진행
+      if(!owner) {
          Set<Integer> memory = (Set<Integer>) session.getAttribute("memory");
          if(memory == null) {
             memory = new HashSet<>();
          }
          
-         if(!memory.contains(qnaNo)) {//읽은 적이 없는가(기억에 없는가)
+         if(!memory.contains(qnaNo)) {
             qnaDao.updateReadcount(qnaNo);
-            qnaDto.setQnaRead(qnaDto.getQnaRead() + 1);//DTO 조회
-            memory.add(qnaNo);//저장소에 추가(기억에 추가)
+            qnaDto.setQnaRead(qnaDto.getQnaRead() + 1);
+            memory.add(qnaNo);
          }
          
-         session.setAttribute("memory", memory);//저장소 갱신
+         session.setAttribute("memory", memory);
       }
       
       model.addAttribute("qnaDto", qnaDto);
       return "/WEB-INF/views/qna/detail.jsp";
    }
    
-   	//게시글 삭제
+   	//Q&A 게시글 삭제
  	@GetMapping("/delete")
  	public String delete(@RequestParam int qnaNo) {
  		qnaDao.delete(qnaNo);
