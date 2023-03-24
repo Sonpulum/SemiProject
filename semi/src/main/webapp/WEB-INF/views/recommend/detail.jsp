@@ -14,6 +14,12 @@
 main section article h1 {
         font-size: 2em;
 }
+.fa-thumbs-up{
+	color:#5186f0;
+}
+.fa-thumbs-up:hover{
+	cursor:pointer;
+}
 </style>
 
 <div class="container-800">
@@ -36,7 +42,7 @@ main section article h1 {
            	</span>
             <span>${recoDto.recoRead}</span>
             <c:if test="${sessionScope.memberId != null}">
-			<!-- 조회자리 -->
+			<!-- 조회수자리 -->
 			<i class="fa-regular fa-eye"></i>
 			</c:if> 
             <span class="like-count ms-10">${recoDto.recoLike}</span>

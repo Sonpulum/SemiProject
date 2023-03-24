@@ -14,21 +14,21 @@ public class RecommendLikeDao {
 	
 	// 등록
 	public void insert(RecommendLikeDto recoLikeDto) {
-		String sql = "insert into recommend_like values(?, ?)";
+		String sql = "insert into reco_like values(?, ?)";
 		Object[] param = {recoLikeDto.getMemberId(), recoLikeDto.getRecoNo()};
 		jdbcTempalte.update(sql, param);
 	}
 	
 	// 삭제
 	public void delete(RecommendLikeDto recoLikeDto) {
-		String sql = "delte recommend_like where member_id = ? and reco_no = ?";
+		String sql = "delete reco_like where member_id = ? and reco_no = ?";
 		Object[] param = {recoLikeDto.getMemberId(), recoLikeDto.getRecoNo()};
 		jdbcTempalte.update(sql, param);
 	}
 	
 	// 확인
 	public boolean check(RecommendLikeDto recoLikeDto) {
-		String sql = "select count(*) from recommend_like where member_id = ? and reco_no = ?";
+		String sql = "select count(*) from reco_like where member_id = ? and reco_no = ?";
 		Object[] param = {recoLikeDto.getMemberId(), recoLikeDto.getRecoNo()};
 		int cnt = jdbcTempalte.queryForObject(sql, int.class, param);
 		return cnt==1;

@@ -76,6 +76,8 @@ public class MemberController {
 		public String logout(HttpSession session) {
 			session.removeAttribute("memberId");
 			session.removeAttribute("memberLevel");
+			session.removeAttribute("recommend_memory");
+			session.removeAttribute("review_memory");
 			return "redirect:/";
 			
 		}
