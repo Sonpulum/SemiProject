@@ -33,6 +33,7 @@ public class ReviewDao {
 			reviewDto.setReviewReply(rs.getString("review_reply"));
 			reviewDto.setReviewRead(rs.getInt("review_read"));
 			reviewDto.setReviewLike(rs.getInt("review_like"));
+			reviewDto.setReviewTime(rs.getDate("review_time"));
 			return reviewDto;
 		}
 	};
@@ -102,6 +103,14 @@ public class ReviewDao {
 			}
 			
 		}
+		
+	//조회수 증가
+	public boolean updateReadCount(int reviewNo) {
+		String sql = "update review set review_read = review_read + 1 "
+				+ "where review_no = ?";
+		Object[] param = {reviewNo};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
 	
 	//등록
 	public int sequence() {
@@ -112,9 +121,10 @@ public class ReviewDao {
 	public void insert(ReviewDto reviewDto) {
 		String sql = "insert into review("
 				+ "review_no, review_writer, review_title, review_content,"
-				+ "review_theme, review_location, review_season, review_read, review_reply,review_like)"
+				+ "review_theme, review_location, review_season, review_read, "
+				+ "review_reply,review_like, review_time)"
 				+ "values ("
-				+ "?, ?, ?, ?, ?, ?, ?,0,0,0)";
+				+ "?, ?, ?, ?, ?, ?, ?, 0, 0, 0, sysdate)";
 		Object[] param = {reviewDto.getReviewNo(), reviewDto.getReviewWriter(), reviewDto.getReviewTitle(),
 							reviewDto.getReviewContent(), reviewDto.getReviewTheme(),
 							reviewDto.getReviewLocation(),reviewDto.getReviewSeason()};

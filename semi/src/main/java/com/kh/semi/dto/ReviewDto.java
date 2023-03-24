@@ -1,5 +1,7 @@
 package com.kh.semi.dto;
 
+import java.sql.Date;
+
 import lombok.Data;
 
 @Data
@@ -14,4 +16,5 @@ public class ReviewDto {
 	private String reviewReply;
 	private int reviewRead;
 	private int reviewLike;
+	private Date reviewTime;
 }

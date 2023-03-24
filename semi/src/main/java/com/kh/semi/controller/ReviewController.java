@@ -1,6 +1,8 @@
 package com.kh.semi.controller;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -25,7 +27,7 @@ public class ReviewController {
 	
 	@Autowired ReviewDao reviewDao;
 	
-	//후기 게시판 목록
+	//게시글 목록
 	@GetMapping("/list")
 	public String list(@ModelAttribute("vo") ReviewPaginationVO vo,
 			Model model) {
@@ -41,7 +43,47 @@ public class ReviewController {
 		return "/WEB-INF/views/review/list.jsp";
 	}
 	
-	//후기 게시판 게시글 등록
+	//게시글 상세
+	@GetMapping("/detail")
+	public String detail(
+			Model model,
+			@RequestParam int reviewNo,
+			HttpSession session) {
+		
+		//사용자가 작성자인지 판단
+		ReviewDto reviewDto = reviewDao.selectOne(reviewNo);
+		String memberId = (String) session.getAttribute("memberId");
+		
+		boolean owner = reviewDto.getReviewWriter() != null
+				&& reviewDto.getReviewWriter().equals(memberId);
+		model.addAttribute("owner", owner);
+		
+		//사용자가 관리자인지 판정
+		String memberLevel = (String) session.getAttribute("memberLevel");
+		boolean admin = memberLevel != null && memberLevel.equals("관리자");
+		model.addAttribute("admin", admin);
+		
+		//조회수 증가
+		if(!owner) {
+			
+			Set<Integer> memory = (Set<Integer>) session.getAttribute("memory");
+			
+			if(memory == null) {
+				memory = new HashSet<>();
+			}
+			
+			if(!memory.contains(reviewNo)) {
+				reviewDao.updateReadCount(reviewNo);
+				reviewDto.setReviewRead(reviewDto.getReviewRead() + 1);
+				memory.add(reviewNo);
+			}
+			session.setAttribute("memory", memory);
+		}
+		model.addAttribute("reviewDto",reviewDto);
+		return "/WEB-INF/views/review/detail.jsp";
+	}
+	
+	//게시글 등록
 	@GetMapping("/write")
 	public String write() {
 		return "/WEB-INF/views/review/write.jsp";
@@ -59,7 +101,7 @@ public class ReviewController {
 	}
 	
 	
-	//후기 게시판 수정
+	//게시글 수정
 	@GetMapping("/edit")
 	public String edit(
 			@RequestParam int reviewNo,
@@ -77,7 +119,7 @@ public class ReviewController {
 		return "redirect:list";
 	}
 	
-	//후기 게시판 삭제
+	//게시글 삭제
 	@GetMapping("/delete")
 	public String delete(@RequestParam int reviewNo) {
 		reviewDao.delete(reviewNo);
