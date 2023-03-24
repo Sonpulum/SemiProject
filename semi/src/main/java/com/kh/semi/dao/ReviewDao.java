@@ -129,17 +129,15 @@ public class ReviewDao {
 	public void insert(ReviewDto reviewDto) {
 		String sql = "insert into review("
 				+ "review_no, review_writer, review_title, review_content,"
-				+ "review_theme, review_location, review_season, review_read, "
-				+ "review_reply,review_like, review_time)"
+				+ "review_theme, review_location, review_season, review_read, review_reply,review_like,review_time)"
 				+ "values ("
-				+ "?, ?, ?, ?, ?, ?, ?,0,0,0, sysdate)";
+				+ "?, ?, ?, ?, ?, ?, ?,0,0,0,sysdate)";
 		Object[] param = {reviewDto.getReviewNo(), reviewDto.getReviewWriter(), reviewDto.getReviewTitle(),
 							reviewDto.getReviewContent(), reviewDto.getReviewTheme(),
 							reviewDto.getReviewLocation(),reviewDto.getReviewSeason()};
 		jdbcTemplate.update(sql, param);
 	}
-	
-	
+
 	//수정
 	public boolean update(ReviewDto reviewDto) {
 		String sql = "update review set "
@@ -166,5 +164,11 @@ public class ReviewDao {
 		jdbcTemplate.update(sql, param);
 	}
 	
-	
+	//커넥트
+	public void connect(int reviewNo, int attachmentNo) {
+		String sql = "insert into review_attachment values(?, ?)";
+		Object[] param = {reviewNo, attachmentNo};
+		jdbcTemplate.update(sql, param);
+	}
+
 }

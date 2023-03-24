@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.semi.dao.ReviewDao;
 import com.kh.semi.dto.ReviewDto;
+import com.kh.semi.service.ReviewService;
 import com.kh.semi.vo.ReviewPaginationVO;
 
 @Controller
@@ -25,6 +26,8 @@ import com.kh.semi.vo.ReviewPaginationVO;
 public class ReviewController {
 	
 	@Autowired ReviewDao reviewDao;
+	
+	@Autowired ReviewService reviewService;
 	
 	//게시글 목록
 	@GetMapping("/list")
@@ -67,22 +70,23 @@ public class ReviewController {
 		//조회수 증가
 		if(!owner) {
 			
-			Set<Integer> memory = (Set<Integer>) session.getAttribute("memory");
+			Set<Integer> reviewMemory = (Set<Integer>) session.getAttribute("reviewMemory");
 			
-			if(memory == null) {
-				memory = new HashSet<>();
+			if(reviewMemory == null) {
+				reviewMemory = new HashSet<>();
 			}
 			
-			if(!memory.contains(reviewNo)) {
+			if(!reviewMemory.contains(reviewNo)) {
 				reviewDao.updateReadCount(reviewNo);
 				reviewDto.setReviewRead(reviewDto.getReviewRead() + 1);
-				memory.add(reviewNo);
+				reviewMemory.add(reviewNo);
 			}
-			session.setAttribute("memory", memory);
+			session.setAttribute("reviewMemory", reviewMemory);
 		}
 		model.addAttribute("reviewDto",reviewDto);
 		return "/WEB-INF/views/review/detail.jsp";
 	}
+	
 	
 	//게시글 등록
 	@GetMapping("/write")
@@ -90,14 +94,29 @@ public class ReviewController {
 		return "/WEB-INF/views/review/write.jsp";
 	}
 	
+//	@PostMapping("/write")
+//	public String write(@ModelAttribute ReviewDto reviewDto,
+//			HttpSession session) {
+//		String memberId = (String)session.getAttribute("memberId");
+//		int reviewNo = reviewDao.sequence();
+//		reviewDto.setReviewNo(reviewNo);
+//		reviewDto.setReviewWriter(memberId);
+//		reviewDao.insert(reviewDto);
+//		return "redirect:detail";
+//	}
+	
 	@PostMapping("/write")
 	public String write(@ModelAttribute ReviewDto reviewDto,
-			HttpSession session) {
+			HttpSession session, @RequestParam(required = false) List<Integer> attachmentNo,
+			RedirectAttributes attr) {
 		String memberId = (String)session.getAttribute("memberId");
-		int reviewNo = reviewDao.sequence();
-		reviewDto.setReviewNo(reviewNo);
 		reviewDto.setReviewWriter(memberId);
-		reviewDao.insert(reviewDto);
+		
+		int reviewNo = reviewService.write(reviewDto, attachmentNo);
+		
+		//상세페이지로 redirect
+		attr.addAttribute("reviewNo", reviewNo);
+		
 		return "redirect:detail";
 	}
 	

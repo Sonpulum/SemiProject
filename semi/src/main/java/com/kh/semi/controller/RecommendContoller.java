@@ -1,5 +1,9 @@
 package com.kh.semi.controller;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +14,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.semi.dao.RecommendDao;
 import com.kh.semi.dto.RecommendDto;
+
 
 @Controller
 @RequestMapping("/recommend")
@@ -21,6 +27,16 @@ public class RecommendContoller {
 	@Autowired
 	private RecommendDao recommendDao;
 	
+//	목록 및 검색
+	@GetMapping("/list")
+	public String list(Model model, 
+			@RequestParam(required = false, defaultValue = "boardTitle") String column, 
+			@RequestParam(required = false, defaultValue = "") String keyword) {
+
+		model.addAttribute("list", recommendDao.selectList());
+		return "/WEB-INF/views/recommend/list.jsp";
+	}
+	
 	@GetMapping("/write")
 	public String write() {
 		return "/WEB-INF/views/recommend/write.jsp";
@@ -28,23 +44,45 @@ public class RecommendContoller {
 	
 	@PostMapping("/write")
 	public String write(@ModelAttribute RecommendDto recommendDto,
-			HttpSession session) {
+			HttpSession session, @RequestParam(required=false) List<Integer> attachmentNo,
+			RedirectAttributes attr) {
 		String memberId = (String)session.getAttribute("memberId");
 		int recoNo = recommendDao.sequence();
 		recommendDto.setRecoNo(recoNo);
 		recommendDto.setRecoWriter(memberId);
 		recommendDao.insert(recommendDto);
-		return "redirect:writeFinish";
+		
+		if (attachmentNo != null) {
+			for(int no : attachmentNo) {
+				recommendDao.connect(recoNo,no);
+			}
+		}
+		
+		attr.addAttribute("recoNo",recoNo);
+		return "redirect:detail";
 	}
 	
-	@GetMapping("/writeFinish")
-	public String wirteFinish() {
-		return "/WEB-INF/views/recommend/writeFinish.jsp";
-	}
-	
-	@GetMapping("detail")
-	public String detail(@RequestParam int recoNo, Model model) {
-		RecommendDto recommendDto = recommendDao.selectOne(recoNo);
+	@GetMapping("/detail")
+	public String detail(@RequestParam int recoNo, Model model, HttpSession session) {
+		String memberId = (String)session.getAttribute("memberId");
+		RecommendDto recoDto = recommendDao.selectOne(recoNo);
+		
+		boolean owner = recoDto.getRecoWriter() != null && recoDto.getRecoWriter().equals(memberId);
+		if(!owner) {
+			Set<Integer> memory = (Set<Integer>)session.getAttribute("recommendMemory");
+			if(memory == null) {
+				memory = new HashSet<>();
+			}
+			
+			if(!memory.contains(recoNo)) {
+				recommendDao.updateReadcount(recoNo);
+				recoDto.setRecoRead(recoDto.getRecoRead()+1);
+				memory.add(recoNo);
+			}
+			session.setAttribute("recommendMemory", memory);//저장소 갱신
+		}
+		
+		model.addAttribute("recoDto",recoDto);
 		return "/WEB-INF/views/recommend/detail.jsp";
 	}
 }
