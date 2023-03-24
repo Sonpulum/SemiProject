@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -99,7 +98,7 @@ public class ReviewController {
 		reviewDto.setReviewNo(reviewNo);
 		reviewDto.setReviewWriter(memberId);
 		reviewDao.insert(reviewDto);
-		return "redirect:list";
+		return "redirect:detail";
 	}
 	
 	
@@ -118,7 +117,7 @@ public class ReviewController {
 			RedirectAttributes attr) {
 		reviewDao.update(reviewDto);
 		attr.addAttribute("reviewNo", reviewDto.getReviewNo());
-		return "redirect:list";
+		return "redirect:detail";
 	}
 	
 	//게시글 삭제

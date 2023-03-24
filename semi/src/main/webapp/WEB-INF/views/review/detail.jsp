@@ -39,8 +39,8 @@
 	</div>
 	
 	<div class="row right">
-		<a href="/review/write" class="form-btn positive">글쓰기</a>	
 		<a href="/review/list" class="form-btn neutral">목록보기</a>	
+		<a href="/review/edit?reviewNo=${reviewDto.reviewNo}" class="form-btn positive">수정하기</a>	
 	</div>
 </div>
 
