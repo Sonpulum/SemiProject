@@ -78,6 +78,7 @@ public class ReviewController {
 				reviewDto.setReviewRead(reviewDto.getReviewRead() + 1);
 				memory.add(reviewNo);
 			}
+			System.out.println("memory ="+memory);
 			session.setAttribute("memory", memory);
 		}
 		model.addAttribute("reviewDto",reviewDto);

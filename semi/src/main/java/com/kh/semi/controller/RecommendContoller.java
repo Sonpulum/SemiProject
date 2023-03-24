@@ -69,18 +69,17 @@ public class RecommendContoller {
 		
 		boolean owner = recoDto.getRecoWriter() != null && recoDto.getRecoWriter().equals(memberId);
 		if(!owner) {
-			Set<Integer> memory = (Set<Integer>)session.getAttribute("memory");
+			Set<Integer> memory = (Set<Integer>)session.getAttribute("recommendMemory");
 			if(memory == null) {
 				memory = new HashSet<>();
 			}
 			
-			if(!memory.contains(recoNo)) {//읽은 적이 없는가(기억에 없는가)
+			if(!memory.contains(recoNo)) {
 				recommendDao.updateReadcount(recoNo);
-				recoDto.setRecoRead(recoDto.getRecoRead()+1); //DTO 조회수 1증가
-				memory.add(recoNo);//저장소에 추가(기억에 추가)
+				recoDto.setRecoRead(recoDto.getRecoRead()+1);
+				memory.add(recoNo);
 			}
-			//System.out.println("memory = " + memory);
-			session.setAttribute("memory", memory);//저장소 갱신
+			session.setAttribute("recommendMemory", memory);//저장소 갱신
 		}
 		
 		model.addAttribute("recoDto",recoDto);
