@@ -79,11 +79,11 @@
     같은 형태로 쓰기 때문에 색상 등을 제외한 나머지 크기가 동일해야함
 */
 .form-input {
-    font-size: 20px;
+    font-size: 18px;
     padding: 0.5em;
     outline: none;/*선택 시 강조 효과 제거*/
     border: 1px solid #636e72;
-    border-radius: 0.1em;
+    border-radius: 0.5em;
 }
 .form-input:focus {/*커서가 위치했을 때*/
     border-color: black;
@@ -123,7 +123,7 @@ input[type=file].form-input {
     padding: 0.5em;
     border-width: 1px;
     border-style: solid;
-    border-radius: 0.1em;
+    border-radius: 0.5em;
     cursor: pointer;
 }
 
@@ -156,6 +156,12 @@ a.form-btn {
     border-color: #dfe6e9;
     color: black;
 }
+
+.form-btn.bosung{
+		background-color: rgb(64, 165, 187);
+	   	border-color: rgb(64, 165, 187);
+	   	color: white;
+	}
 
 .form-btn:hover {
     filter:brightness(105%);/*원래보다 5% 밝게 처리*/

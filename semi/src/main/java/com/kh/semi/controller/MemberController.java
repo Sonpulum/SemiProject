@@ -72,13 +72,15 @@ public class MemberController {
 	    }
 	 
 	//로그아웃 - 세션에 저장된 데이터를 삭제하는 작업
-	@GetMapping("/logout")
-	public String logout(HttpSession session) {
-		session.removeAttribute("memberId");
-		session.removeAttribute("memberLevel");
-		return "redirect:/";
-		
-	}
+		@GetMapping("/logout")
+		public String logout(HttpSession session) {
+			session.removeAttribute("memberId");
+			session.removeAttribute("memberLevel");
+			session.removeAttribute("recommendMemory");
+			session.removeAttribute("reviewMemory");
+			return "redirect:/";
+			
+		}
 
 	 
 	//마이페이지

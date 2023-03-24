@@ -3,6 +3,40 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+
+<style>
+.table.table-border,
+.table.table-border > thead > tr > th,
+.table.table-border > thead > tr > td,
+.table.table-border > tbody > tr > th,
+.table.table-border > tbody > tr > td,
+.table.table-border > tfoot > tr > th,
+.table.table-border > tfoot > tr > td
+{
+    border: 0px solid #636e72;
+}
+
+.table.table-border > thead {
+	border-top : 2px solid rgb(64, 165, 187);
+	border-bottom : 2px solid gray;
+}
+
+.table.table-border > tbody > tr:last-child {
+	border-bottom : 2px solid gray;
+}
+
+ .table.table-border > tfoot > tr:last-child { 
+ 	border-bottom : 2px solid rgb(64, 165, 187); 
+ } 
+
+.table.table-hover > tbody > tr:hover,
+.table.table-hover > tfoot > tr:hover {
+    background-color: black;
+    color: white;
+}
+
+
+</style>
  
  <div class="container-1000">
         <div class="row center">
@@ -10,36 +44,84 @@
         </div>
 
         <div class="row center">
-            <input type="search" name="keyword" class="form-input" placeholder="여행지 검색">
+        <form action="list" method="get">
+        	<c:choose>
+            <c:when test="${vo.column == 'review_content'}">
+               <select name="column" class="form-input">
+                  <option value="review_title">제목</option>
+                  <option value="review_content" selected>내용</option>
+                  <option value="review_writer">작성자</option>
+               </select>
+            </c:when>
+            <c:when test="${vo.column == 'review_writer'}">
+               <select name="column" class="form-input">
+                  <option value="review_title">제목</option>
+                  <option value="review_content">내용</option>
+                  <option value="review_writer" selected>작성자</option>
+               </select>
+            </c:when>  
+            
+            <c:otherwise>
+               <select name="column" class="form-input">
+                  <option value="review_title" selected>제목</option>
+                  <option value="review_content">내용</option>
+                  <option value="review_writer">작성자</option>
+               </select>
+            </c:otherwise>
+         </c:choose>
+        
+            <input type="search" name="keyword" class="form-input" value="${vo.keyword}" placeholder="여행지 검색">
             <button type="submit" class="form-btn neutral">검색</button>
+           </form>
         </div>
         <div class="row right">
-        	<a href="/review/write" class="form-btn positive">글쓰기</a>
+        	<a href="/review/write" class="form-btn bosung">글쓰기</a>
         </div>
         
-        <table class="table table-hover table-border">
+        <table class="table table-hover table-border center">
             <thead>
             	
                 <tr>
-                    <th style="width: 10%;">번호</th>
-                    <th style="width: 60%;">제목</th>
+                    <th></th>
+                    <th>테마</th>
+                    <th>지역</th>
+                    <th class="w-40">제목</th>
                     <th>조회수</th>
                     <th>좋아요</th>
-                    <th>댓글</th>
+                    <th>작성일</th>
                 </tr>
                   
             </thead>
-		<c:forEach var="reviewDto" items="${list}">
+			
             <tbody>
-                <tr>
-                	<td style="width: 10%;">${reviewDto.reviewNo }</td>
-                    <td style="width: 60%;">${reviewDto.reviewTitle }</td>
-                    <td>조회수 : ${reviewDto.reviewRead }</td>
-                    <td>좋아요 : ${reviewDto.reviewLike }</td>
-                    <td>댓글 : ${reviewDto.reviewReply }</td>
-                </tr>
+			<c:forEach var="reviewDto" items="${topList}">
+            <!-- 인기 게시글만 출력 -->
+			<tr>
+				<td>인기</td>
+				<td>${reviewDto.reviewTheme}</td>
+                <td>${reviewDto.reviewLocation }</td>
+           		<td class="w-40 left"><a href="detail?reviewNo=${reviewDto.reviewNo}" class="link">${reviewDto.reviewTitle }</a></td>
+                <td><i class="fa-regular fa-eye"></i>    ${reviewDto.reviewRead }</td>
+                <td><i class="fa-regular fa-thumbs-up"></i>    ${reviewDto.reviewLike }</td>
+                <td>${reviewDto.reviewTime }</td>
+			</tr>
+           </c:forEach> 
             </tbody>
-        </c:forEach>
+           
+            <!-- 모든 게시글 출력 -->
+				<tfoot>
+			<c:forEach var="reviewDto" items="${list}">
+                <tr>
+                	<td>${reviewDto.reviewNo }</td>
+                	<td>${reviewDto.reviewTheme}</td>
+                	<td>${reviewDto.reviewLocation }</td>
+                    <td class="w-40 left"><a href="detail?reviewNo=${reviewDto.reviewNo}" class="link">${reviewDto.reviewTitle }</a></td>
+                    <td><i class="fa-regular fa-eye"></i>    ${reviewDto.reviewRead }</td>
+               		<td><i class="fa-regular fa-thumbs-up"></i>    ${reviewDto.reviewLike }</td>
+               		<td>${reviewDto.reviewTime }</td>
+                </tr>
+        	</c:forEach>
+				</tfoot>
         </table>
         
         <!-- 페이지 네이게이터 - vo에 있는 데이터를 기반으로 구현 -->

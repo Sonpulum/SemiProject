@@ -13,7 +13,7 @@
         $('[name=reviewContent]').summernote({
             placeholder: '내용 작성',
             tabsize: 4,
-            height: 400,
+            height: 600,
             toolbar: [//메뉴 설정
                 ['style', ['style']],
                 ['font', ['bold', 'underline', 'clear']],
@@ -57,26 +57,6 @@
         });
     });
 </script>
-
-<style>
-	.form-input {
-	    font-size: 18px;
-	    padding: 0.5em;
-	    outline: none;/*선택 시 강조 효과 제거*/
-	    border: 1px solid #636e72;
-	    border-radius: 0.5em;
-	}
-	
-	
-	.form-btn{
-		border-radius:0.5em;
-	}
-	.form-btn.positive{
-		background-color: rgb(64, 165, 187);
-	   	border-color: rgb(64, 165, 187);
-	   	color: white;
-	}
-</style>
 
 <form action="edit" method="post" autocomplete="off">
 <input type="hidden" name="reviewNo" value="${reviewDto.reviewNo}">
