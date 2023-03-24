@@ -10,8 +10,35 @@
         </div>
 
         <div class="row center">
-            <input type="search" name="keyword" class="form-input" placeholder="여행지 검색">
+        <form action="list" method="get">
+        	<c:choose>
+            <c:when test="${vo.column == 'review_content'}">
+               <select name="column" class="form-input">
+                  <option value="review_title">제목</option>
+                  <option value="review_content" selected>내용</option>
+                  <option value="review_writer">작성자</option>
+               </select>
+            </c:when>
+            <c:when test="${vo.column == 'review_writer'}">
+               <select name="column" class="form-input">
+                  <option value="review_title">제목</option>
+                  <option value="review_content">내용</option>
+                  <option value="review_writer" selected>작성자</option>
+               </select>
+            </c:when>  
+            
+            <c:otherwise>
+               <select name="column" class="form-input">
+                  <option value="review_title" selected>제목</option>
+                  <option value="review_content">내용</option>
+                  <option value="review_writer">작성자</option>
+               </select>
+            </c:otherwise>
+         </c:choose>
+        
+            <input type="search" name="keyword" class="form-input" value="${vo.keyword}" placeholder="여행지 검색">
             <button type="submit" class="form-btn neutral">검색</button>
+           </form>
         </div>
         <div class="row right">
         	<a href="/review/write" class="form-btn positive">글쓰기</a>
@@ -21,7 +48,7 @@
             <thead>
             	
                 <tr>
-                    <th style="width: 10%;">번호</th>
+                    <th style="width: 10%;"></th>
                     <th style="width: 60%;">제목</th>
                     <th>조회수</th>
                     <th>좋아요</th>
@@ -29,8 +56,17 @@
                 </tr>
                   
             </thead>
-		<c:forEach var="reviewDto" items="${list}">
             <tbody>
+			<c:forEach var="reviewDto" items="${topList}">
+			<tr>
+				<td style="width: 10%;">인기</td>
+           		<td style="width: 60%;">${reviewDto.reviewTitle }</td>
+                <td>조회수 : ${reviewDto.reviewRead }</td>
+                <td>좋아요 : ${reviewDto.reviewLike }</td>
+                <td>댓글 : ${reviewDto.reviewReply }</td>
+			</tr>
+           </c:forEach> 
+			<c:forEach var="reviewDto" items="${list}">
                 <tr>
                 	<td style="width: 10%;">${reviewDto.reviewNo }</td>
                     <td style="width: 60%;">${reviewDto.reviewTitle }</td>
@@ -38,8 +74,8 @@
                     <td>좋아요 : ${reviewDto.reviewLike }</td>
                     <td>댓글 : ${reviewDto.reviewReply }</td>
                 </tr>
+        	</c:forEach>
             </tbody>
-        </c:forEach>
         </table>
         
         <!-- 페이지 네이게이터 - vo에 있는 데이터를 기반으로 구현 -->

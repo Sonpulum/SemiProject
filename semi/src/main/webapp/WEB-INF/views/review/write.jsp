@@ -53,25 +53,6 @@
     });
 </script>
 
-<style>
-	.form-input {
-	    font-size: 18px;
-	    padding: 0.5em;
-	    outline: none;/*선택 시 강조 효과 제거*/
-	    border: 1px solid #636e72;
-	    border-radius: 0.5em;
-	}
-	
-	
-	.form-btn{
-		border-radius:0.5em;
-	}
-	.form-btn.positive{
-		background-color: rgb(64, 165, 187);
-	   	border-color: rgb(64, 165, 187);
-	   	color: white;
-	}
-</style>
 
 <form action="write" method="post" autocomplete="off">
 <div class="container-800">
@@ -108,7 +89,7 @@
     </div>
     <div class="row right">
         <a href="/review/list" class="form-btn neutral me-10">목록으로</a>
-        <button type="submit" class="form-btn positive">등록하기</button>
+        <button type="submit" class="form-btn bosung">등록하기</button>
     </div>
 </div>
 </form>
