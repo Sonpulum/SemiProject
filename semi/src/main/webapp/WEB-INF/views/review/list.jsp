@@ -100,7 +100,13 @@
 				<td>인기</td>
 				<td>${reviewDto.reviewTheme}</td>
                 <td>${reviewDto.reviewLocation }</td>
-           		<td class="w-40 left"><a href="detail?reviewNo=${reviewDto.reviewNo}" class="link">${reviewDto.reviewTitle }</a></td>
+           		<td class="w-40 left">
+           			<a class="link" href="detail?reviewNo=${reviewDto.reviewNo}">
+           				${reviewDto.reviewTitle}</a>
+           			<c:if test="${reviewDto.reviewReply > 0}">
+           				[${reviewDto.reviewReply}]
+           			</c:if>
+           		</td>
                 <td><i class="fa-regular fa-eye"></i>    ${reviewDto.reviewRead }</td>
                 <td><i class="fa-regular fa-thumbs-up"></i>    ${reviewDto.reviewLike }</td>
                 <td>${reviewDto.reviewTime }</td>
@@ -115,7 +121,13 @@
                 	<td>${reviewDto.reviewNo }</td>
                 	<td>${reviewDto.reviewTheme}</td>
                 	<td>${reviewDto.reviewLocation }</td>
-                    <td class="w-40 left"><a href="detail?reviewNo=${reviewDto.reviewNo}" class="link">${reviewDto.reviewTitle }</a></td>
+                    <td class="w-40 left">
+                    <a class="link" href="detail?reviewNo=${reviewDto.reviewNo}">
+           					${reviewDto.reviewTitle}</a>
+           				<c:if test="${reviewDto.reviewReply > 0}">
+           					[${reviewDto.reviewReply}]
+           				</c:if>
+                    </td>
                     <td><i class="fa-regular fa-eye"></i>    ${reviewDto.reviewRead }</td>
                		<td><i class="fa-regular fa-thumbs-up"></i>    ${reviewDto.reviewLike }</td>
                		<td>${reviewDto.reviewTime }</td>
@@ -124,7 +136,7 @@
 				</tfoot>
         </table>
         
-        <!-- 페이지 네이게이터 - vo에 있는 데이터를 기반으로 구현 -->
+<!-- 페이지 네이게이터 - vo에 있는 데이터를 기반으로 구현 -->
 <div class="row">
 
 	<div class="pagination">
@@ -174,7 +186,7 @@
  	</c:choose>
 	</div>
 </div>
-    </div>
+</div>
 
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
