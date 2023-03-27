@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.semi.dao.RecommendDao;
+import com.kh.semi.dto.QnaDto;
 import com.kh.semi.dto.RecommendDto;
 
 
@@ -84,5 +85,20 @@ public class RecommendContoller {
 		
 		model.addAttribute("recoDto",recoDto);
 		return "/WEB-INF/views/recommend/detail.jsp";
+	}
+	
+	@GetMapping("/edit")
+	public String edit(@RequestParam int recoNo, Model model) {
+		RecommendDto recoDto = recommendDao.selectOne(recoNo);
+		model.addAttribute("recoDto",recoDto);
+		return "/WEB-INF/views/recommend/edit.jsp";
+	}
+	
+	@PostMapping("/edit")
+	public String edit(@ModelAttribute RecommendDto recommendDto,
+			RedirectAttributes attr) {
+		recommendDao.edit(recommendDto);
+		attr.addAttribute("recoNo",recommendDto.getRecoNo());
+		return "redirect:detail";
 	}
 }
