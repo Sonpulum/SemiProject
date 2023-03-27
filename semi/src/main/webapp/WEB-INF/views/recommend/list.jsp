@@ -5,17 +5,6 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-    <script>
-      function showPostDetails(postId) {
-        // 게시글 클릭 시 상세 정보를 보여주는 함수입니다.
-        
-        // 게시글 상세 정보가 있는 페이지의 URL을 구성합니다.
-        const detailPageUrl = `post_detail.html?postId=${postId}`;
-
-        // 페이지를 이동합니다.
-        location.href = detailPageUrl;
-      }
-    </script>
     <style>
       .container-900 {
             width: 1000px;
@@ -25,6 +14,7 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             border-radius: 5px;
             padding : 20px;
+            margin-top: 0px;
         }
       /* 스타일 코드를 작성합니다. */
       .form {
@@ -87,7 +77,7 @@
         }
 
         .form a:hover {
-            text-decoration: underline;
+            text-decoration: none;
         }
         .post {
   display: flex;
@@ -121,6 +111,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-size: 20px;
 }
 
 .post-header .titleName {
@@ -128,7 +119,7 @@ body {
 }
 
 .post-caption {
-    margin: 0;
+    margin: 10px;
 }
 
 .post-footer {
@@ -174,17 +165,24 @@ body {
         
         <c:forEach var="recoDto" items="${list}">
         	<div class="post">
-        		<a href="detail?recoNo=${recoDto.recoNo}" class="link">
-          		<img src="/static/image/hotel.jpg" alt="게시글 사진">
-          		</div>
-              		<div class="post-header">
-                  		<h2 class="titleName">${recoDto.recoTitle}</h2>
-              		</div>
-              		<p class="post-caption">${recoDto.recoContent}</p>
-              		<div class="post-footer">
-                  		<span class="likes"><i class="fa-regular fa-thumbs-up"></i>${recoDto.recoLike}</span>
-                  		<span class="comments"><i class="fa-regular fa-eye"></i>${recoDto.recoRead}</span>
-              		</div>
+      			<a href="detail?recoNo=${recoDto.recoNo}">
+      				<img src="/static/image/hotel.jpg" alt="게시글 사진">
+      			</a>
+      			<div class="post-content">
+          			<div class="post-header">
+          				<a class="link" href="detail?recoNo=${recoDto.recoNo}">
+              				<span class="titleName">${recoDto.recoTitle}</span>
+              			</a>
+          			</div>
+          			<a class="link" href="detail?recoNo=${recoDto.recoNo}">
+          				<p class="post-caption">내용</p>
+          			</a>
+         			<div class="post-footer">
+              			<span class="likes"><i class="fa-regular fa-thumbs-up">좋아요</i>${recoDto.recoLike}</span>
+                        <span class="comments"><i class="fa-regular fa-eye">조회수</i>${recoDto.recoRead}</span>
+          			</div>
+      			</div>
+			</div>
       		
     	</c:forEach>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
