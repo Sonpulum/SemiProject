@@ -29,6 +29,7 @@ public class QnaDao {
          qnaDto.setQnaTime(rs.getDate("qna_time"));
          qnaDto.setQnaRead(rs.getInt("qna_read"));
          qnaDto.setQnaLike(rs.getInt("qna_like"));
+         qnaDto.setQnaSecret(rs.getBoolean("qna_secret"));
          qnaDto.setQnaGroup(rs.getInt("qna_group"));
          qnaDto.setQnaParent(rs.getObject("qna_parent") == null ?
                null : rs.getInt("qna_parent"));
@@ -46,11 +47,11 @@ public class QnaDao {
    public void insert(QnaDto qnaDto) {
       String sql = "insert into qna(qna_no, qna_writer, qna_title, "
             + "qna_content, qna_time, qna_read, "
-            + "qna_like, qna_group, qna_parent, qna_depth) "
-            + "values(?, ?, ?, ?, sysdate, 0, 0, ?, ?, ?)";
+            + "qna_like, qna_secret, qna_group, qna_parent, qna_depth) "
+            + "values(?, ?, ?, ?, sysdate, 0, 0, ?, ?, ?, ?)";
       Object[] param = {
             qnaDto.getQnaNo(), qnaDto.getQnaWriter(), qnaDto.getQnaTitle(),
-            qnaDto.getQnaContent(), qnaDto.getQnaGroup(), qnaDto.getQnaParent(),
+            qnaDto.getQnaContent(), qnaDto.isQnaSecret(), qnaDto.getQnaGroup(), qnaDto.getQnaParent(),
             qnaDto.getQnaDepth()};
       jdbcTemplate.update(sql, param);
    }

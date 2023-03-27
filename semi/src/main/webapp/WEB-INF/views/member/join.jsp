@@ -29,7 +29,7 @@
 <form class="join-form" action="join" method="post" autocomplete="off">
 <div class="container container-500">
     <div class="row center mt-30">
-        <a href="/"><img class="logo" src="/static/image/backpack.jpg"></a>
+        <a href="/"><img class="logo" src="/static/image/backpack.png"></a>
     </div>
     <div class="row">
         <label class="form-label w-100">아이디</label>
