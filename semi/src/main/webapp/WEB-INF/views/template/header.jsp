@@ -34,45 +34,45 @@
         <header>
             <div class="flex-box">
                 <div class="row w-10 center">
-                	<a href="/">
+                   <a href="/">
                     <img src="/static/image/backpack.png" alt="배낭 챙겨" width="80px" height="80px" class="pb-10">
-                	</a>
+                   </a>
                 </div>
                 <div class="row w-15 center">
                     <h1 class="mt-5 me-20">배낭챙겨</h1>
                 </div>
                 <div class="row center">
-                	<input type="search" class="form-input" placeholder="검색">
+                   <input type="search" class="form-input" placeholder="검색">
                 </div>
-		        <nav class="mt-10">
-		        	<!-- 메뉴를 상태에 따라 다르게 나오도록 처리 -->
-		            <ul class="menu">
-		                <li class="center"><a href="#">추천</a>
-		                	<ul>
-		                		<li><a href="/recommend/list">지역</a></li>
-		                		<li><a href="/recommend/list">계절</a></li>
-		                		<li><a href="/recommend/list">테마</a></li>
-		                	</ul>
-		                	</li>
-		                <li class="center"><a href="/review/list">후기</a></li>
-		                <li class="center"><a href="/qna/list">Q&A</a></li>
-		                
-		            <li class="center"><a>회원메뉴</a>
+              <nav class="mt-10">
+                 <!-- 메뉴를 상태에 따라 다르게 나오도록 처리 -->
+                  <ul class="menu">
+                      <li class="center"><a href="#">추천</a>
+                         <ul>
+                            <li><a href="/recommend/list">지역</a></li>
+                            <li><a href="/recommend/list">계절</a></li>
+                            <li><a href="/recommend/list">테마</a></li>
+                         </ul>
+                         </li>
+                      <li class="center"><a href="/review/list">후기</a></li>
+                      <li class="center"><a href="/qna/list">Q&A</a></li>
+                      
+                  <li class="center"><a>회원메뉴</a>
                     <ul>
-                    	<!-- 로그아웃 상태 -->
-                    	<c:if test="${memberId == null }">
+                       <!-- 로그아웃 상태 -->
+                       <c:if test="${memberId == null }">
                         <li class="center"><a href="/member/login">로그인</a></li>
                         <li class="center"><a href="/member/join">회원가입</a></li>
-                    	<!-- 로그인 상태 -->
-                    	</c:if>
-                    	<c:if test="${memberId !=null }">
+                       <!-- 로그인 상태 -->
+                       </c:if>
+                       <c:if test="${memberId !=null }">
                         <li class="center"><a href="/member/logout">로그아웃</a></li>
                         <li class="center"><a href="/member/mypage">내정보</a></li>
-                    	</c:if>
+                       </c:if>
                     </ul>
                 </li>
-		       </ul>
-		    </nav>
+             </ul>
+          </nav>
             </div>
         </header>
         <section>

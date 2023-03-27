@@ -18,6 +18,7 @@ public class QnaDto {
    private Date qnaTime;
    private int qnaRead;
    private int qnaLike;
+   private boolean qnaSecret;
    
    private int qnaGroup;
    private Integer qnaParent;

@@ -107,7 +107,9 @@
 			</c:choose>
 		</div>
 		
-		<div class="empty"></div>
+		<div class="row right">
+			<input type="checkbox" name="qnaSecret">비밀글
+		</div>
 		
 		<div class="row">
 			<c:choose>

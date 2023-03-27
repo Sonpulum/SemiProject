@@ -196,16 +196,16 @@ public class MemberController {
    @PostMapping("/findPw")
    public String findPw(@ModelAttribute MemberDto memberDto,
          @RequestParam String memberId,
+         @RequestParam String memberEmail,
          RedirectAttributes attr) {
-      try {
          MemberDto userDto = memberDao.selectOne(memberId);
          
-         String memberEmail = userDto.getMemberEmail();
+         String userEmail = userDto.getMemberEmail();
          String userId = userDto.getMemberId();
          
          String temporaryPw = randomComponent.generateString(10);
          
-         if(userDto.getMemberId().equals(userId)) {
+         if(memberId.equals(userId) && memberEmail.equals(userEmail)) {
             //1회용 비밀번호 이메일로 발급
             SimpleMailMessage message = new SimpleMailMessage();
             message.setTo(memberEmail);
@@ -217,13 +217,7 @@ public class MemberController {
             //비밀번호 변경
             memberDao.changePassword(temporaryPw, memberId);
          }
-         
          return "/WEB-INF/views/member/findPwResult.jsp";
-      }
-      catch(Exception e) {
-         attr.addAttribute("mode", "error");
-         return "redirect:findPw";
-      }
    }
    
    //비밀번호 재설정

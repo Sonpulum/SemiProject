@@ -38,9 +38,17 @@
     }
 </style>
 
+<script type="text/javascript">
+	$(function(){
+		$(".target").text(function(index, text) {
+		    return text.replace(/(?<=.{3})./gi, "*");
+		  });
+	});
+</script>
+
 	<div class="container-1000">
 	   <div class="center">
-	      <h1>Q&A</h1>
+	      <h1>Q&A 게시판</h1>
 	   </div>
 	   
 	   <div class="row right">
@@ -52,10 +60,11 @@
 	         <thead class="thead-color">
 	            <tr>
 	               <th>번호</th>
+	               <th>상태</th>
 	               <th>제목</th>
 	               <th>작성자</th>
-	               <th>작성일</th>
-	               <th>답변유무</th>
+	               <th>날짜</th>
+	               <th>조회수</th>
 	               <c:if test="${sessionScope.memberLevel == '관리자'}">
 						<th>관리</th>
 	               </c:if>
@@ -64,34 +73,47 @@
 	         <tbody class="center">
 	            <c:forEach var="qnaDto" items="${list}">
 	               <tr>
-	                  <td>${qnaDto.qnaNo}</td>
-	                  <td class="left">
-						<c:forEach var="i" begin="1" end="${qnaDto.qnaDepth}">
-							&nbsp;&nbsp;
-						</c:forEach>
-						<c:choose>
-							<c:when test="${qnaDto.qnaDepth > 0}">
-								<i class="fa-solid fa-a me-10" style="color: #87abe2;"></i>
-							</c:when>
-							<c:otherwise>
-								<i class="fa-solid fa-q me-10" style="color: #3878db;"></i>
-							</c:otherwise>
-						</c:choose>
-	                     	<a href="detail?qnaNo=${qnaDto.qnaNo}">
-	                     ${qnaDto.qnaTitle}</a>
-	                  </td>
-	                  <td>${qnaDto.qnaWriter}</td>
-	                  <td>${qnaDto.qnaTimeAuto}</td>
-	                  <td>
+	                  <td>${qnaDto.qnaNo}</td> <!-- 번호 -->
+	                  <td> <!-- 답변유무 -->
 	                  	<c:choose>
-		                  	<c:when test="${qnaDto.qnaDepth > 0}">
-		                  		<i class="fa-sharp fa-solid fa-square-check" style="color: #40a5bb;"></i>
+		                  	<c:when test="${qnaDto.qnaParent == null}">
+		                  		<i class="fa-sharp fa-solid fa-square-xmark" style="color: #e05462"></i>
 		                  	</c:when>
-		                  	<c:otherwise>
+		                  	<c:when test="${qnaDto.qnaDepth == 0}">
 		                  		<i class="fa-solid fa-square-xmark" style="color: #e05462"></i>
-		                  	</c:otherwise>
+		                  	</c:when>
+		                  	<c:otherwise></c:otherwise>
 	                  	</c:choose>
 	                  </td>
+	                  <td class="left"> <!-- 제목 -->
+							<c:forEach var="i" begin="1" end="${qnaDto.qnaDepth}">
+								&nbsp;&nbsp;
+							</c:forEach>
+							<c:choose>
+								<c:when test="${qnaDto.qnaDepth > 0}">
+									<i class="fa-solid fa-a me-10" style="color: #87abe2;"></i>
+								</c:when>
+								<c:otherwise>
+									<i class="fa-solid fa-q me-10" style="color: #3878db;"></i>
+								</c:otherwise>
+							</c:choose>
+							<c:choose>
+								<c:when test="${qnaDto.qnaSecret == true}">
+									<a class="link" href="detail?qnaNo=${qnaDto.qnaNo}">
+										비밀글입니다.
+									</a>
+									<i class="fa-solid fa-lock" style="color: #40a5bb"></i>
+								</c:when>
+								<c:otherwise>
+									<a class="link" href="detail?qnaNo=${qnaDto.qnaNo}">
+										${qnaDto.qnaTitle}
+									</a>
+								</c:otherwise>
+							</c:choose>
+	                  </td>
+	                  <td class="target">${qnaDto.qnaWriter}</td>
+	                  <td>${qnaDto.qnaTimeAuto}</td>
+	                  <td>${qnaDto.qnaRead}</td>
 	                  <c:if test="${sessionScope.memberLevel == '관리자'}">
 		                  <td>
 		                  	<a href="/qna/edit?qnaNo=${qnaDto.qnaNo}" class="edit-btn me-10"><i class="fa-sharp fa-solid fa-pen"></i></a>
