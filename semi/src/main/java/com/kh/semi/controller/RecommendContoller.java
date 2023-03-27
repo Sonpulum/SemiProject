@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -61,6 +62,19 @@ public class RecommendContoller {
 		
 		attr.addAttribute("recoNo",recoNo);
 		return "redirect:detail";
+	}
+	@GetMapping("/delete")
+	public String delete(@RequestParam int recoNo) {
+		recommendDao.delete(recoNo);
+//		return "redirect:list";//상대경로
+		return "redirect:/recommend/list";//절대경로
+	}
+	
+	@GetMapping("/delete/{recoNo}")
+	public String delete2(@PathVariable int recoNo) {
+		recommendDao.delete(recoNo);
+//		return "redirect:../list";//상대경로
+		return "redirect:/recommend/list";//절대경로
 	}
 	
 	@GetMapping("/detail")
