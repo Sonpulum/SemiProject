@@ -20,16 +20,20 @@ main section article h1 {
 .fa-thumbs-up:hover{
 	cursor:pointer;
 }
+.tag {
+	font-size : 22px;
+	font-weight : bold;
+}
 </style>
 
 <div class="container-800">
         <div class="row">
-            <h1 class="mb-50">${recoDto.recoTitle}</h1>
+            <h1 class="mb-30">${recoDto.recoTitle}</h1>
         </div>
         <div class="row">
-            <span >#${recoDto.recoLocation}</span>
-            <span>#${recoDto.recoSeason}</span>
-            <span>#${recoDto.recoTheme}</span>
+            <span class="tag">#${recoDto.recoLocation}</span>
+            <span class="tag">#${recoDto.recoSeason}</span>
+            <span class="tag">#${recoDto.recoTheme}</span>
         </div>
         <hr>
         <div class="row">
@@ -52,5 +56,13 @@ main section article h1 {
 			</c:if>
         </div>
         <hr>
+        
+        <div class = "row right">
+        	<a href="list" class="form-btn neutral">목록으로</a>
+        	<c:if test="${sessionScope.memberId == recoDto.recoWriter}">
+	        	<a href="#" class="form-btn negative">삭제하기</a>
+	        	<a href="edit?recoNo=${recoDto.recoNo}" class="form-btn bosung">수정하기</a>
+        	</c:if>
+        </div>
     </div>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

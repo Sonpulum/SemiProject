@@ -72,6 +72,23 @@ public class RecommendDao {
 		jdbcTemplate.update(sql, param);
 	}
 	
+	//게시글 수정
+	public boolean edit(RecommendDto recommendDto) {
+		String sql = "update recommend set reco_title = ?, reco_content = ?, reco_theme = ?, "
+				+ "reco_location = ?, reco_season = ? where reco_no = ?";
+		Object[] param = {recommendDto.getRecoTitle(), recommendDto.getRecoContent(), recommendDto.getRecoTheme(),
+							recommendDto.getRecoLocation(), recommendDto.getRecoSeason(), recommendDto.getRecoNo()};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
+	
+	//게시글 삭제
+	public boolean delete(int recoNo) {
+		String sql = "delete recommend where reco_no = ?";
+		Object[] param = {recoNo};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
+	
+	
 	// 게시글 상세보기
 	public RecommendDto selectOne(int recoNo) {
 		String sql = "select * from recommend where reco_no = ?";
