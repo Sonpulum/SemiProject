@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <div class="container-600">
@@ -7,9 +8,16 @@
             <h1>마이페이지</h1>
         </div>
 
-        <div class="center">
-            <img width="200" height="200" src="/static/image/usericon.jpg/">
-        </div>
+		<div class="row center">
+			<c:choose>
+				<c:when test="${profile != null}">
+					<img width="200" height="200" src="/attachment/download?attachmentNo=${profile.attachmentNo}">
+				</c:when>
+				<c:otherwise>
+					<img width="200" height="200" src="/static/image/usericon.jpg">
+				</c:otherwise>
+			</c:choose>
+		</div>
 
         <div class="row center">
             <table class="table table-border">

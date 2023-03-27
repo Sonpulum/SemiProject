@@ -1,5 +1,7 @@
 package com.kh.semi.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +14,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.semi.component.RandomComponent;
 import com.kh.semi.dao.MemberDao;
+import com.kh.semi.dao.MemberProfileDao;
+import com.kh.semi.dto.AttachmentDto;
 import com.kh.semi.dto.MemberDto;
+import com.kh.semi.dto.MemberProfileDto;
+import com.kh.semi.service.MemberService;
 
 @Controller
 @RequestMapping("/member")
@@ -30,6 +37,12 @@ public class MemberController {
 	@Autowired
 	private RandomComponent randomComponent;
 	
+	@Autowired
+	private MemberProfileDao memberProfileDao;
+	
+	@Autowired
+	private MemberService memberService;
+	
 	// 회원 가입
 	@GetMapping("/join")
 	public String join() {
@@ -37,8 +50,10 @@ public class MemberController {
 	}
 	
 	@PostMapping("/join")
-	 public String join(@ModelAttribute MemberDto memberDto) {
-		 memberDao.insert(memberDto);
+	 public String join(
+			 @ModelAttribute MemberDto memberDto,
+			 @RequestParam MultipartFile attach) throws IllegalStateException, IOException {
+		 memberService.join(memberDto, attach);
 		 return "redirect:login";
 	 }
 	 
@@ -89,6 +104,7 @@ public class MemberController {
 			String memberId = (String)session.getAttribute("memberId");
 			MemberDto memberDto = memberDao.selectOne(memberId);
 			model.addAttribute("memberDto",memberDto);
+			model.addAttribute("profile", memberProfileDao.selectOne(memberId));
 			
 			return "/WEB-INF/views/member/mypage.jsp";
 	}
@@ -101,6 +117,7 @@ public class MemberController {
          ) {
        String memberId = (String) session.getAttribute("memberId");
        MemberDto memberDto = memberDao.selectOne(memberId);
+       
        model.addAttribute("memberDto", memberDto);
        return "/WEB-INF/views/member/edit.jsp";
     }
@@ -108,10 +125,11 @@ public class MemberController {
 	 //개인정보 변경 처리 기능
 	 @PostMapping("/edit")
 	 public String edit(
-			 @ModelAttribute MemberDto memberDto, //데이터 자동 수신 객체
-			 HttpSession session, //회원 아이디가 저장되어 있는 세션 객체
-			 RedirectAttributes attr //리다이렉트 시 정보를 추가할 전송 객체
-		 ) {
+			 @ModelAttribute MemberDto memberDto,
+			 @RequestParam MultipartFile attach,
+			 HttpSession session,
+			 RedirectAttributes attr
+		 ) throws IllegalStateException, IOException {
 		 String memberId = (String)session.getAttribute("memberId");
 		 MemberDto findDto = memberDao.selectOne(memberId);
 
@@ -122,8 +140,9 @@ public class MemberController {
 		 }
 
 		 //비밀번호가 일치한다면 → 비밀번호 변경 및 완료 페이지로 리다이렉트
-		 memberDto.setMemberId(memberId); //아이디를 추가 설정
-		 memberDao.changeInformation(memberDto); //정보 변경 요청
+		 memberDto.setMemberId(memberId);
+		 memberService.update(memberDto, attach);
+		 
 		 return "redirect:editFinish";
 	 }
 	 
@@ -256,4 +275,5 @@ public class MemberController {
    public String passwordFinish() {
 	   return "/WEB-INF/views/member/passwordFinish.jsp";
 	}
+   
 }
