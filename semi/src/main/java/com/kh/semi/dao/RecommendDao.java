@@ -41,16 +41,14 @@ public class RecommendDao {
 		return jdbcTemplate.query(sql, mapper);
 	}
 	
-//	public List<RecommendDto> selectList(String column, String keyword) {
-//		String sql = "select * from board "
-//						+ "where instr(#1, ?) > 0 "
-//						+ "connect by prior board_no=board_parent "
-//						+ "start with board_parent is null "
-//						+ "order siblings by board_group desc, board_no asc";
-//		sql = sql.replace("#1", column);
-//		Object[] param = {keyword};
-//		return jdbcTemplate.query(sql, mapper, param);
-//	}
+	//게시글 검색
+	public List<RecommendDto> selectList(String column, String keyword) {
+		String sql = "select * from recommend "
+						+ "where instr(#1, ?) > 0 ";
+		sql = sql.replace("#1", column);
+		Object[] param = {keyword};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
 	
 	// 게시글 번호 우선 생성
 	public int sequence() {

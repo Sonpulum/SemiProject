@@ -31,10 +31,10 @@ public class RecommendContoller {
 //	목록 및 검색
 	@GetMapping("/list")
 	public String list(Model model, 
-			@RequestParam(required = false, defaultValue = "boardTitle") String column, 
+			@RequestParam(required = false, defaultValue = "") String column, 
 			@RequestParam(required = false, defaultValue = "") String keyword) {
-
-		model.addAttribute("list", recommendDao.selectList());
+		if(column.length() != 0) model.addAttribute("list", recommendDao.selectList(column,keyword));
+		else	model.addAttribute("list", recommendDao.selectList());
 		return "/WEB-INF/views/recommend/list.jsp";
 	}
 	

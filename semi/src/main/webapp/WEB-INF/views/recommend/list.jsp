@@ -156,12 +156,12 @@ body {
             <table class="table table-border table-hover">
                 <thead>
                     <tr>
-                        <th>수도권</th>
-                        <th>강원도</th>
-                        <th>충청도</th>
-                        <th>전라도</th>
-                        <th>경상도</th>
-                        <th>제주</th>
+                        <th><a class="link" href="list?column=reco_location&keyword=수도권">수도권</a></th>
+                        <th><a class="link" href="list?column=reco_location&keyword=강원도">강원도</a></th>
+                        <th><a class="link" href="list?column=reco_location&keyword=충청도">충청도</a></th>
+                        <th><a class="link" href="list?column=reco_location&keyword=전라도">전라도</a></th>
+                        <th><a class="link" href="list?column=reco_location&keyword=경상도">경상도</a></th>
+                        <th><a class="link" href="list?column=reco_location&keyword=제주">제주</a></th>
                     </tr>
                 </thead>
             </table>
