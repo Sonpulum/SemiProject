@@ -35,7 +35,7 @@
             <div class="flex-box">
                 <div class="row w-10 center">
                 	<a href="/">
-                    <img src="/static/image/backpack.jpg" alt="배낭 챙겨" width="80px" height="80px" class="pb-10">
+                    <img src="/static/image/backpack.png" alt="배낭 챙겨" width="80px" height="80px" class="pb-10">
                 	</a>
                 </div>
                 <div class="row w-15 center">

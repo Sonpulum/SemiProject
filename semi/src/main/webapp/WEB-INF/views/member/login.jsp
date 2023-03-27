@@ -217,7 +217,7 @@
 <body>
 <div class="container pt-30">
     <div class="logo">
-        <img src="/static/image/backpack.jpg" alt="배낭 챙겨">
+        <img src="/static/image/backpack.png" alt="배낭 챙겨">
     </div>
     <form class="form center" style="padding: 0px;">
         <div class="line row center">
