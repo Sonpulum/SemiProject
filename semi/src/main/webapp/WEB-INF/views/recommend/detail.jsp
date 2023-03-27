@@ -25,6 +25,17 @@ main section article h1 {
 	font-weight : bold;
 }
 </style>
+<script>
+$(function(){
+    $(".form-btn.negative").click(function(e){
+        e.preventDefault(); // 링크 이동 중지
+        var choice = window.confirm("정말 삭제하시겠습니까?");
+        if (choice) {
+            window.location.href = $(this).attr("href"); // 링크 이동
+        }
+    });
+});
+</script>
 
 <div class="container-800">
         <div class="row">
@@ -60,7 +71,7 @@ main section article h1 {
         <div class = "row right">
         	<a href="list" class="form-btn neutral">목록으로</a>
         	<c:if test="${sessionScope.memberId == recoDto.recoWriter}">
-	        	<a href="#" class="form-btn negative">삭제하기</a>
+	        	<a href="delete?recoNo=${recoDto.recoNo}" class="form-btn negative">삭제하기</a>
 	        	<a href="edit?recoNo=${recoDto.recoNo}" class="form-btn bosung">수정하기</a>
         	</c:if>
         </div>
