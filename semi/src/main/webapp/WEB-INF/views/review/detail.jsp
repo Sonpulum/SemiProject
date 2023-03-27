@@ -13,6 +13,11 @@
 	color:red;
 	cursor: pointer;
 	}
+	
+	.writer {
+    display: flex;
+    align-items: center;
+	}
 </style>
 
 <div class="container-800">
@@ -21,8 +26,18 @@
 		<h2>${reviewDto.reviewTitle}</h2>
 	</div>
 	
-	<div class="row">
-		${reviewDto.reviewWriter}
+	<!-- 이미지 첨부 코드 내일 수정 예정!! -->
+	<div class="row writer">
+		<c:choose>
+			<c:when test="${profile != null}">
+				<img width="70" height="70" src="/attachment/download?attachmentNo=${profile.attachmentNo}">
+				${reviewDto.reviewWriter}
+			</c:when>
+			<c:otherwise>
+       			<img class="me-10" width="70" height="70" src="/static/image/usericon.jpg">
+				${reviewDto.reviewWriter}
+			</c:otherwise>
+		</c:choose>
 	</div>
 	<div class="row">
 		<label>작성일 : </label>
@@ -45,7 +60,7 @@
 		<c:if test="${sessionScope.memberId != null}">
 		<i class="fa-regular fa-thumbs-up"></i>
 		댓글
-		<span class="reply-count">${reviewDto.reviewRead}</span>
+		<span class="reply-count">${reviewDto.reviewReply}</span>
 		</c:if>
 	</div>
 	
@@ -58,7 +73,7 @@
 		</c:if>
 		<!-- 작성자만 수정 -->
 		<c:if test="${owner}">
-			<a href="/review/edit?reviewNo=${reviewDto.reviewNo}" class="form-btn positive">수정</a>	
+			<a href="/review/edit?reviewNo=${reviewDto.reviewNo}" class="form-btn bosung">수정</a>	
 		</c:if>
 	</div>
 </div>

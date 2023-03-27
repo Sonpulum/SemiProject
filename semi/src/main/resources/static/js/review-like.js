@@ -43,7 +43,7 @@
 				 	 setTimeout(function(){
 						  $(".fa-thumbs-up").removeClass("fa-shake");
 						  
-					 }, 1000);
+					 }, 900);
 					 
 					 $(".thumbs-count").text(response.count);
 				 }
