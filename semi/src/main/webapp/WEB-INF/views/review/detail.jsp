@@ -8,6 +8,21 @@
 <script src="/static/js/review-like.js"></script>
 </c:if>
 
+<link rel="stylesheet" type="text/css" href="/static/css/reply.css">
+<script>
+	var memberId = "${sessionScope.memberId}";
+	var reviewWriter = "${reviewDto.reviewWriter}";
+</script>
+<script src="/static/js/review-reply.js"></script>
+
+<script type="text/template" id="reply-template">
+	<div class="reply-item">
+		<div class="reviewReplyWriter">?</div>
+		<div class="reviewReplyContent">?</div>
+		<div class="reviewReplyTime">?</div>
+	</div>
+</script>
+
 <style>
 	.fa-thumbs-up {
 	color:red;
@@ -45,10 +60,38 @@
 		<c:if test="${sessionScope.memberId != null}">
 		<i class="fa-regular fa-thumbs-up"></i>
 		댓글
-		<span class="reply-count">${reviewDto.reviewRead}</span>
+		<span class="reply-count">${reviewDto.reviewReply}</span>
 		</c:if>
 	</div>
 	
+	<div class="row reply-list">
+		댓글목록 위치
+	</div>
+	
+	
+	
+	<!-- 댓글 작성란 -->
+	<div class="row">
+		
+		<div class="row">
+			<c:choose>
+				<c:when test="${sessionScope.memberId != null}">
+					<textarea name="reviewReplyContent" class="form-input w-100"
+							placeholder="댓글 내용을 작성하세요"></textarea>	
+				</c:when>
+				<c:otherwise>
+					<textarea name="reviewReplyContent" class="form-input w-100"
+							placeholder="로그인 후에 댓글 작성이 가능합니다" disabled></textarea>	
+				</c:otherwise>
+			</c:choose>
+			
+		</div>
+		<c:if test="${sessionScope.memberId != null}">		
+		<div class="row right">
+			<button type="button" class="form-btn bosung reply-insert-btn">댓글 작성</button>
+		</div>
+		</c:if>
+
 	<div class="row right">
 		<a href="/review/list" class="form-btn neutral">목록보기</a>
 		
@@ -61,6 +104,10 @@
 			<a href="/review/edit?reviewNo=${reviewDto.reviewNo}" class="form-btn positive">수정</a>	
 		</c:if>
 	</div>
+	</div>
+	
+	
+	
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
