@@ -63,6 +63,7 @@ public class QnaController {
       boolean admin = memberLevel != null && memberLevel.equals("관리자");
       model.addAttribute("admin", admin);
       
+      model.addAttribute("attachmentNo", attachmentNo);
       attr.addAttribute("qnaNo", qnaNo);
       
       //상세 페이지로 redirect
@@ -76,6 +77,9 @@ public class QnaController {
          Model model) {
       int totalCount = qnaDao.selectCount(vo);
       vo.setCount(totalCount);
+      
+      //공지사항
+      model.addAttribute("noticeList", qnaDao.selectNoticeList(1, 3));
        
       //게시글
       List<QnaDto> list = qnaDao.selectList(vo);
@@ -84,44 +88,43 @@ public class QnaController {
       return "/WEB-INF/views/qna/list.jsp";
    }
    
-   //Q&A 상세
-   @GetMapping("/detail")
-   public String detail(
-         @RequestParam int qnaNo, 
-         Model model,
-         HttpSession session) {
-      //사용자가 작성자인지 판정 후 JSP로 전달
-      QnaDto qnaDto = qnaDao.selectOne(qnaNo);
-      String memberId = (String)session.getAttribute("memberId");
-      
-      boolean owner = qnaDto.getQnaWriter() != null
-            && qnaDto.getQnaWriter().equals(memberId);
-      model.addAttribute("owner", owner);
-      
-      //사용자가 관리자인지 판정 후 JSP로 전달
-      String memberLevel = (String)session.getAttribute("memberLevel");
-      boolean admin = memberLevel != null && memberLevel.equals("관리자");
-      model.addAttribute("admin", admin);
-      
-      //조회수 증가
-      if(!owner) {
-         Set<Integer> memory = (Set<Integer>) session.getAttribute("memory");
-         if(memory == null) {
-            memory = new HashSet<>();
-         }
-         
-         if(!memory.contains(qnaNo)) {
-            qnaDao.updateReadcount(qnaNo);
-            qnaDto.setQnaRead(qnaDto.getQnaRead() + 1);
-            memory.add(qnaNo);
-         }
-         
-         session.setAttribute("memory", memory);
-      }
-      
-      model.addAttribute("qnaDto", qnaDto);
-      return "/WEB-INF/views/qna/detail.jsp";
-   }
+   	//Q&A 상세
+ 	@GetMapping("/detail")
+ 	public String detail(
+ 			@RequestParam int qnaNo, 
+ 			Model model,
+ 			HttpSession session) {
+ 		//사용자가 작성자인지 판정 후 JSP로 전달
+ 		QnaDto qnaDto = qnaDao.selectOne(qnaNo);
+ 		String memberId = (String)session.getAttribute("memberId");
+ 		
+ 		boolean owner = qnaDto.getQnaWriter() != null
+ 				&& qnaDto.getQnaWriter().equals(memberId);
+ 		model.addAttribute("owner", owner);
+ 		
+ 		//사용자가 관리자인지 판정 후 JSP로 전달
+ 		String memberLevel = (String)session.getAttribute("memberLevel");
+ 		boolean admin = memberLevel != null && memberLevel.equals("관리자");
+ 		model.addAttribute("admin", admin);
+ 		
+ 		//조회수 증가
+ 		if(!owner) {
+ 			Set<Integer> memory = (Set<Integer>) session.getAttribute("memory");
+ 			if(memory == null) {
+ 				memory = new HashSet<>();
+ 			}
+ 			
+ 			if(!memory.contains(qnaNo)) {//읽은 적이 없는가(기억에 없는가)
+ 				qnaDao.updateReadcount(qnaNo);
+ 				qnaDto.setQnaRead(qnaDto.getQnaRead() + 1);//DTO 조회
+ 				memory.add(qnaNo);//저장소에 추가(기억에 추가)
+ 			}
+ 			session.setAttribute("memory", memory);//저장소 갱신
+ 		}
+ 		
+ 		model.addAttribute("qnaDto", qnaDto);
+ 		return "/WEB-INF/views/qna/detail.jsp";
+ 	}
    
    	//Q&A 게시글 삭제
  	@GetMapping("/delete")

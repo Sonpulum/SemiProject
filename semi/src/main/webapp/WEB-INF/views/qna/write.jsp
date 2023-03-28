@@ -97,8 +97,8 @@
 		<div class="row center mb-30">
 			<c:choose>
 				<c:when test="${qnaParent == null}">
-					<h1>Q&A</h1>
-					<h5>양식에 맞게 작성해주세요</h5>
+					<h1>Q&A 게시글 작성</h1>
+					<h4>양식에 맞게 작성해주세요</h4>
 				</c:when>
 				<c:otherwise>
 					<h1>Q&A 답글 작성</h1>
@@ -108,7 +108,23 @@
 		</div>
 		
 		<div class="row right">
-			<input type="checkbox" name="qnaSecret">비밀글
+			
+		</div>
+		
+		<div class="row">
+			<label class="form-label w-100">카테고리</label>
+			<select name="qnaHead" class="form-input">
+				<option value="">없음</option>
+				<c:if test="${memberLevel == '관리자'}">
+					<option>공지</option>
+				</c:if>
+				<option>질문</option>
+				<option>회원</option>
+				<option>혜택/이벤트</option>
+				<option>제휴/서비스</option>
+				<option>기타</option>
+			</select>
+			<input class="align-right" type="checkbox" name="qnaSecret">비밀글
 		</div>
 		
 		<div class="row">

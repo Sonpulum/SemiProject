@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class QnaDto {
 
    private int qnaNo;
+   private String qnaHead;
    private String qnaWriter;
    private String qnaTitle;
    private String qnaContent;
@@ -23,6 +24,7 @@ public class QnaDto {
    private int qnaGroup;
    private Integer qnaParent;
    private int qnaDepth;
+   private int qnaAnswer;
    
    //게시글 시각
    public String getQnaTimeAuto() {

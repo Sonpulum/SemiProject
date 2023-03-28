@@ -23,6 +23,7 @@ public class QnaDao {
       public QnaDto mapRow(ResultSet rs, int idx) throws SQLException {
          QnaDto qnaDto = new QnaDto();
          qnaDto.setQnaNo(rs.getInt("qna_no"));
+         qnaDto.setQnaHead(rs.getString("qna_head"));
          qnaDto.setQnaWriter(rs.getString("qna_writer"));
          qnaDto.setQnaTitle(rs.getString("qna_title"));
          qnaDto.setQnaContent(rs.getString("qna_content"));
@@ -34,9 +35,11 @@ public class QnaDao {
          qnaDto.setQnaParent(rs.getObject("qna_parent") == null ?
                null : rs.getInt("qna_parent"));
          qnaDto.setQnaDepth(rs.getInt("qna_depth"));
+         qnaDto.setQnaAnswer(rs.getInt("qna_answer"));
          return qnaDto;
       }
    };
+   
    //시퀀스
    public int sequence() {
       String sql = "select qna_seq.nextVal from dual";
@@ -45,31 +48,18 @@ public class QnaDao {
    
    //Q&A 작성
    public void insert(QnaDto qnaDto) {
-      String sql = "insert into qna(qna_no, qna_writer, qna_title, "
+      String sql = "insert into qna(qna_no, qna_head, qna_writer, qna_title, "
             + "qna_content, qna_time, qna_read, "
-            + "qna_like, qna_secret, qna_group, qna_parent, qna_depth) "
-            + "values(?, ?, ?, ?, sysdate, 0, 0, ?, ?, ?, ?)";
+            + "qna_like, qna_secret, qna_group, "
+            + "qna_parent, qna_depth, qna_answer) "
+            + "values(?, ?, ?, ?, ?, sysdate, 0, 0, ?, ?, ?, ?, ?)";
       Object[] param = {
-            qnaDto.getQnaNo(), qnaDto.getQnaWriter(), qnaDto.getQnaTitle(),
-            qnaDto.getQnaContent(), qnaDto.isQnaSecret(), qnaDto.getQnaGroup(), qnaDto.getQnaParent(),
-            qnaDto.getQnaDepth()};
+            qnaDto.getQnaNo(), qnaDto.getQnaHead(), qnaDto.getQnaWriter(), qnaDto.getQnaTitle(),
+            qnaDto.getQnaContent(), qnaDto.isQnaSecret(), qnaDto.getQnaGroup(), 
+            qnaDto.getQnaParent(), qnaDto.getQnaDepth(), qnaDto.getQnaAnswer()};
       jdbcTemplate.update(sql, param);
    }
-   
-//   //조회
-//   public List<QnaDto> selectList() {
-//      String sql = "select * from qna order by qna_no asc";
-//      return jdbcTemplate.query(sql, mapper);
-//   }
-//   
-//   //검색
-//   public List<QnaDto> selectList(String column, String keyword) {
-//      String sql = "select * from qna where instr(#1, ?) > 0 order by #1 asc";
-//      sql = sql.replace("#1", column);
-//      Object[] param = {keyword};
-//      return jdbcTemplate.query(sql, mapper, param);
-//   }
-   
+  
    //Q&A 목록
    public List<QnaDto> selectList(QnaPaginationVO vo) {
       if(vo.isSearch()) {//검색
@@ -138,7 +128,7 @@ public class QnaDao {
    }
    
    	//Q&A 게시글 삭제
- 	public boolean delete(int qnaNo) {
+   public boolean delete(int qnaNo) {
  		String sql ="delete qna where qna_no = ?";
  		Object[] param = {qnaNo};
  		return jdbcTemplate.update(sql, param) > 0;
@@ -146,8 +136,28 @@ public class QnaDao {
  	
  	//Q&A 게시글 수정
 	public boolean edit(QnaDto qnaDto) {
-		String sql = "update qna set qna_title = ?, qna_content = ? where qna_no = ?";
-		Object[] param = {qnaDto.getQnaTitle(), qnaDto.getQnaContent(), qnaDto.getQnaNo()};
+		String sql = "update qna set qna_head = ?, qna_title = ?, qna_content = ? where qna_no = ?";
+		Object[] param = {qnaDto.getQnaHead(), qnaDto.getQnaTitle(), qnaDto.getQnaContent(), qnaDto.getQnaNo()};
 		return jdbcTemplate.update(sql, param) > 0;
+	}
+	
+	//Q&A 답글 개수 카운트
+	public boolean update(QnaDto qnaDto) {
+		String sql = "update qna set qna_answer = qna_answer + 1 where qna_no = ?";
+		Object[] param = {qnaDto.getQnaNo()};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
+	
+	//공지사항만 조회하는 기능
+	public List<QnaDto> selectNoticeList(int begin, int end) {
+		String sql = "select * from("
+					+ "select rownum rn, TMP.* from("
+							+ "select * from qna where qna_head = '공지' "
+							+ "order by qna_no desc"
+						+ ")TMP"
+				+ ")where rn between ? and ?";
+		Object[] param = {begin, end};
+		return jdbcTemplate.query(sql, mapper, param);
+		
 	}
 }
