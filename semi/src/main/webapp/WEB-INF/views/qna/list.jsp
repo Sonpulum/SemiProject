@@ -40,9 +40,15 @@
 
 <script type="text/javascript">
 	$(function(){
-		$(".target").text(function(index, text) {
+		$(".encoding").text(function(index, text) {
 		    return text.replace(/(?<=.{3})./gi, "*");
 		  });
+		
+		$("[name=secret]").click(function(){
+			alert("접근 권한이 없습니다.");
+			event.preventDefault();
+			window.location.href = "/member/login";
+		});
 	});
 </script>
 
@@ -63,7 +69,7 @@
 	               <th>상태</th>
 	               <th>제목</th>
 	               <th>작성자</th>
-	               <th>파일</th>
+<!-- 	               <th>파일</th> -->
 	               <th>날짜</th>
 	               <th>조회수</th>
 	               <c:if test="${sessionScope.memberLevel == '관리자'}">
@@ -79,8 +85,9 @@
 						<td>${qnaDto.qnaNo}</td>
 						<td></td>
 						<td class="left">
-							<a href="detail?qnaNo=${qnaDto.qnaNo}">
+							<a href="detail?qnaNo=${qnaDto.qnaNo}" class="link">
 							<c:if test="${qnaDto.qnaHead != null}">
+								<i class="me-10"></i>&nbsp;&nbsp;
 								<!-- 말머리가 있으면 출력 -->
 								[${qnaDto.qnaHead}]
 							</c:if>
@@ -88,7 +95,7 @@
 							</a>
 						</td>
 						<td>${qnaDto.qnaWriter}</td>
-						<td></td>
+<!-- 						<td></td> -->
 						<td>${qnaDto.qnaTimeAuto}</td>
 						<td><i class="fa-regular fa-eye"></i>	${qnaDto.qnaRead}</td>
 						<c:if test="${sessionScope.memberLevel == '관리자'}">
@@ -120,13 +127,16 @@
 								<c:when test="${qnaDto.qnaDepth > 0}">
 									<i class="fa-solid fa-a me-10" style="color: #87abe2;"></i>
 								</c:when>
+								<c:when test="${qnaDto.qnaHead == '공지'}">
+ 									<i class="me-10"></i>&nbsp;&nbsp;
+								</c:when>
 								<c:otherwise>
 									<i class="fa-solid fa-q me-10" style="color: #3878db;"></i>
 								</c:otherwise>
 							</c:choose>
 							<c:choose>
 								<c:when test="${qnaDto.qnaSecret == true}">
-									<a class="link" href="detail?qnaNo=${qnaDto.qnaNo}">
+									<a class="link" href="detail?qnaNo=${qnaDto.qnaNo}" name="secret">
 										<c:if test="${qnaDto.qnaHead != null}">
 											[${qnaDto.qnaHead}]
 										</c:if>
@@ -144,12 +154,12 @@
 								</c:otherwise>
 							</c:choose>
 	                  </td>
-	                  <td class="target">${qnaDto.qnaWriter}</td>
-	                  <td>
-						<c:if test="${param.attachmentNo > 0}">
-							<i class="fa-solid fa-image"></i>
-						</c:if>
-	                  </td>
+	                  <td class="encoding">${qnaDto.qnaWriter}</td>
+<!-- 	                  <td> -->
+<%-- 						<c:if test="${param.attachmentNo != null}"> --%>
+<!-- 							<i class="fa-solid fa-image"></i> -->
+<%-- 						</c:if> --%>
+<!-- 	                  </td> -->
 	                  <td>${qnaDto.qnaTimeAuto}</td>
 	                  <td><i class="fa-regular fa-eye"></i>		${qnaDto.qnaRead}</td>
 	                  <c:if test="${sessionScope.memberLevel == '관리자'}">
