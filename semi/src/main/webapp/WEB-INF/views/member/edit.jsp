@@ -8,7 +8,7 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/static/js/find-address.js"></script>
 
-<form action="/member/edit" method="post" autocomplete="off">
+<form action="/member/edit" method="post" autocomplete="off" enctype="multipart/form-data">
 <div class=container-400>
    <div class="row center mb-20">
       <h2>개인정보 변경</h2>
@@ -47,9 +47,14 @@
       <input type="text" name="memberDetailAddr" class="form-input w-100" placeholder="상세주소" value="${memberDto.memberDetailAddr}">
    </div>
    
+   <div class="row">
+		<label class="form-label w-100">프로필 이미지</label>
+		<input type="file" name="attach" class="form-input" accept=".png, .gif, .jpg" style="border: 1px transparent solid;">
+   </div>
+   
    <!-- 버튼 -->
    <div class="row mt-20 mb-20">
-      <button type="submit" class="form-btn positive w-100">수정하기</button>
+      <button type="submit" class="form-btn bosung w-100">수정하기</button>
    </div>
    <!-- 비멀번호 에러 시 -->
    <c:if test="${param.mode == 'error'}">

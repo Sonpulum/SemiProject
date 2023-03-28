@@ -43,13 +43,25 @@ public class QnaController {
    @PostMapping("/write")
    public String write(@ModelAttribute QnaDto qnaDto,
 		   @RequestParam(required=false) List<Integer> attachmentNo,
+		   @RequestParam(defaultValue = "false") boolean qnaSecret,
          HttpSession session,
-         RedirectAttributes attr) {
+         RedirectAttributes attr,
+         Model model) {
       String memberId = (String)session.getAttribute("memberId");
       qnaDto.setQnaWriter(memberId);
       
       //나머지 일반 프로그래밍 코드는 서비스를 호출하여 처리
-      int qnaNo = qnaService.write(qnaDto, attachmentNo);
+      int qnaNo = qnaService.write(qnaDto, attachmentNo, qnaSecret);
+      
+      //작성자 여부 확인
+      boolean owner = qnaDto.getQnaWriter() != null
+    		  && qnaDto.getQnaWriter().equals(memberId);
+      model.addAttribute("owner", owner);
+
+      //관리자 여부 확인
+      String memberLevel = (String)session.getAttribute("memberLevel");
+      boolean admin = memberLevel != null && memberLevel.equals("관리자");
+      model.addAttribute("admin", admin);
       
       attr.addAttribute("qnaNo", qnaNo);
       
@@ -60,10 +72,11 @@ public class QnaController {
    //Q&A 목록
    @GetMapping("/list")
    public String list(@ModelAttribute("vo") QnaPaginationVO vo,
+		   @ModelAttribute QnaDto qnaDto,
          Model model) {
       int totalCount = qnaDao.selectCount(vo);
       vo.setCount(totalCount);
-
+       
       //게시글
       List<QnaDto> list = qnaDao.selectList(vo);
       model.addAttribute("list", list);

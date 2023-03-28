@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.semi.dao.QnaDao;
 import com.kh.semi.dto.QnaDto;
@@ -21,7 +22,8 @@ public class QnaService {
 	//게시글 등록 서비스
 	//- 컨트롤러에게서 게시글 정보를 받는다
 	//- 컨트롤러에게 등록된 게시글 번호를 반환한다
-	public int write(QnaDto qnaDto, List<Integer> attachmentNo) {
+	public int write(QnaDto qnaDto, List<Integer> attachmentNo,
+			@RequestParam(defaultValue = "false") boolean isSecret) {
 		//qnaDto의 정보를 새글과 답글로 구분하여 처리 후 등록
 		//- 새글일 경우 qnaParent가 null이다.
 		//		- 그룹번호(qnaGroup)는 글번호와 동일하게 처리

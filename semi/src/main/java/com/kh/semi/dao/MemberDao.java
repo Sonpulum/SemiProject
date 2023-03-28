@@ -63,7 +63,7 @@ public class MemberDao {
 		return jdbcTemplate.update(sql, param) > 0;
 	}
 	
-	public boolean changePassword(String memberId, String memberPw) {
+	public boolean changePassword(String memberPw, String memberId) {
 		String sql = "update member set member_pw = ? where member_id = ?";
 		Object[] param = {memberPw, memberId};
 		return jdbcTemplate.update(sql, param) > 0;
