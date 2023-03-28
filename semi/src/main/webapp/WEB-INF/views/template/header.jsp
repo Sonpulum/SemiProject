@@ -47,11 +47,11 @@
 		        <nav class="mt-10">
 		        	<!-- 메뉴를 상태에 따라 다르게 나오도록 처리 -->
 		            <ul class="menu">
-		                <li class="center"><a href="#">추천</a>
+		                <li class="center"><a href="">추천</a>
 		                	<ul>
-		                		<li><a href="/recommend/list">지역</a></li>
-		                		<li><a href="/recommend/list">계절</a></li>
-		                		<li><a href="/recommend/list">테마</a></li>
+		                		<li><a href="/recommend/list?column=reco_location&keyword=수도권">지역</a></li>
+		                		<li><a href="/recommend/list?column=reco_season&keyword=봄">계절</a></li>
+		                		<li><a href="/recommend/list?column=reco_theme&keyword=관광">테마</a></li>
 		                	</ul>
 		                	</li>
 		                <li class="center"><a href="/review/list">후기</a></li>

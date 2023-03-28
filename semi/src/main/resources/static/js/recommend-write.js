@@ -13,53 +13,48 @@ $(function(){
 	
 	$("[name=recoTitle]").blur(function(){
 		var target = $(this);
-		var isValid = target.val().length() != 0;
+		var isValid = target.val().trim().length > 0;
 		
 		valid.recoTitleValid = isValid;
 		$(this).removeClass("valid invalid")
 					.addClass(isValid ? "valid" : "invalid");
 	});
 	
-	$("[name=recoContentValid]").blur(function(){
+	
+	$("[name=recoLocation]").change(function(){
 		var target = $(this);
-		var isValid = target.val().length() != 0;
+		var isValid = target.val().length > 0;
 		
-		valid.recoTitleValid = isValid;
+		valid.recoLocationValid = isValid;
 		$(this).removeClass("valid invalid")
 					.addClass(isValid ? "valid" : "invalid");
 	});
 	
-	$("[name=recoLocationValid]").blur(function(){
+	$("[name=recoSeason]").change(function(){
 		var target = $(this);
-		var isValid = target.val().length() != 0;
+		var isValid = target.val().length > 0;
 		
-		valid.recoTitleValid = isValid;
+		valid.recoSeasonValid = isValid;
 		$(this).removeClass("valid invalid")
 					.addClass(isValid ? "valid" : "invalid");
 	});
 	
-	$("[name=recoSeasonValid]").blur(function(){
+	
+	$("[name=recoTheme]").change(function(){
 		var target = $(this);
-		var isValid = target.val().length() != 0;
+		var isValid = target.val().length > 0;
 		
-		valid.recoTitleValid = isValid;
+		valid.recoThemeValid = isValid;
 		$(this).removeClass("valid invalid")
 					.addClass(isValid ? "valid" : "invalid");
 	});
 	
-	
-	$("[name=recoThemeValid]").blur(function(){
-		var target = $(this);
-		var isValid = target.val().length() != 0;
-		
-		valid.recoTitleValid = isValid;
-		$(this).removeClass("valid invalid")
-					.addClass(isValid ? "valid" : "invalid");
-	});
-	
-	$(".join-form").submit(function(e){
-		if(!valid.isAllValid){
-			e.preventDefault();
+	$(".write-form").submit(function(e){
+		valid.recoContentValid = $("[name=recoContent]").val().length > 0;
+		if (valid.isAllValid() == false){
+			confirm("모든 항목을 입력하세요")
+			return false;
 		}
+		return true;
 	});
 });

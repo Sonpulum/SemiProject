@@ -5,7 +5,7 @@
 
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-
+<script src="/static/js/recommend-write.js"></script>
 <script type="text/javascript">
     $(function(){
         $('[name=recoContent]').summernote({
@@ -55,13 +55,13 @@
 </script>
 
 <style>
-	.form-input {
-	    font-size: 18px;
-	    padding: 0.5em;
-	    outline: none;/*선택 시 강조 효과 제거*/
-	    border: 1px solid #636e72;
-	    border-radius: 0.5em;
-	}
+/* 	.form-input { */
+/* 	    font-size: 18px; */
+/* 	    padding: 0.5em; */
+/* 	    outline: none;/*선택 시 강조 효과 제거*/ */
+/* 	    border: 1px solid #636e72; */
+/* 	    border-radius: 0.5em; */
+/* 	} */
 	
 	
 	.form-btn{
@@ -74,7 +74,7 @@
 	}
 </style>
 
-<form action="write" method="post" autocomplete="off">
+<form class="write-form" action="write" method="post" autocomplete="off">
 <div class="container-800">
     <div class="row mb-40">
 <!--         <label class="form-label w-100">제목</label> -->
@@ -88,7 +88,7 @@
             <option value="전라도">전라도</option>
             <option value="경상도">경상도</option>
             <option value="제주">제주</option>
-        </select>
+        </select>      
         <select name="recoSeason" class="form-input w-15">
             <option value="">계절</option>
             <option value="봄">봄</option>
@@ -108,7 +108,7 @@
         <textarea name="recoContent"></textarea>
     </div>
     <div class="row right">
-        <a href="#" class="form-btn neutral me-10">목록으로</a>
+        <a href="list" class="form-btn neutral me-10">목록으로</a>
         <button type="submit" class="form-btn positive">등록하기</button>
     </div>
 </div>

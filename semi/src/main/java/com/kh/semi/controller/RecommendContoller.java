@@ -34,7 +34,11 @@ public class RecommendContoller {
 	public String list(Model model, 
 			@RequestParam(required = false, defaultValue = "") String column, 
 			@RequestParam(required = false, defaultValue = "") String keyword) {
-		if(column.length() != 0) model.addAttribute("list", recommendDao.selectList(column,keyword));
+		if(column.length() != 0) {
+			model.addAttribute("list", recommendDao.selectList(column,keyword));
+			model.addAttribute("column",column);
+			model.addAttribute("keyword",keyword);
+		}
 		else	model.addAttribute("list", recommendDao.selectList());
 		return "/WEB-INF/views/recommend/list.jsp";
 	}
@@ -110,8 +114,15 @@ public class RecommendContoller {
 	
 	@PostMapping("/edit")
 	public String edit(@ModelAttribute RecommendDto recommendDto,
-			RedirectAttributes attr) {
+			@RequestParam(required=false) List<Integer> attachmentNo, RedirectAttributes attr) {
 		recommendDao.edit(recommendDto);
+		
+		
+		if (attachmentNo != null) {
+			for(int no : attachmentNo) {
+				recommendDao.connect(recommendDto.getRecoNo(),no);
+			}
+		}
 		attr.addAttribute("recoNo",recommendDto.getRecoNo());
 		return "redirect:detail";
 	}

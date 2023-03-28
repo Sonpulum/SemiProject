@@ -49,7 +49,4 @@ public class RecommendRestController {
 		recoLikeDto.setMemberId(memberId);
 		return recoLikeDao.check(recoLikeDto);
 	}
-	
-	@PostMapping("/write")
-	public String wirte(@Mo)
 }
