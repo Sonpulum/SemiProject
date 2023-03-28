@@ -5,13 +5,13 @@
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
  <style>
 .wrapper {
-  height: 450px; /* 이미지 높이 + 여백 */
+  height: 400px; /* 이미지 높이 + 여백 */
   background: #f6f5ef;
   position: relative;
 }
 .wrapper .swiper-container {
   width: calc(600px * 3 + 20px); /* 이미지 너비 * 보여줄 개수 + 여백의 합 */
-  height: min-content;
+  height: 400px;
   position: absolute;
   left: 50%;
   margin-left: calc((600px * 3 + 20px) / -2); /* 전체 너비의 반의 음수 값 */
@@ -82,33 +82,35 @@
   color: #fff;
 }
 </style>
-
+<div class="row center">
+<h1>4월 SNS 인기 여행지 Top 5</h1>
+</div>
 <div class="wrapper">
   <div class="swiper-container">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
-        <img src="/static/image/hotel.jpg" alt="" />
+        <img src="/static/image/hotel.jpg">
       </div>
       <div class="swiper-slide">
-        <img src="/static/image/sakura.jpg" alt="" />
+        <img src="/static/image/sakura.jpg">
       </div>
       <div class="swiper-slide">
-        <img src="/static/image/bosan.jpg" alt="" />
+        <img src="/static/image/bosan.jpg">
       </div>
       <div class="swiper-slide">
-        <img src="/static/image/gimpo.jpg" alt="" />
+        <img src="/static/image/gimpo.jpg">
       </div>
       <div class="swiper-slide">
-        <img src="/static/image/gangneung.jpg" alt="" />
+        <img src="/static/image/gangneung.jpg">
       </div>
     </div>
   </div>
   <div class="swiper-pagination"></div>
   <div class="swiper-prev">
-    <div class="material-icons">arrow_back</div>
+    <div class="material-icons">◀</div>
   </div>
   <div class="swiper-next">
-    <div class="material-icons">arrow_forward</div>
+    <div class="material-icons">▶</div>
   </div>
 </div>
 <script>
