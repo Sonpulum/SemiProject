@@ -92,7 +92,7 @@ public class ReviewDao {
 						+ "select rownum rn, TMP.* from ( "
 						+ "select * from review "
 						+ "where instr(#1,?)>0"
-						+ "order by review_no asc"
+						+ "order by review_no desc"
 						+ ")TMP"
 						+ ") where rn between ? and ?";
 				sql = sql.replace("#1", vo.getColumn());
@@ -103,7 +103,7 @@ public class ReviewDao {
 				String sql = "select * from ( "
 						+ "select rownum rn, TMP.* from ( "
 						+ "select * from review "
-						+ "order by review_no asc"
+						+ "order by review_no desc"
 						+ ")TMP"
 						+ ") where rn between ? and ?";
 				Object[] param = {vo.getBegin(), vo.getEnd()};
@@ -168,6 +168,17 @@ public class ReviewDao {
 	public void connect(int reviewNo, int attachmentNo) {
 		String sql = "insert into review_attachment values(?, ?)";
 		Object[] param = {reviewNo, attachmentNo};
+		jdbcTemplate.update(sql, param);
+	}
+	
+	//댓글 개수 갱신기능
+	public void updateReplycount(int reviewNo) {
+		String sql = "update review "
+						+ "set review_reply = ("
+							+ "select count(*) from review_reply where review_reply_origin = ?"
+						+ ") "
+					+ "where review_no = ?";
+		Object[] param = {reviewNo, reviewNo};
 		jdbcTemplate.update(sql, param);
 	}
 
