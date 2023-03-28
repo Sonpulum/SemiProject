@@ -40,17 +40,18 @@ public class QnaService {
 		qnaDto.setQnaNo(qnaNo);
 		
 		//새글일 경우와 답글일 경우에 따른 추가 계산 작업
-		//if(qnaDto.getqnaParent() == null) {
 		if(qnaDto.isNew()) {
 			qnaDto.setQnaGroup(qnaNo);//그룹번호를 글번호로 설정
-			//qnaDto.setqnaParent(null);//대상글번호를 null로 설정
-			//qnaDto.setqnaDepth(0);//차수를 0으로 설정
 		}
 		else {
 			//전달받은 대상글번호의 모든 정보 조회
 			QnaDto parentDto = qnaDao.selectOne(qnaDto.getQnaParent());
 			qnaDto.setQnaGroup(parentDto.getQnaGroup());//대상글 그룹번호
 			qnaDto.setQnaDepth(parentDto.getQnaDepth()+1);//대상글 차수+1
+
+			//부모글의 answer 증가
+		    parentDto.setQnaAnswer(parentDto.getQnaAnswer()+1);
+		    qnaDao.update(parentDto);
 		}
 		
 		//등록
