@@ -98,11 +98,11 @@
 			<c:choose>
 				<c:when test="${qnaParent == null}">
 					<h1>Q&A 게시글 작성</h1>
-					<h4>양식에 맞게 작성해주세요</h4>
+					<h5>양식에 맞게 작성해주세요</h5>
 				</c:when>
 				<c:otherwise>
 					<h1>Q&A 답글 작성</h1>
-					<h4>양식에 맞게 작성해주세요</h4>
+					<h5>양식에 맞게 작성해주세요</h5>
 				</c:otherwise>
 			</c:choose>
 		</div>
@@ -124,7 +124,7 @@
 				<option>제휴/서비스</option>
 				<option>기타</option>
 			</select>
-			<input class="align-right" type="checkbox" name="qnaSecret">비밀글
+			<input type="checkbox" name="qnaSecret">비밀글
 		</div>
 		
 		<div class="row">
