@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import lombok.Data;
 
 @Data
-public class RecommendDto {
+public class RecommendAttachDto {
 	private int recoNo;
 	private String recoWriter;
 	private String recoTitle;

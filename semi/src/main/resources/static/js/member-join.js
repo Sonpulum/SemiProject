@@ -210,9 +210,7 @@ $(function(){
 	
 	//폼 검사
 	$(".join-form").submit(function(e){
-		if(!valid.isAllValid){
-			e.preventDefault();
-		}
+		return valid.isAllValid();
 	});
 	
 });

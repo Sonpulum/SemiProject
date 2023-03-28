@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.kh.semi.dto.RecommendAttachDto;
 import com.kh.semi.dto.RecommendDto;
 
 @Repository
@@ -36,21 +37,45 @@ public class RecommendDao {
 		}
 	};
 	
-	public List<RecommendDto> selectList() {
-		String sql = "select * from recommend order by reco_no desc";
-		return jdbcTemplate.query(sql, mapper);
+	private RowMapper<RecommendAttachDto> mapper2 = new RowMapper<RecommendAttachDto>() {
+
+		@Override
+		public RecommendAttachDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+			RecommendAttachDto recommendAttachDto = new RecommendAttachDto();
+			recommendAttachDto.setRecoNo(rs.getInt("reco_no"));
+			recommendAttachDto.setRecoWriter(rs.getString("reco_writer"));
+			recommendAttachDto.setRecoTitle(rs.getString("reco_title"));
+			recommendAttachDto.setRecoContent(rs.getString("reco_content"));
+			recommendAttachDto.setRecoTheme(rs.getString("reco_theme"));
+			recommendAttachDto.setRecoLocation(rs.getString("reco_location"));
+			recommendAttachDto.setRecoSeason(rs.getString("reco_season"));
+			recommendAttachDto.setRecoLike(rs.getInt("reco_like"));
+			recommendAttachDto.setRecoRead(rs.getInt("reco_read"));
+			recommendAttachDto.setRecoTime(rs.getDate("reco_time"));
+			recommendAttachDto.setAttachNo(rs.getInt("attach_no"));
+			return recommendAttachDto;
+		}
+	};
+	
+	public List<RecommendAttachDto> selectList() {
+		String sql = "select R.*, IMG.attach_no from recommend R "
+				+ "left outer join "
+				+ "(select reco_no, min(attachment_no) attach_no from recommend_attachment group by reco_no) "
+				+ "IMG on R.reco_no = IMG.reco_no";
+		return jdbcTemplate.query(sql, mapper2);
 	}
 	
-//	public List<RecommendDto> selectList(String column, String keyword) {
-//		String sql = "select * from board "
-//						+ "where instr(#1, ?) > 0 "
-//						+ "connect by prior board_no=board_parent "
-//						+ "start with board_parent is null "
-//						+ "order siblings by board_group desc, board_no asc";
-//		sql = sql.replace("#1", column);
-//		Object[] param = {keyword};
-//		return jdbcTemplate.query(sql, mapper, param);
-//	}
+	//게시글 검색
+	public List<RecommendAttachDto> selectList(String column, String keyword) {
+		String sql = "select R.*, IMG.attach_no from recommend R "
+				+ "left outer join "
+				+ "(select reco_no, min(attachment_no) attach_no from recommend_attachment group by reco_no) "
+				+ "IMG on R.reco_no = IMG.reco_no "
+				+ "where instr(R.#1, ?) > 0 order by R.reco_no desc";
+		sql = sql.replace("#1", column);
+		Object[] param = {keyword};
+		return jdbcTemplate.query(sql, mapper2, param);
+	}
 	
 	// 게시글 번호 우선 생성
 	public int sequence() {

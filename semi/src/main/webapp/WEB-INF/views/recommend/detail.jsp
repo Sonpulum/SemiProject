@@ -69,7 +69,7 @@ $(function(){
         <hr>
         
         <div class = "row right">
-        	<a href="list" class="form-btn neutral">목록으로</a>
+<%--         	<a href="list?column=${column}&keyword=${keyword}" class="form-btn neutral">목록으로</a> --%>
         	<c:if test="${sessionScope.memberId == recoDto.recoWriter}">
 	        	<a href="delete?recoNo=${recoDto.recoNo}" class="form-btn negative">삭제하기</a>
 	        	<a href="edit?recoNo=${recoDto.recoNo}" class="form-btn bosung">수정하기</a>

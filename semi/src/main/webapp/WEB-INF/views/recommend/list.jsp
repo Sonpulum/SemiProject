@@ -139,26 +139,76 @@ body {
     </style>
 <!-- 제목 -->
     <div class="container-900">
+    <c:choose>
+    	<c:when test="${column == 'reco_location'}">
         <div class="row center">
-            <h1><i class="fa-solid fa-map" style="color: #40a5bb;"></i> 지역별 추천</h1>
+            <h1>
+            	<i class="fa-solid fa-map" style="color: #40a5bb;"></i>
+            	지역별 추천
+           	</h1>
         </div>
     
         <div class="row">
             <table class="table table-border table-hover">
                 <thead>
                     <tr>
-                        <th>수도권</th>
-                        <th>강원도</th>
-                        <th>충청도</th>
-                        <th>전라도</th>
-                        <th>경상도</th>
-                        <th>제주</th>
+                        <th><a class="link" href="?column=reco_location&keyword=수도권">수도권</a></th>
+                        <th><a class="link" href="?column=reco_location&keyword=강원도">강원도</a></th>
+                        <th><a class="link" href="?column=reco_location&keyword=충청도">충청도</a></th>
+                        <th><a class="link" href="?column=reco_location&keyword=전라도">전라도</a></th>
+                        <th><a class="link" href="?column=reco_location&keyword=경상도">경상도</a></th>
+                        <th><a class="link" href="?column=reco_location&keyword=제주">제주</a></th>
                     </tr>
                 </thead>
             </table>
          </div>
+    	</c:when>
+    	
+    	<c:when test="${column == 'reco_season'}">
+        <div class="row center">
+            <h1>
+            	<i class="fa-solid fa-cloud-sun" style="color: #40a5bb;"></i>
+            	계절별 추천
+           	</h1>
+        </div>
+    
+        <div class="row">
+            <table class="table table-border table-hover">
+                <thead>
+                    <tr>
+                        <th><a class="link" href="?column=reco_season&keyword=봄">봄</a></th>
+                        <th><a class="link" href="?column=reco_season&keyword=여름">여름</a></th>
+                        <th><a class="link" href="?column=reco_season&keyword=가을">가을</a></th>
+                        <th><a class="link" href="?column=reco_season&keyword=겨울">겨울</a></th>
+                    </tr>
+                </thead>
+            </table>
+         </div>
+    	</c:when>
+    	<c:when test="${column == 'reco_theme'}">
+        <div class="row center">
+            <h1>
+            	<i class="fa-solid fa-person-swimming" style="color: #40a5bb;"></i>
+            	테마별 추천
+           	</h1>
+        </div>
+    
+        <div class="row">
+            <table class="table table-border table-hover">
+                <thead>
+                    <tr>
+                        <th><a class="link" href="?column=reco_theme&keyword=관광">관광</a></th>
+                        <th><a class="link" href="?column=reco_theme&keyword=레저">레저</a></th>
+                        <th><a class="link" href="?column=reco_theme&keyword=식도락">식도락</a></th>
+                    </tr>
+                </thead>
+            </table>
+         </div>
+    	</c:when>
+    </c:choose>
+         
    <div class="wrapper">
-          <h2 class="left">#수도권</h2>
+          <h2 class="left">${keyword}</h2>
           <a href="write" class="write-btn center">글쓰기</a>
         </div>
         <hr>
@@ -166,7 +216,8 @@ body {
         <c:forEach var="recoDto" items="${list}">
         	<div class="post">
       			<a href="detail?recoNo=${recoDto.recoNo}">
-      				<img src="/static/image/hotel.jpg" alt="게시글 사진">
+<!--       				<img src="/static/image/hotel.jpg" alt="게시글 사진"> -->
+      				<img src=/rest/attachment/download/${recoDto.attachNo}>
       			</a>
       			<div class="post-content">
           			<div class="post-header">
@@ -175,11 +226,13 @@ body {
               			</a>
           			</div>
           			<a class="link" href="detail?recoNo=${recoDto.recoNo}">
-          				<p class="post-caption">내용</p>
+          				<span>#${recoDto.recoLocation}</span>
+          				<span>#${recoDto.recoSeason}</span>
+          				<span>#${recoDto.recoTheme}</span>
           			</a>
          			<div class="post-footer">
-              			<span class="likes"><i class="fa-regular fa-thumbs-up">좋아요</i>${recoDto.recoLike}</span>
                         <span class="comments"><i class="fa-regular fa-eye">조회수</i>${recoDto.recoRead}</span>
+              			<span class="likes"><i class="fa-regular fa-thumbs-up">좋아요</i>${recoDto.recoLike}</span>
           			</div>
       			</div>
 			</div>
