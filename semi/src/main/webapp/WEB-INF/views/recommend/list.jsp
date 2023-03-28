@@ -7,13 +7,13 @@
 
     <style>
       .container-900 {
-            width: 1000px;
+            width: 1050px;
             background-color: #ffffff;
             border: 1px solid #ebebeb;
             margin: 100px auto;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             border-radius: 5px;
-            padding : 20px;
+            padding : 10px 80px 80px 80px;
             margin-top: 0px;
         }
       /* 스타일 코드를 작성합니다. */
@@ -53,7 +53,7 @@
             color: #ffffff;
             border: none;
             border-radius: 5px;
-            font-size: 16px;
+            font-size: 18px;
             cursor: pointer;
             text-decoration: none;
             
@@ -83,9 +83,14 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  /* 기존 스타일 유지 */
-}
 
+  /* 기존 스타일 유지 */
+  
+  
+}
+.table .link{
+	font-size:18px;
+  }
 body {
   background-color: #f6f6f6;
 }
@@ -97,8 +102,8 @@ body {
 }
 
 .post img {
-    width: 128px;
-    height: 128px;
+    width: 230px;
+    height: 170px;
     margin-right: 10px;
     margin: 20px;
 }
@@ -133,15 +138,20 @@ body {
     margin-left: 10px;
 }
       h2{
-        font-size: 40px;
+        font-size: 30px;
         display: inline;
+        margin-top: 25px;
       }
+.boseng{
+	height:1px;
+	background-color:#40a5bb;
+}
     </style>
 <!-- 제목 -->
     <div class="container-900">
     <c:choose>
     	<c:when test="${column == 'reco_location'}">
-        <div class="row center">
+        <div class="row center" style="padding: 30px; font-size: 30px;">
             <h1>
             	<i class="fa-solid fa-map" style="color: #40a5bb;"></i>
             	지역별 추천
@@ -149,7 +159,7 @@ body {
         </div>
     
         <div class="row">
-            <table class="table table-border table-hover">
+            <table class="table">
                 <thead>
                     <tr>
                         <th><a class="link" href="?column=reco_location&keyword=수도권">수도권</a></th>
@@ -165,7 +175,7 @@ body {
     	</c:when>
     	
     	<c:when test="${column == 'reco_season'}">
-        <div class="row center">
+        <div class="row center" style="padding: 30px; font-size: 30px;">
             <h1>
             	<i class="fa-solid fa-cloud-sun" style="color: #40a5bb;"></i>
             	계절별 추천
@@ -173,7 +183,7 @@ body {
         </div>
     
         <div class="row">
-            <table class="table table-border table-hover">
+            <table class="table">
                 <thead>
                     <tr>
                         <th><a class="link" href="?column=reco_season&keyword=봄">봄</a></th>
@@ -186,7 +196,7 @@ body {
          </div>
     	</c:when>
     	<c:when test="${column == 'reco_theme'}">
-        <div class="row center">
+        <div class="row center" style="padding: 30px; font-size: 30px;">
             <h1>
             	<i class="fa-solid fa-person-swimming" style="color: #40a5bb;"></i>
             	테마별 추천
@@ -194,7 +204,7 @@ body {
         </div>
     
         <div class="row">
-            <table class="table table-border table-hover">
+            <table class="table">
                 <thead>
                     <tr>
                         <th><a class="link" href="?column=reco_theme&keyword=관광">관광</a></th>
@@ -208,10 +218,11 @@ body {
     </c:choose>
          
    <div class="wrapper">
-          <h2 class="left">${keyword}</h2>
+          <h2>${keyword}</h2>
           <a href="write" class="write-btn center">글쓰기</a>
         </div>
-        <hr>
+        <br>
+        <hr class="boseng">
         
         <c:forEach var="recoDto" items="${list}">
         	<div class="post">
