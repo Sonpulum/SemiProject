@@ -126,17 +126,17 @@
       <input type="text" name="memberDetailAddr" class="form-input w-75" placeholder="상세주소" value="${memberDto.memberDetailAddr}">
    </div>
    
-   <label class="form-label w-100">프로필 이미지</label>
+   <label class="form-label w-75">프로필 이미지</label>
    <div class="row writer">
    		<c:choose>
 			<c:when test="${profile.attachmentNo != null}">
-		   		<img id="preview" width="100" height="100" src="/attachment/download?attachmentNo=${profile.attachmentNo}">
+		   		<img id="preview" width="100" height="100" src="/attachment/download?attachmentNo=${profile.attachmentNo}" class="ms-50">
 			</c:when>
 			<c:otherwise>
-       			<img id="preview" width="100" height="100" src="/static/image/usericon.jpg">
+       			<img id="preview" width="100" height="100" src="/static/image/usericon.jpg" class="ms-50">
 			</c:otherwise>
 		</c:choose>
-		<input type="file" name="attach" class="form-input" accept=".png, .gif, .jpg" style="border: 1px transparent solid;">
+		<input type="file" name="attach" class="form-input w-75" accept=".png, .gif, .jpg" style="border: 1px transparent solid;">
    </div>
    
    <!-- 버튼 -->
