@@ -5,12 +5,67 @@
 
 <script src="/static/js/change-password.js"></script>
 
-<div class="container-500">
-	<div class="row center pb-30">
-		<h1>비밀번호 변경</h1>
-		<h5>안전한 비밀번호로 내정보를 보호하세요</h5>
-	</div>
+<style>
+	h2 {
+            font-size: 15px;
+        }
+	
+	h3 {
+            font-size: 10px;
+        }
 
+        .form-label {
+            display: inline-block;
+            margin-left: 13%;
+        }
+		
+		.form-btn1{
+            font-size: 15px;
+            padding: 0.5em;
+            border-width: 1px;
+            border-style: solid;
+            border-radius: 0.4em;
+            cursor: pointer;
+            background-color: #b1d5db;
+            border-color: #b1d5db;
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+        }
+		
+		
+        .form-btn2{
+            font-size: 15px;
+            padding: 0.5em;
+            border-width: 1px;
+            border-style: solid;
+            border-radius: 0.4em;
+            cursor: pointer;
+            background-color: rgb(64, 165, 187);
+            border-color: rgb(64, 165, 187);
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+        }
+        .form-input{
+            border-bottom-color: white;
+            border-radius: 0.4em;
+            border-color: #c8c8c8;
+        }
+        .form-label {
+            display: block;
+        }
+	
+</style>
+
+<div class="container-500">
+	<div class="row left">
+		<h1>비밀번호 변경</h1>
+		<h3>안전한 비밀번호로 내정보를 보호하세요</h3>
+	</div>
+	<hr>
 	<form action="password" method="post">
 		<div class="row">
 			<input type="password" name="currentPw"
@@ -35,12 +90,12 @@
 		</div>
 		
 		<div class="row">
-			<button type="submit" class="form-btn w-100 positive">변경</button>
+			<button type="submit" class="form-btn2 w-100">변경</button>
 		</div>
 		
 		<div class="row">
 			<a type="submit" href="/member/mypage?memberId=${memberDto.memberId}" 
-			class="form-btn neutral w-100">취소</a>
+			class="form-btn1 w-100">취소</a>
         </div>
 	</form>
 	

@@ -242,8 +242,16 @@ body {
           				<span>#${recoDto.recoTheme}</span>
           			</a>
          			<div class="post-footer">
-                        <span class="comments"><i class="fa-regular fa-eye">조회수</i>${recoDto.recoRead}</span>
-              			<span class="likes"><i class="fa-regular fa-thumbs-up">좋아요</i>${recoDto.recoLike}</span>
+                        <span class="comments">
+                        	<i class="fa-regular fa-eye"></i>
+                        	<span>조회수</span>
+                        	<span>${recoDto.recoRead}</span>
+                       	</span>
+                        <span class="likes">
+                        	<i class="fa-regular fa-thumbs-up"></i>
+                        	<span>좋아요</span>
+                        	<span>${recoDto.recoLike}</span>
+                       	</span>
           			</div>
       			</div>
 			</div>

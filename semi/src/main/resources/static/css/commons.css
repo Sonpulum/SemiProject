@@ -29,11 +29,6 @@
 	font-family: 'S-CoreDream-3Light';
 }
 
-* {
-    box-sizing: border-box;
-/*     font-family: '빙그레 메로나체'; */
-}
-
 /* 
     container는 표시될 폭과 정렬방식을 가운데로 설정 
     가운데라고만 하면 너무 애매하므로 다음과 같이 세분화

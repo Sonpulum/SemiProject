@@ -40,14 +40,18 @@
 
 <script type="text/javascript">
 	$(function(){
-		$(".encoding").text(function(index, text) {
-		    return text.replace(/(?<=.{3})./gi, "*");
-		  });
-		
-		$("[name=secret]").click(function(){
-			alert("접근 권한이 없습니다.");
-			event.preventDefault();
-			window.location.href = "/member/login";
+		$("[name=secret]").click(function(e){
+			var memberId = "${sessionScope.memberId}";
+			var memberLevel = "${sessionScope.memberLevel}";
+			
+			var writer = $(this).parent().next().text();
+			
+			if(memberLevel == '관리자' || memberId == writer){
+				$(this).parent().next().removeClass("masking");
+				return true;
+			}
+			e.preventDefault();
+			alert("읽을 권한이 없습니다.");
 		});
 	});
 </script>
@@ -154,7 +158,7 @@
 								</c:otherwise>
 							</c:choose>
 	                  </td>
-	                  <td class="encoding">${qnaDto.qnaWriter}</td>
+	                  <td>${qnaDto.qnaWriter}</td>
 <!-- 	                  <td> -->
 <%-- 						<c:if test="${param.attachmentNo != null}"> --%>
 <!-- 							<i class="fa-solid fa-image"></i> -->

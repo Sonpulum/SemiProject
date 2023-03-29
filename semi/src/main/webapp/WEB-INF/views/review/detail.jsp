@@ -4,6 +4,18 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<style>
+	.fa-thumbs-up {
+	color:red;
+	cursor: pointer;
+	}
+	
+	.writer {
+    display: flex;
+    align-items: center;
+	}
+</style>
+
 <c:if test="${sessionScope.memberId != null}">
 <script src="/static/js/review-like.js"></script>
 </c:if>
@@ -23,29 +35,17 @@
 	</div>
 </script>
 
-<style>
-	.fa-thumbs-up {
-	color:red;
-	cursor: pointer;
-	}
-	
-	.writer {
-    display: flex;
-    align-items: center;
-	}
-</style>
-
+<form action="detail" method="post" enctype="multipart/form-data">
 <div class="container-800">
 
 	<div class="row">
 		<h2>${reviewDto.reviewTitle}</h2>
 	</div>
 	
-	<!-- 이미지 첨부 코드 내일 수정 예정!! -->
 	<div class="row writer">
 		<c:choose>
-			<c:when test="${profile != null}">
-				<img width="70" height="70" src="/attachment/download?attachmentNo=${profile.attachmentNo}">
+			<c:when test="${memberProfile.attachmentNo != null}">
+				<img class="me-10" width="80" height="80" src="/attachment/download?attachmentNo=${memberProfile.attachmentNo}">
 				${reviewDto.reviewWriter}
 			</c:when>
 			<c:otherwise>
@@ -69,7 +69,7 @@
 	<hr>
 	
 	<div class="row">
-		좋아요 
+		좋아요
 		<span class="thumbs-count">${reviewDto.reviewLike}</span>
 				 
 		<c:if test="${sessionScope.memberId != null}">
@@ -121,8 +121,7 @@
 	</div>
 	</div>
 	
-	
-	
 </div>
+</form>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
