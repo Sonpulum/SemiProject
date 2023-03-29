@@ -87,6 +87,17 @@
   border: 2px solid #9999;
   border-radius: 20px;
 }
+ .area {
+    position: absolute;
+    background: #fff;
+    border: 1px solid #888;
+    border-radius: 3px;
+    font-size: 12px;
+    top: -5px;
+    left: 15px;
+    padding:2px;
+}
+
 </style>
 
 <div class="row center">
@@ -235,6 +246,7 @@ new Swiper('.swiper-container',{
 						
 						kakao.maps.event.addListener(polygon, 'mouseover', function(mouseEvent) { 
 							polygon.setOptions({fillColor: 'rgb(64, 165, 187)'});
+							customOverlay.setContent('<div class="area">' + data.name + '</div>');
 							customOverlay.setPosition(mouseEvent.latLng); 
 							customOverlay.setMap(map);
 						});
@@ -252,12 +264,8 @@ new Swiper('.swiper-container',{
 						
 						
 						kakao.maps.event.addListener(polygon, 'click', function(mouseEvent) {
-                            var content = '<a style="width:150px;text-align:center;padding:6px 0;" class="link" href="/recommend/list?column=reco_location&keyword='+data.name +'">'+data.name+'로 이동'+'</a>'
-
-                            infowindow.setContent(content); 
-                            infowindow.setPosition(mouseEvent.latLng); 
-                            infowindow.setMap(map);
-                        });
+	                            window.location.href = '/recommend/list?column=reco_location&keyword='+data.name ;
+	                        });
 						
 						polygon.setMap(map);
 					}

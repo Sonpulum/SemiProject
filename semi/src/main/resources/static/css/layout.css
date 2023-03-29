@@ -72,7 +72,7 @@ main {
     margin:0 auto;
 }
 /* 내부 영역에 기본 여백을 부여 */
-header, footer {
+header{
 	left: 0;
     padding: 1em;
     width : 100%;
@@ -80,6 +80,14 @@ header, footer {
     position:fixed;
     z-index: 9999;
     background-color:white;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+footer {
+	left: 0;
+    padding: 1em;
+    width : 100%;
+    height: 100px;
+    z-index: 9999;
 }
 /* section은 다단 레이아웃이 가능하도록 배치 */
 section {
@@ -92,5 +100,5 @@ article {
     flex-grow: 1;
     padding: 1em;
     min-height: 450px;
-    margin-top: 150px;
+    margin-top: 100px;
 }

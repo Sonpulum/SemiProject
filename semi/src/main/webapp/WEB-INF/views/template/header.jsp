@@ -32,14 +32,14 @@
     -->
     <main>
         <header>
-            <div class="flex-box">
+            <div class="flex-box" style="margin:0 auto;">
                 <div class="row w-10 center">
                    <a href="/">
-                    <img src="/static/image/backpack.png" alt="배낭 챙겨" width="80px" height="80px" class="pb-20">
+                    <img src="/static/image/backpack.png" alt="배낭 챙겨" width="90px" height="80px"style="position:relative; top:-15px;">
                    </a>
                 </div>
                 <div class="row w-15 center">
-                    <h1 class="mt-5 me-20"><a href="/" class="link" style="color:#2d3436">배낭챙겨</a></h1>
+                    <h1 class="me-20"><a href="/" class="link" style="color:#2d3436">배낭챙겨</a></h1>
                 </div>
                 <div class="row center w-30">
                 	<form action="/search" method="post">
