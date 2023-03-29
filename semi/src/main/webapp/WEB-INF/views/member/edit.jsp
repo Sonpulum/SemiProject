@@ -56,10 +56,34 @@
             display: block;
         }
 	
+	.fa-thumbs-up {
+	color:red;
+	cursor: pointer;
+	}
+	
+	.writer {
+    display: flex;
+    align-items: center;
+	}
 </style>
-<!-- 다음 우편 API 사용을 위한 CDN -->
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="/static/js/find-address.js"></script>
+<script>
+	function previewImage(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$('#preview').attr('src', e.target.result);
+			}
+			reader.readAsDataURL(input.files[0]);
+		} else {
+			$('#preview').attr('src', '/static/image/usericon.jpg');
+		}
+	}
+	$(document).ready(function() {
+		$("[name=attach]").change(function() {
+			previewImage(this);
+		});
+	});
+</script>
 
 <form action="/member/edit" method="post" autocomplete="off">
 <div class=container-500>
@@ -100,6 +124,19 @@
    </div>
    <div class="row center">
       <input type="text" name="memberDetailAddr" class="form-input w-75" placeholder="상세주소" value="${memberDto.memberDetailAddr}">
+   </div>
+   
+   <label class="form-label w-100">프로필 이미지</label>
+   <div class="row writer">
+   		<c:choose>
+			<c:when test="${profile.attachmentNo != null}">
+		   		<img id="preview" width="100" height="100" src="/attachment/download?attachmentNo=${profile.attachmentNo}">
+			</c:when>
+			<c:otherwise>
+       			<img id="preview" width="100" height="100" src="/static/image/usericon.jpg">
+			</c:otherwise>
+		</c:choose>
+		<input type="file" name="attach" class="form-input" accept=".png, .gif, .jpg" style="border: 1px transparent solid;">
    </div>
    
    <!-- 버튼 -->

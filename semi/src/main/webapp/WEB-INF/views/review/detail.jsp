@@ -45,11 +45,11 @@
 	<div class="row writer">
 		<c:choose>
 			<c:when test="${memberProfile.attachmentNo != null}">
-				<img class="me-10" width="80" height="80" src="/attachment/download?attachmentNo=${memberProfile.attachmentNo}">
+				<img class="me-10" width="90" height="90" src="/attachment/download?attachmentNo=${memberProfile.attachmentNo}">
 				${reviewDto.reviewWriter}
 			</c:when>
 			<c:otherwise>
-       			<img class="me-10" width="70" height="70" src="/static/image/usericon.jpg">
+       			<img class="me-10" width="90" height="90" src="/static/image/usericon.jpg">
 				${reviewDto.reviewWriter}
 			</c:otherwise>
 		</c:choose>
