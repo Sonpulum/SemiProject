@@ -41,6 +41,8 @@
 */
 .flex-box {
     display: flex;
+    width : 1100px;
+    height: 90px;
 }
 .inline-flex-box {
     display: inline-flex;
@@ -72,6 +74,8 @@ main {
 /* 내부 영역에 기본 여백을 부여 */
 header, footer {
     padding: 1em;
+    width : 1100px;
+    height: 90px;
 }
 /* section은 다단 레이아웃이 가능하도록 배치 */
 section {

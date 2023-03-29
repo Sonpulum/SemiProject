@@ -367,7 +367,7 @@ a.link {
     text-decoration: none;
 }
 a.link:hover {
-    color: #d63031;
+    color: rgb(64, 165, 187);
 }
 
 /*
@@ -575,7 +575,8 @@ input.form-input.search {
     padding: 0;
     font-size: 20px;
     font-weight:bold;
-
+    background-color: white;
+    color:#626262;
 }
 /* (2) */
 .menu a {
@@ -597,6 +598,7 @@ input.form-input.search {
     left:0;
     top:100%;
     width:100px;
+    
 }
 .menu, .menu li {
     position: relative;
@@ -612,13 +614,14 @@ input.form-input.search {
 }
 /* (7) */
 .menu li:hover {
-/*     background-color: #f6f6f6; */
-/* 	border: 1px solid black; */
+	font-weight: 800;
+	color:black;
 }
 /* (8) */
 .menu > li > ul > li ul {
     top:0;
     left:100%;
+    
 }
 /* (9) */
 .menu a {
@@ -632,6 +635,7 @@ input.form-input.search {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    
 }
 /* (10) */
 .menu > li.right-menu {
