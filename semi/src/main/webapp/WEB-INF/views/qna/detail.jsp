@@ -29,6 +29,10 @@
            border-color: rgb(64, 165, 187);
            color: white;
     }
+    .writer {
+    display: flex;
+    align-items: center;
+	}
 </style>
 
 <script>
@@ -44,6 +48,7 @@
    </div>
 </script>
 
+<form action="detail" method="post" enctype="multipart/form-data">
 <div class="container-800">
 
    <div class="row center">
@@ -58,8 +63,17 @@
 	         </td>
 	      </tr>
 	      <tr>
-	         <td>
-	            ${qnaDto.qnaWriter}
+	         <td class="writer">
+				<c:choose>
+					<c:when test="${memberProfile.attachmentNo != null}">
+						<img class="me-10" width="90" height="90" src="/attachment/download?attachmentNo=${memberProfile.attachmentNo}">
+						${qnaDto.qnaWriter}
+					</c:when>
+					<c:otherwise>
+		       			<img class="me-10" width="90" height="90" src="/static/image/usericon.jpg">
+			            ${qnaDto.qnaWriter}
+					</c:otherwise>
+				</c:choose>
 	         </td>
 	      </tr>
 	      <tr>
@@ -93,4 +107,5 @@
 		<a href="/qna/list" class="form-btn neutral">목록보기</a>
 	</div>
 </div>
+</form>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
