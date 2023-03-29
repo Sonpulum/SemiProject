@@ -20,9 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.semi.component.RandomComponent;
 import com.kh.semi.dao.MemberDao;
 import com.kh.semi.dao.MemberProfileDao;
-import com.kh.semi.dto.AttachmentDto;
 import com.kh.semi.dto.MemberDto;
-import com.kh.semi.dto.MemberProfileDto;
 import com.kh.semi.service.MemberService;
 
 @Controller
