@@ -41,10 +41,14 @@
                 <div class="row w-15 center">
                     <h1 class="mt-5 me-20">배낭챙겨</h1>
                 </div>
-                <div class="row center">
-                   <input type="search" class="form-input" placeholder="검색">
+                <div class="row center w-30">
+                	<form action="/search" method="post">
+<!-- 	               		<i class="fa-solid fa-magnifying-glass fa-2x"></i> -->
+<!-- 	               		<img src="/static/image/search.png" width="30px" height="30px"> -->
+	                  	<input name="keyword" type="search" class="form-input search w-100" placeholder="검색어를 입력하세요">
+                  	</form>
                 </div>
-              <nav class="mt-10">
+              <nav class="mt-10 ms-20">
                  <!-- 메뉴를 상태에 따라 다르게 나오도록 처리 -->
                   <ul class="menu">
                       <li class="center"><a>추천</a>

@@ -65,7 +65,7 @@ public class RecommendDao {
 		return jdbcTemplate.query(sql, mapper2);
 	}
 	
-	//게시글 검색
+	//게시글 분류
 	public List<RecommendAttachDto> selectList(String column, String keyword) {
 		String sql = "select R.*, IMG.attach_no from recommend R "
 				+ "left outer join "
@@ -75,6 +75,15 @@ public class RecommendDao {
 		sql = sql.replace("#1", column);
 		Object[] param = {keyword};
 		return jdbcTemplate.query(sql, mapper2, param);
+	}
+	
+	//게시글 검색
+	public List<RecommendDto> searchList(String keyword){
+		String sql = "select * from recommend where instr(reco_title, ?) > 0 "
+				+ "or instr(reco_content, ?) > 0 or instr(reco_location, ?) > 0 "
+				+ "or instr(reco_theme, ?) > 0 or instr(reco_season, ?) > 0 order by reco_no";
+		Object[] param = {keyword, keyword, keyword, keyword, keyword};
+		return jdbcTemplate.query(sql, mapper, param);
 	}
 	
 	// 게시글 번호 우선 생성
