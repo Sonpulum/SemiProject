@@ -36,7 +36,6 @@
    var qnaWriter = "${qnaDto.qnaWriter}";
 </script>
 
-<script src="/static/js/reply.js"></script>
 <script type="text/template" id="reply-template">
    <div class="reply-item">
       <div class="replyWriter">?</div>
@@ -78,8 +77,10 @@
 	
 	<div class="row right">
 		<a href="/qna/write" class="form-btn qna">글쓰기</a>
-		<a href="/qna/write?qnaParent=${qnaDto.qnaNo}" class="form-btn qna">답글쓰기</a>
 		
+		<c:if test="${admin}">
+			<a href="/qna/write?qnaParent=${qnaDto.qnaNo}" class="form-btn qna">답글쓰기</a>
+		</c:if>
 		<!--  내가 작성한 글이라면 수정과 삭제 메뉴를 출력 -->
 		<c:if test="${owner}">
 			<a href="/qna/edit?qnaNo=${qnaDto.qnaNo}" class="form-btn qna">수정</a>

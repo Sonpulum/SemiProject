@@ -158,6 +158,5 @@ public class QnaDao {
 				+ ")where rn between ? and ?";
 		Object[] param = {begin, end};
 		return jdbcTemplate.query(sql, mapper, param);
-		
 	}
 }
