@@ -564,7 +564,8 @@ input.form-input.form-input-bg {
     padding: 0;
     font-size: 20px;
     font-weight:bold;
-
+    background-color: white;
+    color:#626262;
 }
 /* (2) */
 .menu a {
@@ -586,9 +587,11 @@ input.form-input.form-input-bg {
     left:0;
     top:100%;
     width:100px;
+    
 }
 .menu, .menu li {
     position: relative;
+    z-index: 9999;
 }
 /* (5) */
 .menu > li ul {
@@ -600,12 +603,14 @@ input.form-input.form-input-bg {
 }
 /* (7) */
 .menu li:hover {
-    background-color: darkgray;
+			font-weight: 800;
+			color:black;
 }
 /* (8) */
 .menu > li > ul > li ul {
     top:0;
     left:100%;
+    
 }
 /* (9) */
 .menu a {
@@ -619,6 +624,7 @@ input.form-input.form-input-bg {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    
 }
 /* (10) */
 .menu > li.right-menu {

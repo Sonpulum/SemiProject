@@ -23,7 +23,7 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     
     <style>
-        
+   
     </style>
 </head>
 <body>
@@ -48,26 +48,26 @@
                  <!-- 메뉴를 상태에 따라 다르게 나오도록 처리 -->
                   <ul class="menu">
                       <li class="center"><a>추천</a>
-                         <ul>
-                            <li><a href="/recommend/list?column=reco_location&keyword=수도권">지역</a></li>
+                         <ul style="border: 1px solid black;  border-radius: 20px;">
+                            <li style="border-radius: 20px;"><a href="/recommend/list?column=reco_location&keyword=수도권">지역</a></li>
                             <li><a href="/recommend/list?column=reco_season&keyword=봄">계절</a></li>
-                            <li><a href="/recommend/list?column=reco_theme&keyword=관광">테마</a></li>
+                            <li style="border-radius: 20px;"><a href="/recommend/list?column=reco_theme&keyword=관광">테마</a></li>
                          </ul>
                          </li>
                       <li class="center"><a href="/review/list">후기</a></li>
                       <li class="center"><a href="/qna/list">Q&A</a></li>
                       
                   <li class="center"><a>회원메뉴</a>
-                    <ul>
+                    <ul style="border: 1px solid black; width:100px; border-radius: 20px;">
                        <!-- 로그아웃 상태 -->
                        <c:if test="${memberId == null }">
-                        <li class="center"><a href="/member/login">로그인</a></li>
-                        <li class="center"><a href="/member/join">회원가입</a></li>
+                        <li class="center" style="border-radius: 20px;"><a href="/member/login">로그인</a></li>
+                        <li class="center" style="border-radius: 20px; width:100px;"><a href="/member/join">회원가입</a></li>
                        <!-- 로그인 상태 -->
                        </c:if>
                        <c:if test="${memberId !=null }">
-                        <li class="center"><a href="/member/logout">로그아웃</a></li>
-                        <li class="center"><a href="/member/mypage">내정보</a></li>
+                        <li class="center" style="border-radius: 20px; width:100px;"><a href="/member/logout">로그아웃</a></li>
+                        <li class="center" style="border-radius: 20px;"><a href="/member/mypage">내정보</a></li>
                        </c:if>
                     </ul>
                 </li>
