@@ -70,7 +70,7 @@
             </c:otherwise>
          </c:choose>
         
-            <input type="search" name="keyword" class="form-input" value="${vo.keyword}" placeholder="여행지 검색">
+            <input type="search" name="keyword" class="form-input" style="width:350px;" value="${vo.keyword}" placeholder="여행지 검색">
             <button type="submit" class="form-btn neutral">검색</button>
            </form>
         </div>
