@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.semi.dao.MemberDao;
 import com.kh.semi.dao.QnaDao;
+import com.kh.semi.dto.MemberDto;
 import com.kh.semi.dto.QnaDto;
 import com.kh.semi.service.QnaService;
 import com.kh.semi.vo.QnaPaginationVO;
@@ -27,6 +29,9 @@ public class QnaController {
 
    @Autowired
    private QnaDao qnaDao;
+   
+   @Autowired
+   private MemberDao memberDao;
    
    @Autowired
    private QnaService qnaService;
@@ -80,7 +85,7 @@ public class QnaController {
       
       //공지사항
       model.addAttribute("noticeList", qnaDao.selectNoticeList(1, 3));
-       
+         
       //게시글
       List<QnaDto> list = qnaDao.selectList(vo);
       model.addAttribute("list", list);
