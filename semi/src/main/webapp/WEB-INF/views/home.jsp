@@ -82,6 +82,11 @@
   background: #333;
   color: #fff;
 }
+
+#mp {
+  border: 2px solid #9999;
+  border-radius: 20px;
+}
 </style>
 
 <div class="row center">
@@ -114,8 +119,14 @@
   <div class="swiper-next">
     <div class="material-icons">▶</div>
   </div>
+
 </div>
-<div class="row center" id="map" style="width:700px;height:500px;"></div> 
+<div class="flex-box" style="height:400px">
+<div class="mt-30 p-10" id="mp">
+<h1 class="mb-10 center">가고 싶은 지역을 클릭해보세요!</h1>
+<div id="map" style="width:500px;height:300px; border-radius: 20px;"></div> 
+</div>
+</div>
 
 
 
@@ -151,8 +162,9 @@ new Swiper('.swiper-container',{
 						
 						mapContainer = document.getElementById(areaId); // 지도를 표시할 div 
 						mapOption = $.extend({
+							draggable: false,
 							center: new kakao.maps.LatLng(35.9628205, 127.7251621)
-							,level : 13.3
+							,level : 14
 						},option);
 
 						map = new kakao.maps.Map(mapContainer, mapOption),
