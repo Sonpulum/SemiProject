@@ -367,7 +367,7 @@ a.link {
     text-decoration: none;
 }
 a.link:hover {
-    color: #d63031;
+    color: rgb(64, 165, 187);
 }
 
 /*

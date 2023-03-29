@@ -39,7 +39,7 @@
                    </a>
                 </div>
                 <div class="row w-15 center">
-                    <h1 class="mt-5 me-20">배낭챙겨</h1>
+                    <h1 class="mt-5 me-20"><a href="/" class="link" style="color:#2d3436">배낭챙겨</a></h1>
                 </div>
                 <div class="row center">
                    <input type="search" class="form-input" placeholder="검색">
