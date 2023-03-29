@@ -45,7 +45,7 @@
                 	<form action="/search" method="post">
 <!-- 	               		<i class="fa-solid fa-magnifying-glass fa-2x"></i> -->
 <!-- 	               		<img src="/static/image/search.png" width="30px" height="30px"> -->
-	                  	<input name="keyword" type="search" class="form-input search w-100" placeholder="검색어를 입력하세요">
+	                  	<input name="keyword" type="search" class="form-input search w-100" placeholder="검색어를 입력하세요" autocomplete="off">
                   	</form>
                 </div>
               <nav class="mt-10 ms-20">

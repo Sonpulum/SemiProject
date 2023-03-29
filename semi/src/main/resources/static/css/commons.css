@@ -18,9 +18,20 @@
 
     (주의) reset.css로 이동하였으므로 향후 제거해야함
 */
+@font-face {
+     font-family: 'S-CoreDream-3Light';
+     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
+}
+
+* {
+	font-family: 'S-CoreDream-3Light';
+}
+
 * {
     box-sizing: border-box;
-    font-family: '빙그레 메로나체';
+/*     font-family: '빙그레 메로나체'; */
 }
 
 /* 
