@@ -51,7 +51,7 @@ public class ReviewDao {
 		String sql = "select*from review order by review_no desc";
 		return jdbcTemplate.query(sql, mapper);
 	}
-	
+
 	//검색
 	public List<ReviewDto> selectList(String column, String keyword){
 		String sql = "select*from review "
@@ -62,6 +62,15 @@ public class ReviewDao {
 		return jdbcTemplate.query(sql, mapper, param);
 	}
 	
+	// 통합 검색
+	public List<ReviewDto> searchList(String keyword){
+		String sql = "select * from review "
+				+ "where instr(review_title, ?) > 0 or instr(review_content, ?) > 0 or "
+				+ "instr(review_location, ?) > 0 or instr(review_season, ?) > 0 or "
+				+ "instr(review_theme, ?) > 0 order by review_no desc";
+		Object[] param = {keyword, keyword, keyword, keyword, keyword};
+		return jdbcTemplate.query(sql, mapper, param);
+	}
 	//상세조회
 	public ReviewDto selectOne(int reviewNo) {
 		String sql="select*from review where review_no=?";
