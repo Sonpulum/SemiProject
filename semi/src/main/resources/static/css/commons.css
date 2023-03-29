@@ -469,6 +469,17 @@ input.form-input.form-input-bg {
     padding-left: 2.5em;
 }
 
+input.form-input.search {
+    background-size: auto 75%;
+    background-repeat: no-repeat;
+    background-image: url("/static/image/search.png");
+
+    background-position: right 12px center;
+
+
+    padding: 0 2.5em 0 1em;
+}
+
 /* 
     (참고) 
     z-index가 없어도 fixed가 가장 높게 나온다 
@@ -603,8 +614,8 @@ input.form-input.form-input-bg {
 }
 /* (7) */
 .menu li:hover {
-			font-weight: 800;
-			color:black;
+	font-weight: 800;
+	color:black;
 }
 /* (8) */
 .menu > li > ul > li ul {

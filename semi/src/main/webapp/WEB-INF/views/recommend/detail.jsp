@@ -20,6 +20,10 @@ main section article h1 {
 .fa-thumbs-up:hover{
 	cursor:pointer;
 }
+
+.non-click:hover{
+	cursor:default;
+}
 .tag {
 	font-size : 22px;
 	font-weight : bold;
@@ -55,16 +59,20 @@ $(function(){
             <span class="me-10">
             	<fmt:formatDate value="${recoDto.recoTime}" pattern="y년 M월 d일 HH:mm"/>
            	</span>
+            <span>조회수</span>
             <span>${recoDto.recoRead}</span>
-            <c:if test="${sessionScope.memberId != null}">
-			<!-- 조회수자리 -->
-			<i class="fa-regular fa-eye"></i>
-			</c:if> 
-            <span class="like-count ms-10">${recoDto.recoLike}</span>
-            <c:if test="${sessionScope.memberId != null}">
-			<!-- 좋아요자리 -->
-			<i class="fa-thumbs-up"></i>
-			</c:if>
+			<i class="fa-regular fa-eye me-10"></i>
+			
+			<span>좋아요</span>
+            <span class="like-count">${recoDto.recoLike}</span>
+            <c:choose>
+            	<c:when test="${sessionScope.memberId != null}">
+            		<i class="fa-thumbs-up"></i>
+            	</c:when>
+            	<c:otherwise>
+            		<i class="fa-regular fa-thumbs-up non-click"></i>
+            	</c:otherwise>
+            </c:choose>
         </div>
         <hr>
         

@@ -583,6 +583,9 @@ input.form-input.form-input-bg {
 }
 .menu, .menu li {
     position: relative;
+    border-radius:0.5em;
+	background-color:white;
+	z-index : 999;
 }
 /* (5) */
 .menu > li ul {
@@ -681,4 +684,7 @@ input.form-input.form-input-bg {
     background-color: #cae7fd;
     border-color: #cae7fd;
     filter:none;
+}
+header{
+	z-index: 99999;
 }
