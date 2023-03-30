@@ -36,6 +36,31 @@
     .fa-pen:hover {
     	color: #e05462;
     }
+    
+	.table.table-border,
+	.table.table-border > thead > tr > th,
+	.table.table-border > thead > tr > td,
+	.table.table-border > tbody > tr > th,
+	.table.table-border > tbody > tr > td,
+	.table.table-border > tfoot > tr > th,
+	.table.table-border > tfoot > tr > td
+	{
+	    border: 0px solid #636e72;
+	}
+	
+	.table.table-border > thead {
+		border-top : 2px solid rgb(64, 165, 187);
+		border-bottom : 2px solid gray;
+	}
+	
+	.table.table-border > tbody > tr:last-child {
+		border-bottom : 2px solid gray;
+	}
+	
+	 .table.table-border > tfoot > tr:last-child { 
+	 	border-bottom : 2px solid rgb(64, 165, 187); 
+	 } 
+	
 </style>
 
 <script type="text/javascript">
@@ -66,7 +91,7 @@
 	   </div>
 
 	   <div class="row">
-	      <table class="table table-slit table-hover">
+	      <table class="table table-border table-hover">
 	         <thead class="thead-color">
 	            <tr>
 	               <th>번호</th>
@@ -194,10 +219,10 @@
       <!-- 이전 -->
       <c:choose>
          <c:when test="${vo.prev}">
-            <a href="list?${vo.parameter}&page=${vo.prevPage}">&lt;</a>
+            <a href="list?${vo.parameter}&page=${vo.prevPage}">이전</a>
          </c:when>
          <c:otherwise>
-            <a class="disabled">&lt;</a>
+            <a class="disabled">이전</a>
          </c:otherwise>
       </c:choose>
       
@@ -214,10 +239,10 @@
       <!-- 다음 -->
       <c:choose>
          <c:when test="${vo.next}">
-            <a href="list?${vo.parameter}&page=${vo.nextPage}">&gt;</a>
+            <a href="list?${vo.parameter}&page=${vo.nextPage}">다음</a>
          </c:when>
          <c:otherwise>
-            <a class="disabled">&gt;</a>
+            <a class="disabled">다음</a>
          </c:otherwise>
       </c:choose>
       
