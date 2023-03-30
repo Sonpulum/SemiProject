@@ -20,7 +20,11 @@ public class HomeController {
 	private ReviewDao reviewDao;	
 	
 	@GetMapping("/")
-	public String home() {
+	public String home(Model model) {
+		//인기 게시글 조회
+		model.addAttribute("reviewTop",reviewDao.selectTopList(3));
+		model.addAttribute("recoTop", recommendDao.selectTopList(3));
+		
 		return "/WEB-INF/views/home.jsp";
 	}
 	

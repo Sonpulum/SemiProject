@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
@@ -101,6 +102,21 @@
     padding:2px;
 }
 
+.table.table-border,
+.table.table-border > thead > tr > th,
+.table.table-border > thead > tr > td,
+.table.table-border > tbody > tr > th,
+.table.table-border > tbody > tr > td,
+.table.table-border > tfoot > tr > th,
+.table.table-border > tfoot > tr > td
+{
+    border: 0px solid #636e72;
+}
+
+.table.table-border > thead {
+	border-bottom : 2px solid rgb(64, 165, 187);
+}
+
 </style>
 
 <div class="row center">
@@ -135,11 +151,52 @@
   </div>
 
 </div>
+
 <div class="flex-box" style="height:400px">
-<div class="mt-30 p-10" id="mp">
-<h1 class="mb-10 center">가고 싶은 지역을 클릭해보세요!</h1>
-<div id="map" style="width:500px;height:300px; border-radius: 20px;"></div> 
-</div>
+	<div class="mt-30 p-10 ms-10" id="mp">
+		<h1 class="mb-10 center">가고 싶은 지역을 클릭해보세요!</h1>
+		<div id="map" style="width:500px;height:300px; border-radius: 20px;"></div> 
+	</div>
+	<div class="mt-30 ms-30 p-10" style="width:500px; border-radius: 20px;" id="mp">
+		<table class="table table-border mt-10 mb-10">
+			<thead>
+				<tr >
+					<th colspan='3' class="center">추천 인기 게시글</th>
+				</tr>		
+			</thead>
+			<tbody>
+			<c:forEach var="recoDto" items="${recoTop}">
+				<tr>
+					<td class="w-70"><a class="link" href="recommend/detail?recoNo=${recoDto.recoNo}">
+					${recoDto.recoTitle}</a>
+					</td>
+					<td><i class="fa-regular fa-eye"></i> ${recoDto.recoRead}</td>
+                <td><i class="fa-regular fa-thumbs-up"></i> ${recoDto.recoLike}</td>
+				</tr>
+			</c:forEach>
+			</tbody>
+		</table>
+		<table class="table table-border mt-20">
+			<thead>
+				<tr >
+					<th colspan='3' class="center">후기 인기 게시글</th>
+				</tr>		
+			</thead>
+			<tbody>
+			<c:forEach var="reviewDto" items="${reviewTop}">
+				<tr>
+					<td class="w-70"><a class="link" href="review/detail?reviewNo=${reviewDto.reviewNo}">
+					${reviewDto.reviewTitle}</a>
+					</td>
+					<td><i class="fa-regular fa-eye"></i> ${reviewDto.reviewRead }</td>
+                <td><i class="fa-regular fa-thumbs-up"></i> ${reviewDto.reviewLike }</td>
+				</tr>
+			</c:forEach>
+			</tbody>
+		</table>
+	</div>
+	
+	
 </div>
 
 

@@ -258,7 +258,7 @@ public class MemberController {
 		}
 		
 		//비밀번호가 일치한다면 → 비밀번호 변경 처리
-		memberDao.changePassword(memberId, newPw);
+		memberDao.changePassword(newPw, memberId);
 
 		return "redirect:passwordFinish";
 	}

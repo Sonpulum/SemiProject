@@ -51,43 +51,37 @@
 <form action="detail" method="post" enctype="multipart/form-data">
 <div class="container-800">
 
-   <div class="row center">
-      <h1>${qnaDto.qnaNo}번 게시글</h1>
+   <div class="row">
+      <h2>${qnaDto.qnaTitle}</h2>
    </div>
-
-	<table class="table table-slit">
-	   <tbody>
-	      <tr>
-	         <td>
-	            <h2>${qnaDto.qnaTitle}</h2>
-	         </td>
-	      </tr>
-	      <tr>
-	         <td class="writer">
-				<c:choose>
-					<c:when test="${memberProfile.attachmentNo != null}">
-						<img class="me-10" width="90" height="90" src="/attachment/download?attachmentNo=${memberProfile.attachmentNo}">
-						${qnaDto.qnaWriter}
-					</c:when>
-					<c:otherwise>
-		       			<img class="me-10" width="90" height="90" src="/static/image/usericon.jpg">
-			            ${qnaDto.qnaWriter}
-					</c:otherwise>
-				</c:choose>
-	         </td>
-	      </tr>
-	      <tr>
-	         <td>
-	            <fmt:formatDate value="${qnaDto.qnaTime}"
-	                        pattern = "y년 M월 d일 H시 m분 s초"/>
-	            <i class="fa-regular fa-eye"></i>	${qnaDto.qnaRead}
-	         </td>
-	      </tr>
-	      <tr height="150" valign="top">
-	         <td>${qnaDto.qnaContent}</td>
-	      </tr>
-	   </tbody>
-	</table>
+   
+	<div class="row writer">
+		<c:choose>
+			<c:when test="${memberProfile.attachmentNo != null}">
+				<img class="me-10" width="90" height="90" src="/attachment/download?attachmentNo=${memberProfile.attachmentNo}">
+				${qnaDto.qnaWriter}
+			</c:when>
+			<c:otherwise>
+				<img class="me-10" width="90" height="90" src="/static/image/usericon.jpg">
+				   ${qnaDto.qnaWriter}
+			</c:otherwise>
+		</c:choose>
+	</div>
+	
+	<div class="row">
+		<label>작성일 : </label>
+		${qnaDto.qnaTime}
+		<label>조회수 : </label>
+		${qnaDto.qnaRead}
+	</div>
+	
+	<hr>
+	
+	<div class="row"  style="min-height: 500px;">
+		${qnaDto.qnaContent}
+	</div>
+	
+	<hr>
 	
 	<div class="row right">
 		<a href="/qna/write" class="form-btn qna">글쓰기</a>
