@@ -134,13 +134,13 @@
    <div class="row writer">
    		<c:choose>
 			<c:when test="${profile.attachmentNo != null}">
-		   		<img id="preview" width="100" height="100" src="/attachment/download?attachmentNo=${profile.attachmentNo}" class="ms-50">
+		   		<img id="preview" width="100" height="100" src="/attachment/download?attachmentNo=${profile.attachmentNo}" class="ms-70">
 			</c:when>
 			<c:otherwise>
-       			<img id="preview" width="100" height="100" src="/static/image/usericon.jpg" class="ms-50">
+       			<img id="preview" width="100" height="100" src="/static/image/usericon.jpg" class="ms-70">
 			</c:otherwise>
 		</c:choose>
-		<input type="file" name="attach" class="form-input w-60" accept=".png, .gif, .jpg" style="border: 1px transparent solid;">
+		<input type="file" name="attach" class="form-input w-55" accept=".png, .gif, .jpg" style="border: 1px transparent solid;">
    </div>
    
    <!-- 버튼 -->

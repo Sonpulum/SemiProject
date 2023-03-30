@@ -31,6 +31,24 @@
     align-items: center;
 	}
 </style>
+<script>
+	function previewImage(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$('#preview').attr('src', e.target.result);
+			}
+			reader.readAsDataURL(input.files[0]);
+		} else {
+			$('#preview').attr('src', '/static/image/usericon.jpg');
+		}
+	}
+	$(document).ready(function() {
+		$("[name=attach]").change(function() {
+			previewImage(this);
+		});
+	});
+</script>
 
 <form class="join-form" action="join" method="post" autocomplete="off" enctype="multipart/form-data">
 <div class="container container-500">
@@ -101,7 +119,7 @@
     </div>
     
    <label class="form-label w-100">프로필 이미지</label>
-   <div class="row writer">
+   <div class="writer">
    		<c:choose>
 			<c:when test="${profile.attachmentNo != null}">
 		   		<img id="preview" width="100" height="100" src="/attachment/download?attachmentNo=${profile.attachmentNo}">
