@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.semi.dto.RecommendAttachDto;
 import com.kh.semi.dto.RecommendDto;
+import com.kh.semi.dto.ReviewDto;
 
 @Repository
 public class RecommendDao {
@@ -150,6 +151,14 @@ public class RecommendDao {
 		String sql = "update recommend set reco_like = ? where reco_no = ?";
 		Object[] param = {cnt, recoNo};
 		jdbcTemplate.update(sql, param);
+	}
+	
+	//인기 게시물 조회
+	public List<RecommendDto> selectTopList(int count){
+		String sql = "select * from (select * from recommend order by reco_read desc)\r\n"
+				+ "where rownum<=?";
+		Object[] param = {count};
+		return jdbcTemplate.query(sql, mapper, param);
 	}
 	
 }
