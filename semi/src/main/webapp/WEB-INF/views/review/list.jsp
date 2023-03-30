@@ -5,6 +5,24 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <style>
+ .container-1000 { 
+             width: 1100px; 
+             height: 100%; 
+             background-color: #ffffff; 
+             border: 1px solid #ebebeb; 
+             margin: 100px auto; 
+             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
+             border-radius: 5px; 
+             padding : 10px 80px 80px 80px;  
+             margin-top: 0px; 
+             margin-bottom: 0px
+         } 
+        
+ body { 
+   background-color: #f6f6f6; 
+ } 
+
+
 .table.table-border,
 .table.table-border > thead > tr > th,
 .table.table-border > thead > tr > td,
@@ -16,7 +34,7 @@
     border: 0px solid #636e72;
 }
 
-.table.table-border > thead {
+ .table.table-border > thead { 
 	border-top : 2px solid rgb(64, 165, 187);
 	border-bottom : 2px solid gray;
 }
@@ -39,7 +57,7 @@
 </style>
  
  <div class="container-1000">
-        <div class="row center">
+        <div class="row center mt-30">
             <h1>나만의 여행지를 공유해보세요</h1>
         </div>
 
@@ -164,13 +182,16 @@
 	</div>
 </div>
 
-<div class="row center">
+<div class="row center mt-10">
 	<form action="list" method="get">
 		<c:choose>
 			<c:when test="${vo.column == 'review_content'}">
 				<select name="column" class="form-input">
    					<option value="review_title">제목</option>
    					<option value="review_content" selected>내용</option>
+   					<option value="review_location">지역</option>
+			   		<option value="review_season">계절</option>
+			   		<option value="review_theme">테마</option>
    					<option value="review_writer">작성자</option>
 				</select>
 			</c:when>
@@ -178,7 +199,40 @@
 				<select name="column" class="form-input">
 			   		<option value="review_title">제목</option>
 			   		<option value="review_content">내용</option>
+			   		<option value="review_location">지역</option>
+			   		<option value="review_season">계절</option>
+			   		<option value="review_theme">테마</option>
 			   		<option value="review_writer" selected>작성자</option>
+				</select>
+			</c:when>
+			<c:when test="${vo.column == 'review_location'}">
+				<select name="column" class="form-input">
+			   		<option value="review_title">제목</option>
+			   		<option value="review_content">내용</option>
+			   		<option value="review_location" selected>지역</option>
+			   		<option value="review_season">계절</option>
+			   		<option value="review_theme">테마</option>
+			   		<option value="review_writer">작성자</option>
+				</select>
+			</c:when>  
+			<c:when test="${vo.column == 'review_season'}">
+				<select name="column" class="form-input">
+			   		<option value="review_title">제목</option>
+			   		<option value="review_content">내용</option>
+			   		<option value="review_location">지역</option>
+			   		<option value="review_season" selected>계절</option>
+			   		<option value="review_theme">테마</option>
+			   		<option value="review_writer">작성자</option>
+				</select>
+			</c:when>  
+			<c:when test="${vo.column == 'review_theme'}">
+				<select name="column" class="form-input">
+			   		<option value="review_title">제목</option>
+			   		<option value="review_content">내용</option>
+			   		<option value="review_location">지역</option>
+			   		<option value="review_season">계절</option>
+			   		<option value="review_theme" selected>테마</option>
+			   		<option value="review_writer">작성자</option>
 				</select>
 			</c:when>  
 
@@ -186,6 +240,9 @@
 				<select name="column" class="form-input">
 			   		<option value="review_title" selected>제목</option>
 			   		<option value="review_content">내용</option>
+			   		<option value="review_location">지역</option>
+			   		<option value="review_season">계절</option>
+			   		<option value="review_theme">테마</option>
 			   		<option value="review_writer">작성자</option>
 				</select>
 			</c:otherwise>
