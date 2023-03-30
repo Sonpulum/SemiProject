@@ -6,6 +6,7 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=95c82dc1c1149f6ed680ecae0d9ba566&libraries=services"></script>
  <style>
 .wrapper {
+
   height: 400px; /* 이미지 높이 + 여백 */
   background: #f6f5ef;
   position: relative;
@@ -16,6 +17,8 @@
   position: absolute;
   left: 50%;
   margin-left: calc((600px * 3 + 20px) / -2); /* 전체 너비의 반의 음수 값 */
+  overflow:hidden;
+  
 }
 .wrapper :not(.swiper-slide-active).swiper-slide {
   opacity: 0.5;
@@ -30,8 +33,8 @@
   margin: auto;
 }
 .wrapper .swiper-slide img{
-	width : 100%;
-	height : 100%;
+   width : 100%;
+   height : 100%;
 }
 .wrapper .swiper-pagination {
   bottom: 10px;
@@ -144,144 +147,144 @@
 
 <script>
 new Swiper('.swiper-container',{
-	  slidesPerView: 3, // 한 번에 보여줄 슬라이드 개수
-	  spaceBetween: 10, // 슬라이드 사이 여백
-	  centeredSlides: true, // 1번 슬라이드가 가운데 보이기
-	  loop: true, // 반복 재생 여부
-	  autoplay: { // 자동 재생 여부
-	    delay: 3000 // 3초마다 슬라이드 바뀜
-	  },
-	  pagination:{ // 페이지 번호 사용 여부
-	    el: '.swiper-pagination', // 페이지 번호 요소 선택자
-	    clickable: true, // 사용자의 페이지 번호 요소 제어 가능 여부
-	  },
-	  navigation:{ // 슬라이드 이전/다음 버튼 사용 여부
-	    prevEl:'.swiper-prev', // 이전 버튼 선택자
-	    nextEl:'.swiper-next' // 다음 버튼 선택자
-	  }
-	});
+     slidesPerView: 3, // 한 번에 보여줄 슬라이드 개수
+     spaceBetween: 10, // 슬라이드 사이 여백
+     centeredSlides: true, // 1번 슬라이드가 가운데 보이기
+     loop: true, // 반복 재생 여부
+     autoplay: { // 자동 재생 여부
+       delay: 2000 // 3초마다 슬라이드 바뀜
+     },
+     pagination:{ // 페이지 번호 사용 여부
+       el: '.swiper-pagination', // 페이지 번호 요소 선택자
+       clickable: true, // 사용자의 페이지 번호 요소 제어 가능 여부
+     },
+     navigation:{ // 슬라이드 이전/다음 버튼 사용 여부
+       prevEl:'.swiper-prev', // 이전 버튼 선택자
+       nextEl:'.swiper-next' // 다음 버튼 선택자
+     }
+   });
 </script>
 
 <script>
-			(function(){
-				var map ="";
-					
-				var kkoMap = {				
-					initKko : function(data){
-						areaId = data.mapId;
-						option = data.option;
-						
-						mapContainer = document.getElementById(areaId); // 지도를 표시할 div 
-						mapOption = $.extend({
-							draggable: false,
-							center: new kakao.maps.LatLng(35.9628205, 127.7251621)
-							,level : 14
-						},option);
+         (function(){
+            var map ="";
+               
+            var kkoMap = {            
+               initKko : function(data){
+                  areaId = data.mapId;
+                  option = data.option;
+                  
+                  mapContainer = document.getElementById(areaId); // 지도를 표시할 div 
+                  mapOption = $.extend({
+                     draggable: false,
+                     center: new kakao.maps.LatLng(35.9628205, 127.7251621)
+                     ,level : 14
+                  },option);
 
-						map = new kakao.maps.Map(mapContainer, mapOption),
-						customOverlay = new kakao.maps.CustomOverlay({}),
-						infowindow = new kakao.maps.InfoWindow({removable: true});
-						
-						$.getJSON("static/json/all.json",function(jData){
-						$jData = $(jData.features);
-							$jData.each(function(){
-								kkoMap.getPolycode($(this)[0],)
-								;
-							});
-						});
-					}
-					,getPolycode : function(Feature){
-						var geometry = Feature.geometry
-						var polygonBox = [];						
-						var polygon=[];
-						var MultiPolygon=[];
-						
-						
-						if("Polygon" == geometry.type){
-							var coordinate = geometry.coordinates[0];
-							polygonArr = {"name":Feature.properties.loc_nm, "path":[]}
-							
-							for(var c in coordinate){						
-								polygonArr.path.push(new kakao.maps.LatLng(coordinate[c][1], coordinate[c][0]));
-							}
-							
-							kkoMap.setPolygon(polygonArr)
-						}else if("MultiPolygon" == geometry.type){
-							arrP = []
-							for(var c in geometry.coordinates){
-								var multiCoordinates = geometry.coordinates[c];
-								polygonArr = {"name":Feature.properties.loc_nm, "path":[]}
-								
-								for(var z in multiCoordinates[0]){
-									polygonArr.path.push(new kakao.maps.LatLng(multiCoordinates[0][z][1], multiCoordinates[0][z][0]));
-									
-								}
-								kkoMap.setPolygon(polygonArr)
-							}
-							
-						}
-					
-					}
-					,setPolygon : function(data,option){
-																		
-						polygonOption = $.extend({
-							strokeWeight: 2,
-							strokeColor: '#004c80',
-							strokeOpacity: 0.8,
-							fillColor: '#fff',
-							fillOpacity: 0.7
-						},option);
-						
-						var polygon = new kakao.maps.Polygon({
-							name: data.name
-							,path : data.path,
-							strokeWeight: 2,
-						strokeColor: '#004c80',
-						strokeOpacity: 0.8,
-						fillColor: '#fff',
-						fillOpacity: 0.7 
-						});
-						
-						
-						
-						kakao.maps.event.addListener(polygon, 'mouseover', function(mouseEvent) { 
-							polygon.setOptions({fillColor: 'rgb(64, 165, 187)'});
-							customOverlay.setContent('<div class="area">' + data.name + '</div>');
-							customOverlay.setPosition(mouseEvent.latLng); 
-							customOverlay.setMap(map);
-						});
-						
-			
-						
-						kakao.maps.event.addListener(polygon, 'mousemove', function(mouseEvent) {
-							customOverlay.setPosition(mouseEvent.latLng); 
-						});
-						
-						kakao.maps.event.addListener(polygon, 'mouseout', function() {
-							polygon.setOptions({fillColor: '#fff'});
-							customOverlay.setMap(null);
-						}); 
-						
-						
-						kakao.maps.event.addListener(polygon, 'click', function(mouseEvent) {
-	                            window.location.href = '/recommend/list?column=reco_location&keyword='+data.name ;
-	                        });
-						
-						polygon.setMap(map);
-					}
-				}
-				
-				window.kkoMap = kkoMap;
-			})();
-			
-			
-			
-			$(function(){
-				kkoMap.initKko({
-					mapId :"map"
-					,option :""
-				});
-			});
-		</script>
+                  map = new kakao.maps.Map(mapContainer, mapOption),
+                  customOverlay = new kakao.maps.CustomOverlay({}),
+                  infowindow = new kakao.maps.InfoWindow({removable: true});
+                  
+                  $.getJSON("static/json/all.json",function(jData){
+                  $jData = $(jData.features);
+                     $jData.each(function(){
+                        kkoMap.getPolycode($(this)[0],)
+                        ;
+                     });
+                  });
+               }
+               ,getPolycode : function(Feature){
+                  var geometry = Feature.geometry
+                  var polygonBox = [];                  
+                  var polygon=[];
+                  var MultiPolygon=[];
+                  
+                  
+                  if("Polygon" == geometry.type){
+                     var coordinate = geometry.coordinates[0];
+                     polygonArr = {"name":Feature.properties.loc_nm, "path":[]}
+                     
+                     for(var c in coordinate){                  
+                        polygonArr.path.push(new kakao.maps.LatLng(coordinate[c][1], coordinate[c][0]));
+                     }
+                     
+                     kkoMap.setPolygon(polygonArr)
+                  }else if("MultiPolygon" == geometry.type){
+                     arrP = []
+                     for(var c in geometry.coordinates){
+                        var multiCoordinates = geometry.coordinates[c];
+                        polygonArr = {"name":Feature.properties.loc_nm, "path":[]}
+                        
+                        for(var z in multiCoordinates[0]){
+                           polygonArr.path.push(new kakao.maps.LatLng(multiCoordinates[0][z][1], multiCoordinates[0][z][0]));
+                           
+                        }
+                        kkoMap.setPolygon(polygonArr)
+                     }
+                     
+                  }
+               
+               }
+               ,setPolygon : function(data,option){
+                                                      
+                  polygonOption = $.extend({
+                     strokeWeight: 2,
+                     strokeColor: '#004c80',
+                     strokeOpacity: 0.8,
+                     fillColor: '#fff',
+                     fillOpacity: 0.7
+                  },option);
+                  
+                  var polygon = new kakao.maps.Polygon({
+                     name: data.name
+                     ,path : data.path,
+                     strokeWeight: 2,
+                  strokeColor: '#004c80',
+                  strokeOpacity: 0.8,
+                  fillColor: '#fff',
+                  fillOpacity: 0.7 
+                  });
+                  
+                  
+                  
+                  kakao.maps.event.addListener(polygon, 'mouseover', function(mouseEvent) { 
+                     polygon.setOptions({fillColor: 'rgb(64, 165, 187)'});
+                     customOverlay.setContent('<div class="area">' + data.name + '</div>');
+                     customOverlay.setPosition(mouseEvent.latLng); 
+                     customOverlay.setMap(map);
+                  });
+                  
+         
+                  
+                  kakao.maps.event.addListener(polygon, 'mousemove', function(mouseEvent) {
+                     customOverlay.setPosition(mouseEvent.latLng); 
+                  });
+                  
+                  kakao.maps.event.addListener(polygon, 'mouseout', function() {
+                     polygon.setOptions({fillColor: '#fff'});
+                     customOverlay.setMap(null);
+                  }); 
+                  
+                  
+                  kakao.maps.event.addListener(polygon, 'click', function(mouseEvent) {
+                               window.location.href = '/recommend/list?column=reco_location&keyword='+data.name ;
+                           });
+                  
+                  polygon.setMap(map);
+               }
+            }
+            
+            window.kkoMap = kkoMap;
+         })();
+         
+         
+         
+         $(function(){
+            kkoMap.initKko({
+               mapId :"map"
+               ,option :""
+            });
+         });
+      </script>
     
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
