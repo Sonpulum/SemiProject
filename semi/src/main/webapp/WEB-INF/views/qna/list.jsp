@@ -59,8 +59,7 @@
 	
 	 .table.table-border > tfoot > tr:last-child { 
 	 	border-bottom : 2px solid rgb(64, 165, 187); 
-	 } 
-	
+	 }
 </style>
 
 <script type="text/javascript">
@@ -91,7 +90,7 @@
 	   </div>
 
 	   <div class="row">
-	      <table class="table table-border table-hover">
+	      <table class="table table-border">
 	         <thead class="thead-color">
 	            <tr>
 	               <th>번호</th>
@@ -204,89 +203,96 @@
 	   </div>
 	</div>
 
-   <!-- 페이지 네비게이터 vo에 있는 데이터를 기반으로 구현 -->
-   <div class="row pagination">
-      <!-- 처음 -->
-      <c:choose>
-         <c:when test="${vo.first}">
-            <a class="disabled">&laquo;</a>
-         </c:when>
-         <c:otherwise>
-            <a href="list?${vo.parameter}&page=1">&laquo;</a>
-         </c:otherwise>
-      </c:choose>
-      
-      <!-- 이전 -->
-      <c:choose>
-         <c:when test="${vo.prev}">
-            <a href="list?${vo.parameter}&page=${vo.prevPage}">이전</a>
-         </c:when>
-         <c:otherwise>
-            <a class="disabled">이전</a>
-         </c:otherwise>
-      </c:choose>
-      
-      <!-- 숫자 -->
-      <c:forEach var="i" begin="${vo.startBlock}" end="${vo.finishBlock}">
-         <c:choose>
-            <c:when test="${vo.page == i}"><a class="on">${i}</a></c:when>
-            <c:otherwise>
-               <a href="list?${vo.parameter}&page=${i}">${i}</a>
-            </c:otherwise>
-         </c:choose>
-      </c:forEach>
-      
-      <!-- 다음 -->
-      <c:choose>
-         <c:when test="${vo.next}">
-            <a href="list?${vo.parameter}&page=${vo.nextPage}">다음</a>
-         </c:when>
-         <c:otherwise>
-            <a class="disabled">다음</a>
-         </c:otherwise>
-      </c:choose>
-      
-      <!-- 마지막 -->
-      <c:choose>
-         <c:when test="${vo.last}">
-            <a class="disabled">&raquo;</a>
-         </c:when>
-         <c:otherwise>
-            <a href="list?${vo.parameter}&page=${vo.totalPage}">&raquo;</a>
-         </c:otherwise>
-      </c:choose>
-   </div>
-
-   <!-- 검색창 -->
-   <div class="row center">
-      <form action="list" method="get">
-
-         <c:choose>
-            <c:when test="${vo.column == 'qna_writer'}">
-               <select name="column" class="form-input">
-                  <option value="qna_title">제목</option>
-                  <option value="qna_writer" selected>작성자</option>
-               </select>
-            </c:when>
-            <c:when test="${vo.column == 'qna_head'}">
-               <select name="column" class="form-input">
-                  <option value="qna_title">제목</option>
-                  <option value="qna_writer">작성자</option>
-               </select>
-            </c:when>
-            <c:otherwise>
-               <select name="column" class="form-input">
-                  <option value="qna_title" selected>제목</option>
-                  <option value="qna_writer">작성자</option>
-               </select>
-            </c:otherwise>
-         </c:choose>
-
-         <input type="search" name="keyword" placeholder="검색어" required
-            class="form-input" value="${vo.keyword}">
-
-         <button type="submit" class="form-btn qna">검색</button>
-      </form>
-   </div>
+	<!-- 페이지 네비게이터 vo에 있는 데이터를 기반으로 구현 -->
+	<div class="row pagination">
+	   <!-- 처음 -->
+	   <c:choose>
+	      <c:when test="${vo.first}">
+	         <a class="disabled"><i class="fa-solid fa-angles-left"></i></a>
+	      </c:when>
+	      <c:otherwise>
+	         <a href="list?${vo.parameter}&page=1"><i class="fa-solid fa-angles-left"></i></a>
+	      </c:otherwise>
+	   </c:choose>
+	   
+	   <!-- 이전 -->
+	   <c:choose>
+	      <c:when test="${vo.prev}">
+	         <a href="list?${vo.parameter}&page=${vo.prevPage}"><i class="fa-solid fa-angle-left"></i></a>
+	      </c:when>
+	      <c:otherwise>
+	         <a class="disabled"><i class="fa-solid fa-angle-left"></i></a>
+	      </c:otherwise>
+	   </c:choose>
+	   
+	   <!-- 숫자 -->
+	   <c:forEach var="i" begin="${vo.startBlock}" end="${vo.finishBlock}">
+	      <c:choose>
+	         <c:when test="${vo.page == i}"><a class="on">${i}</a></c:when>
+	         <c:otherwise>
+	            <a href="list?${vo.parameter}&page=${i}">${i}</a>
+	         </c:otherwise>
+	      </c:choose>
+	   </c:forEach>
+	   
+	   <!-- 다음 -->
+	   <c:choose>
+	      <c:when test="${vo.next}">
+	         <a href="list?${vo.parameter}&page=${vo.nextPage}"><i class="fa-solid fa-angle-right"></i></a>
+	      </c:when>
+	      <c:otherwise>
+	         <a class="disabled"><i class="fa-solid fa-angle-right"></i></a>
+	      </c:otherwise>
+	   </c:choose>
+	   
+	   <!-- 마지막 -->
+	   <c:choose>
+	      <c:when test="${vo.last}">
+	         <a class="disabled"><i class="fa-solid fa-angles-right"></i></a>
+	      </c:when>
+	      <c:otherwise>
+	         <a href="list?${vo.parameter}&page=${vo.totalPage}"><i class="fa-solid fa-angles-right"></i></a>
+	      </c:otherwise>
+	   </c:choose>
+	</div>
+	
+	<!-- 페이징 숨김 -->
+	<c:if test="${vo.totalPage <= 10}">
+		<script>
+			document.querySelectorAll('.pagination a.disabled').forEach(el => el.style.display = 'none');
+		</script>
+	</c:if>
+		
+	<!-- 검색창 -->
+	<div class="row center">
+	   <form action="list" method="get">
+	
+	      <c:choose>
+	         <c:when test="${vo.column == 'qna_writer'}">
+	            <select name="column" class="form-input">
+	               <option value="qna_title">제목</option>
+	               <option value="qna_writer" selected>작성자</option>
+	            </select>
+	         </c:when>
+	         <c:when test="${vo.column == 'qna_head'}">
+	            <select name="column" class="form-input">
+	               <option value="qna_title">제목</option>
+	               <option value="qna_writer">작성자</option>
+	            </select>
+	         </c:when>
+	         <c:otherwise>
+	            <select name="column" class="form-input">
+	               <option value="qna_title" selected>제목</option>
+	               <option value="qna_writer">작성자</option>
+	            </select>
+	         </c:otherwise>
+	      </c:choose>
+	
+	      <input type="search" name="keyword" placeholder="검색어" required
+	         class="form-input" value="${vo.keyword}">
+	
+	      <button type="submit" class="form-btn qna">검색</button>
+	   </form>
+	</div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
