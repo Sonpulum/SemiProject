@@ -85,7 +85,7 @@
 	});
 </script>
 
-<form action="/member/edit" method="post" autocomplete="off">
+<form action="/member/edit" method="post" autocomplete="off" enctype="multipart/form-data">
 <div class=container-500>
    <div class="row left mb-20">
       <h1>개인정보 변경</h1>
@@ -116,7 +116,7 @@
    </div>
    <div class="row center">
       <label class="form-label left">주소</label>
-      <input type="text" name="memberPost" class="form-input w-49" placeholder="우편번호" readonly value="${memberDto.memberPost}">
+      <input type="text" name="memberPost" class="form-input w-50" placeholder="우편번호" readonly value="${memberDto.memberPost}">
       <button type="button" class="form-btn1 find-address-btn">우편번호 찾기</button>
    </div>
    <div class="row center">

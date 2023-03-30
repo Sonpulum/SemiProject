@@ -398,24 +398,23 @@ a.link:hover {
     color: black;
     text-decoration: none;
 
-    font-size: 16px;
+    font-size: 15px;
 
     min-width: 3em;
     height: 3em;
     padding: 1em;
 
     text-align: center;
-
-    /*border: 1px solid transparent;*/
 }
-.pagination > a.on,
-.pagination > a:hover:not(.disabled) {
-    /*border-color: black;*/
+.pagination > a.on {
     color:red;
-    font-weight: bold;
-    box-shadow: 0px 0px 0px 1px black;
+    font-weight: bolder;
 }
-
+.pagination > a:hover:not(.disabled) {
+    color:red;
+    font-weight: bolder;
+    text-decoration: underline;
+}
 .pagination > a.disabled {
 	cursor: not-allowed;
 }
