@@ -109,7 +109,7 @@
            		</td>
                 <td><i class="fa-regular fa-eye"></i>    ${reviewDto.reviewRead }</td>
                 <td><i class="fa-regular fa-thumbs-up"></i>    ${reviewDto.reviewLike }</td>
-                <td>${reviewDto.reviewTime }</td>
+                <td>${reviewDto.reviewTimeAuto}</td>
 			</tr>
            </c:forEach> 
             </tbody>
@@ -130,7 +130,7 @@
                     </td>
                     <td><i class="fa-regular fa-eye"></i>    ${reviewDto.reviewRead }</td>
                		<td><i class="fa-regular fa-thumbs-up"></i>    ${reviewDto.reviewLike }</td>
-               		<td>${reviewDto.reviewTime }</td>
+               		<td>${reviewDto.reviewTimeAuto}</td>
                 </tr>
         	</c:forEach>
 				</tfoot>
