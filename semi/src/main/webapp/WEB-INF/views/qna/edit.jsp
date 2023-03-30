@@ -68,6 +68,7 @@
 					<option>제휴/서비스</option>
 					<option>기타</option>
 				</select>
+				<input type="checkbox" name="qnaSecret">비밀글
 				</c:when>
 			<c:when test="${qnaDto.qnaHead == '회원'}">
 				<select name="qnaHead" class="form-input w-100">
@@ -81,6 +82,7 @@
 					<option>제휴/서비스</option>
 					<option>기타</option>
 				</select>
+				<input type="checkbox" name="qnaSecret">비밀글
 			</c:when>
 			<c:when test="${qnaDto.qnaHead == '혜택/이벤트'}">
 				<select name="qnaHead" class="form-input w-100">
@@ -94,6 +96,7 @@
 					<option>제휴/서비스</option>
 					<option>기타</option>
 				</select>
+				<input type="checkbox" name="qnaSecret">비밀글
 			</c:when>
 			<c:when test="${qnaDto.qnaHead == '제휴/서비스'}">
 				<select name="qnaHead" class="form-input w-100">
@@ -107,6 +110,7 @@
 					<option selected>제휴/서비스</option>
 					<option>기타</option>
 				</select>
+				<input type="checkbox" name="qnaSecret">비밀글
 			</c:when>
 			<c:when test="${qnaDto.qnaHead == '기타'}">
 				<select name="qnaHead" class="form-input w-100">
@@ -120,6 +124,7 @@
 					<option>제휴/서비스</option>
 					<option selected>기타</option>
 				</select>
+				<input type="checkbox" name="qnaSecret">비밀글
 			</c:when>
 			<c:otherwise>
 				<select name="qnaHead" class="form-input w-100">
@@ -133,6 +138,7 @@
 					<option>제휴/서비스</option>
 					<option>기타</option>
 				</select>
+				<input type="checkbox" name="qnaSecret">비밀글
 			</c:otherwise>
 		</c:choose>
 		<textarea name="qnaContent" required style="min-height: 500px;" class="form-input w-100">${qnaDto.qnaContent}</textarea>
