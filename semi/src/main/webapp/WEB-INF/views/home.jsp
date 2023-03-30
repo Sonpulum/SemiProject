@@ -152,6 +152,7 @@
 
 </div>
 
+<div style="width:100%;background-color: #f0f2f7;"> 
 <div class="flex-box" style="height:400px">
 	<div class="mt-30 p-10 ms-10" id="mp">
 		<h1 class="mb-10 center">가고 싶은 지역을 클릭해보세요!</h1>
@@ -199,7 +200,7 @@
 	
 </div>
 
-
+</div>
 
 
 <script>
