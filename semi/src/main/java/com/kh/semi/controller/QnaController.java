@@ -32,9 +32,6 @@ public class QnaController {
    private QnaDao qnaDao;
    
    @Autowired
-   private MemberDao memberDao;
-   
-   @Autowired
    private QnaService qnaService;
    
    @Autowired

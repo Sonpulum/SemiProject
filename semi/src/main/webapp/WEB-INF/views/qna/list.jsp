@@ -60,6 +60,7 @@
 	 .table.table-border > tfoot > tr:last-child { 
 	 	border-bottom : 2px solid rgb(64, 165, 187); 
 	 }
+
 </style>
 
 <script type="text/javascript">
@@ -71,7 +72,6 @@
 			var writer = $(this).parent().next().text();
 			
 			if(memberLevel == '관리자' || memberId == writer){
-				$(this).parent().next().removeClass("masking");
 				return true;
 			}
 			e.preventDefault();
@@ -82,22 +82,37 @@
 
 	<div class="container-1000">
 	   <div class="center">
-	      <h1>Q&A 게시판</h1>
+	      <h1>궁금한 점이 있으면 물어보세요</h1>
 	   </div>
 	   
 	   <div class="row right">
 	      <a href="write" class="form-btn qna">글쓰기</a>
 	   </div>
+	   
+		<div class="row center">
+			<table class="table">
+				<thead>
+					<tr>
+						<th><a class="link" href="?column=qna_list">#전체</a></th>
+                        <th><a class="link" href="?column=qna_head&keyword=공지">#공지</a></th>
+                        <th><a class="link" href="?column=qna_head&keyword=질문">#질문</a></th>
+                        <th><a class="link" href="?column=qna_head&keyword=회원">#회원</a></th>
+                        <th><a class="link" href="?column=qna_head&keyword=혜택/이벤트">#혜택/이벤트</a></th>
+                        <th><a class="link" href="?column=qna_head&keyword=제휴/서비스">#제휴/서비스</a></th>
+                        <th><a class="link" href="?column=qna_head&keyword=기타">#기타</a></th>
+					</tr>
+				</thead>
+			</table>
+		</div>
 
 	   <div class="row">
 	      <table class="table table-border">
-	         <thead class="thead-color">
+	         <thead>
 	            <tr>
 	               <th>번호</th>
 	               <th>상태</th>
 	               <th>제목</th>
 	               <th>작성자</th>
-<!-- 	               <th>파일</th> -->
 	               <th>날짜</th>
 	               <th>조회수</th>
 	               <c:if test="${sessionScope.memberLevel == '관리자'}">
@@ -109,7 +124,7 @@
 	         
 	         	<!-- 공지사항을 출력 -->
 				<c:forEach var="qnaDto" items="${noticeList}">
-					<tr bgcolor="#dfe6e9">
+					<tr bgcolor="#c7e1e7">
 						<td>${qnaDto.qnaNo}</td>
 						<td></td>
 						<td class="left">
@@ -123,7 +138,6 @@
 							</a>
 						</td>
 						<td>${qnaDto.qnaWriter}</td>
-<!-- 						<td></td> -->
 						<td>${qnaDto.qnaTimeAuto}</td>
 						<td><i class="fa-regular fa-eye"></i>	${qnaDto.qnaRead}</td>
 						<c:if test="${sessionScope.memberLevel == '관리자'}">
@@ -131,7 +145,7 @@
 		                  	<a href="/qna/edit?qnaNo=${qnaDto.qnaNo}" class="edit-btn me-10"><i class="fa-sharp fa-solid fa-pen"></i></a>
 		                    <a href="/qna/delete?qnaNo=${qnaDto.qnaNo}" class="delete-btn"><i class="fa-sharp fa-solid fa-trash"></i></a>
 		                  </td>
-		              </c:if>
+		              	</c:if>
 					</tr>
 				</c:forEach>
 	            <c:forEach var="qnaDto" items="${list}">
@@ -172,6 +186,14 @@
 									</a>
 									<i class="fa-solid fa-lock" style="color: #40a5bb"></i>
 								</c:when>
+								<c:when test="${qnaDto.qnaDepth > 0}">
+									<a class="link" href="detail?qnaNo=${qnaDto.qnaNo}">
+										<c:if test="${qnaDto.qnaHead != null}">
+											[${qnaDto.qnaHead}]
+										</c:if>
+										문의 답변드리겠습니다.
+									</a>
+								</c:when>
 								<c:otherwise>
 									<a class="link" href="detail?qnaNo=${qnaDto.qnaNo}">
 										<c:if test="${qnaDto.qnaHead != null}">
@@ -183,11 +205,6 @@
 							</c:choose>
 	                  </td>
 	                  <td>${qnaDto.qnaWriter}</td>
-<!-- 	                  <td> -->
-<%-- 						<c:if test="${param.attachmentNo != null}"> --%>
-<!-- 							<i class="fa-solid fa-image"></i> -->
-<%-- 						</c:if> --%>
-<!-- 	                  </td> -->
 	                  <td>${qnaDto.qnaTimeAuto}</td>
 	                  <td><i class="fa-regular fa-eye"></i>		${qnaDto.qnaRead}</td>
 	                  <c:if test="${sessionScope.memberLevel == '관리자'}">
