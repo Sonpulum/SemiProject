@@ -43,6 +43,14 @@ public class RecommendContoller {
 		return "/WEB-INF/views/recommend/list.jsp";
 	}
 	
+	//통합 검색 리스트
+	@GetMapping("/listTotal")
+	public String listTotal(Model model,  
+			@RequestParam String keyword) {
+		model.addAttribute("list",recommendDao.searchList(keyword));
+		return "/WEB-INF/views/recommend/listTotal.jsp";
+	}
+	
 	@GetMapping("/write")
 	public String write() {
 		return "/WEB-INF/views/recommend/write.jsp";

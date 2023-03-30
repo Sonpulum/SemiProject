@@ -479,14 +479,14 @@ input.form-input.form-input-bg {
 }
 
 input.form-input.search {
-    background-size: auto 75%;
-    background-repeat: no-repeat;
-    background-image: url("/static/image/search.png");
+    margin-right :-40px;
+    padding-right:45px;
+}
 
-    background-position: right 12px center;
-
-
-    padding: 0 2.5em 0 1em;
+.search-icon{
+	position:absolute;
+	margin-top: 10px;
+	cursor:pointer;
 }
 
 /* 
