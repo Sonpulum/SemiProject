@@ -149,77 +149,10 @@ body {
     </style>
 <!-- 제목 -->
     <div class="container-900">
-    <c:choose>
-    	<c:when test="${column == 'reco_location'}">
-        <div class="row center" style="padding: 30px; font-size: 30px;">
-            <h1>
-            	<i class="fa-solid fa-map" style="color: #40a5bb;"></i>
-            	지역별 추천
-           	</h1>
-        </div>
-    
-        <div class="row">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th><a class="link" href="?column=reco_location&keyword=수도권">수도권</a></th>
-                        <th><a class="link" href="?column=reco_location&keyword=강원도">강원도</a></th>
-                        <th><a class="link" href="?column=reco_location&keyword=충청도">충청도</a></th>
-                        <th><a class="link" href="?column=reco_location&keyword=전라도">전라도</a></th>
-                        <th><a class="link" href="?column=reco_location&keyword=경상도">경상도</a></th>
-                        <th><a class="link" href="?column=reco_location&keyword=제주">제주</a></th>
-                    </tr>
-                </thead>
-            </table>
-         </div>
-    	</c:when>
-    	
-    	<c:when test="${column == 'reco_season'}">
-        <div class="row center" style="padding: 30px; font-size: 30px;">
-            <h1>
-            	<i class="fa-solid fa-cloud-sun" style="color: #40a5bb;"></i>
-            	계절별 추천
-           	</h1>
-        </div>
-    
-        <div class="row">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th><a class="link" href="?column=reco_season&keyword=봄">봄</a></th>
-                        <th><a class="link" href="?column=reco_season&keyword=여름">여름</a></th>
-                        <th><a class="link" href="?column=reco_season&keyword=가을">가을</a></th>
-                        <th><a class="link" href="?column=reco_season&keyword=겨울">겨울</a></th>
-                    </tr>
-                </thead>
-            </table>
-         </div>
-    	</c:when>
-    	<c:when test="${column == 'reco_theme'}">
-        <div class="row center" style="padding: 30px; font-size: 30px;">
-            <h1>
-            	<i class="fa-solid fa-person-swimming" style="color: #40a5bb;"></i>
-            	테마별 추천
-           	</h1>
-        </div>
-    
-        <div class="row">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th><a class="link" href="?column=reco_theme&keyword=관광">관광</a></th>
-                        <th><a class="link" href="?column=reco_theme&keyword=레저">레저</a></th>
-                        <th><a class="link" href="?column=reco_theme&keyword=식도락">식도락</a></th>
-                    </tr>
-                </thead>
-            </table>
-         </div>
-    	</c:when>
-    	<c:otherwise>
    		<div class="row center" style="padding: 30px; font-size: 30px;">
    			<h1>
-            	<i class="fa-regular fa-clipboard" style="color: #40a5bb;"></i>
-            		추천 게시판
+            	<i class="fa-solid fa-magnifying-glass" style="color: #40a5bb;"></i>
+            		추천 게시판 검색결과
          	</h1>
    		</div>
    		<div class="row">
@@ -233,8 +166,6 @@ body {
                 </thead>
             </table>
          </div>
-    	</c:otherwise>
-    </c:choose>
          
    <div class="wrapper">
           <h2 class="ms-30">${keyword}</h2>
@@ -248,7 +179,6 @@ body {
         <c:forEach var="recoDto" items="${list}">
         	<div class="post">
       			<a href="detail?recoNo=${recoDto.recoNo}">
-<!--       				<img src="/static/image/hotel.jpg" alt="게시글 사진"> -->
       				<img src=/rest/attachment/download/${recoDto.attachNo}>
       			</a>
       			<div class="post-content">

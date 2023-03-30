@@ -7,6 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.kh.semi.interceptor.MemberInterceptor;
 import com.kh.semi.interceptor.QnaInterceptor;
+import com.kh.semi.interceptor.RecommendInterceptor;
 
 @Configuration
 public class InterceptorConfiguration implements WebMvcConfigurer{
@@ -16,6 +17,9 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 	
 	@Autowired
 	private MemberInterceptor memberInterceptor;
+	
+	@Autowired
+	private RecommendInterceptor recommendInterceptor;
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
@@ -42,6 +46,14 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 				.addPathPatterns(
 						"/qna/edit",
 						"/qna/delete"
+						);
+		
+		//3. RecommendInterceptor
+		registry.addInterceptor(memberInterceptor)
+				.addPathPatterns(
+						"/recommend/write",
+						"/recommend/delete",
+						"/recommend/edit"
 						);
 	}
 }
