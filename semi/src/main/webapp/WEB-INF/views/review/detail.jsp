@@ -45,11 +45,11 @@
 	<div class="row writer">
 		<c:choose>
 			<c:when test="${memberProfile.attachmentNo != null}">
-				<img class="me-10" width="80" height="80" src="/attachment/download?attachmentNo=${memberProfile.attachmentNo}">
+				<img class="me-10" width="90" height="90" src="/attachment/download?attachmentNo=${memberProfile.attachmentNo}">
 				${reviewDto.reviewWriter}
 			</c:when>
 			<c:otherwise>
-       			<img class="me-10" width="70" height="70" src="/static/image/usericon.jpg">
+       			<img class="me-10" width="90" height="90" src="/static/image/usericon.jpg">
 				${reviewDto.reviewWriter}
 			</c:otherwise>
 		</c:choose>
@@ -71,12 +71,11 @@
 	<div class="row">
 		좋아요
 		<span class="thumbs-count">${reviewDto.reviewLike}</span>
-				 
 		<c:if test="${sessionScope.memberId != null}">
 		<i class="fa-regular fa-thumbs-up"></i>
+		</c:if>
 		댓글
 		<span class="reply-count">${reviewDto.reviewReply}</span>
-		</c:if>
 	</div>
 	
 	<div class="row reply-list">

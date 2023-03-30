@@ -5,6 +5,24 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <style>
+ .container-1000 { 
+             width: 1100px; 
+             height: 100%; 
+             background-color: #ffffff; 
+             border: 1px solid #ebebeb; 
+             margin: 100px auto; 
+             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
+             border-radius: 5px; 
+             padding : 10px 80px 80px 80px;  
+             margin-top: 0px; 
+             margin-bottom: 0px
+         } 
+        
+ body { 
+   background-color: #f6f6f6; 
+ } 
+
+
 .table.table-border,
 .table.table-border > thead > tr > th,
 .table.table-border > thead > tr > td,
@@ -16,7 +34,7 @@
     border: 0px solid #636e72;
 }
 
-.table.table-border > thead {
+ .table.table-border > thead { 
 	border-top : 2px solid rgb(64, 165, 187);
 	border-bottom : 2px solid gray;
 }
@@ -39,46 +57,15 @@
 </style>
  
  <div class="container-1000">
-        <div class="row center">
+        <div class="row center mt-30">
             <h1>나만의 여행지를 공유해보세요</h1>
         </div>
 
-        <div class="row center">
-        <form action="list" method="get">
-        	<c:choose>
-            <c:when test="${vo.column == 'review_content'}">
-               <select name="column" class="form-input">
-                  <option value="review_title">제목</option>
-                  <option value="review_content" selected>내용</option>
-                  <option value="review_writer">작성자</option>
-               </select>
-            </c:when>
-            <c:when test="${vo.column == 'review_writer'}">
-               <select name="column" class="form-input">
-                  <option value="review_title">제목</option>
-                  <option value="review_content">내용</option>
-                  <option value="review_writer" selected>작성자</option>
-               </select>
-            </c:when>  
-            
-            <c:otherwise>
-               <select name="column" class="form-input">
-                  <option value="review_title" selected>제목</option>
-                  <option value="review_content">내용</option>
-                  <option value="review_writer">작성자</option>
-               </select>
-            </c:otherwise>
-         </c:choose>
-        
-            <input type="search" name="keyword" class="form-input" style="width:350px;" value="${vo.keyword}" placeholder="여행지 검색">
-            <button type="submit" class="form-btn neutral">검색</button>
-           </form>
-        </div>
         <div class="row right">
         	<a href="/review/write" class="form-btn bosung">글쓰기</a>
         </div>
         
-        <table class="table table-hover table-border center">
+        <table class="table table-border center">
             <thead>
             	
                 <tr>
@@ -109,7 +96,7 @@
            		</td>
                 <td><i class="fa-regular fa-eye"></i>    ${reviewDto.reviewRead }</td>
                 <td><i class="fa-regular fa-thumbs-up"></i>    ${reviewDto.reviewLike }</td>
-                <td>${reviewDto.reviewTime }</td>
+                <td>${reviewDto.reviewTimeAuto}</td>
 			</tr>
            </c:forEach> 
             </tbody>
@@ -130,7 +117,7 @@
                     </td>
                     <td><i class="fa-regular fa-eye"></i>    ${reviewDto.reviewRead }</td>
                		<td><i class="fa-regular fa-thumbs-up"></i>    ${reviewDto.reviewLike }</td>
-               		<td>${reviewDto.reviewTime }</td>
+               		<td>${reviewDto.reviewTimeAuto}</td>
                 </tr>
         	</c:forEach>
 				</tfoot>
@@ -142,19 +129,19 @@
 	<div class="pagination">
 	<c:choose>
 	<c:when test="${vo.first}">
-	<a class="disabled">&laquo;</a>
+	<a class="disabled"><i class="fa-solid fa-angles-left"></i></a>
 	</c:when>
 	<c:otherwise>
-	<a href="list?${vo.parameter}&page=1">&laquo;</a>	
+	<a href="list?${vo.parameter}&page=1"><i class="fa-solid fa-angles-left"></i></a>	
 	</c:otherwise>
 	</c:choose>
 	
 	<c:choose>
 		<c:when test="${vo.prev}">
-	<a href="list?${vo.parameter}&page=${vo.prevPage}">&lt;</a>
+	<a href="list?${vo.parameter}&page=${vo.prevPage}"><i class="fa-solid fa-angle-left"></i></a>
 		</c:when>
 	<c:otherwise>
-		<a class="disabled">&lt;</a>
+		<a class="disabled"><i class="fa-solid fa-angle-left"></i></a>
 	</c:otherwise>
 	</c:choose>
  		
@@ -169,23 +156,103 @@
  		
  	<c:choose>
  		<c:when test="${vo.next}">
- 			<a href="list?${vo.parameter}&page=${vo.nextPage}">&gt;</a> 		
+ 			<a href="list?${vo.parameter}&page=${vo.nextPage}"><i class="fa-solid fa-angle-right"></i></a> 		
  		</c:when>
  		<c:otherwise>
- 			<a class="disabled">&gt;</a>
+ 			<a class="disabled"><i class="fa-solid fa-angle-right"></i></a>
  		</c:otherwise>
  	</c:choose>	
  	
  	<c:choose>
- 		<c:when test="${vo.last }">
- 		<a class="disabled">&raquo;</a>
+ 		<c:when test="${vo.last}">
+ 		<a class="disabled"><i class="fa-solid fa-angles-right"></i></a>
  		</c:when>
  	<c:otherwise>
- 	<a href="list?${vo.parameter}&page=${vo.totalPage}">&raquo;</a>
+ 	<a href="list?${vo.parameter}&page=${vo.totalPage}"><i class="fa-solid fa-angles-right"></i></a>
  	</c:otherwise>
  	</c:choose>
+ 	
+ 	<!-- 페이징 숨김 -->
+	<c:if test="${vo.totalPage <= 10}">
+		<script>
+			document.querySelectorAll('.pagination a.disabled').forEach(el => el.style.display = 'none');
+		</script>
+	</c:if>
+ 	
 	</div>
 </div>
+
+<div class="row center mt-10">
+	<form action="list" method="get">
+		<c:choose>
+			<c:when test="${vo.column == 'review_content'}">
+				<select name="column" class="form-input">
+   					<option value="review_title">제목</option>
+   					<option value="review_content" selected>내용</option>
+   					<option value="review_location">지역</option>
+			   		<option value="review_season">계절</option>
+			   		<option value="review_theme">테마</option>
+   					<option value="review_writer">작성자</option>
+				</select>
+			</c:when>
+			<c:when test="${vo.column == 'review_writer'}">
+				<select name="column" class="form-input">
+			   		<option value="review_title">제목</option>
+			   		<option value="review_content">내용</option>
+			   		<option value="review_location">지역</option>
+			   		<option value="review_season">계절</option>
+			   		<option value="review_theme">테마</option>
+			   		<option value="review_writer" selected>작성자</option>
+				</select>
+			</c:when>
+			<c:when test="${vo.column == 'review_location'}">
+				<select name="column" class="form-input">
+			   		<option value="review_title">제목</option>
+			   		<option value="review_content">내용</option>
+			   		<option value="review_location" selected>지역</option>
+			   		<option value="review_season">계절</option>
+			   		<option value="review_theme">테마</option>
+			   		<option value="review_writer">작성자</option>
+				</select>
+			</c:when>  
+			<c:when test="${vo.column == 'review_season'}">
+				<select name="column" class="form-input">
+			   		<option value="review_title">제목</option>
+			   		<option value="review_content">내용</option>
+			   		<option value="review_location">지역</option>
+			   		<option value="review_season" selected>계절</option>
+			   		<option value="review_theme">테마</option>
+			   		<option value="review_writer">작성자</option>
+				</select>
+			</c:when>  
+			<c:when test="${vo.column == 'review_theme'}">
+				<select name="column" class="form-input">
+			   		<option value="review_title">제목</option>
+			   		<option value="review_content">내용</option>
+			   		<option value="review_location">지역</option>
+			   		<option value="review_season">계절</option>
+			   		<option value="review_theme" selected>테마</option>
+			   		<option value="review_writer">작성자</option>
+				</select>
+			</c:when>  
+
+			<c:otherwise>
+				<select name="column" class="form-input">
+			   		<option value="review_title" selected>제목</option>
+			   		<option value="review_content">내용</option>
+			   		<option value="review_location">지역</option>
+			   		<option value="review_season">계절</option>
+			   		<option value="review_theme">테마</option>
+			   		<option value="review_writer">작성자</option>
+				</select>
+			</c:otherwise>
+		</c:choose>
+
+		<input type="search" name="keyword" class="form-input" style="width:350px;" value="${vo.keyword}" placeholder="여행지 검색">
+    	<button type="submit" class="form-btn neutral bosung">검색</button>
+   </form>
+</div>
+
 </div>
 
 

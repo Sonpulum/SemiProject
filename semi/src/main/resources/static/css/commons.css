@@ -180,8 +180,10 @@ a.form-btn {
 .w-75 {width:75%;}
 .w-70 {width:70%;}
 .w-60 {width:60%;}
+.w-55 {width:55%;}
 .w-50 {width:50%;}
 .w-40 {width:40%;}
+.w-38 {width:38.7%;}
 .w-33 {width:33.3333%;}
 .w-30 {width:30%;}
 .w-25 {width:25%;}
@@ -233,6 +235,8 @@ a.form-btn {
 .ms-30 { margin-left: 30px; }
 .ms-40 { margin-left: 40px; }
 .ms-50 { margin-left: 50px; }
+.ms-60 { margin-left: 60px; }
+.ms-70 { margin-left: 70px; }
 
 .me-10 { margin-right: 10px; }
 .me-20 { margin-right: 20px; }
@@ -398,24 +402,23 @@ a.link:hover {
     color: black;
     text-decoration: none;
 
-    font-size: 16px;
+    font-size: 15px;
 
     min-width: 3em;
     height: 3em;
     padding: 1em;
 
     text-align: center;
-
-    /*border: 1px solid transparent;*/
 }
-.pagination > a.on,
+.pagination > a.on {
+    color: rgb(64, 165, 187);
+    font-weight: bolder;
+}
 .pagination > a:hover:not(.disabled) {
-    /*border-color: black;*/
-    color:red;
-    font-weight: bold;
-    box-shadow: 0px 0px 0px 1px black;
+    color: rgb(64, 165, 187);
+    font-weight: bolder;
+    text-decoration: underline;
 }
-
 .pagination > a.disabled {
 	cursor: not-allowed;
 }

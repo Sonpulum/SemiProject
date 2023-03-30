@@ -133,7 +133,7 @@
 					<input type="text" name="qnaTitle" required placeholder="제목을 입력하세요" autocomplete="off" class="form-input w-100">
 				</c:when>
 				<c:otherwise>
-					<input type="text" name="qnaTitle" required placeholder="제목을 입력하세요" autocomplete="off" value="RE : " class="form-input w-100">
+					<input type="text" name="qnaTitle" required placeholder="제목을 입력하세요" autocomplete="off" class="form-input w-100">
 				</c:otherwise>
 			</c:choose>
 		</div>

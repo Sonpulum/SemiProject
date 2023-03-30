@@ -20,9 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.semi.component.RandomComponent;
 import com.kh.semi.dao.MemberDao;
 import com.kh.semi.dao.MemberProfileDao;
-import com.kh.semi.dto.AttachmentDto;
 import com.kh.semi.dto.MemberDto;
-import com.kh.semi.dto.MemberProfileDto;
 import com.kh.semi.service.MemberService;
 
 @Controller
@@ -260,7 +258,7 @@ public class MemberController {
 		}
 		
 		//비밀번호가 일치한다면 → 비밀번호 변경 처리
-		memberDao.changePassword(memberId, newPw);
+		memberDao.changePassword(newPw, memberId);
 
 		return "redirect:passwordFinish";
 	}

@@ -66,28 +66,185 @@
 <!--         <label class="form-label w-100">제목</label> -->
         
         <input name="reviewTitle" class="form-input w-50 me-10" type="text" placeholder="제목을 입력해주세요" value="${reviewDto.reviewTitle}">
+        
+        <c:choose>
+        <c:when test="${reviewDto.reviewLocation == '수도권'}">
         <select name="reviewLocation" class="form-input w-15">
             <option value="">지역</option>
-            <option value="수도권">수도권</option>
-            <option value="강원도">강원도</option>
-            <option value="충청도">충청도</option>
-            <option value="전라도">전라도</option>
-            <option value="경상도">경상도</option>
-            <option value="제주">제주</option>
+            <option selected>수도권</option>
+            <option>강원도</option>
+            <option>충청도</option>
+            <option>전라도</option>
+            <option>경상도</option>
+            <option>제주도</option>
         </select>
+        </c:when>
+        
+        <c:when test="${reviewDto.reviewLocation == '강원도'}">
+        <select name="reviewLocation" class="form-input w-15">
+            <option value="">지역</option>
+            <option>수도권</option>
+            <option selected>강원도</option>
+            <option>충청도</option>
+            <option>전라도</option>
+            <option>경상도</option>
+            <option>제주도</option>
+        </select>
+        </c:when>
+        
+        <c:when test="${reviewDto.reviewLocation == '충청도'}">
+        <select name="reviewLocation" class="form-input w-15">
+            <option value="">지역</option>
+            <option>수도권</option>
+            <option>강원도</option>
+            <option selected>충청도</option>
+            <option>전라도</option>
+            <option>경상도</option>
+            <option>제주도</option>
+        </select>
+        </c:when>
+        
+        <c:when test="${reviewDto.reviewLocation == '전라도'}">
+        <select name="reviewLocation" class="form-input w-15">
+            <option value="">지역</option>
+            <option>수도권</option>
+            <option>강원도</option>
+            <option>충청도</option>
+            <option selected>전라도</option>
+            <option>경상도</option>
+            <option>제주도</option>
+        </select>
+        </c:when>
+        
+        <c:when test="${reviewDto.reviewLocation == '경상도'}">
+        <select name="reviewLocation" class="form-input w-15">
+            <option value="">지역</option>
+            <option>수도권</option>
+            <option>강원도</option>
+            <option>충청도</option>
+            <option>전라도</option>
+            <option selected>경상도</option>
+            <option>제주도</option>
+        </select>
+        </c:when>
+        
+        <c:when test="${reviewDto.reviewLocation == '제주도'}">
+        <select name="reviewLocation" class="form-input w-15">
+            <option value="">지역</option>
+            <option>수도권</option>
+            <option>강원도</option>
+            <option>충청도</option>
+            <option>전라도</option>
+            <option>경상도</option>
+            <option selected>제주도</option>
+        </select>
+        </c:when>
+        
+        <c:otherwise>
+        <select name="reviewLocation" class="form-input w-15">
+            <option value="" selected>지역</option>
+            <option>수도권</option>
+            <option>강원도</option>
+            <option>충청도</option>
+            <option>전라도</option>
+            <option>경상도</option>
+            <option>제주도</option>
+        </select>
+        </c:otherwise>
+        </c:choose>
+        
+        <c:choose>
+        
+        <c:when test="${reviewDto.reviewSeason == '봄'}">
+        <select name="reviewSeason" class="form-input w-15">
+            <option value="">계절</option>
+            <option value="봄" selected>봄</option>
+            <option value="여름">여름</option>
+            <option value="가을">가을</option>
+            <option value="겨울">겨울</option>
+        </select>
+        </c:when>
+        
+         <c:when test="${reviewDto.reviewSeason == '여름'}">
+        <select name="reviewSeason" class="form-input w-15">
+            <option value="">계절</option>
+            <option value="봄">봄</option>
+            <option value="여름" selected>여름</option>
+            <option value="가을">가을</option>
+            <option value="겨울">겨울</option>
+        </select>
+        </c:when>
+        
+         <c:when test="${reviewDto.reviewSeason == '가을'}">
+        <select name="reviewSeason" class="form-input w-15">
+            <option value="">계절</option>
+            <option value="봄" >봄</option>
+            <option value="여름">여름</option>
+            <option value="가을" selected>가을</option>
+            <option value="겨울">겨울</option>
+        </select>
+        </c:when>
+        
+         <c:when test="${reviewDto.reviewSeason == '겨울'}">
         <select name="reviewSeason" class="form-input w-15">
             <option value="">계절</option>
             <option value="봄">봄</option>
             <option value="여름">여름</option>
             <option value="가을">가을</option>
+            <option value="겨울" selected>겨울</option>
+        </select>
+        </c:when>
+        
+         <c:otherwise>
+        <select name="reviewSeason" class="form-input w-15">
+            <option value="" selected>계절</option>
+            <option value="봄">봄</option>
+            <option value="여름">여름</option>
+            <option value="가을">가을</option>
             <option value="겨울">겨울</option>
         </select>
+         </c:otherwise>
+        </c:choose>
+        
+        <c:choose>
+        
+        <c:when test="${reviewDto.reviewTheme == '레저'}">
+        <select name="reviewTheme" class="form-input w-15">
+            <option value="">테마</option>
+            <option value="레저" selected>레저</option>
+            <option value="관광">관광</option>
+            <option value="식도락">식도락</option>
+        </select>
+        </c:when>
+        
+        <c:when test="${reviewDto.reviewTheme == '관광'}">
+        <select name="reviewTheme" class="form-input w-15">
+            <option value="">테마</option>
+            <option value="레저">레저</option>
+            <option value="관광" selected>관광</option>
+            <option value="식도락">식도락</option>
+        </select>
+        </c:when>
+        
+        <c:when test="${reviewDto.reviewTheme == '식도락'}">
         <select name="reviewTheme" class="form-input w-15">
             <option value="">테마</option>
             <option value="레저">레저</option>
             <option value="관광">관광</option>
+            <option value="식도락" selected>식도락</option>
+        </select>
+        </c:when>
+        
+        <c:otherwise>
+        <select name="reviewTheme" class="form-input w-15">
+            <option value="" selected>테마</option>
+            <option value="레저">레저</option>
+            <option value="관광">관광</option>
             <option value="식도락">식도락</option>
         </select>
+        </c:otherwise>
+        
+        </c:choose>
     </div>
 	
 	<div class="row">

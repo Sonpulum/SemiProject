@@ -150,11 +150,13 @@ public class ReviewDao {
 	//수정
 	public boolean update(ReviewDto reviewDto) {
 		String sql = "update review set "
-				+ "review_title = ?, review_content = ? "
+				+ "review_title = ?, review_content = ?, review_location = ?, "
+				+ "review_season = ?, review_theme = ? "
 				+ "where review_no = ?";
 		Object[] param = {
 			reviewDto.getReviewTitle(), reviewDto.getReviewContent(),
-			reviewDto.getReviewNo()
+			reviewDto.getReviewLocation(), reviewDto.getReviewSeason(), 
+			reviewDto.getReviewTheme(), reviewDto.getReviewNo()
 		};
 		return jdbcTemplate.update(sql, param) > 0;
 	}
