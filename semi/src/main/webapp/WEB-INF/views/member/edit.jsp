@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<script src="/static/js/member-join.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/static/js/find-address.js"></script>
 <style>
 	h2 {
             font-size: 15px;
@@ -116,8 +119,9 @@
    </div>
    <div class="row center">
       <label class="form-label left">주소</label>
-      <input type="text" name="memberPost" class="form-input w-50" placeholder="우편번호" readonly value="${memberDto.memberPost}">
+      <input type="text" name="memberPost" class="form-input w-38" placeholder="우편번호" readonly value="${memberDto.memberPost}">
       <button type="button" class="form-btn1 find-address-btn">우편번호 찾기</button>
+   	  <button type="button" class="form-btn negative clear-address-btn"><i class="fa-solid fa-eraser"></i></button>
    </div>
    <div class="row center">
       <input type="text" name="memberBasicAddr" class="form-input w-75" placeholder="기본주소" readonly value="${memberDto.memberBasicAddr}">
@@ -136,11 +140,11 @@
        			<img id="preview" width="100" height="100" src="/static/image/usericon.jpg" class="ms-50">
 			</c:otherwise>
 		</c:choose>
-		<input type="file" name="attach" class="form-input w-75" accept=".png, .gif, .jpg" style="border: 1px transparent solid;">
+		<input type="file" name="attach" class="form-input w-60" accept=".png, .gif, .jpg" style="border: 1px transparent solid;">
    </div>
    
    <!-- 버튼 -->
-   <div class="row center mt-20 mb-20">
+   <div class="row center mb-20">
       <button type="submit" class="form-btn2 w-75">수정하기</button>
    </div>
    <!-- 비멀번호 에러 시 -->

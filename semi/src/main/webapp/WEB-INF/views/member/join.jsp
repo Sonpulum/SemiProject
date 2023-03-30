@@ -25,6 +25,12 @@
 <script src="/static/js/member-join.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/static/js/find-address.js"></script>
+<style>
+	.writer {
+    display: flex;
+    align-items: center;
+	}
+</style>
 
 <form class="join-form" action="join" method="post" autocomplete="off" enctype="multipart/form-data">
 <div class="container container-500">
@@ -94,11 +100,19 @@
         <div class="invalid-message">주소는 비워두거나 모두 작성해야 합니다</div>
     </div>
     
-    <div class="row">
-	    <label class="form-label w-100">프로필 이미지</label>
-	    <input type="file" name="attach" accept=".png, .gif, .jpg" class="form-input" 
+   <label class="form-label w-100">프로필 이미지</label>
+   <div class="row writer">
+   		<c:choose>
+			<c:when test="${profile.attachmentNo != null}">
+		   		<img id="preview" width="100" height="100" src="/attachment/download?attachmentNo=${profile.attachmentNo}">
+			</c:when>
+			<c:otherwise>
+       			<img id="preview" width="100" height="100" src="/static/image/usericon.jpg">
+			</c:otherwise>
+		</c:choose>
+		<input type="file" name="attach" accept=".png, .gif, .jpg" class="form-input" 
 	        style="border: 1px transparent solid;">
-    </div>
+   </div>
     
     <div class="row mb-30">
         <button type="submit" class="form-btn positive w-100">회원가입</button>

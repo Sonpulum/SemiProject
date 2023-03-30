@@ -71,12 +71,11 @@
 	<div class="row">
 		좋아요
 		<span class="thumbs-count">${reviewDto.reviewLike}</span>
-				 
 		<c:if test="${sessionScope.memberId != null}">
 		<i class="fa-regular fa-thumbs-up"></i>
+		</c:if>
 		댓글
 		<span class="reply-count">${reviewDto.reviewReply}</span>
-		</c:if>
 	</div>
 	
 	<div class="row reply-list">
