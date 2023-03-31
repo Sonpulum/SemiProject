@@ -107,16 +107,16 @@
   <div class="swiper-container">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
-        <a href="recommend/detail?recoNo=104"><img src="/static/image/hotel.jpg"></a>
+        <a href="recommend/detail?recoNo=143"><img src="/static/image/hotel.jpg"></a>
       </div>
       <div class="swiper-slide">
-        <a href="recommend/detail?recoNo=106"><img src="/static/image/sakura.jpg"></a>
+        <a href="recommend/detail?recoNo=123"><img src="/static/image/sakura.jpg"></a>
       </div>
       <div class="swiper-slide">
         <a href="recommend/detail?recoNo=103"><img src="/static/image/bosan.jpg"></a>
       </div>
       <div class="swiper-slide">
-        <a href="recommend/detail?recoNo=107"><img src="/static/image/gimpo.jpg"></a>
+        <a href="recommend/detail?recoNo=144"><img src="/static/image/gyeongju.jpg"></a>
       </div>
       <div class="swiper-slide">
         <a href="recommend/detail?recoNo=108"><img src="/static/image/gangneung.jpg"></a>
