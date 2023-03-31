@@ -55,6 +55,8 @@
 </style>
  
  <div class="container-1000">
+ 		<c:choose>
+		<c:when test="${list.size() != 0}">
         <div class="row center mt-30">
             <h1>나만의 여행지를 공유해보세요</h1>
         </div>
@@ -86,7 +88,7 @@
             <tbody>
 			<c:forEach var="reviewDto" items="${topList}">
             <!-- 인기 게시글만 출력 -->
-			<tr>
+			<tr bgcolor="#c7e1e7">
 				<td>인기</td>
 				<td>${reviewDto.reviewTheme}</td>
                 <td>${reviewDto.reviewLocation }</td>
@@ -184,6 +186,16 @@
  	
 	</div>
 </div>
+</c:when>
+
+	<c:otherwise>
+	<div class="row center mt-30 mb-30">
+	<img src="/static/image/search.png" width="90px" height="80px">
+	<h2>' ${vo.keyword} '에 대한 검색 결과가 없습니다.</h2>
+	<h1>다른 검색어를 입력하시거나 철자와 띄어쓰기를 확인해 보세요.</h1>
+	</div>
+	</c:otherwise>
+	</c:choose>
 
 <div class="row center mt-10">
 	<form action="list" method="get">

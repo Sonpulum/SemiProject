@@ -6,7 +6,7 @@
 
 <style>
 	.fa-thumbs-up {
-	color:red;
+	color:#5186f0;
 	cursor: pointer;
 	}
 	
@@ -21,10 +21,24 @@
 </c:if>
 
 <link rel="stylesheet" type="text/css" href="/static/css/reply.css">
+
 <script>
 	var memberId = "${sessionScope.memberId}";
 	var reviewWriter = "${reviewDto.reviewWriter}";
 </script>
+
+<script>
+$(function(){
+    $(".form-btn.negative").click(function(e){
+        e.preventDefault(); // 링크 이동 중지
+        var choice = window.confirm("정말 삭제하시겠습니까?");
+        if (choice) {
+            window.location.href = $(this).attr("href"); // 링크 이동
+        }
+    });
+});
+</script>
+
 <script src="/static/js/review-reply.js"></script>
 
 <script type="text/template" id="reply-template">
@@ -46,7 +60,7 @@
 		<c:choose>
 			<c:when test="${memberProfile.attachmentNo != null}">
 				<img class="me-10" width="90" height="90" src="/attachment/download?attachmentNo=${memberProfile.attachmentNo}">
-				${reviewDto.reviewWriter}
+				${reviewDto.reviewNick}
 			</c:when>
 			<c:otherwise>
        			<img class="me-10" width="90" height="90" src="/static/image/usericon.jpg">
@@ -56,9 +70,12 @@
 	</div>
 	<div class="row">
 		<label>작성일 : </label>
-		${reviewDto.reviewTime}
+		${reviewDto.reviewTime} &nbsp;
 		<label>조회수 : </label>
-		${reviewDto.reviewRead}
+		${reviewDto.reviewRead} &nbsp;
+		<label># ${reviewDto.reviewLocation} &nbsp;</label>
+		<label># ${reviewDto.reviewSeason} &nbsp;</label>
+		<label># ${reviewDto.reviewTheme}</label>
 	</div>
 	
 	<hr>
@@ -74,7 +91,7 @@
 		<c:if test="${sessionScope.memberId != null}">
 		<i class="fa-regular fa-thumbs-up"></i>
 		</c:if>
-		댓글
+		&nbsp; 댓글
 		<span class="reply-count">${reviewDto.reviewReply}</span>
 	</div>
 	
