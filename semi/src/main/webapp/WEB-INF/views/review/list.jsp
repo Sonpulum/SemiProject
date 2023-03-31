@@ -182,7 +182,7 @@
  	</c:choose>
  	
  	<!-- 페이징 숨김 -->
-	<c:if test="${vo.totalPage <= 10}">
+	<c:if test="${vo.totalPage <= 5}">
 		<script>
 			document.querySelectorAll('.pagination a.disabled').forEach(el => el.style.display = 'none');
 		</script>
