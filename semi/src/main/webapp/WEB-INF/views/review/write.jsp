@@ -60,7 +60,7 @@
 <!--         <label class="form-label w-100">제목</label> -->
         
         <input name="reviewTitle" class="form-input w-50 me-10" type="text" placeholder="제목을 입력해주세요">
-        <select name="reviewLocation" class="form-input w-15">
+        <select name="reviewLocation" class="form-input w-15" required>
             <option value="">지역</option>
             <option value="수도권">수도권</option>
             <option value="강원도">강원도</option>
@@ -69,14 +69,14 @@
             <option value="경상도">경상도</option>
             <option value="제주">제주</option>
         </select>
-        <select name="reviewSeason" class="form-input w-15">
+        <select name="reviewSeason" class="form-input w-15" required>
             <option value="">계절</option>
             <option value="봄">봄</option>
             <option value="여름">여름</option>
             <option value="가을">가을</option>
             <option value="겨울">겨울</option>
         </select>
-        <select name="reviewTheme" class="form-input w-15">
+        <select name="reviewTheme" class="form-input w-15" required>
             <option value="">테마</option>
             <option value="레저">레저</option>
             <option value="관광">관광</option>
