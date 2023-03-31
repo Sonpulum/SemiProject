@@ -22,6 +22,7 @@ import com.kh.semi.dto.MemberProfileDto;
 import com.kh.semi.dto.ReviewDto;
 import com.kh.semi.service.ReviewService;
 import com.kh.semi.vo.ReviewPaginationVO;
+import com.kh.semi.vo.ReviewPaginationVO2;
 
 @Controller
 @RequestMapping("/review")
@@ -50,6 +51,16 @@ public class ReviewController {
 		model.addAttribute("list", list);
 		
 		return "/WEB-INF/views/review/list.jsp";
+	}
+	
+	//게시글 통합 검색
+	@GetMapping("/listTotal")
+	public String listTotal(@ModelAttribute("vo") ReviewPaginationVO2 vo,
+			Model model) {
+		int totalCount = reviewDao.selectCount2(vo);
+		vo.setCount(totalCount);
+		model.addAttribute("list",reviewDao.searchList(vo));
+		return "/WEB-INF/views/review/listTotal.jsp";
 	}
 	
 	//게시글 상세

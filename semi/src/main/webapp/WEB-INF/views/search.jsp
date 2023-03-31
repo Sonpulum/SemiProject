@@ -147,7 +147,7 @@
 									</tbody>
 									</table>
 									<div class="row right">
-										<a class="link search-detail" href="#">검색결과 상세보기<i class="fa-solid fa-arrow-right"></i></a>
+										<a class="link search-detail" href="/review/listTotal?keyword=${keyword}">검색결과 상세보기<i class="fa-solid fa-arrow-right"></i></a>
 									</div>
 			            		</c:otherwise>
 			            	</c:choose>
