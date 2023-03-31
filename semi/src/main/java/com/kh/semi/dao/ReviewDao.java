@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.semi.dto.ReviewDto;
 import com.kh.semi.vo.ReviewPaginationVO;
+import com.kh.semi.vo.ReviewPaginationVO2;
 
 @Repository
 public class ReviewDao {
@@ -71,6 +72,7 @@ public class ReviewDao {
 		Object[] param = {keyword, keyword, keyword, keyword, keyword};
 		return jdbcTemplate.query(sql, mapper, param);
 	}
+	
 	//상세조회
 	public ReviewDto selectOne(int reviewNo) {
 		String sql="select*from review where review_no=?";
@@ -81,45 +83,70 @@ public class ReviewDao {
 	}
 	
 	//페이징 적용된 조회 및 카운트
-		public int selectCount(ReviewPaginationVO vo) {
-			if(vo.isSearch()) {
-				String sql = "select count(*) from review where instr(#1,?)>0";
-				sql=sql.replace("#1", vo.getColumn());
-				Object[] param = {vo.getKeyword()};
-				return jdbcTemplate.queryForObject(sql, int.class, param);
-			}
-			else {
-				String sql = "select count(*) from review";
-				return jdbcTemplate.queryForObject(sql, int.class);
-			}
+	public int selectCount(ReviewPaginationVO vo) {
+		if(vo.isSearch()) {
+			String sql = "select count(*) from review where instr(#1,?)>0";
+			sql=sql.replace("#1", vo.getColumn());
+			Object[] param = {vo.getKeyword()};
+			return jdbcTemplate.queryForObject(sql, int.class, param);
+		}
+		else {
+			String sql = "select count(*) from review";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
+	}
+	
+	//페이징 적용
+	public List<ReviewDto> selectList(ReviewPaginationVO vo){
+		if(vo.isSearch()) {
+			String sql = "select * from ( "
+					+ "select rownum rn, TMP.* from ( "
+					+ "select * from review "
+					+ "where instr(#1,?)>0"
+					+ "order by review_no desc"
+					+ ")TMP"
+					+ ") where rn between ? and ?";
+			sql = sql.replace("#1", vo.getColumn());
+			Object[] param = {vo.getKeyword(), vo.getBegin(), vo.getEnd()};
+			return jdbcTemplate.query(sql, mapper, param);
+		}
+		else {
+			String sql = "select * from ( "
+					+ "select rownum rn, TMP.* from ( "
+					+ "select * from review "
+					+ "order by review_no desc"
+					+ ")TMP"
+					+ ") where rn between ? and ?";
+			Object[] param = {vo.getBegin(), vo.getEnd()};
+			return jdbcTemplate.query(sql, mapper,param);			
 		}
 		
-		//페이징 적용
-		public List<ReviewDto> selectList(ReviewPaginationVO vo){
-			if(vo.isSearch()) {
-				String sql = "select * from ( "
-						+ "select rownum rn, TMP.* from ( "
-						+ "select * from review "
-						+ "where instr(#1,?)>0"
-						+ "order by review_no desc"
-						+ ")TMP"
-						+ ") where rn between ? and ?";
-				sql = sql.replace("#1", vo.getColumn());
-				Object[] param = {vo.getKeyword(), vo.getBegin(), vo.getEnd()};
-				return jdbcTemplate.query(sql, mapper, param);
-			}
-			else {
-				String sql = "select * from ( "
-						+ "select rownum rn, TMP.* from ( "
-						+ "select * from review "
-						+ "order by review_no desc"
-						+ ")TMP"
-						+ ") where rn between ? and ?";
-				Object[] param = {vo.getBegin(), vo.getEnd()};
-				return jdbcTemplate.query(sql, mapper,param);			
-			}
-			
-		}
+	}
+	
+	// 통합검색 페이징을 위한 카운트
+	public int selectCount2(ReviewPaginationVO2 vo) {
+		String sql = "select count(*) from review "
+				+ "where instr(review_title, ?) > 0 or instr(review_content, ?) > 0 or "
+				+ "instr(review_location, ?) > 0 or instr(review_season, ?) > 0 or "
+				+ "instr(review_theme, ?) > 0";
+		Object[] param = {vo.getKeyword(), vo.getKeyword(), vo.getKeyword(), vo.getKeyword(), vo.getKeyword()};
+		return jdbcTemplate.queryForObject(sql, int.class, param);
+	}
+	
+	// 통합검색 페이징
+	public List<ReviewDto> searchList(ReviewPaginationVO2 vo){
+			String sql = "select * from ( "
+					+ "select rownum rn, TMP.* from ( "
+					+ "select * from review "
+					+ "where instr(review_title, ?) > 0 or instr(review_content, ?) > 0 or "
+					+ "instr(review_location, ?) > 0 or instr(review_season, ?) > 0 or "
+					+ "instr(review_theme, ?) > 0"
+					+ "order by review_no desc"
+					+ ")TMP"
+					+ ") where rn between ? and ?";
+			Object[] param = {vo.getKeyword(), vo.getKeyword(), vo.getKeyword(), vo.getKeyword(), vo.getKeyword(), vo.getBegin(), vo.getEnd()};
+			return jdbcTemplate.query(sql, mapper, param);		
+	}
 		
 	//조회수 증가
 	public boolean updateReadCount(int reviewNo) {
