@@ -9,6 +9,57 @@
 	font-size:20px;
 	font-weight:bold;
 }
+ .form-input {
+        font-size: 18px;
+        padding: 0.5em;
+        outline: none;/*선택 시 강조 효과 제거*/
+        border: 1px solid #636e72;
+        border-radius: 0.5em;
+    }
+    .form-btn{
+        font-size: 20px;
+        border-radius:0.5em;
+    }
+    .form-btn.qna{
+        background-color: rgb(64, 165, 187);
+           border-color: rgb(64, 165, 187);
+           color: white;
+    }
+    .thead-color{
+    	background-color: rgba(64, 165, 187, 0.16);
+    }
+    .fa-trash,
+    .fa-pen {
+    	color: #40a5bb;
+    }
+    .fa-trash:hover,
+    .fa-pen:hover {
+    	color: #e05462;
+    }
+    
+	.table.table-border,
+	.table.table-border > thead > tr > th,
+	.table.table-border > thead > tr > td,
+	.table.table-border > tbody > tr > th,
+	.table.table-border > tbody > tr > td,
+	.table.table-border > tfoot > tr > th,
+	.table.table-border > tfoot > tr > td
+	{
+	    border: 0px solid #636e72;
+	}
+	
+	.table.table-border > thead {
+		border-top : 2px solid rgb(64, 165, 187);
+		border-bottom : 2px solid gray;
+	}
+	
+	.table.table-border > tbody > tr:last-child {
+		border-bottom : 2px solid gray;
+	}
+	
+	 .table.table-border > tfoot > tr:last-child { 
+	 	border-bottom : 2px solid rgb(64, 165, 187); 
+	 }
 </style>
 <div class="container-1000">
 	<div class="row">

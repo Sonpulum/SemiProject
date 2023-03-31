@@ -7,7 +7,6 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=95c82dc1c1149f6ed680ecae0d9ba566&libraries=services"></script>
  <style>
 .wrapper {
-
   height: 400px; /* 이미지 높이 + 여백 */
   background: #f6f5ef;
   position: relative;
@@ -36,10 +35,6 @@
 .wrapper .swiper-slide img{
    width : 100%;
    height : 100%;
-}
-.wrapper .swiper-container .swiper-slide img:hover{
-	transform: scale(1.025);
-	transition: all 0.5s;
 }
 .wrapper .swiper-pagination {
   bottom: 10px;
@@ -117,54 +112,8 @@
     border: 0px solid #636e72;
 }
 
-
-
-.main-box-shadow {
-			transition: transform .2s ease, padding .2s ease
-		}
-
-.main-box-shadow:hover {
-			transform: translate(0,-5px);
-		}
-	
-
-.hash-tag {
-			top: 50px;
-			left: 20px;
-		   	border: none;
-		    font-size: 15px;
-		    padding: 0.5em 1em 0.5em 1em;
-		    display: inline-block;
-		    text-align: center;
-		    text-decoration: none;
-		    border-radius: 10px;
-		    color: #373A3C;
-		    background-color: #EEEEEE;
-		}
-		
-		.d1 {
-	border: 1px solid #c1ced1;
-	box-shadow: 0px 0px 20px 10px #c1ced1;
-}
-
-.map {
-	width: 100%;  
-  height: 100%;
-  background: #FF7777;
-  -webkit-font-smoothing: antialiased;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.image_text {
-	font-size: 20px;
-	color: white;
-	padding: 5px 10px;
-	text-align: center;
-	position: absolute;
-	bottom: 10px;
-	transform: translate;
+.table.table-border > thead {
+	border-bottom : 2px solid rgb(64, 165, 187);
 }
 
 </style>
@@ -175,39 +124,19 @@
   <div class="swiper-container">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
-        <a href="recommend/detail?recoNo=143"><img src="/static/image/hotel.jpg">
-        	<div class="row">
-        		<strong class="image_text">고급스러운 인테리어와 최상의 서비스가 어우러진 메이필드호텔</strong>
-        	</div>
-        </a>
+        <a href="recommend/detail?recoNo=143"><img src="/static/image/hotel.jpg"></a>
       </div>
       <div class="swiper-slide">
-        <a href="recommend/detail?recoNo=123"><img src="/static/image/sakura.jpg">
-        	<div class="row">
-        		<strong class="image_text">강원도의 아름다운 자연과 벚꽃이 만나는 경포 벚꽃축제, 봄의 아름다움을 만끽할 수 있는 멋진 장소입니다.</strong>
-        	</div>
-        </a>
+        <a href="recommend/detail?recoNo=123"><img src="/static/image/sakura.jpg"></a>
       </div>
       <div class="swiper-slide">
-        <a href="recommend/detail?recoNo=103"><img src="/static/image/bosan.jpg">
-        	<div class="row">
-        		<strong class="image_text">역사적인 가치와 아름다운 해변 경관이 어우러져 있는 부산의 아름다운 사찰, 해동용궁사</strong>
-        	</div>
-        </a>
+        <a href="recommend/detail?recoNo=103"><img src="/static/image/bosan.jpg"></a>
       </div>
       <div class="swiper-slide">
-        <a href="recommend/detail?recoNo=144"><img src="/static/image/gyeongju.jpg">
-        	<div class="row">
-        		<strong class="image_text">한국 고대 역사와 문화 유산을 담은 경주 대릉원, 아름다운 조경과 함께하는 역사 여행의 즐거움을 선사합니다.</strong>
-        	</div>
-        </a>
+        <a href="recommend/detail?recoNo=144"><img src="/static/image/gyeongju.jpg"></a>
       </div>
       <div class="swiper-slide">
-        <a href="recommend/detail?recoNo=108"><img src="/static/image/gangneung.jpg">
-        	<div class="row">
-        		<strong class="image_text">한국의 전통 아름다움과 우아함이 고스란히 담겨있는 아름다운 건축물, 오죽헌</strong>
-        	</div>
-        </a>
+        <a href="recommend/detail?recoNo=108"><img src="/static/image/gangneung.jpg"></a>
       </div>
     </div>
   </div>
@@ -222,54 +151,44 @@
 </div>
 
 <div style="width:100%;background-color: #f0f2f7;"> 
-<div class="flex-box " style="height:400px">
-	<div class="mt-30 mb-30 p-10 ms-10 main-box-shadow d1" id="mp" style="background-color:white; border:none 'box-shadow:2px 3px 5px 0px' gray">
-		<h1 class="mb-10 center"><img  width="25px" height="25px" src="/static/image/finger.png">가고 싶은 지역을 클릭해보세요<img  width="25px" height="25px" src="/static/image/finger.png"></h1>
-		<div Class="mt-10 mb-50 ms-10 me-10" id="map" style="width:500px;height:250px; border-radius: 20px;"></div> 
+<div class="flex-box" style="height:400px">
+	<div class="mt-30 p-10 ms-10" id="mp" style="background-color:white;">
+		<h1 class="mb-10 center">가고 싶은 지역을 클릭해보세요!</h1>
+		<div id="map" style="width:500px;height:300px; border-radius: 20px;"></div> 
 	</div>
-	
-	<div style = "padding:0px 30px 0px 0px"></div>
-	
-	<div class="mt-30 mb-30 p-10 ms-10 main-box-shadow d1" style="width:500px; background-color:white; border-radius: 20px; border:none" id="mp">
+	<div class="mt-30 ms-30 p-10" style="width:500px; background-color:white; border-radius: 20px;" id="mp">
 		<table class="table table-border mt-10 mb-10">
 			<thead>
 				<tr >
-					<th colspan='3' class="center"><img  style = "display:inline" width="30px" height="30px" src="/static/image/medal.png">추천 인기 게시글</th>
+					<th colspan='3' class="center">추천 인기 게시글</th>
 				</tr>		
 			</thead>
 			<tbody>
-			<c:forEach var="recoDto" items="${recoTop}" varStatus="status">
+			<c:forEach var="recoDto" items="${recoTop}">
 				<tr>
-					<td>${status.index+1}</td>
-					<td class="w-90">
-					<a class="link" href="recommend/detail?recoNo=${recoDto.recoNo}">
+					<td class="w-70"><a class="link" href="recommend/detail?recoNo=${recoDto.recoNo}">
 					${recoDto.recoTitle}</a>
-				
-			
 					</td>
+					<td><i class="fa-regular fa-eye"></i> ${recoDto.recoRead}</td>
+                <td><i class="fa-regular fa-thumbs-up"></i> ${recoDto.recoLike}</td>
 				</tr>
-					
 			</c:forEach>
 			</tbody>
 		</table>
-	</div>
-	
-	<div style = "padding:0px 30px 0px 0px"></div>
-	
-	<div class="mt-30 mb-30 p-10 ms-10 main-box-shadow d1" style="width:500px; background-color:white; border-radius: 20px; border:none" id="mp">
-		<table class="table table-border mt-10 mb-10">
+		<table class="table table-border mt-20">
 			<thead>
 				<tr >
-					<th colspan='3' class="center"><img  style = "display:inline" width="30px" height="30px" src="/static/image/medal.png">후기 인기 게시글</th>
+					<th colspan='3' class="center">후기 인기 게시글</th>
 				</tr>		
 			</thead>
 			<tbody>
-			<c:forEach var="reviewDto" items="${reviewTop}" varStatus="status">
+			<c:forEach var="reviewDto" items="${reviewTop}">
 				<tr>
-					<td>${status.index+1}</td>
-					<td class="w-90"><a class="link" href="review/detail?reviewNo=${reviewDto.reviewNo}">
+					<td class="w-70"><a class="link" href="review/detail?reviewNo=${reviewDto.reviewNo}">
 					${reviewDto.reviewTitle}</a>
 					</td>
+					<td><i class="fa-regular fa-eye"></i> ${reviewDto.reviewRead }</td>
+                <td><i class="fa-regular fa-thumbs-up"></i> ${reviewDto.reviewLike }</td>
 				</tr>
 			</c:forEach>
 			</tbody>
