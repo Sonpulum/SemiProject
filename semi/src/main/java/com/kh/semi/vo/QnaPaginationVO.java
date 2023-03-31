@@ -9,7 +9,7 @@ public class QnaPaginationVO {
 	private int page = 1;
 	private int size = 10;
 	private int count;
-	private int blockSize=10;
+	private int blockSize = 10;
 	
 	//검색 여부 판정
 	public boolean isSearch() {
