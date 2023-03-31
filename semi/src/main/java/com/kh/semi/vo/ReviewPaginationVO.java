@@ -10,6 +10,7 @@ public class ReviewPaginationVO {
 	private int size = 10;
 	private int count;
 	private int blockSize=10;
+	private String sort;
 	
 	//검색 여부 판정
 	public boolean isSearch() {
@@ -36,7 +37,6 @@ public class ReviewPaginationVO {
 		
 		return buffer.toString();
 	}
-	
 	
 	//시작행 번호 계산
 	public int getBegin() {

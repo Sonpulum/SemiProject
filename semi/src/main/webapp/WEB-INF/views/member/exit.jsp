@@ -25,6 +25,7 @@
     <!-- jquery cdn -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     
+    
    <script type="text/javascript">
         $(function(){
             $(".next-btn").prop("disabled", true);
@@ -37,6 +38,23 @@
                 var isValid = $(".check-unit").length == $(".check-unit:checked").length;
                 $(".next-btn").prop("disabled", !isValid);
             });
+            
+            var valid = {
+            		memberPwValid:false,		//비밀번호 (형식)
+            		memberPwReValid:false,	//비밀번호 확인 (일치)
+            		isAllValid:function(){
+            			return this.memberPwValid && this.memberPwReValid;
+            		}
+            	};
+            
+          //현재 비밀번호 검사
+        	$("[name=memberPw]").blur(function(){
+        		var regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_-])[A-Za-z0-9!@#$%^&*()_-]{8,16}$/;
+        		var isValid = regex.test($(this).val());
+        		valid.memberPwValid = isValid;
+        		$(this).removeClass("valid invalid")
+        					.addClass(isValid ? "valid" : "invalid");
+        	});
 
         });
     </script>
@@ -45,7 +63,7 @@
 
 <body>
 	<form action="exit" method="post">
-			<div class="container=600">
+			<div class="container-800">
 					<div class="row center">
 						<img src="/static/image/backpack.png"  width="70px" height="70px">
 						<h1>비밀번호 확인</h1>
@@ -55,11 +73,13 @@
 				</div>
 				<div class="row center">
 					<input type="password" class = "form-input w-50" name="memberPw" placeholder="현재 비밀번호" required></input>
+<!-- 					<div class="valid-message">비밀번호가 일치합니다</div> -->
+					<div class="invalid-message">비밀번호가 일치하지 않습니다</div>
 				</div>
 				<div class="row center">
 		            <label>
 		                <input type="checkbox" name="agree" value="1" class="check-unit"
-		                    onchange="checkUnit();">
+		                    onchange="checkUnit();" required>
 		                회원 탈퇴 시 주의사항에 대해 확인하였으면 회원탈퇴에 동의합니다
 		            </label>
 		        </div>

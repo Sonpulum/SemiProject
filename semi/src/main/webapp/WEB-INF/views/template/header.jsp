@@ -92,4 +92,4 @@
             </div>
         </header>
         <section>
-            <article>
+            <article style="padding-left:0px; padding-right:0px;">

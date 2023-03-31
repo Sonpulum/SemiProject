@@ -34,7 +34,7 @@
     border: 0px solid #636e72;
 }
 
- .table.table-border > thead { 
+.table.table-border > thead { 
 	border-top : 2px solid rgb(64, 165, 187);
 	border-bottom : 2px solid gray;
 }
@@ -52,11 +52,11 @@
     background-color: black;
     color: white;
 }
-
-
 </style>
  
  <div class="container-1000">
+ 		<c:choose>
+		<c:when test="${list.size() != 0}">
         <div class="row center mt-30">
             <h1>나만의 여행지를 공유해보세요</h1>
         </div>
@@ -64,6 +64,11 @@
         <div class="row right">
         	<a href="/review/write" class="form-btn bosung">글쓰기</a>
         </div>
+        <div class="row">
+		    <a href="list?sort=latest" class="link">최신순 |</a>
+		    <a href="list?sort=read" class="link">조회수순 |</a>
+		    <a href="list?sort=like" class="link">좋아요순</a>
+		</div>
         
         <table class="table table-border center">
             <thead>
@@ -83,7 +88,7 @@
             <tbody>
 			<c:forEach var="reviewDto" items="${topList}">
             <!-- 인기 게시글만 출력 -->
-			<tr>
+			<tr bgcolor="#ebf8fa">
 				<td>인기</td>
 				<td>${reviewDto.reviewTheme}</td>
                 <td>${reviewDto.reviewLocation }</td>
@@ -91,7 +96,9 @@
            			<a class="link" href="detail?reviewNo=${reviewDto.reviewNo}">
            				${reviewDto.reviewTitle}</a>
            			<c:if test="${reviewDto.reviewReply > 0}">
-           				[${reviewDto.reviewReply}]
+           				<span style="color: rgb(50, 138, 157);">
+            				[${reviewDto.reviewReply}]
+        				</span>
            			</c:if>
            		</td>
                 <td><i class="fa-regular fa-eye"></i>    ${reviewDto.reviewRead }</td>
@@ -112,7 +119,9 @@
                     <a class="link" href="detail?reviewNo=${reviewDto.reviewNo}">
            					${reviewDto.reviewTitle}</a>
            				<c:if test="${reviewDto.reviewReply > 0}">
-           					[${reviewDto.reviewReply}]
+           					<span style="color: rgb(50, 138, 157);">
+            				[${reviewDto.reviewReply}]
+        				</span>
            				</c:if>
                     </td>
                     <td><i class="fa-regular fa-eye"></i>    ${reviewDto.reviewRead }</td>
@@ -181,6 +190,16 @@
  	
 	</div>
 </div>
+</c:when>
+
+	<c:otherwise>
+	<div class="row center mt-30 mb-30">
+	<img src="/static/image/search.png" width="90px" height="80px">
+	<h2>' ${vo.keyword} '에 대한 검색 결과가 없습니다.</h2>
+	<h1>다른 검색어를 입력하시거나 철자와 띄어쓰기를 확인해 보세요.</h1>
+	</div>
+	</c:otherwise>
+	</c:choose>
 
 <div class="row center mt-10">
 	<form action="list" method="get">

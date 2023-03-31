@@ -29,9 +29,11 @@ import com.kh.semi.vo.ReviewPaginationVO2;
 @RequestMapping("/review")
 public class ReviewController {
 	
-	@Autowired ReviewDao reviewDao;
+	@Autowired 
+	private ReviewDao reviewDao;
 	
-	@Autowired ReviewService reviewService;
+	@Autowired 
+	private ReviewService reviewService;
 	
 	@Autowired
 	private MemberProfileDao memberProfileDao;
@@ -39,22 +41,27 @@ public class ReviewController {
 	@Autowired
 	private MemberDao memberDao;
 	
+
 	//게시글 목록
 	@GetMapping("/list")
 	public String list(@ModelAttribute("vo") ReviewPaginationVO vo,
-			Model model) {
-		//게시글 개수(목록/검색이 다름)
-		int totalCount = reviewDao.selectCount(vo);
-		vo.setCount(totalCount);
-		
-		//인기 게시글 조회
-		model.addAttribute("topList",reviewDao.selectTopList(3));
-		
-		//게시글
-		List<ReviewDto> list = reviewDao.selectList(vo);
-		model.addAttribute("list", list);
-		
-		return "/WEB-INF/views/review/list.jsp";
+	        @RequestParam(required = false, defaultValue = "latest") String sort,
+	        Model model) {
+	    //정렬 조건을 VO 객체에 설정
+	    vo.setSort(sort);
+
+	    //게시글 개수(목록/검색이 다름)
+	    int totalCount = reviewDao.selectCount(vo);
+	    vo.setCount(totalCount);
+
+	    //인기 게시글 조회
+	    model.addAttribute("topList",reviewDao.selectTopList(3));
+
+	    //게시글
+	    List<ReviewDto> list = reviewDao.selectList(vo);
+	    model.addAttribute("list", list);
+
+	    return "/WEB-INF/views/review/list.jsp";
 	}
 	
 	//게시글 통합 검색
