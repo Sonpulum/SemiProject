@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.semi.dao.MemberDao;
 import com.kh.semi.dao.MemberProfileDao;
 import com.kh.semi.dao.ReviewDao;
 import com.kh.semi.dto.MemberProfileDto;
@@ -34,6 +35,9 @@ public class ReviewController {
 	
 	@Autowired
 	private MemberProfileDao memberProfileDao;
+	
+	@Autowired
+	private MemberDao memberDao;
 	
 	//게시글 목록
 	@GetMapping("/list")
@@ -103,6 +107,9 @@ public class ReviewController {
 		
 	    String reviewWriter = reviewDto.getReviewWriter();
 		MemberProfileDto memberProfile = memberProfileDao.selectOne(reviewWriter);
+		String memberNick = memberDao.selectOne(reviewWriter).getMemberNick();
+		
+		model.addAttribute("memberNick",memberNick);
 		model.addAttribute("memberProfile", memberProfile);
 		
 		return "/WEB-INF/views/review/detail.jsp";

@@ -46,11 +46,13 @@
 		<c:choose>
 			<c:when test="${memberProfile.attachmentNo != null}">
 				<img class="me-10" width="90" height="90" src="/attachment/download?attachmentNo=${memberProfile.attachmentNo}">
-				${reviewDto.reviewWriter}
+<%-- 				${reviewDto.reviewWriter} --%>
+				${memberNick}
 			</c:when>
 			<c:otherwise>
        			<img class="me-10" width="90" height="90" src="/static/image/usericon.jpg">
-				${reviewDto.reviewWriter}
+<%-- 				${reviewDto.reviewWriter} --%>
+				${memberNick}
 			</c:otherwise>
 		</c:choose>
 	</div>
