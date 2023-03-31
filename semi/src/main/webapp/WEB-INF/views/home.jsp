@@ -167,6 +167,7 @@
 	transform: translate;
 }
 
+}
 </style>
 <div class="row center">
 <h1>4월 SNS 인기 여행지 Top 5</h1>
@@ -224,7 +225,9 @@
 <div style="width:100%;background-color: #f0f2f7;"> 
 <div class="flex-box " style="height:400px">
 	<div class="mt-30 mb-30 p-10 ms-10 main-box-shadow d1" id="mp" style="background-color:white; border:none 'box-shadow:2px 3px 5px 0px' gray">
-		<h1 class="mb-10 center"><img  width="25px" height="25px" src="/static/image/finger.png">가고 싶은 지역을 클릭해보세요<img  width="25px" height="25px" src="/static/image/finger.png"></h1>
+		<h1 class="mb-10 center"><i class="fa-solid fa-earth-americas" style="color: #2798a0;"></i>
+		가보고싶은지역을선택하세요
+		</h1>
 		<div Class="mt-10 mb-50 ms-10 me-10" id="map" style="width:500px;height:250px; border-radius: 20px;"></div> 
 	</div>
 	
@@ -234,7 +237,7 @@
 		<table class="table table-border mt-10 mb-10">
 			<thead>
 				<tr >
-					<th colspan='3' class="center"><img  style = "display:inline" width="30px" height="30px" src="/static/image/medal.png">추천 인기 게시글</th>
+					<th colspan='3' class="center"><img style = "display:inline" width="25px" height="20px" src="/static/image/medal.png">추천 인기 게시글</th>
 				</tr>		
 			</thead>
 			<tbody>
@@ -260,7 +263,7 @@
 		<table class="table table-border mt-10 mb-10">
 			<thead>
 				<tr >
-					<th colspan='3' class="center"><img  style = "display:inline" width="30px" height="30px" src="/static/image/medal.png">후기 인기 게시글</th>
+					<th colspan='3' class="center"><img  style = "display:inline" width="25px" height="20px" src="/static/image/medal.png">후기 인기 게시글</th>
 				</tr>		
 			</thead>
 			<tbody>
