@@ -54,13 +54,28 @@
 	}
 	
 	.table.table-border > tbody > tr:last-child {
-		border-bottom : 2px solid gray;
+		border-bottom : 2px solid rgb(64, 165, 187);
 	}
 	
-	 .table.table-border > tfoot > tr:last-child { 
-	 	border-bottom : 2px solid rgb(64, 165, 187); 
-	 }
-
+	.table.table-border > tbody > tr:nth-child(3) {
+		border-bottom : 2px solid gray;
+	}
+	 
+	 .container-1000 {
+	    width: 1050px;
+	    height: 100%;
+	    background-color: #ffffff;
+	    border: 1px solid #ebebeb;
+	    margin: 100px auto;
+	    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+	    border-radius: 5px;
+	    padding : 10px 80px 80px 80px;
+	    margin-top: 0px;
+	}
+	
+	body {
+    	background-color: #f6f6f6;
+	}
 </style>
 
 <script type="text/javascript">
@@ -81,19 +96,21 @@
 </script>
 
 	<div class="container-1000">
-	   <div class="center">
-	      <h1>궁금한 점이 있으면 물어보세요</h1>
-	   </div>
+		<c:choose>
+			<c:when test="${list.size() != 0}">
+		<div class="center p-30">
+			<h1>궁금한 점이 있으면 물어보세요</h1>
+		</div>
 	   
-	   <div class="row right">
-	      <a href="write" class="form-btn qna">글쓰기</a>
-	   </div>
+		<div class="row right">
+			<a href="write" class="form-btn qna">글쓰기</a>
+		</div>
 	   
 		<div class="row center">
 			<table class="table">
 				<thead>
 					<tr>
-						<th><a class="link" href="?column=qna_list">#전체</a></th>
+						<th><a class="link" href="/qna/list">#전체</a></th>
                         <th><a class="link" href="?column=qna_head&keyword=공지">#공지</a></th>
                         <th><a class="link" href="?column=qna_head&keyword=질문">#질문</a></th>
                         <th><a class="link" href="?column=qna_head&keyword=회원">#회원</a></th>
@@ -120,8 +137,8 @@
 	               </c:if>
 	            </tr>
 	         </thead>
-	         <tbody class="center">
 	         
+	         <tbody class="center">
 	         	<!-- 공지사항을 출력 -->
 				<c:forEach var="qnaDto" items="${noticeList}">
 					<tr bgcolor="#c7e1e7">
@@ -218,98 +235,110 @@
 	         </tbody>
 	      </table>
 	   </div>
-	</div>
-
-	<!-- 페이지 네비게이터 vo에 있는 데이터를 기반으로 구현 -->
-	<div class="row pagination">
-	   <!-- 처음 -->
-	   <c:choose>
-	      <c:when test="${vo.first}">
-	         <a class="disabled"><i class="fa-solid fa-angles-left"></i></a>
-	      </c:when>
-	      <c:otherwise>
-	         <a href="list?${vo.parameter}&page=1"><i class="fa-solid fa-angles-left"></i></a>
-	      </c:otherwise>
-	   </c:choose>
-	   
-	   <!-- 이전 -->
-	   <c:choose>
-	      <c:when test="${vo.prev}">
-	         <a href="list?${vo.parameter}&page=${vo.prevPage}"><i class="fa-solid fa-angle-left"></i></a>
-	      </c:when>
-	      <c:otherwise>
-	         <a class="disabled"><i class="fa-solid fa-angle-left"></i></a>
-	      </c:otherwise>
-	   </c:choose>
-	   
-	   <!-- 숫자 -->
-	   <c:forEach var="i" begin="${vo.startBlock}" end="${vo.finishBlock}">
-	      <c:choose>
-	         <c:when test="${vo.page == i}"><a class="on">${i}</a></c:when>
-	         <c:otherwise>
-	            <a href="list?${vo.parameter}&page=${i}">${i}</a>
-	         </c:otherwise>
-	      </c:choose>
-	   </c:forEach>
-	   
-	   <!-- 다음 -->
-	   <c:choose>
-	      <c:when test="${vo.next}">
-	         <a href="list?${vo.parameter}&page=${vo.nextPage}"><i class="fa-solid fa-angle-right"></i></a>
-	      </c:when>
-	      <c:otherwise>
-	         <a class="disabled"><i class="fa-solid fa-angle-right"></i></a>
-	      </c:otherwise>
-	   </c:choose>
-	   
-	   <!-- 마지막 -->
-	   <c:choose>
-	      <c:when test="${vo.last}">
-	         <a class="disabled"><i class="fa-solid fa-angles-right"></i></a>
-	      </c:when>
-	      <c:otherwise>
-	         <a href="list?${vo.parameter}&page=${vo.totalPage}"><i class="fa-solid fa-angles-right"></i></a>
-	      </c:otherwise>
-	   </c:choose>
-	</div>
 	
-	<!-- 페이징 숨김 -->
-	<c:if test="${vo.totalPage <= 10}">
-		<script>
-			document.querySelectorAll('.pagination a.disabled').forEach(el => el.style.display = 'none');
-		</script>
-	</c:if>
+		<!-- 페이지 네비게이터 vo에 있는 데이터를 기반으로 구현 -->
+		<div class="row pagination">
+		   <!-- 처음 -->
+		   <c:choose>
+		      <c:when test="${vo.first}">
+		         <a class="disabled"><i class="fa-solid fa-angles-left"></i></a>
+		      </c:when>
+		      <c:otherwise>
+		         <a href="list?${vo.parameter}&page=1"><i class="fa-solid fa-angles-left"></i></a>
+		      </c:otherwise>
+		   </c:choose>
+		   
+		   <!-- 이전 -->
+		   <c:choose>
+		      <c:when test="${vo.prev}">
+		         <a href="list?${vo.parameter}&page=${vo.prevPage}"><i class="fa-solid fa-angle-left"></i></a>
+		      </c:when>
+		      <c:otherwise>
+		         <a class="disabled"><i class="fa-solid fa-angle-left"></i></a>
+		      </c:otherwise>
+		   </c:choose>
+		   
+		   <!-- 숫자 -->
+		   <c:forEach var="i" begin="${vo.startBlock}" end="${vo.finishBlock}">
+		      <c:choose>
+		         <c:when test="${vo.page == i}"><a class="on">${i}</a></c:when>
+		         <c:otherwise>
+		            <a href="list?${vo.parameter}&page=${i}">${i}</a>
+		         </c:otherwise>
+		      </c:choose>
+		   </c:forEach>
+		   
+		   <!-- 다음 -->
+		   <c:choose>
+		      <c:when test="${vo.next}">
+		         <a href="list?${vo.parameter}&page=${vo.nextPage}"><i class="fa-solid fa-angle-right"></i></a>
+		      </c:when>
+		      <c:otherwise>
+		         <a class="disabled"><i class="fa-solid fa-angle-right"></i></a>
+		      </c:otherwise>
+		   </c:choose>
+		   
+		   <!-- 마지막 -->
+		   <c:choose>
+		      <c:when test="${vo.last}">
+		         <a class="disabled"><i class="fa-solid fa-angles-right"></i></a>
+		      </c:when>
+		      <c:otherwise>
+		         <a href="list?${vo.parameter}&page=${vo.totalPage}"><i class="fa-solid fa-angles-right"></i></a>
+		      </c:otherwise>
+		   </c:choose>
+		</div>
+	
+		<!-- 페이징 숨김 -->
+		<c:if test="${vo.totalPage <= 10}">
+			<script>
+				document.querySelectorAll('.pagination a.disabled').forEach(el => el.style.display = 'none');
+			</script>
+		</c:if>
 		
-	<!-- 검색창 -->
-	<div class="row center">
-	   <form action="list" method="get">
+		</c:when>
 	
-	      <c:choose>
-	         <c:when test="${vo.column == 'qna_writer'}">
-	            <select name="column" class="form-input">
-	               <option value="qna_title">제목</option>
-	               <option value="qna_writer" selected>작성자</option>
-	            </select>
-	         </c:when>
-	         <c:when test="${vo.column == 'qna_head'}">
-	            <select name="column" class="form-input">
-	               <option value="qna_title">제목</option>
-	               <option value="qna_writer">작성자</option>
-	            </select>
-	         </c:when>
-	         <c:otherwise>
-	            <select name="column" class="form-input">
-	               <option value="qna_title" selected>제목</option>
-	               <option value="qna_writer">작성자</option>
-	            </select>
-	         </c:otherwise>
-	      </c:choose>
-	
-	      <input type="search" name="keyword" placeholder="검색어" required
-	         class="form-input" value="${vo.keyword}">
-	
-	      <button type="submit" class="form-btn qna">검색</button>
-	   </form>
+		<c:otherwise>
+			<div class="row center mb-30">
+				<img src="/static/image/search.png" width=150px; height=150px;>
+				<h2>' ${vo.keyword} '에 대한 검색결과가 없습니다.</h2>
+				<h1>다른 검색어를 입력하시거나 철자와 띄어쓰기를 확인해 보세요.</h1>
+			</div>
+		</c:otherwise>
+		
+	</c:choose>
+		
+		<!-- 검색창 -->
+		<div class="row center">
+		   <form action="list" method="get">
+		      <c:choose>
+		         <c:when test="${vo.column == 'qna_writer'}">
+		            <select name="column" class="form-input">
+		               <option value="qna_title">제목</option>
+		               <option value="qna_writer" selected>작성자</option>
+		            </select>
+		         </c:when>
+		         <c:when test="${vo.column == 'qna_title'}">
+		            <select name="column" class="form-input">
+		               <option value="qna_title" selected>제목</option>
+		               <option value="qna_writer">작성자</option>
+		            </select>
+		         </c:when>
+		         <c:otherwise>
+		            <select name="column" class="form-input">
+		               <option value="qna_title">제목</option>
+		               <option value="qna_writer">작성자</option>
+		            </select>
+		         </c:otherwise>
+		      </c:choose>
+				
+		      <input type="search" name="keyword" placeholder="검색어" required
+		         class="form-input" value="${vo.keyword}">
+
+		      <button type="submit" class="form-btn qna">검색</button>
+		   </form>
+		</div>
+			
 	</div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
