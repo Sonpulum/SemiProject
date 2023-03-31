@@ -128,7 +128,7 @@
        			<img id="preview" width="100" height="100" src="/static/image/usericon.jpg">
 			</c:otherwise>
 		</c:choose>
-		<input type="file" name="attach" accept=".png, .gif, .jpg" class="form-input" 
+		<input type="file" name="attach" accept=".png, .gif, .jpg, .jpeg" class="form-input" 
 	        style="border: 1px transparent solid;">
    </div>
     

@@ -37,6 +37,10 @@
    width : 100%;
    height : 100%;
 }
+.wrapper .swiper-container .swiper-slide img:hover{
+	transform: scale(1.025);
+	transition: all 0.5s;
+}
 .wrapper .swiper-pagination {
   bottom: 10px;
   left: 0;
@@ -116,7 +120,15 @@
 .table.table-border > thead {
 	border-bottom : 2px solid rgb(64, 165, 187);
 }
-
+.image_text {
+	font-size: 20px;
+	color: white;
+	padding: 5px 10px;
+	text-align: center;
+	position: absolute;
+	bottom: 10px;
+	transform: translate;
+}
 </style>
 <div class="row center">
 <h1>4월 SNS 인기 여행지 Top 5</h1>
@@ -125,19 +137,39 @@
   <div class="swiper-container">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
-        <a href="recommend/detail?recoNo=143"><img src="/static/image/hotel.jpg"></a>
+        <a href="recommend/detail?recoNo=143"><img src="/static/image/hotel.jpg">
+        	<div class="row">
+        		<strong class="image_text">고급스러운 인테리어와 최상의 서비스가 어우러진 메이필드호텔</strong>
+        	</div>
+        </a>
       </div>
       <div class="swiper-slide">
-        <a href="recommend/detail?recoNo=123"><img src="/static/image/sakura.jpg"></a>
+        <a href="recommend/detail?recoNo=123"><img src="/static/image/sakura.jpg">
+        	<div class="row">
+        		<strong class="image_text">강원도의 아름다운 자연과 벚꽃이 만나는 경포 벚꽃축제, 봄의 아름다움을 만끽할 수 있는 멋진 장소입니다.</strong>
+        	</div>
+        </a>
       </div>
       <div class="swiper-slide">
-        <a href="recommend/detail?recoNo=103"><img src="/static/image/bosan.jpg"></a>
+        <a href="recommend/detail?recoNo=103"><img src="/static/image/bosan.jpg">
+        	<div class="row">
+        		<strong class="image_text">역사적인 가치와 아름다운 해변 경관이 어우러져 있는 부산의 아름다운 사찰, 해동용궁사</strong>
+        	</div>
+        </a>
       </div>
       <div class="swiper-slide">
-        <a href="recommend/detail?recoNo=144"><img src="/static/image/gyeongju.jpg"></a>
+        <a href="recommend/detail?recoNo=144"><img src="/static/image/gyeongju.jpg">
+        	<div class="row">
+        		<strong class="image_text">한국 고대 역사와 문화 유산을 담은 경주 대릉원, 아름다운 조경과 함께하는 역사 여행의 즐거움을 선사합니다.</strong>
+        	</div>
+        </a>
       </div>
       <div class="swiper-slide">
-        <a href="recommend/detail?recoNo=108"><img src="/static/image/gangneung.jpg"></a>
+        <a href="recommend/detail?recoNo=108"><img src="/static/image/gangneung.jpg">
+        	<div class="row">
+        		<strong class="image_text">한국의 전통 아름다움과 우아함이 고스란히 담겨있는 아름다운 건축물, 오죽헌</strong>
+        	</div>
+        </a>
       </div>
     </div>
   </div>
