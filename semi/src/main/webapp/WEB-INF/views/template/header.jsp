@@ -22,9 +22,21 @@
     <!-- jquery cdn -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     
-    <style>
-   
-    </style>
+    <script>
+    	$(function(){
+    		$(".search-icon").on("click",function(){
+    			var keyword = $("[name=keyword]");
+    			keyword.val(keyword.val().trim());
+    			if (keyword.val() == '')
+    				{
+    					confirm("검색어를 입력하세요");
+    					return false;
+    				}
+    			$("[name=search-form]").submit();
+    		});
+    	});
+    </script>
+    
 </head>
 <body>
     <!--
@@ -42,16 +54,16 @@
                     <h1 class="me-20"><a href="/" class="link" style="color:#2d3436">배낭챙겨</a></h1>
                 </div>
                 <div class="row center w-30">
-                	<form action="/search" method="post">
+                	<form action="/search" method="post" name="search-form">
 <!-- 	               		<i class="fa-solid fa-magnifying-glass fa-2x"></i> -->
-<!-- 	               		<img src="/static/image/search.png" width="30px" height="30px"> -->
-	                  	<input name="keyword" type="search" class="form-input search w-100" placeholder="검색어를 입력하세요" autocomplete="off">
+	                  	<input name="keyword" type="text" class="form-input search w-100"placeholder="검색어를 입력하세요" autocomplete="off">
+	               		<img src="/static/image/search.png" class="search-icon" width="30px" height="30px">
                   	</form>
                 </div>
               <nav class="mt-10 ms-20">
                  <!-- 메뉴를 상태에 따라 다르게 나오도록 처리 -->
                   <ul class="menu">
-                      <li class="center"><a>추천</a>
+                      <li class="center"><a href="/recommend/list">추천</a>
                          <ul style="border: 1px solid black;  border-radius: 20px;">
                             <li style="border-radius: 20px;"><a href="/recommend/list?column=reco_location&keyword=수도권">지역</a></li>
                             <li><a href="/recommend/list?column=reco_season&keyword=봄">계절</a></li>

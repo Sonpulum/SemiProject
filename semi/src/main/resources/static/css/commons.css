@@ -180,6 +180,7 @@ a.form-btn {
 .w-75 {width:75%;}
 .w-70 {width:70%;}
 .w-60 {width:60%;}
+.w-55 {width:55%;}
 .w-50 {width:50%;}
 .w-40 {width:40%;}
 .w-38 {width:38.7%;}
@@ -234,6 +235,8 @@ a.form-btn {
 .ms-30 { margin-left: 30px; }
 .ms-40 { margin-left: 40px; }
 .ms-50 { margin-left: 50px; }
+.ms-60 { margin-left: 60px; }
+.ms-70 { margin-left: 70px; }
 
 .me-10 { margin-right: 10px; }
 .me-20 { margin-right: 20px; }
@@ -476,14 +479,14 @@ input.form-input.form-input-bg {
 }
 
 input.form-input.search {
-    background-size: auto 75%;
-    background-repeat: no-repeat;
-    background-image: url("/static/image/search.png");
+    margin-right :-40px;
+    padding-right:45px;
+}
 
-    background-position: right 12px center;
-
-
-    padding: 0 2.5em 0 1em;
+.search-icon{
+	position:absolute;
+	margin-top: 10px;
+	cursor:pointer;
 }
 
 /* 
