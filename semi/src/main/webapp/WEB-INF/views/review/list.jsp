@@ -34,7 +34,7 @@
     border: 0px solid #636e72;
 }
 
- .table.table-border > thead { 
+.table.table-border > thead { 
 	border-top : 2px solid rgb(64, 165, 187);
 	border-bottom : 2px solid gray;
 }
@@ -52,8 +52,6 @@
     background-color: black;
     color: white;
 }
-
-
 </style>
  
  <div class="container-1000">
@@ -64,6 +62,11 @@
         <div class="row right">
         	<a href="/review/write" class="form-btn bosung">글쓰기</a>
         </div>
+        <div class="row">
+		    <a href="list?sort=latest" class="link">최신순 |</a>
+		    <a href="list?sort=read" class="link">조회수순 |</a>
+		    <a href="list?sort=like" class="link">좋아요순</a>
+		</div>
         
         <table class="table table-border center">
             <thead>

@@ -96,33 +96,6 @@ public class ReviewDao {
 		}
 	}
 	
-	//페이징 적용
-	public List<ReviewDto> selectList(ReviewPaginationVO vo){
-		if(vo.isSearch()) {
-			String sql = "select * from ( "
-					+ "select rownum rn, TMP.* from ( "
-					+ "select * from review "
-					+ "where instr(#1,?)>0"
-					+ "order by review_no desc"
-					+ ")TMP"
-					+ ") where rn between ? and ?";
-			sql = sql.replace("#1", vo.getColumn());
-			Object[] param = {vo.getKeyword(), vo.getBegin(), vo.getEnd()};
-			return jdbcTemplate.query(sql, mapper, param);
-		}
-		else {
-			String sql = "select * from ( "
-					+ "select rownum rn, TMP.* from ( "
-					+ "select * from review "
-					+ "order by review_no desc"
-					+ ")TMP"
-					+ ") where rn between ? and ?";
-			Object[] param = {vo.getBegin(), vo.getEnd()};
-			return jdbcTemplate.query(sql, mapper,param);			
-		}
-		
-	}
-	
 	// 통합검색 페이징을 위한 카운트
 	public int selectCount2(ReviewPaginationVO2 vo) {
 		String sql = "select count(*) from review "
@@ -146,6 +119,39 @@ public class ReviewDao {
 					+ ") where rn between ? and ?";
 			Object[] param = {vo.getKeyword(), vo.getKeyword(), vo.getKeyword(), vo.getKeyword(), vo.getKeyword(), vo.getBegin(), vo.getEnd()};
 			return jdbcTemplate.query(sql, mapper, param);		
+	}
+					
+	//정렬 및 페이징 적용
+	public List<ReviewDto> selectList(ReviewPaginationVO vo) {
+	    String sql = "";
+	    Object[] param = null;
+	    
+	    if (vo.getSort().equals("read")) {
+	        sql = "ORDER BY review_read DESC";
+	    } else if (vo.getSort().equals("like")) {
+	        sql = "ORDER BY review_like DESC";
+	    } else {
+	        sql = "ORDER BY review_time DESC";
+	    }	 	   
+	     
+	    if (vo.isSearch()) {
+        sql = "SELECT * FROM ("
+        		+ "SELECT ROWNUM RN, TMP.* FROM ("
+        		+ "select * from review "
+        		+ "WHERE INSTR(#1, ?) > 0"
+        		+ sql + ") TMP"
+        		+ ") WHERE RN BETWEEN ? AND ?";
+        sql = sql.replace("#1", vo.getColumn());
+        param = new Object[] { vo.getKeyword(), vo.getBegin(), vo.getEnd() };
+	    } else {
+        sql = "SELECT * FROM ("
+        		+ "SELECT ROWNUM RN, TMP.* FROM ("
+        		+ "select * from review "
+        		+ sql + ") TMP"
+        		+ ") WHERE RN BETWEEN ? AND ?";
+        param = new Object[] { vo.getBegin(), vo.getEnd() };
+	    }
+	    return jdbcTemplate.query(sql, mapper, param);
 	}
 		
 	//조회수 증가
