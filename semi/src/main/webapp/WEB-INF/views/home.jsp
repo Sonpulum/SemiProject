@@ -117,9 +117,46 @@
     border: 0px solid #636e72;
 }
 
-.table.table-border > thead {
-	border-bottom : 2px solid rgb(64, 165, 187);
+
+
+.main-box-shadow {
+			transition: transform .2s ease, padding .2s ease
+		}
+
+.main-box-shadow:hover {
+			transform: translate(0,-5px);
+		}
+	
+
+.hash-tag {
+			top: 50px;
+			left: 20px;
+		   	border: none;
+		    font-size: 15px;
+		    padding: 0.5em 1em 0.5em 1em;
+		    display: inline-block;
+		    text-align: center;
+		    text-decoration: none;
+		    border-radius: 10px;
+		    color: #373A3C;
+		    background-color: #EEEEEE;
+		}
+		
+		.d1 {
+	border: 1px solid #c1ced1;
+	box-shadow: 0px 0px 20px 10px #c1ced1;
 }
+
+.map {
+	width: 100%;  
+  height: 100%;
+  background: #FF7777;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .image_text {
 	font-size: 20px;
 	color: white;
@@ -129,6 +166,7 @@
 	bottom: 10px;
 	transform: translate;
 }
+
 </style>
 <div class="row center">
 <h1>4월 SNS 인기 여행지 Top 5</h1>
@@ -184,44 +222,54 @@
 </div>
 
 <div style="width:100%;background-color: #f0f2f7;"> 
-<div class="flex-box" style="height:400px">
-	<div class="mt-30 p-10 ms-10" id="mp" style="background-color:white;">
-		<h1 class="mb-10 center">가고 싶은 지역을 클릭해보세요!</h1>
-		<div id="map" style="width:500px;height:300px; border-radius: 20px;"></div> 
+<div class="flex-box " style="height:400px">
+	<div class="mt-30 mb-30 p-10 ms-10 main-box-shadow d1" id="mp" style="background-color:white; border:none 'box-shadow:2px 3px 5px 0px' gray">
+		<h1 class="mb-10 center"><img  width="25px" height="25px" src="/static/image/finger.png">가고 싶은 지역을 클릭해보세요<img  width="25px" height="25px" src="/static/image/finger.png"></h1>
+		<div Class="mt-10 mb-50 ms-10 me-10" id="map" style="width:500px;height:250px; border-radius: 20px;"></div> 
 	</div>
-	<div class="mt-30 ms-30 p-10" style="width:500px; background-color:white; border-radius: 20px;" id="mp">
+	
+	<div style = "padding:0px 30px 0px 0px"></div>
+	
+	<div class="mt-30 mb-30 p-10 ms-10 main-box-shadow d1" style="width:500px; background-color:white; border-radius: 20px; border:none" id="mp">
 		<table class="table table-border mt-10 mb-10">
 			<thead>
 				<tr >
-					<th colspan='3' class="center">추천 인기 게시글</th>
+					<th colspan='3' class="center"><img  style = "display:inline" width="30px" height="30px" src="/static/image/medal.png">추천 인기 게시글</th>
 				</tr>		
 			</thead>
 			<tbody>
-			<c:forEach var="recoDto" items="${recoTop}">
+			<c:forEach var="recoDto" items="${recoTop}" varStatus="status">
 				<tr>
-					<td class="w-70"><a class="link" href="recommend/detail?recoNo=${recoDto.recoNo}">
+					<td>${status.index+1}</td>
+					<td class="w-90">
+					<a class="link" href="recommend/detail?recoNo=${recoDto.recoNo}">
 					${recoDto.recoTitle}</a>
+				
+			
 					</td>
-					<td><i class="fa-regular fa-eye"></i> ${recoDto.recoRead}</td>
-                <td><i class="fa-regular fa-thumbs-up"></i> ${recoDto.recoLike}</td>
 				</tr>
+					
 			</c:forEach>
 			</tbody>
 		</table>
-		<table class="table table-border mt-20">
+	</div>
+	
+	<div style = "padding:0px 30px 0px 0px"></div>
+	
+	<div class="mt-30 mb-30 p-10 ms-10 main-box-shadow d1" style="width:500px; background-color:white; border-radius: 20px; border:none" id="mp">
+		<table class="table table-border mt-10 mb-10">
 			<thead>
 				<tr >
-					<th colspan='3' class="center">후기 인기 게시글</th>
+					<th colspan='3' class="center"><img  style = "display:inline" width="30px" height="30px" src="/static/image/medal.png">후기 인기 게시글</th>
 				</tr>		
 			</thead>
 			<tbody>
-			<c:forEach var="reviewDto" items="${reviewTop}">
+			<c:forEach var="reviewDto" items="${reviewTop}" varStatus="status">
 				<tr>
-					<td class="w-70"><a class="link" href="review/detail?reviewNo=${reviewDto.reviewNo}">
+					<td>${status.index+1}</td>
+					<td class="w-90"><a class="link" href="review/detail?reviewNo=${reviewDto.reviewNo}">
 					${reviewDto.reviewTitle}</a>
 					</td>
-					<td><i class="fa-regular fa-eye"></i> ${reviewDto.reviewRead }</td>
-                <td><i class="fa-regular fa-thumbs-up"></i> ${reviewDto.reviewLike }</td>
 				</tr>
 			</c:forEach>
 			</tbody>
