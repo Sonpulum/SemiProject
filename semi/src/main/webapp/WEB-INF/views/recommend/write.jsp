@@ -7,7 +7,7 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <script src="/static/js/recommend-write.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="/static/js/recommend-find-address.js"></script>
+
 <script type="text/javascript">
     $(function(){
         $('[name=recoContent]').summernote({

@@ -24,22 +24,15 @@
     
     <script>
     	$(function(){
-    		var isPossible = true;
-    		$("[name=keyword]").on("change",function(){
-    			$(this).val($(this).val().trim());
-    			if ($(this).val() == '')
-    				isPossible = false;
-    			else isPossible = true;
-    		});
-    		
     		$(".search-icon").on("click",function(){
     			$("[name=search-form]").submit();
     		});
     		
     		$("[name=search-form]").submit(function(e){
-    			if (!isPossible){
+    			$("[name=keyword]").val($("[name=keyword]").val().trim());
+    			if ($("[name=keyword]").val() == ''){
     				confirm("검색어를 입력하세요");
-    				return false;
+    				return false;	
     			}
     			return true;
     		});
