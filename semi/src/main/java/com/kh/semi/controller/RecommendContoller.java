@@ -30,20 +30,6 @@ public class RecommendContoller {
 	@Autowired
 	private RecommendDao recommendDao;
 	
-//	목록 및 검색
-//	@GetMapping("/list")
-//	public String list(Model model, 
-//			@RequestParam(required = false, defaultValue = "") String column, 
-//			@RequestParam(required = false, defaultValue = "") String keyword) {
-//		if(column.length() != 0) {
-//			model.addAttribute("list", recommendDao.selectList(column,keyword));
-//			model.addAttribute("column",column);
-//			model.addAttribute("keyword",keyword);
-//		}
-//		else	model.addAttribute("list", recommendDao.selectList());
-//		return "/WEB-INF/views/recommend/list.jsp";
-//	}
-	
 	@GetMapping("/list")
 	public String list(@ModelAttribute("vo") RecommendPaginationVO vo,
 			Model model) {
@@ -56,14 +42,6 @@ public class RecommendContoller {
 		model.addAttribute("list",recommendDao.selectList(vo));
 		return "/WEB-INF/views/recommend/list.jsp";
 	}
-	
-//	//통합 검색 리스트
-//	@GetMapping("/listTotal")
-//	public String listTotal(Model model,  
-//			@RequestParam String keyword) {
-//		model.addAttribute("list",recommendDao.searchList(keyword));
-//		return "/WEB-INF/views/recommend/listTotal.jsp";
-//	}
 	
 	@GetMapping("/listTotal")
 	public String listTotal(@ModelAttribute("vo") RecommendPaginationVO2 vo,
