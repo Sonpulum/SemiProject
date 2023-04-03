@@ -60,10 +60,11 @@
         <div class="row center mt-30">
             <h1>나만의 여행지를 공유해보세요</h1>
         </div>
-
+		
         <div class="row right">
         	<a href="/review/write" class="form-btn bosung">글쓰기</a>
         </div>
+        
         <div class="row">
 		    <a href="list?sort=latest" class="link">최신순 |</a>
 		    <a href="list?sort=read" class="link">조회수순 |</a>

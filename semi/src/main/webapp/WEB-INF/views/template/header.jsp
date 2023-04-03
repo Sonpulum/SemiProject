@@ -92,6 +92,9 @@
                        <c:if test="${memberId !=null }">
                         <li class="center" style="border-radius: 20px; width:100px;"><a href="/member/logout">로그아웃</a></li>
                         <li class="center" style="border-radius: 20px;"><a href="/member/mypage">내정보</a></li>
+                        <c:if test="${sessionScope.memberLevel == '관리자'}">
+                        <li class="center" style="border-radius: 20px;"><a href="/admin/member/list">회원관리</a></li>
+                        </c:if>
                        </c:if>
                     </ul>
                 </li>
