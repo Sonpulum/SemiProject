@@ -10,6 +10,9 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kh.semi.dto.MemberDto;
+import com.kh.semi.dto.ReviewDto;
+import com.kh.semi.vo.MemberPaginationVO;
+import com.kh.semi.vo.ReviewPaginationVO;
 
 @Repository
 public class MemberDao {
@@ -49,6 +52,47 @@ public class MemberDao {
 		};
 		jdbcTemplate.update(sql, param);
 	}
+	
+	//회원 목록
+	public List<MemberDto> selectList(MemberPaginationVO vo){
+		if(vo.isSearch()) {
+			String sql = "select * from ( "
+					+ "select rownum rn, TMP.* from ( "
+					+ "select * from member "
+					+ "where instr(#1,?)>0"
+					+ "order by member_level"
+					+ ")TMP"
+					+ ") where rn between ? and ?";
+			sql = sql.replace("#1", vo.getColumn());
+			Object[] param = {vo.getKeyword(), vo.getBegin(), vo.getEnd()};
+			return jdbcTemplate.query(sql, mapper, param);
+		}
+		else {
+			String sql = "select * from( "
+					+ "select rownum rn, TMP.* from( "
+					+ "select*from member "
+					+ "order by member_level"
+					+ ")TMP) where rn between ? and ?";
+			Object[] param = {vo.getBegin(), vo.getEnd()};
+			return jdbcTemplate.query(sql, mapper,param);			
+		}
+		
+	}
+	
+	//페이징 적용된 조회 및 카운트
+	public int selectCount(MemberPaginationVO vo) {
+		if(vo.isSearch()) {
+			String sql = "select count(*) from member where instr(#1,?)>0";
+			sql=sql.replace("#1", vo.getColumn());
+			Object[] param = {vo.getKeyword()};
+			return jdbcTemplate.queryForObject(sql, int.class, param);
+		}
+		else {
+			String sql = "select count(*) from member";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
+	}
+
 	
 	public MemberDto selectOne(String id) {
 		String sql = "select * from member where member_id = ?";
@@ -105,4 +149,30 @@ public class MemberDao {
 		List<MemberDto> list = jdbcTemplate.query(sql, mapper, param);
 		return list.isEmpty() ? null : list.get(0);
 	}
+	
+	//탈퇴 예정 회원 정보 담아두기
+	public void wating(String memberId) {
+		String sql = "insert into wating select*from member where member_id=?";
+		Object[] param = {memberId};
+		jdbcTemplate.update(sql,param);
+	}
+	
+	//관리자용 회원 정보 변경
+	public boolean changeInformationByAdmin(MemberDto memberDto) {
+		String sql = "update member set "
+						+ "member_nick=?, member_tel=?, "
+						+ "member_email=?, member_birth=?, "
+						+ "member_post=?, member_basic_addr=?, "
+						+ "member_detail_addr=? , member_level=? "
+						+ "where member_id = ?";
+		Object[] param = {
+			memberDto.getMemberNick(), memberDto.getMemberTel(),
+			memberDto.getMemberEmail(), memberDto.getMemberBirth(),
+			memberDto.getMemberPost(), memberDto.getMemberBasicAddr(),
+			memberDto.getMemberDetailAddr(), memberDto.getMemberLevel(),
+			 memberDto.getMemberId()
+		};
+		return jdbcTemplate.update(sql, param) > 0;
+	}
+
 }
