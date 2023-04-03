@@ -22,6 +22,7 @@ public class ReviewReplyDao {
 					.reviewReplyOrigin(rs.getInt("review_reply_origin"))
 					.reviewReplyContent(rs.getString("review_reply_content"))
 					.reviewReplyTime(rs.getDate("review_reply_time"))
+					.memberNick(rs.getString("member_nick"))
 				.build();
 	};
 	
@@ -39,10 +40,12 @@ public class ReviewReplyDao {
 	}
 	
 	public List<ReviewReplyDto> selectList(int reviewReplyOrigin){
-		String sql = "select * from review_reply where review_reply_origin = ?"
-				+ "order by review_reply_no asc";
-		Object [] param = {reviewReplyOrigin};
-		return jdbcTemplate.query(sql, mapper, param);
+	    String sql = "select r.*, m.member_nick from review_reply r "
+	               + "join member m on r.review_reply_writer = m.member_id "
+	               + "where r.review_reply_origin = ? "
+	               + "order by r.review_reply_no asc";
+	    Object[] param = {reviewReplyOrigin};
+	    return jdbcTemplate.query(sql, mapper, param);
 	}
 	
 	public void update(ReviewReplyDto reviewReplyDto) {

@@ -14,4 +14,5 @@ public class ReviewReplyDto {
 	private int reviewReplyOrigin;
 	private String reviewReplyContent;
 	private Date reviewReplyTime;
+	private String memberNick;
 }

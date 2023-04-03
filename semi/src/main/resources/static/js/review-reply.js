@@ -47,7 +47,7 @@ $(function(){
 					var template = $("#reply-template").html();//템플릿 불러와서
 					var html = $.parseHTML(template);//사용할 수 있게 변환하고
 					
-					$(html).find(".reviewReplyWriter").text(response[i].reviewReplyWriter);
+					$(html).find(".reviewReplyWriter").text(response[i].memberNick);
 					$(html).find(".reviewReplyContent").text(response[i].reviewReplyContent);
 					$(html).find(".reviewReplyTime").text(response[i].reviewReplyTime);
 					
