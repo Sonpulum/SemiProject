@@ -49,7 +49,6 @@ $(function(){
 	</div>
 </script>
 
-<form action="detail" method="post" enctype="multipart/form-data">
 <div class="container-800">
 
 	<div class="row">
@@ -60,10 +59,7 @@ $(function(){
 		<c:choose>
 			<c:when test="${memberProfile.attachmentNo != null}">
 				<img class="me-10" width="90" height="90" src="/attachment/download?attachmentNo=${memberProfile.attachmentNo}">
-
 				${memberNick}
-				${reviewDto.reviewNick}
-
 			</c:when>
 			<c:otherwise>
        			<img class="me-10" width="90" height="90" src="/static/image/usericon.jpg">
@@ -102,8 +98,6 @@ $(function(){
 		댓글목록 위치
 	</div>
 	
-	
-	
 	<!-- 댓글 작성란 -->
 	<div class="row">
 		
@@ -139,8 +133,6 @@ $(function(){
 		</c:if>
 	</div>
 	</div>
-	
 </div>
-</form>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

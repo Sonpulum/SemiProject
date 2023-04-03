@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kh.semi.dao.MemberDao;
 import com.kh.semi.dao.ReviewDao;
 import com.kh.semi.dao.ReviewReplyDao;
+import com.kh.semi.dto.MemberDto;
 import com.kh.semi.dto.ReviewReplyDto;
 
 @RestController
@@ -28,6 +30,9 @@ public class ReviewReplyRestController {
 		@Autowired
 		private ReviewDao reviewDao;
 		
+		@Autowired
+		private MemberDao memberDao;
+		
 		//댓글 조회
 		@GetMapping("/{reviewReplyOrigin}")
 		public List<ReviewReplyDto> list (@PathVariable int reviewReplyOrigin) {
@@ -38,8 +43,12 @@ public class ReviewReplyRestController {
 		@PostMapping("/")
 		public void write(HttpSession session, @ModelAttribute ReviewReplyDto reviewReplyDto) {
 			//작성자 설정
-			String memberId = (String)session.getAttribute("memberId");
+			String memberId = (String) session.getAttribute("memberId");
+			MemberDto memberDto = memberDao.selectOne(memberId);
+			String memberNick = memberDto.getMemberNick();
+			
 			reviewReplyDto.setReviewReplyWriter(memberId);
+			reviewReplyDto.setMemberNick(memberNick);
 			
 			//등록
 			reviewReplyDao.insert(reviewReplyDto);
@@ -51,15 +60,11 @@ public class ReviewReplyRestController {
 		
 		//댓글 삭제
 		@DeleteMapping("/{reviewReplyNo}")
-		public void delete(@PathVariable int reviewReplyNo) {
-			ReviewReplyDto reviewReplyDto = reviewReplyDao.selectOne(reviewReplyNo);
-			
+		public void delete(@PathVariable int reviewReplyNo, @ModelAttribute ReviewReplyDto reviewReplyDto) {
 			//삭제
+			reviewReplyDto.setMemberNick(null);
 			reviewReplyDao.delete(reviewReplyNo);
-			
-			//댓글 개수 갱신
-			reviewDao.updateReplycount(reviewReplyDto.getReviewReplyOrigin());
-			
+					
 		}
 		
 		//일부 수정

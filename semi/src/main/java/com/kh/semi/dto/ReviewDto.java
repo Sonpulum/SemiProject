@@ -22,7 +22,7 @@ public class ReviewDto {
 	private int reviewLike;
 	private Date reviewTime;
 
-
+	
 //게시글 시각
 public String getReviewTimeAuto() {
    java.util.Date now = new java.util.Date();
