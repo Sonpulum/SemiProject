@@ -223,7 +223,7 @@
 </div>
 
 <div style="width:100%;background-color: #f0f2f7;"> 
-<div class="flex-box " style="height:430px">
+<div class="flex-box " style="height:400px">
 	<div class="mt-30 mb-30 p-10 ms-10 main-box-shadow d1" id="mp" style="background-color:white; border:none 'box-shadow:2px 3px 5px 0px' gray">
 		<h1 class="mb-10 center"><i class="fa-solid fa-earth-americas" style="color: #2798a0;"></i>
 		가보고싶은지역을선택하세요
