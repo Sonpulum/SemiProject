@@ -164,19 +164,7 @@
    text-align: center;
    position: absolute;
    bottom: 10px;
-   transform: translate;
-   animation: upward 1s forwards;
 }
-@keyframes upward {
-    from {
-      transform: translateY(100%);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
 </style>
 <div class="row center">
 <h1>4월 SNS 인기 여행지 Top 5</h1>
@@ -216,6 +204,13 @@
         <a href="recommend/detail?recoNo=108"><img src="/static/image/gangneung.jpg">
            <div class="row">
               <strong class="image_text">한국의 전통 아름다움과 우아함이 고스란히 담겨있는 아름다운 건축물, 오죽헌</strong>
+           </div>
+        </a>
+      </div>
+       <div class="swiper-slide">
+        <a href="recommend/detail?recoNo=103"><img src="/static/image/bosan.jpg">
+           <div class="row">
+              <strong class="image_text">역사적인 가치와 아름다운 해변 경관이 어우러져 있는 부산의 아름다운 사찰, 해동용궁사</strong>
            </div>
         </a>
       </div>
@@ -301,7 +296,7 @@ new Swiper('.swiper-container',{
      centeredSlides: true, // 1번 슬라이드가 가운데 보이기
      loop: true, // 반복 재생 여부
      autoplay: { // 자동 재생 여부
-       delay: 2000 // 2초마다 슬라이드 바뀜
+       delay: 3000 // 3초마다 슬라이드 바뀜
      },
      pagination:{ // 페이지 번호 사용 여부
        el: '.swiper-pagination', // 페이지 번호 요소 선택자
@@ -314,7 +309,6 @@ new Swiper('.swiper-container',{
      
    });
 </script>
-
 <script>
          (function(){
             var map ="";
