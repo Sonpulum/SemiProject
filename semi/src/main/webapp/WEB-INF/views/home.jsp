@@ -223,12 +223,12 @@
 </div>
 
 <div style="width:100%;background-color: #f0f2f7;"> 
-<div class="flex-box " style="height:400px">
+<div class="flex-box " style="height:430px">
 	<div class="mt-30 mb-30 p-10 ms-10 main-box-shadow d1" id="mp" style="background-color:white; border:none 'box-shadow:2px 3px 5px 0px' gray">
 		<h1 class="mb-10 center"><i class="fa-solid fa-earth-americas" style="color: #2798a0;"></i>
 		가보고싶은지역을선택하세요
 		</h1>
-		<div Class="mt-10 mb-50 ms-10 me-10" id="map" style="width:500px;height:250px; border-radius: 20px;"></div> 
+		<div Class="mt-10 mb-50 ms-10 me-10" id="map" style="width:500px;height:300px; border-radius: 20px;"></div> 
 	</div>
 	
 	<div style = "padding:0px 30px 0px 0px"></div>
