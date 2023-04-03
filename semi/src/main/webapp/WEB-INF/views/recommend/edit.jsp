@@ -8,7 +8,6 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <script src="/static/js/recommend-write.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="/static/js/recommend-find-address.js"></script>
 
 <script type="text/javascript">
     $(function(){
@@ -211,7 +210,7 @@
         <textarea name="recoContent">${recoDto.recoContent}</textarea>
     </div>
     <div class="row right">
-        <a href="list" class="form-btn neutral me-10">목록으로</a>
+<!--         <a href="list" class="form-btn neutral me-10">목록으로</a> -->
         <button type="submit" class="form-btn positive">수정하기</button>
     </div>
 </div>
