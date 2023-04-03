@@ -6,6 +6,8 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <script src="/static/js/recommend-write.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/static/js/recommend-find-address.js"></script>
 <script type="text/javascript">
     $(function(){
         $('[name=recoContent]').summernote({
@@ -76,7 +78,7 @@
 
 <form class="write-form" action="write" method="post" autocomplete="off">
 <div class="container-800">
-    <div class="row mb-40">
+    <div class="row mb-20">
 <!--         <label class="form-label w-100">제목</label> -->
         
         <input name="recoTitle" class="form-input w-50 me-10" type="text" placeholder="제목을 입력해주세요">
@@ -104,7 +106,12 @@
         </select>
     </div>
     <div class="row">
-<!--         <label class="form-label w-100">내용</label> -->
+        <input type="text" name="recoAddr"
+            class="form-input w-75 me-30" placeholder="주소를 검색하세요" readonly>
+        <button type="button" class="form-btn positive find-address-btn">주소 찾기</button>
+        <button type="button" class="form-btn negative clear-address-btn"><i class="fa-solid fa-eraser"></i></button>
+    </div>
+    <div class="row">
         <textarea name="recoContent"></textarea>
     </div>
     <div class="row right">

@@ -24,15 +24,24 @@
     
     <script>
     	$(function(){
+    		var isPossible = true;
+    		$("[name=keyword]").on("change",function(){
+    			$(this).val($(this).val().trim());
+    			if ($(this).val() == '')
+    				isPossible = false;
+    			else isPossible = true;
+    		});
+    		
     		$(".search-icon").on("click",function(){
-    			var keyword = $("[name=keyword]");
-    			keyword.val(keyword.val().trim());
-    			if (keyword.val() == '')
-    				{
-    					confirm("검색어를 입력하세요");
-    					return false;
-    				}
     			$("[name=search-form]").submit();
+    		});
+    		
+    		$("[name=search-form]").submit(function(e){
+    			if (!isPossible){
+    				confirm("검색어를 입력하세요");
+    				return false;
+    			}
+    			return true;
     		});
     	});
     </script>
@@ -55,7 +64,6 @@
                 </div>
                 <div class="row center w-30">
                 	<form action="/search" method="post" name="search-form">
-<!-- 	               		<i class="fa-solid fa-magnifying-glass fa-2x"></i> -->
 	                  	<input name="keyword" type="text" class="form-input search w-100"placeholder="검색어를 입력하세요" autocomplete="off">
 	               		<img src="/static/image/search.png" class="search-icon" width="30px" height="30px">
                   	</form>

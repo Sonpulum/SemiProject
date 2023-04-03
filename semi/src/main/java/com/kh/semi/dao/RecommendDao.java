@@ -35,6 +35,7 @@ public class RecommendDao {
 			recommendDto.setRecoLike(rs.getInt("reco_like"));
 			recommendDto.setRecoRead(rs.getInt("reco_read"));
 			recommendDto.setRecoTime(rs.getDate("reco_time"));
+			recommendDto.setRecoAddr(rs.getString("reco_addr"));
 			return recommendDto;
 		}
 	};
@@ -54,30 +55,12 @@ public class RecommendDao {
 			recommendAttachDto.setRecoLike(rs.getInt("reco_like"));
 			recommendAttachDto.setRecoRead(rs.getInt("reco_read"));
 			recommendAttachDto.setRecoTime(rs.getDate("reco_time"));
+			recommendAttachDto.setRecoAddr(rs.getString("reco_addr"));
 			recommendAttachDto.setAttachNo(rs.getInt("attach_no"));
 			return recommendAttachDto;
 		}
 	};
 	
-//	public List<RecommendAttachDto> selectList() {
-//		String sql = "select R.*, IMG.attach_no from recommend R "
-//				+ "left outer join "
-//				+ "(select reco_no, min(attachment_no) attach_no from recommend_attachment group by reco_no) "
-//				+ "IMG on R.reco_no = IMG.reco_no";
-//		return jdbcTemplate.query(sql, mapper2);
-//	}
-//	
-//	//게시글 분류
-//	public List<RecommendAttachDto> selectList(String column, String keyword) {
-//		String sql = "select R.*, IMG.attach_no from recommend R "
-//				+ "left outer join "
-//				+ "(select reco_no, min(attachment_no) attach_no from recommend_attachment group by reco_no) "
-//				+ "IMG on R.reco_no = IMG.reco_no "
-//				+ "where instr(R.#1, ?) > 0 order by R.reco_no desc";
-//		sql = sql.replace("#1", column);
-//		Object[] param = {keyword};
-//		return jdbcTemplate.query(sql, mapper2, param);
-//	}
 	
 	//페이징 적용된 조회 및 카운트
 	public int selectCount(RecommendPaginationVO vo) {
@@ -170,21 +153,21 @@ public class RecommendDao {
 	public void insert(RecommendDto recommendDto) {
 		String sql = "insert into recommend("
 				+ "reco_no, reco_writer, reco_title, reco_content,"
-				+ "reco_theme, reco_location, reco_season, reco_like,"
+				+ "reco_theme, reco_location, reco_season, reco_addr, reco_like,"
 				+ "reco_read, reco_time)"
 				+ "values ("
-				+ "?, ?, ?, ?, ?, ?, ?, 0, 0, sysdate)";
+				+ "?, ?, ?, ?, ?, ?, ?, ?, 0, 0, sysdate)";
 		Object[] param = {recommendDto.getRecoNo(), recommendDto.getRecoWriter(), recommendDto.getRecoTitle(),
 							recommendDto.getRecoContent(), recommendDto.getRecoTheme(),
-							recommendDto.getRecoLocation(),recommendDto.getRecoSeason()};
+							recommendDto.getRecoLocation(),recommendDto.getRecoSeason(),recommendDto.getRecoAddr()};
 		jdbcTemplate.update(sql, param);
 	}
 	
 	//게시글 수정
 	public boolean edit(RecommendDto recommendDto) {
-		String sql = "update recommend set reco_title = ?, reco_content = ?, reco_theme = ?, "
+		String sql = "update recommend set reco_title = ?, reco_content = ?, reco_addr = ?, reco_theme = ?, "
 				+ "reco_location = ?, reco_season = ? where reco_no = ?";
-		Object[] param = {recommendDto.getRecoTitle(), recommendDto.getRecoContent(), recommendDto.getRecoTheme(),
+		Object[] param = {recommendDto.getRecoTitle(), recommendDto.getRecoContent(), recommendDto.getRecoAddr(), recommendDto.getRecoTheme(),
 							recommendDto.getRecoLocation(), recommendDto.getRecoSeason(), recommendDto.getRecoNo()};
 		return jdbcTemplate.update(sql, param) > 0;
 	}
