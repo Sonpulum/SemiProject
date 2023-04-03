@@ -88,7 +88,7 @@
             <tbody>
 			<c:forEach var="reviewDto" items="${topList}">
             <!-- 인기 게시글만 출력 -->
-			<tr bgcolor="#c7e1e7">
+			<tr bgcolor="#ebf8fa">
 				<td>인기</td>
 				<td>${reviewDto.reviewTheme}</td>
                 <td>${reviewDto.reviewLocation }</td>
@@ -96,7 +96,9 @@
            			<a class="link" href="detail?reviewNo=${reviewDto.reviewNo}">
            				${reviewDto.reviewTitle}</a>
            			<c:if test="${reviewDto.reviewReply > 0}">
-           				[${reviewDto.reviewReply}]
+           				<span style="color: rgb(50, 138, 157);">
+            				[${reviewDto.reviewReply}]
+        				</span>
            			</c:if>
            		</td>
                 <td><i class="fa-regular fa-eye"></i>    ${reviewDto.reviewRead }</td>
@@ -117,7 +119,9 @@
                     <a class="link" href="detail?reviewNo=${reviewDto.reviewNo}">
            					${reviewDto.reviewTitle}</a>
            				<c:if test="${reviewDto.reviewReply > 0}">
-           					[${reviewDto.reviewReply}]
+           					<span style="color: rgb(50, 138, 157);">
+            				[${reviewDto.reviewReply}]
+        				</span>
            				</c:if>
                     </td>
                     <td><i class="fa-regular fa-eye"></i>    ${reviewDto.reviewRead }</td>
@@ -178,7 +182,7 @@
  	</c:choose>
  	
  	<!-- 페이징 숨김 -->
-	<c:if test="${vo.totalPage <= 10}">
+	<c:if test="${vo.totalPage <= 5}">
 		<script>
 			document.querySelectorAll('.pagination a.disabled').forEach(el => el.style.display = 'none');
 		</script>

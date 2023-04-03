@@ -17,6 +17,7 @@ public class RecommendAttachDto {
 	private int recoLike;
 	private int recoRead;
 	private Date recoTime;
+	private String recoAddr;
 	private int attachNo;
 	
 	public String getTimeConvert() {

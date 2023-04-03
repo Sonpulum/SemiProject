@@ -141,7 +141,7 @@
 	         <tbody class="center">
 	         	<!-- 공지사항을 출력 -->
 				<c:forEach var="qnaDto" items="${noticeList}">
-					<tr bgcolor="#c7e1e7">
+					<tr bgcolor="#ebf8fa">
 						<td>${qnaDto.qnaNo}</td>
 						<td></td>
 						<td class="left">

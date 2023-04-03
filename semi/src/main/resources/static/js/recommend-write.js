@@ -5,8 +5,9 @@ $(function(){
 		recoLocationValid : false,
 		recoSeasonValid : false,
 		recoThemeValid : false,
+		recoAddrValid : false,
 		isAllValid : function(){
-			return this.recoTitleValid && this.recoContentValid && this.recoLocationValid && this.recoSeasonValid && this.recoThemeValid;
+			return this.recoTitleValid && this.recoContentValid && this.recoLocationValid && this.recoSeasonValid && this.recoThemeValid && this.recoAddrValid;
 		}
 		
 	};
@@ -49,8 +50,17 @@ $(function(){
 					.addClass(isValid ? "valid" : "invalid");
 	});
 	
+	$("[name=recoAddr]").blur(function(){
+		var target = $(this);
+		var isValid = target.val().length > 0;
+		valid.recoAddrValid = isValid;
+		$(this).removeClass("valid invalid")
+					.addClass(isValid ? "valid" : "invalid");
+	});
+	
 	$(".write-form").submit(function(e){
 		valid.recoContentValid = $("[name=recoContent]").val().length > 0;
+		console.log(valid.recoAddrValid);
 		if (valid.isAllValid() == false){
 			confirm("모든 항목을 입력하세요")
 			return false;

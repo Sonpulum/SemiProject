@@ -29,6 +29,9 @@ main section article h1 {
 	font-weight : bold;
 }
 </style>
+
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=aeb8fd374510e8f59291b500589fdbe5&libraries=services"></script>
 <script>
 $(function(){
     $(".form-btn.negative").click(function(e){
@@ -38,6 +41,46 @@ $(function(){
             window.location.href = $(this).attr("href"); // 링크 이동
         }
     });
+    
+    var mapContainer = document.querySelector('.map');
+    mapOption = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
+
+	// 지도를 생성합니다    
+	var map = new kakao.maps.Map(mapContainer, mapOption); 
+	map.setDraggable(false);
+	map.setZoomable(false);
+	// 주소-좌표 변환 객체를 생성합니다
+	var geocoder = new kakao.maps.services.Geocoder();
+	
+	// 주소로 좌표를 검색합니다
+	console.log($("[name=recoAddr]").val());
+	geocoder.addressSearch($("[name=recoAddr]").val(), function(result, status) {
+	
+	    // 정상적으로 검색이 완료됐으면 
+	     if (status === kakao.maps.services.Status.OK) {
+	
+	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+	
+	        // 결과값으로 받은 위치를 마커로 표시합니다
+	        var marker = new kakao.maps.Marker({
+	            map: map,
+	            position: coords
+	        });
+	
+// 	        // 인포윈도우로 장소에 대한 설명을 표시합니다
+// 	        var infowindow = new kakao.maps.InfoWindow({
+// 	            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+// 	        });
+// 	        infowindow.open(map, marker);
+	
+	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	        map.setCenter(coords);
+	    } 
+	});    
+  	
 });
 </script>
 
@@ -54,6 +97,12 @@ $(function(){
         <div class="row">
             ${recoDto.recoContent}
         </div>
+        
+        <input type="hidden" name="recoAddr" value="${recoDto.recoAddr}">
+        <div class="row">
+        	<div class="map" style="width:100%;height:350px;"></div>
+        </div>
+        
         <hr>
         <div class="row">
             <span class="me-10">
@@ -77,7 +126,7 @@ $(function(){
         <hr>
         
         <div class = "row right">
-        	<a href="list" class="form-btn neutral">목록으로</a>
+<!--         	<a href="list" class="form-btn neutral">목록으로</a> -->
         	<c:if test="${sessionScope.memberLevel eq '관리자'}">
 		       	<a href="delete?recoNo=${recoDto.recoNo}" class="form-btn negative">삭제하기</a>
 		       	<a href="edit?recoNo=${recoDto.recoNo}" class="form-btn bosung">수정하기</a>

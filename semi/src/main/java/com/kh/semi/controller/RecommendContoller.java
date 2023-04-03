@@ -18,8 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.semi.dao.RecommendDao;
-import com.kh.semi.dto.QnaDto;
 import com.kh.semi.dto.RecommendDto;
+import com.kh.semi.vo.RecommendPaginationVO;
+import com.kh.semi.vo.RecommendPaginationVO2;
 
 
 @Controller
@@ -29,25 +30,26 @@ public class RecommendContoller {
 	@Autowired
 	private RecommendDao recommendDao;
 	
-//	목록 및 검색
 	@GetMapping("/list")
-	public String list(Model model, 
-			@RequestParam(required = false, defaultValue = "") String column, 
-			@RequestParam(required = false, defaultValue = "") String keyword) {
-		if(column.length() != 0) {
-			model.addAttribute("list", recommendDao.selectList(column,keyword));
-			model.addAttribute("column",column);
-			model.addAttribute("keyword",keyword);
+	public String list(@ModelAttribute("vo") RecommendPaginationVO vo,
+			Model model) {
+		int totalCount = recommendDao.selectCount(vo);
+		vo.setCount(totalCount);
+		if (vo.isSearch()) {
+			model.addAttribute("column",vo.getColumn());
+			model.addAttribute("keyword",vo.getKeyword());
 		}
-		else	model.addAttribute("list", recommendDao.selectList());
+		model.addAttribute("list",recommendDao.selectList(vo));
 		return "/WEB-INF/views/recommend/list.jsp";
 	}
 	
-	//통합 검색 리스트
 	@GetMapping("/listTotal")
-	public String listTotal(Model model,  
-			@RequestParam String keyword) {
-		model.addAttribute("list",recommendDao.searchList(keyword));
+	public String listTotal(@ModelAttribute("vo") RecommendPaginationVO2 vo,
+			Model model) {
+		int totalCount = recommendDao.selectCount2(vo);
+		vo.setCount(totalCount);
+		model.addAttribute("keyword",vo.getKeyword());
+		model.addAttribute("list",recommendDao.searchList(vo));
 		return "/WEB-INF/views/recommend/listTotal.jsp";
 	}
 	

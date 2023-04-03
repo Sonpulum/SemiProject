@@ -115,6 +115,7 @@ public class MemberController {
          ) {
        String memberId = (String) session.getAttribute("memberId");
        MemberDto memberDto = memberDao.selectOne(memberId);
+       model.addAttribute("profile", memberProfileDao.selectOne(memberId));
        
        model.addAttribute("memberDto", memberDto);
        return "/WEB-INF/views/member/edit.jsp";
