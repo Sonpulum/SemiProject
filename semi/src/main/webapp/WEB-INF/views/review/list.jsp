@@ -4,55 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<style>
- .container-1000 { 
-             width: 1100px; 
-             height: 100%; 
-             background-color: #ffffff; 
-             border: 1px solid #ebebeb; 
-             margin: 100px auto; 
-             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
-             border-radius: 5px; 
-             padding : 10px 80px 80px 80px;  
-             margin-top: 0px; 
-             margin-bottom: 0px
-         } 
-        
- body { 
-   background-color: #f6f6f6; 
- } 
-
-
-.table.table-border,
-.table.table-border > thead > tr > th,
-.table.table-border > thead > tr > td,
-.table.table-border > tbody > tr > th,
-.table.table-border > tbody > tr > td,
-.table.table-border > tfoot > tr > th,
-.table.table-border > tfoot > tr > td
-{
-    border: 0px solid #636e72;
-}
-
-.table.table-border > thead { 
-	border-top : 2px solid rgb(64, 165, 187);
-	border-bottom : 2px solid gray;
-}
-
-.table.table-border > tbody > tr:last-child {
-	border-bottom : 2px solid gray;
-}
-
- .table.table-border > tfoot > tr:last-child { 
- 	border-bottom : 2px solid rgb(64, 165, 187); 
- } 
-
-.table.table-hover > tbody > tr:hover,
-.table.table-hover > tfoot > tr:hover {
-    background-color: black;
-    color: white;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="/static/css/list.css">
 
 <script>
 $(function(){
@@ -278,7 +230,7 @@ $(function(){
 			</c:otherwise>
 		</c:choose>
 
-		<input type="search" name="keyword" class="form-input" style="width:350px;" value="${vo.keyword}" placeholder="여행지 검색">
+		<input type="search" name="keyword" class="form-input" style="width:350px;" value="${vo.keyword}" placeholder="검색어를 입력하세요">
     	<button type="submit" class="form-btn neutral bosung">검색</button>
    </form>
 </div>

@@ -14,100 +14,11 @@
     <link rel="stylesheet" type="text/css" href="/static/css/commons.css">
     <link rel="stylesheet" type="text/css" href="/static/css/layout.css">
     <link rel="stylesheet" type="text/css" href="/static/css/test.css">
+    
+    <link rel="stylesheet" type="text/css" href="/static/css/login.css">
 
     <title>배낭챙겨 로그인</title>
-<style>
-        .line {
-            display: inline-block;
-            position: relative;
-        }
 
-        .line::before,
-        .line::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            border-top: 1px solid #d9d9d9;;
-            width: 50px;
-        }
-
-        .line::before {
-            right: 100%;
-        }
-
-        .line::after {
-            left: 100%;
-        }
-        body {
-            background-color: #f6f6f6;
-            font-family: 'Noto Sans KR', sans-serif;
-        }
-
-        .container {
-            width: 350px;
-            background-color: #ffffff;
-            border: 1px solid #ebebeb;
-            margin: 100px auto;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 5px;
-        }
-
-        .logo {
-            text-align: center;
-        }
-
-        .logo img {
-            width: 100px;
-            height: 100px;
-        }
-
-        .form {
-            padding: 20px;
-        
-        }
-
-        .form input {
-            width: 100%;
-            border: none;
-            border-bottom: 1px solid #d9d9d9;
-            padding: 10px 0;
-            margin: 10px 0;
-            font-size: 16px;
-        }
-
-        .form button {
-            width: 100%;
-            padding: 10px;
-            margin-top: 20px;
-            background-color: rgb(64, 165, 187);
-            color: #ffffff;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .form p {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .form a {
-            color: rgb(64, 165, 187);
-            text-decoration: none;
-        }
-
-        .form p1 {
-            color: rgb(64, 165, 187);
-            text-decoration: none;
-            font-weight: bolder;
-            
-        }
-
-        .form a:hover {
-            text-decoration: underline;
-        }
-    </style>
     <!-- 카카오 스크립트 -->
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     
