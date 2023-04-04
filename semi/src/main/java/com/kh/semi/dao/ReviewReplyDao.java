@@ -22,6 +22,16 @@ public class ReviewReplyDao {
 					.reviewReplyOrigin(rs.getInt("review_reply_origin"))
 					.reviewReplyContent(rs.getString("review_reply_content"))
 					.reviewReplyTime(rs.getDate("review_reply_time"))
+				.build();
+	};
+	//닉네임
+	private RowMapper<ReviewReplyDto> mapper2 = (rs, rowNum) ->{
+		return ReviewReplyDto.builder()
+					.reviewReplyNo(rs.getInt("review_reply_no"))
+					.reviewReplyWriter(rs.getString("review_reply_writer"))
+					.reviewReplyOrigin(rs.getInt("review_reply_origin"))
+					.reviewReplyContent(rs.getString("review_reply_content"))
+					.reviewReplyTime(rs.getDate("review_reply_time"))
 					.memberNick(rs.getString("member_nick"))
 				.build();
 	};
@@ -45,7 +55,7 @@ public class ReviewReplyDao {
 	               + "where r.review_reply_origin = ? "
 	               + "order by r.review_reply_no asc";
 	    Object[] param = {reviewReplyOrigin};
-	    return jdbcTemplate.query(sql, mapper, param);
+	    return jdbcTemplate.query(sql, mapper2, param);
 	}
 	
 	public void update(ReviewReplyDto reviewReplyDto) {

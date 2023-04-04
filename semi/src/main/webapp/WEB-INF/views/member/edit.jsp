@@ -150,7 +150,7 @@
    <!-- 비멀번호 에러 시 -->
    <c:if test="${param.mode == 'error'}">
    <div class="row center">
-      <h3 style="color: #c23616;">비밀번호가 일치하지 않습니다.</h3>
+      <h2 style="color: #c23616;">비밀번호가 일치하지 않습니다.</h2>
    </div>
    </c:if>
 
