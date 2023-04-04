@@ -59,11 +59,11 @@
 		<c:choose>
 			<c:when test="${memberProfile.attachmentNo != null}">
 				<img class="me-10" width="90" height="90" src="/attachment/download?attachmentNo=${memberProfile.attachmentNo}">
-				${qnaDto.qnaWriter}
+				${qnaWriterNick}
 			</c:when>
 			<c:otherwise>
 				<img class="me-10" width="90" height="90" src="/static/image/usericon.jpg">
-				   ${qnaDto.qnaWriter}
+				   ${qnaWriterNick}
 			</c:otherwise>
 		</c:choose>
 	</div>
