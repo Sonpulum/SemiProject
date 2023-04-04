@@ -53,7 +53,24 @@
     color: white;
 }
 </style>
- 
+
+<script>
+$(function(){
+	$("[name=search-form]").submit(function(e){
+		var keyword = $("[name=search-form] [name=keyword]");
+		keyword.val(keyword.val().trim());
+		if (keyword.val() == ''){
+			confirm("검색어를 입력하세요");
+			return false;	
+		}
+		else if (keyword.val().length >= 20){
+			confirm("검색어는 20글자 이하여야 합니다");
+			return false;
+		}
+		return true;
+	});
+});
+</script>
  <div class="container-1000">
  		<c:choose>
 		<c:when test="${list.size() != 0}">
@@ -203,7 +220,7 @@
 	</c:choose>
 
 <div class="row center mt-10">
-	<form action="list" method="get">
+	<form action="list" method="get" name="search-form">
 		<c:choose>
 			<c:when test="${vo.column == 'review_content'}">
 				<select name="column" class="form-input">
