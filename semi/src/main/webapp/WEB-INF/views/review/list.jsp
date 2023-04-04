@@ -110,7 +110,7 @@
             </tbody>
            
             <!-- 모든 게시글 출력 -->
-				<tfoot>
+			<tfoot>
 			<c:forEach var="reviewDto" items="${list}">
                 <tr>
                 	<td>${reviewDto.reviewNo }</td>
@@ -121,8 +121,8 @@
            					${reviewDto.reviewTitle}</a>
            				<c:if test="${reviewDto.reviewReply > 0}">
            					<span style="color: rgb(50, 138, 157);">
-            				[${reviewDto.reviewReply}]
-        				</span>
+            					[${reviewDto.reviewReply}]
+        					</span>
            				</c:if>
                     </td>
                     <td><i class="fa-regular fa-eye"></i>    ${reviewDto.reviewRead }</td>
@@ -130,25 +130,24 @@
                		<td>${reviewDto.reviewTimeAuto}</td>
                 </tr>
         	</c:forEach>
-				</tfoot>
+			</tfoot>
         </table>
         
 <!-- 페이지 네이게이터 - vo에 있는 데이터를 기반으로 구현 -->
 <div class="row">
-
 	<div class="pagination">
 	<c:choose>
 	<c:when test="${vo.first}">
 	<a class="disabled"><i class="fa-solid fa-angles-left"></i></a>
 	</c:when>
 	<c:otherwise>
-	<a href="list?${vo.parameter}&page=1"><i class="fa-solid fa-angles-left"></i></a>	
+	<a href="list?${vo.parameter}&sort=${vo.sort}&page=1"><i class="fa-solid fa-angles-left"></i></a>	
 	</c:otherwise>
 	</c:choose>
 	
 	<c:choose>
 		<c:when test="${vo.prev}">
-	<a href="list?${vo.parameter}&page=${vo.prevPage}"><i class="fa-solid fa-angle-left"></i></a>
+	<a href="list?${vo.parameter}&sort=${vo.sort}&page=${vo.prevPage}"><i class="fa-solid fa-angle-left"></i></a>
 		</c:when>
 	<c:otherwise>
 		<a class="disabled"><i class="fa-solid fa-angle-left"></i></a>
@@ -159,14 +158,14 @@
  		<c:choose>
  		<c:when test="${vo.page == i }"><a class="on">${i}</a></c:when>
  		<c:otherwise>
- 		<a href="list?${vo.parameter}&page=${i}">${i}</a>
+ 		<a href="list?${vo.parameter}&sort=${vo.sort}&page=${i}">${i}</a>
  		</c:otherwise>
  		</c:choose>
  	</c:forEach>	
  		
  	<c:choose>
  		<c:when test="${vo.next}">
- 			<a href="list?${vo.parameter}&page=${vo.nextPage}"><i class="fa-solid fa-angle-right"></i></a> 		
+ 			<a href="list?${vo.parameter}&sort=${vo.sort}&page=${vo.nextPage}"><i class="fa-solid fa-angle-right"></i></a> 		
  		</c:when>
  		<c:otherwise>
  			<a class="disabled"><i class="fa-solid fa-angle-right"></i></a>
@@ -178,7 +177,7 @@
  		<a class="disabled"><i class="fa-solid fa-angles-right"></i></a>
  		</c:when>
  	<c:otherwise>
- 	<a href="list?${vo.parameter}&page=${vo.totalPage}"><i class="fa-solid fa-angles-right"></i></a>
+ 	<a href="list?${vo.parameter}&sort=${vo.sort}&page=${vo.totalPage}"><i class="fa-solid fa-angles-right"></i></a>
  	</c:otherwise>
  	</c:choose>
  	
@@ -212,7 +211,6 @@
    					<option value="review_location">지역</option>
 			   		<option value="review_season">계절</option>
 			   		<option value="review_theme">테마</option>
-   					<option value="review_writer">작성자</option>
 				</select>
 			</c:when>
 			<c:when test="${vo.column == 'review_writer'}">
@@ -222,7 +220,6 @@
 			   		<option value="review_location">지역</option>
 			   		<option value="review_season">계절</option>
 			   		<option value="review_theme">테마</option>
-			   		<option value="review_writer" selected>작성자</option>
 				</select>
 			</c:when>
 			<c:when test="${vo.column == 'review_location'}">
@@ -232,7 +229,6 @@
 			   		<option value="review_location" selected>지역</option>
 			   		<option value="review_season">계절</option>
 			   		<option value="review_theme">테마</option>
-			   		<option value="review_writer">작성자</option>
 				</select>
 			</c:when>  
 			<c:when test="${vo.column == 'review_season'}">
@@ -242,7 +238,6 @@
 			   		<option value="review_location">지역</option>
 			   		<option value="review_season" selected>계절</option>
 			   		<option value="review_theme">테마</option>
-			   		<option value="review_writer">작성자</option>
 				</select>
 			</c:when>  
 			<c:when test="${vo.column == 'review_theme'}">
@@ -252,7 +247,6 @@
 			   		<option value="review_location">지역</option>
 			   		<option value="review_season">계절</option>
 			   		<option value="review_theme" selected>테마</option>
-			   		<option value="review_writer">작성자</option>
 				</select>
 			</c:when>  
 
@@ -263,7 +257,6 @@
 			   		<option value="review_location">지역</option>
 			   		<option value="review_season">계절</option>
 			   		<option value="review_theme">테마</option>
-			   		<option value="review_writer">작성자</option>
 				</select>
 			</c:otherwise>
 		</c:choose>
