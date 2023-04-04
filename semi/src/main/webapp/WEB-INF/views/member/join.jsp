@@ -25,29 +25,66 @@
 <script src="/static/js/member-join.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/static/js/find-address.js"></script>
+
 <style>
 	.writer {
     display: flex;
     align-items: center;
 	}
-</style>
-<script>
-	function previewImage(input) {
-		if (input.files && input.files[0]) {
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				$('#preview').attr('src', e.target.result);
-			}
-			reader.readAsDataURL(input.files[0]);
-		} else {
-			$('#preview').attr('src', '/static/image/usericon.jpg');
-		}
+	
+	input[type="file"]{
+		position: absolute;
+	    width: 0;
+	    height: 0;
+	    padding: 0;
+	    overflow: hidden;
+	    border: 0;
 	}
-	$(document).ready(function() {
-		$("[name=attach]").change(function() {
-			previewImage(this);
+	
+</style>
+
+<script>
+	$(function(){
+		$("#attach").change(function() {
+			if (uploadFile()){
+				previewImage(this);
+			}
+			else {
+				$(this).val("");
+				previewImage(this);
+			}
 		});
+		
+		$(".clear-attach-btn").on("click",function(){
+			$("#attach").val("");
+			previewImage($("#attach"));
+		});
+		
+		function previewImage(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					$('#preview').attr('src', e.target.result);
+				}
+				reader.readAsDataURL(input.files[0]);
+			} else {
+				$('#preview').attr('src', '/static/image/usericon.jpg');
+			}
+		}
+		
+		function uploadFile(){
+			var fileVal = $("#attach").val();
+			if (fileVal !=""){
+				var ext = fileVal.split('.').pop().toLowerCase();
+				if($.inArray(ext, ['jpg','jpeg','gif','png']) == -1){
+					alert("이미지 파일만 업로드 할 수 있습니다");
+					return false;
+				}
+				else return true;
+			}
+		}
 	});
+	
 </script>
 
 <form class="join-form" action="join" method="post" autocomplete="off" enctype="multipart/form-data">
@@ -128,8 +165,9 @@
        			<img id="preview" width="100" height="100" src="/static/image/usericon.jpg">
 			</c:otherwise>
 		</c:choose>
-		<input type="file" name="attach" accept=".png, .gif, .jpg, .jpeg" class="form-input" 
-	        style="border: 1px transparent solid;">
+		<label for="attach" class="center form-btn neutral w-40 ms-40 me-10"> 사진 업로드</label>
+		<input type="file" id="attach" accept=".png, .gif, .jpg, .jpeg">
+        <button type="button" class="form-btn negative clear-attach-btn"><i class="fa-solid fa-eraser"></i></button>
    </div>
     
     <div class="row mb-30">
