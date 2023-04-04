@@ -25,14 +25,19 @@
     <script>
     	$(function(){
     		$(".search-icon").on("click",function(){
-    			$("[name=search-form]").submit();
+    			$("[name=total-search-form]").submit();
     		});
     		
-    		$("[name=search-form]").submit(function(e){
-    			$("[name=keyword]").val($("[name=keyword]").val().trim());
-    			if ($("[name=keyword]").val() == ''){
+    		$("[name=total-search-form]").submit(function(e){
+    			var keyword = $("[name=total-search-form] [name=keyword]");
+    			keyword.val(keyword.val().trim());
+    			if (keyword.val() == ''){
     				confirm("검색어를 입력하세요");
     				return false;	
+    			}
+    			else if (keyword.val().length >= 20){
+    				confirm("검색어는 20글자 이하여야 합니다");
+    				return false;
     			}
     			return true;
     		});
@@ -56,7 +61,7 @@
                     <h1 class="me-20"><a href="/" class="link" style="color:#2d3436">배낭챙겨</a></h1>
                 </div>
                 <div class="row center w-30">
-                	<form action="/search" method="post" name="search-form">
+                	<form action="/search" method="post" name="total-search-form">
 	                  	<input name="keyword" type="text" class="form-input search w-100"placeholder="검색어를 입력하세요" autocomplete="off">
 	               		<img src="/static/image/search.png" class="search-icon" width="30px" height="30px">
                   	</form>
