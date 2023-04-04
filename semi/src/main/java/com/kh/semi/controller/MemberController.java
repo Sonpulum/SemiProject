@@ -95,7 +95,6 @@ public class MemberController {
 			
 		}
 
-	 
 	//마이페이지
 	@GetMapping("/mypage")
 	public String mypage(Model model, HttpSession session) {
@@ -216,7 +215,12 @@ public class MemberController {
          @RequestParam String memberId,
          @RequestParam String memberEmail,
          RedirectAttributes attr) {
+      try {
          MemberDto userDto = memberDao.selectOne(memberId);
+         
+         if (userDto == null || !userDto.getMemberEmail().equals(memberEmail)) {
+               throw new IllegalArgumentException("일치하는 정보가 없습니다.");
+           }
          
          String userEmail = userDto.getMemberEmail();
          String userId = userDto.getMemberId();
@@ -235,8 +239,14 @@ public class MemberController {
             //비밀번호 변경
             memberDao.changePassword(temporaryPw, memberId);
          }
+      }
+         catch(Exception e) {
+             attr.addAttribute("mode", "error");
+             return "redirect:findPw";
+          }
          return "/WEB-INF/views/member/findPwResult.jsp";
    }
+
    
    //비밀번호 재설정
    @GetMapping("/password")
@@ -260,7 +270,6 @@ public class MemberController {
 		
 		//비밀번호가 일치한다면 → 비밀번호 변경 처리
 		memberDao.changePassword(newPw, memberId);
-
 		return "redirect:passwordFinish";
 	}
    

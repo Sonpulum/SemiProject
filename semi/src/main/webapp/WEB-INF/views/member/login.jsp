@@ -110,28 +110,32 @@
     </style>
     <!-- 카카오 스크립트 -->
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    
     <script>
-    Kakao.init('d3be718d728db44363fd8948c3faa0ee'); //발급받은 키 중 javascript키를 사용해준다.
+    Kakao.init('30793f867a8e7d238c5db229c3254f87'); //발급받은 키 중 javascript키를 사용해준다.
     console.log(Kakao.isInitialized()); // sdk초기화여부판단
     //카카오로그인
     function kakaoLogin() {
-        Kakao.Auth.login({
-          success: function (response) {
-            Kakao.API.request({
-              url: '/v2/user/me',
-              success: function (response) {
-                  console.log(response)
-              },
-              fail: function (error) {
-                console.log(error)
-              },
-            })
-          },
-          fail: function (error) {
-            console.log(error)
-          },
-        })
-      }
+		  Kakao.Auth.login({
+		    success: function(authObj) {
+		      console.log(authObj);
+		      // 사용자 인증 정보가 담긴 authObj를 이용하여 사용자 정보를 요청합니다.
+		      Kakao.API.request({
+		        url: '/v2/user/me',
+		        success: function(response) {
+		          console.log(response);
+		          window.location.href = "http://localhost:8080";
+		        },
+		        fail: function(error) {
+		          console.log(error);
+		        }
+		      });
+		    },
+		    fail: function(error) {
+		      console.log(error);
+		    }
+		  });
+		}
     </script>
 
        <script>
@@ -170,7 +174,6 @@
        
        <!--반드시 중간에 본인의 앱아이디를 입력하셔야 합니다.-->
        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v10.0&appId=941166163991367" nonce="SiOBIhLG"></script>
-</script>
 
 <script>
 

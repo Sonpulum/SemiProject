@@ -8,6 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.kh.semi.interceptor.MemberInterceptor;
 import com.kh.semi.interceptor.QnaInterceptor;
 import com.kh.semi.interceptor.RecommendInterceptor;
+import com.kh.semi.interceptor.ReviewInterceptor;
 
 @Configuration
 public class InterceptorConfiguration implements WebMvcConfigurer{
@@ -21,6 +22,9 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 	@Autowired
 	private RecommendInterceptor recommendInterceptor;
 	
+	@Autowired
+	private ReviewInterceptor reviewInterceptor;
+	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		
@@ -29,7 +33,8 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 				.addPathPatterns(
 						"/member/**",
 						"/admin/**",
-						"/qna/**"
+						"/qna/**",
+						"/review/**"
 						)
 				.excludePathPatterns(
 						"/member/join", 
@@ -39,7 +44,9 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 						"/member/findPw",
 						"/member/exitFinish",
 						"/qna/list",
-						"/qna/detail"
+						"/qna/detail",
+						"/review/list",
+						"/review/detail"
 						);
 
 		//2. QnaInterceptor
@@ -55,6 +62,14 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 						"/recommend/write",
 						"/recommend/delete",
 						"/recommend/edit"
+						);
+		
+		//4. ReviewInterceptor
+		registry.addInterceptor(reviewInterceptor)
+				.addPathPatterns(
+						"/review/write",
+						"/review/delete",
+						"/review/edit"
 						);
 	}
 }

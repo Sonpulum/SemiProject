@@ -20,6 +20,7 @@ public class QnaDto {
    private int qnaRead;
    private int qnaLike;
    private boolean qnaSecret;
+   private String memberNick;
    
    private int qnaGroup;
    private Integer qnaParent;

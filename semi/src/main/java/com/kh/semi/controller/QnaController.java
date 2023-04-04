@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.semi.dao.MemberDao;
 import com.kh.semi.dao.MemberProfileDao;
 import com.kh.semi.dao.QnaDao;
+import com.kh.semi.dto.MemberDto;
 import com.kh.semi.dto.MemberProfileDto;
 import com.kh.semi.dto.QnaDto;
 import com.kh.semi.service.QnaService;
@@ -35,6 +37,9 @@ public class QnaController {
    
    @Autowired
 	private MemberProfileDao memberProfileDao;
+   
+   @Autowired
+   private MemberDao memberDao;
    
    //Q&A 작성
    @GetMapping("/write")
@@ -55,6 +60,10 @@ public class QnaController {
       String memberId = (String)session.getAttribute("memberId");
       qnaDto.setQnaWriter(memberId);
       
+      MemberDto memberDto = memberDao.selectOne(memberId);
+      String memberNick = memberDto.getMemberNick();
+      qnaDto.setMemberNick(memberNick);
+      
       //나머지 일반 프로그래밍 코드는 서비스를 호출하여 처리
       int qnaNo = qnaService.write(qnaDto, attachmentNo, qnaSecret);
       
@@ -62,7 +71,7 @@ public class QnaController {
       boolean owner = qnaDto.getQnaWriter() != null
     		  && qnaDto.getQnaWriter().equals(memberId);
       model.addAttribute("owner", owner);
-
+      
       //관리자 여부 확인
       String memberLevel = (String)session.getAttribute("memberLevel");
       boolean admin = memberLevel != null && memberLevel.equals("관리자");
@@ -131,6 +140,9 @@ public class QnaController {
  		
  		String qnaWriter = qnaDto.getQnaWriter();
 		MemberProfileDto memberProfile = memberProfileDao.selectOne(qnaWriter);
+		String memberNick = memberDao.selectOne(qnaWriter).getMemberNick();
+		
+		model.addAttribute("qnaWriterNick", memberNick);
 		model.addAttribute("memberProfile", memberProfile);
  		
  		return "/WEB-INF/views/qna/detail.jsp";
