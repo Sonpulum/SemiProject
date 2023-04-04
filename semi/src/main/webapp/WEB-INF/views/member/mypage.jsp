@@ -2,15 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<link rel="stylesheet" type="text/css" href="/static/css/list.css">
 
-	<style>
-		h3 {
-		    font-size: 10px;
-		}
-		.form-label {
-			display: inline-block;
-			margin-left: 13%;
-		}
+<style>
+
 		.form-btn2{
 			font-size: 15px;
 			padding: 0.5em;
@@ -25,56 +20,53 @@
 			text-decoration: none;
 			color: white;
 		}
-	     .form-input{
-	         border-bottom-color: white;
-	         border-radius: 0.4em;
-	         border-color: #c8c8c8;
-	     }
-	     .form-label {
-	         display: block;
-	     }
 	     
-	     .table.table-slit {
-		    border-collapse: collapse;
-		    border-top: 4px black double;
-		    border-bottom: 4px black double;
-		}
-		.table.table-slit > thead {
-		    border-bottom: 4px black double;
-		}
-		.table.table-slit > tfoot {
-		    border-top: 4px black double;
-		}
+	      .container-600 { 
+             width: 700px; 
+             height: 100%; 
+             background-color: #ffffff; 
+             border: 1px solid #ebebeb; 
+             margin: 100px auto; 
+             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
+             border-radius: 5px; 
+             padding : 10px 80px 80px 80px;  
+             margin-top: 0px; 
+             margin-bottom: 0px
+         } 
+	 
+	 	.table.table-border > tbody {
+			border-bottom : 2px solid gray;
+			border-top : 2px solid gray;
+		}    
+	 
 		/* 
 		    마지막 줄은 제외하고 하려면 :not(선택자)를 붙인다
 		*/
-		.table.table-slit > tbody > tr:not(:last-child) {
-		    border-bottom: 1px black dotted;
-		}
+	
 	</style>
 
 <div class="container-600">
-	<div class="empty"></div>
 	<div class="row center">
 		<h1>My Page</h1>
 	</div>
 	
-	<hr>
 	
-	<div class="row center">
-        <c:choose>
-			<c:when test="${profile.attachmentNo != null}">
-		   		<img width="200" height="200" src="/attachment/download?attachmentNo=${profile.attachmentNo}">
-			</c:when>
-			<c:otherwise>
-       			<img width="200" height="200" src="/static/image/usericon.jpg">
-			</c:otherwise>
-		</c:choose>
-	</div>
-	
-        <div class="row center">
-            <table class="table table-slit">
+        <div class="row center mt-20">
+            <table class="table table-border">
                 <tbody>
+               <tr>
+                	<td colspan="2">
+			        <c:choose>
+						<c:when test="${profile.attachmentNo != null}">
+					   		<img class="image image-circle" width="200" height="200" src="/attachment/download?attachmentNo=${profile.attachmentNo}">
+						</c:when>
+						<c:otherwise>
+			       			<img  width="200" height="200" src="/static/image/usericon.jpg" >
+						</c:otherwise>
+					</c:choose>
+					</td>
+              </tr>
+                    
                     <tr>
                         <th>아이디</th>
                         <td>${memberDto.memberId}</td>
@@ -110,7 +102,7 @@
             </table>
         </div>
 
-        <div class="row center">
+        <div class="row center mt-20">
             <a href="/member/password" class="form-btn2">비밀번호 변경</a>
             <a href="/member/edit" class="form-btn2">개인정보 변경</a>
         </div>

@@ -4,39 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<style>
-.table.table-border,
-.table.table-border > thead > tr > th,
-.table.table-border > thead > tr > td,
-.table.table-border > tbody > tr > th,
-.table.table-border > tbody > tr > td,
-.table.table-border > tfoot > tr > th,
-.table.table-border > tfoot > tr > td
-{
-    border: 0px solid #636e72;
-}
-
-.table.table-border > thead {
-	border-top : 2px solid rgb(64, 165, 187);
-	border-bottom : 2px solid gray;
-}
-
-.table.table-border > tbody > tr:last-child {
-	border-bottom : 2px solid gray;
-}
-
- .table.table-border > tfoot > tr:last-child { 
- 	border-bottom : 2px solid rgb(64, 165, 187); 
- } 
-
-.table.table-hover > tbody > tr:hover,
-.table.table-hover > tfoot > tr:hover {
-    background-color: black;
-    color: white;
-}
-
-
-</style>
+<link rel="stylesheet" type="text/css" href="/static/css/list.css">
  
  <div class="container-1000">
         <div class="row center">

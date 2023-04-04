@@ -6,69 +6,8 @@
 <script src="/static/js/member-join.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/static/js/find-address.js"></script>
-<style>
-	h2 {
-            font-size: 15px;
-        }
-	
-	h3 {
-            font-size: 10px;
-        }
+<link rel="stylesheet" type="text/css" href="/static/css/memberEdit.css">
 
-        .form-label {
-            display: inline-block;
-            margin-left: 13%;
-        }
-		
-		.form-btn1{
-            font-size: 18px;
-            padding: 0.5em;
-            border-width: 1px;
-            border-style: solid;
-            border-radius: 0.4em;
-            cursor: pointer;
-            background-color: #b1d5db;
-            border-color: #b1d5db;
-            display: inline-block;
-            text-align: center;
-            text-decoration: none;
-            color: white;
-        }
-		
-		
-        .form-btn2{
-            font-size: 18px;
-            padding: 0.5em;
-            border-width: 1px;
-            border-style: solid;
-            border-radius: 0.4em;
-            cursor: pointer;
-            background-color: rgb(64, 165, 187);
-            border-color: rgb(64, 165, 187);
-            display: inline-block;
-            text-align: center;
-            text-decoration: none;
-            color: white;
-        }
-        .form-input{
-            border-bottom-color: white;
-            border-radius: 0.4em;
-            border-color: #c8c8c8;
-        }
-        .form-label {
-            display: block;
-        }
-	
-	.fa-thumbs-up {
-	color:red;
-	cursor: pointer;
-	}
-	
-	.writer {
-    display: flex;
-    align-items: center;
-	}
-</style>
 <script>
 	function previewImage(input) {
 		if (input.files && input.files[0]) {

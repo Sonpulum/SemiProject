@@ -2,57 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<style>
-	h2 {
-            font-size: 15px;
-        }
-	
-	h3 {
-            font-size: 10px;
-        }
+<link rel="stylesheet" type="text/css" href="/static/css/find.css">
 
-        .form-label {
-            display: inline-block;
-            margin-left: 13%;
-        }
-		
-		.form-btn1{
+<style>
+h2 {
             font-size: 15px;
-            padding: 0.5em;
-            border-width: 1px;
-            border-style: solid;
-            border-radius: 0.4em;
-            cursor: pointer;
-            background-color: #b1d5db;
-            border-color: #b1d5db;
-            display: inline-block;
-            text-align: center;
-            text-decoration: none;
-            color: white;
-        }
-		
-		
-        .form-btn2{
-            font-size: 15px;
-            padding: 0.5em;
-            border-width: 1px;
-            border-style: solid;
-            border-radius: 0.4em;
-            cursor: pointer;
-            background-color: rgb(64, 165, 187);
-            border-color: rgb(64, 165, 187);
-            display: inline-block;
-            text-align: center;
-            text-decoration: none;
-            color: white;
-        }
-        .form-input{
-            border-bottom-color: white;
-            border-radius: 0.4em;
-            border-color: #c8c8c8;
-        }
-        .form-label {
-            display: block;
         }
 </style>
 

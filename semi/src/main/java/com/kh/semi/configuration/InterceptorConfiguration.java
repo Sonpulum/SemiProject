@@ -67,7 +67,6 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 		//4. ReviewInterceptor
 		registry.addInterceptor(reviewInterceptor)
 				.addPathPatterns(
-						"/review/write",
 						"/review/delete",
 						"/review/edit"
 						);
