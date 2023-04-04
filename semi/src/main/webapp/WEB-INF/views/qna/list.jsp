@@ -81,12 +81,12 @@
 <script type="text/javascript">
 	$(function(){
 		$("[name=secret]").click(function(e){
-			var memberId = "${sessionScope.memberId}";
+			var memberNick = "${sessionScope.memberNick}";
 			var memberLevel = "${sessionScope.memberLevel}";
 			
 			var writer = $(this).parent().next().text();
 			
-			if(memberLevel == '관리자' || memberId == writer){
+			if(memberLevel == '관리자' || memberNick == writer){
 				return true;
 			}
 			e.preventDefault();
@@ -221,7 +221,7 @@
 								</c:otherwise>
 							</c:choose>
 	                  </td>
-	                  <td>${qnaDto.qnaWriter}</td>
+	                  <td>${qnaDto.memberNick}</td>
 	                  <td>${qnaDto.qnaTimeAuto}</td>
 	                  <td><i class="fa-regular fa-eye"></i>		${qnaDto.qnaRead}</td>
 	                  <c:if test="${sessionScope.memberLevel == '관리자'}">
@@ -312,7 +312,7 @@
 		<div class="row center">
 		   <form action="list" method="get">
 		      <c:choose>
-		         <c:when test="${vo.column == 'qna_writer'}">
+		         <c:when test="${vo.column == 'member_nick'}">
 		            <select name="column" class="form-input">
 		               <option value="qna_title">제목</option>
 		               <option value="qna_writer" selected>작성자</option>

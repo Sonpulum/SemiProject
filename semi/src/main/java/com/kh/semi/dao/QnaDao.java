@@ -24,7 +24,7 @@ public class QnaDao {
          QnaDto qnaDto = new QnaDto();
          qnaDto.setQnaNo(rs.getInt("qna_no"));
          qnaDto.setQnaHead(rs.getString("qna_head"));
-         qnaDto.setQnaWriter(rs.getString("qna_writer"));
+         qnaDto.setQnaWriter(rs.getString("qna_writer")); 
          qnaDto.setQnaTitle(rs.getString("qna_title"));
          qnaDto.setQnaContent(rs.getString("qna_content"));
          qnaDto.setQnaTime(rs.getDate("qna_time"));
@@ -39,6 +39,30 @@ public class QnaDao {
          return qnaDto;
       }
    };
+   
+   //리스트 전용 매퍼
+   private RowMapper<QnaDto> mapper2 = new RowMapper<QnaDto>() {
+	      @Override
+	      public QnaDto mapRow(ResultSet rs, int idx) throws SQLException {
+	         QnaDto qnaDto = new QnaDto();
+	         qnaDto.setQnaNo(rs.getInt("qna_no"));
+	         qnaDto.setQnaHead(rs.getString("qna_head"));
+	         qnaDto.setQnaWriter(rs.getString("qna_writer"));
+	         qnaDto.setMemberNick(rs.getString("member_nick"));
+	         qnaDto.setQnaTitle(rs.getString("qna_title"));
+	         qnaDto.setQnaContent(rs.getString("qna_content"));
+	         qnaDto.setQnaTime(rs.getDate("qna_time"));
+	         qnaDto.setQnaRead(rs.getInt("qna_read"));
+	         qnaDto.setQnaLike(rs.getInt("qna_like"));
+	         qnaDto.setQnaSecret(rs.getBoolean("qna_secret"));
+	         qnaDto.setQnaGroup(rs.getInt("qna_group"));
+	         qnaDto.setQnaParent(rs.getObject("qna_parent") == null ?
+	               null : rs.getInt("qna_parent"));
+	         qnaDto.setQnaDepth(rs.getInt("qna_depth"));
+	         qnaDto.setQnaAnswer(rs.getInt("qna_answer"));
+	         return qnaDto;
+	      }
+	   };
    
    //시퀀스
    public int sequence() {
@@ -63,30 +87,40 @@ public class QnaDao {
    //Q&A 목록
    public List<QnaDto> selectList(QnaPaginationVO vo) {
       if(vo.isSearch()) {//검색
-         String sql = "select * from ("
-                  + "select rownum rn, TMP.* from ("
-                     + "select * from qna "
-                     + "where instr(#1, ?) > 0 "
-                     + "connect by prior qna_no = qna_parent "
-                     + "start with qna_parent is null "
-                     + "order siblings by qna_group desc, qna_no asc"
-                  + ")TMP"
-               + ")where rn between ? and ?";
+         String sql = "SELECT * "
+         		+ "FROM ( "
+         		+ "  SELECT ROWNUM RN, TMP.*, M.member_nick "
+         		+ "  FROM ( "
+         		+ "    SELECT * "
+         		+ "    FROM qna"
+         		+ "    WHERE instr(#1, ?) > 0"
+         		+ "    CONNECT BY PRIOR qna_no = qna_parent "
+         		+ "    START WITH qna_parent IS NULL "
+         		+ "    ORDER SIBLINGS BY qna_group DESC, qna_no ASC "
+         		+ "  ) TMP"
+         		+ "  LEFT OUTER JOIN member M ON TMP.qna_writer = M.member_id "
+         		+ ") "
+         		+ "WHERE RN BETWEEN ? AND ?";
          sql = sql.replace("#1", vo.getColumn());
          Object[] param = {vo.getKeyword(), vo.getBegin(), vo.getEnd()};
-         return jdbcTemplate.query(sql, mapper, param);
+         return jdbcTemplate.query(sql, mapper2, param);
       }
       else {//목록
-         String sql = "select * from ("
-                  + "select rownum rn, TMP.* from ("
-                     + "select * from qna "
-                     + "connect by prior qna_no = qna_parent "
-                     + "start with qna_parent is null "
-                     + "order siblings by qna_group desc, qna_no asc"
-                  + ")TMP"
-               + ")where rn between ? and ?";
+         String sql = "SELECT *"
+         		+ "FROM ("
+         		+ "  SELECT ROWNUM rn, TMP.*, M.MEMBER_NICK"
+         		+ "  FROM ("
+         		+ "    SELECT *"
+         		+ "    FROM qna"
+         		+ "    CONNECT BY PRIOR qna_no = qna_parent"
+         		+ "    START WITH qna_parent IS NULL"
+         		+ "    ORDER SIBLINGS BY qna_group DESC, qna_no ASC"
+         		+ "  ) TMP"
+         		+ "  LEFT OUTER JOIN member M ON TMP.qna_writer = M.member_id"
+         		+ ")"
+         		+ "WHERE rn BETWEEN ? AND ?";
          Object[] param = {vo.getBegin(), vo.getEnd()};
-         return jdbcTemplate.query(sql, mapper, param);   
+         return jdbcTemplate.query(sql, mapper2, param);   
       }
    }
    
@@ -150,13 +184,19 @@ public class QnaDao {
 	
 	//공지사항만 조회하는 기능
 	public List<QnaDto> selectNoticeList(int begin, int end) {
-		String sql = "select * from("
-					+ "select rownum rn, TMP.* from("
-							+ "select * from qna where qna_head = '공지' "
-							+ "order by qna_no desc"
-						+ ")TMP"
-				+ ")where rn between ? and ?";
+		String sql = "SELECT *"
+				+ "FROM ("
+				+ "  SELECT ROWNUM rn, TMP.*, m.member_nick"
+				+ "  FROM ("
+				+ "    SELECT *"
+				+ "    FROM qna"
+				+ "    WHERE qna_head = '공지'"
+				+ "    ORDER BY qna_no DESC"
+				+ "  ) TMP\r\n"
+				+ "  LEFT OUTER JOIN member m ON TMP.qna_writer = m.member_id"
+				+ ")"
+				+ "WHERE rn BETWEEN ? AND ?";
 		Object[] param = {begin, end};
-		return jdbcTemplate.query(sql, mapper, param);
+		return jdbcTemplate.query(sql, mapper2, param);
 	}
 }
