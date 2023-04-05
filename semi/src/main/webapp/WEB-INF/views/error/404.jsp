@@ -7,7 +7,7 @@
 	<div class="row center">
 		<h2>찾으시는 페이지가 없습니다</h2>
 	</div>
-	<div class="row">
+	<div class="row center">
 		주소를 다시 한 번 확인해주세요
 	</div>
 </div>
