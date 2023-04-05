@@ -315,19 +315,19 @@
 		         <c:when test="${vo.column == 'member_nick'}">
 		            <select name="column" class="form-input">
 		               <option value="qna_title">제목</option>
-		               <option value="qna_writer" selected>작성자</option>
+		               <option value="member_nick" selected>작성자</option>
 		            </select>
 		         </c:when>
 		         <c:when test="${vo.column == 'qna_title'}">
 		            <select name="column" class="form-input">
 		               <option value="qna_title" selected>제목</option>
-		               <option value="qna_writer">작성자</option>
+		               <option value="member_nick">작성자</option>
 		            </select>
 		         </c:when>
 		         <c:otherwise>
 		            <select name="column" class="form-input">
 		               <option value="qna_title">제목</option>
-		               <option value="qna_writer">작성자</option>
+		               <option value="member_nick">작성자</option>
 		            </select>
 		         </c:otherwise>
 		      </c:choose>
