@@ -6,6 +6,11 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <link rel="stylesheet" type="text/css" href="/static/css/recoList.css">
 
+<style>
+	.write-btn{
+		margin-left:90%;
+	}
+</style>
 <div class="container-900">
 	<div class="row center" style="padding: 30px; font-size: 30px;">
 		<h1>

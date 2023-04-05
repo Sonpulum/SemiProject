@@ -43,6 +43,22 @@
                 //['view', ['fullscreen', 'codeview', 'help']]
             ]
         });
+        $(".write-form").submit(function(e){
+        	var titleValid = $("[name=qnaTitle]").val().length > 0;
+    		var contentValid = $("[name=qnaContent]").val().length > 0;
+    		var isAllValid = titleValid && contentValid;
+    		
+    		if (isAllValid == false){
+    			alert("모든 항목을 입력하세요")
+    			return false;
+    		}
+    		
+    		if ($("[name=qnaTitle]").val().length >100){
+    			alert("제목은 100글자 이하로 작성하세요");
+    			return false;
+    		}
+    		return true;
+    	});
     });
 </script>
 
@@ -52,7 +68,7 @@
 		<h1>${qnaDto.qnaNo}번 게시글 수정</h1>
 	</div>
 
-	<form action="edit" method="post">
+	<form action="edit" class="write-form" method="post">
 	
 		<div class="row">
 			<input type="hidden" name="qnaNo" value="${qnaDto.qnaNo}">
@@ -169,12 +185,12 @@
 		</div>
 		
 		<div class="row">
-			<input type="text" name="qnaTitle" required placeholder="제목을 입력하세요" 
+			<input type="text" name="qnaTitle" placeholder="제목을 입력하세요" 
 				autocomplete="off" class="form-input w-100" value="${qnaDto.qnaTitle}">
 		</div>
 		
 		<div class="row">
-			<textarea name="qnaContent" required style="min-height: 500px;" class="form-input w-100">${qnaDto.qnaContent}</textarea>
+			<textarea name="qnaContent" style="min-height: 500px;" class="form-input w-100">${qnaDto.qnaContent}</textarea>
 		</div>
 
 		<div class="row right">

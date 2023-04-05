@@ -86,10 +86,26 @@
             }
          }
         });
+        $(".write-form").submit(function(e){
+        	var titleValid = $("[name=qnaTitle]").val().length > 0;
+    		var contentValid = $("[name=qnaContent]").val().length > 0;
+    		var isAllValid = titleValid && contentValid;
+    		
+    		if (isAllValid == false){
+    			alert("모든 항목을 입력하세요")
+    			return false;
+    		}
+    		
+    		if ($("[name=qnaTitle]").val().length >100){
+    			alert("제목은 100글자 이하로 작성하세요");
+    			return false;
+    		}
+    		return true;
+    	});
     });
 </script>
     
-<form action="write" method="post" name="content">
+<form action="write" class="write-form" method="post" name="content">
 	<c:if test="${qnaParent != null}">
 		<input type="hidden" name="qnaParent" value="${qnaParent}">
 	</c:if>
@@ -130,16 +146,16 @@
 		<div class="row">
 			<c:choose>
 				<c:when test="${qnaParent == null}">
-					<input type="text" name="qnaTitle" required placeholder="제목을 입력하세요" autocomplete="off" class="form-input w-100">
+					<input type="text" name="qnaTitle" placeholder="제목을 입력하세요" autocomplete="off" class="form-input w-100">
 				</c:when>
 				<c:otherwise>
-					<input type="text" name="qnaTitle" required placeholder="제목을 입력하세요" autocomplete="off" class="form-input w-100">
+					<input type="text" name="qnaTitle" placeholder="제목을 입력하세요" autocomplete="off" class="form-input w-100">
 				</c:otherwise>
 			</c:choose>
 		</div>
 
 		<div class="row">
-			<textarea name="qnaContent" required class="form-input w-100"></textarea>
+			<textarea name="qnaContent" class="form-input w-100"></textarea>
 		</div>
 		<div class="row right">
 			<a type="submit" href="/qna/list" class="form-btn neutral me-10">목록으로</a>
