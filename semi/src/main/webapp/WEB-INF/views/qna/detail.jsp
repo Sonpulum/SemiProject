@@ -84,8 +84,9 @@
 	<hr>
 	
 	<div class="row right">
-		<a href="/qna/write" class="form-btn qna">글쓰기</a>
-		
+		<c:if test="${sessionScope.memberId != null}">
+			<a href="/qna/write" class="form-btn qna">글쓰기</a>
+		</c:if>
 		<c:if test="${admin}">
 			<a href="/qna/write?qnaParent=${qnaDto.qnaNo}" class="form-btn qna">답글쓰기</a>
 		</c:if>
