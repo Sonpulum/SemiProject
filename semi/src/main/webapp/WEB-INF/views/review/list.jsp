@@ -180,17 +180,6 @@ $(function(){
    					<option value="review_location">지역</option>
 			   		<option value="review_season">계절</option>
 			   		<option value="review_theme">테마</option>
-			   		<option value="member_nick">작성자</option>
-				</select>
-			</c:when>
-			<c:when test="${vo.column == 'member_nick'}">
-				<select name="column" class="form-input">
-			   		<option value="review_title">제목</option>
-			   		<option value="review_content">내용</option>
-			   		<option value="review_location">지역</option>
-			   		<option value="review_season">계절</option>
-			   		<option value="review_theme">테마</option>
-			   		<option value="member_nick" selected>작성자</option>
 				</select>
 			</c:when>
 			<c:when test="${vo.column == 'review_location'}">
@@ -200,7 +189,6 @@ $(function(){
 			   		<option value="review_location" selected>지역</option>
 			   		<option value="review_season">계절</option>
 			   		<option value="review_theme">테마</option>
-			   		<option value="member_nick">작성자</option>
 				</select>
 			</c:when>  
 			<c:when test="${vo.column == 'review_season'}">
@@ -210,7 +198,6 @@ $(function(){
 			   		<option value="review_location">지역</option>
 			   		<option value="review_season" selected>계절</option>
 			   		<option value="review_theme">테마</option>
-			   		<option value="member_nick">작성자</option>
 				</select>
 			</c:when>  
 			<c:when test="${vo.column == 'review_theme'}">
@@ -220,7 +207,6 @@ $(function(){
 			   		<option value="review_location">지역</option>
 			   		<option value="review_season">계절</option>
 			   		<option value="review_theme" selected>테마</option>
-			   		<option value="member_nick">작성자</option>
 				</select>
 			</c:when>  
 
@@ -231,7 +217,6 @@ $(function(){
 			   		<option value="review_location">지역</option>
 			   		<option value="review_season">계절</option>
 			   		<option value="review_theme">테마</option>
-			   		<option value="member_nick">작성자</option>
 				</select>
 			</c:otherwise>
 		</c:choose>
