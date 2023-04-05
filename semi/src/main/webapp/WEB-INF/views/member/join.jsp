@@ -45,7 +45,7 @@
 
 <script>
 	$(function(){
-		$("#attach").change(function() {
+		$("[name=attach]").change(function() {
 			if (uploadFile()){
 				previewImage(this);
 			}
@@ -56,8 +56,8 @@
 		});
 		
 		$(".clear-attach-btn").on("click",function(){
-			$("#attach").val("");
-			previewImage($("#attach"));
+			$("[name=attach]").val("");
+			previewImage($("[name=attach]"));
 		});
 		
 		function previewImage(input) {
@@ -73,7 +73,7 @@
 		}
 		
 		function uploadFile(){
-			var fileVal = $("#attach").val();
+			var fileVal = $("[name=attach]").val();
 			if (fileVal !=""){
 				var ext = fileVal.split('.').pop().toLowerCase();
 				if($.inArray(ext, ['jpg','jpeg','gif','png']) == -1){
@@ -165,8 +165,9 @@
        			<img id="preview" width="100" height="100" src="/static/image/usericon.jpg">
 			</c:otherwise>
 		</c:choose>
-		<label for="attach" class="center form-btn neutral w-40 ms-40 me-10"> 사진 업로드</label>
-		<input type="file" id="attach" accept=".png, .gif, .jpg, .jpeg">
+		<label class="center form-btn neutral w-40 ms-40 me-10"> 사진 업로드
+			<input type="file" name="attach" accept=".png, .gif, .jpg, .jpeg">
+		</label>
         <button type="button" class="form-btn negative clear-attach-btn"><i class="fa-solid fa-eraser"></i></button>
    </div>
     
