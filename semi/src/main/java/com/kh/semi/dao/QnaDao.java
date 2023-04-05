@@ -154,6 +154,11 @@ public class QnaDao {
          Object[] param = {vo.getKeyword()};
          return jdbcTemplate.queryForObject(sql, int.class, param);
       }
+      else if (vo.isSort()) {
+    	  String sql = "select count(*) from qna Q left outer join member M on Q.qna_writer = M.member_id where instr(qna_head, ?) > 0";
+          Object[] param = {vo.getSort()};
+          return jdbcTemplate.queryForObject(sql, int.class, param); 
+      }
       else {//목록
          String sql = "select count(*) from qna";
          return jdbcTemplate.queryForObject(sql, int.class);
