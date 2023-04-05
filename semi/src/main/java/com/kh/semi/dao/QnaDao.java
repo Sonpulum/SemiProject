@@ -85,27 +85,7 @@ public class QnaDao {
    }
   
    //Q&A 목록
-   public List<QnaDto> selectList(QnaPaginationVO vo) {
-//      if(vo.isSearch()) {//검색
-//         String sql = "SELECT * "
-//         		+ "FROM ( "
-//         		+ "  SELECT ROWNUM RN, TMP.*, M.member_nick "
-//         		+ "  FROM ( "
-//         		+ "    SELECT * "
-//         		+ "    FROM qna"
-//         		+ "    WHERE instr(#1, ?) > 0"
-//         		+ "    CONNECT BY PRIOR qna_no = qna_parent "
-//         		+ "    START WITH qna_parent IS NULL "
-//         		+ "    ORDER SIBLINGS BY qna_group DESC, qna_no ASC "
-//         		+ "  ) TMP"
-//         		+ "  LEFT OUTER JOIN member M ON TMP.qna_writer = M.member_id "
-//         		+ ") "
-//         		+ "WHERE RN BETWEEN ? AND ?";
-//         sql = sql.replace("#1", vo.getColumn());
-//         Object[] param = {vo.getKeyword(), vo.getBegin(), vo.getEnd()};
-//         return jdbcTemplate.query(sql, mapper2, param);
-//      }
-	   
+   public List<QnaDto> selectList(QnaPaginationVO vo) {  
 	  if(vo.isSearch()) {
 		  String sql = "select * from "
 		  		+ "(select rownum rn, TMP.* from "
