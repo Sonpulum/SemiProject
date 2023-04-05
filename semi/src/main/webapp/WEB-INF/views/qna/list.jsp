@@ -92,6 +92,20 @@
 			e.preventDefault();
 			alert("읽을 권한이 없습니다.");
 		});
+		
+		$("[name=search-form]").submit(function(e){
+			var keyword = $("[name=search-form] [name=keyword]");
+			keyword.val(keyword.val().trim());
+			if (keyword.val() == ''){
+				alert("검색어를 입력하세요");
+				return false;	
+			}
+			else if (keyword.val().length >= 20){
+				alert("검색어는 20글자 이하여야 합니다");
+				return false;
+			}
+			return true;
+		});
 	});
 </script>
 
@@ -111,12 +125,12 @@
 				<thead>
 					<tr>
 						<th><a class="link" href="/qna/list">#전체</a></th>
-                        <th><a class="link" href="?column=qna_head&keyword=공지">#공지</a></th>
-                        <th><a class="link" href="?column=qna_head&keyword=질문">#질문</a></th>
-                        <th><a class="link" href="?column=qna_head&keyword=회원">#회원</a></th>
-                        <th><a class="link" href="?column=qna_head&keyword=혜택/이벤트">#혜택/이벤트</a></th>
-                        <th><a class="link" href="?column=qna_head&keyword=제휴/서비스">#제휴/서비스</a></th>
-                        <th><a class="link" href="?column=qna_head&keyword=기타">#기타</a></th>
+                        <th><a class="link" href="list?sort=공지">#공지</a></th>
+                        <th><a class="link" href="list?sort=질문">#질문</a></th>
+                        <th><a class="link" href="list?sort=회원">#회원</a></th>
+                        <th><a class="link" href="list?sort=혜택/이벤트">#혜택/이벤트</a></th>
+                        <th><a class="link" href="list?sort=제휴/서비스">#제휴/서비스</a></th>
+                        <th><a class="link" href="list?sort=기타">#기타</a></th>
 					</tr>
 				</thead>
 			</table>
@@ -244,14 +258,14 @@
 		         <a class="disabled"><i class="fa-solid fa-angles-left"></i></a>
 		      </c:when>
 		      <c:otherwise>
-		         <a href="list?${vo.parameter}&page=1"><i class="fa-solid fa-angles-left"></i></a>
+		         <a href="list?${vo.parameter}&sort=${vo.sort}&page=1"><i class="fa-solid fa-angles-left"></i></a>
 		      </c:otherwise>
 		   </c:choose>
 		   
 		   <!-- 이전 -->
 		   <c:choose>
 		      <c:when test="${vo.prev}">
-		         <a href="list?${vo.parameter}&page=${vo.prevPage}"><i class="fa-solid fa-angle-left"></i></a>
+		         <a href="list?${vo.parameter}&sort=${vo.sort}&page=${vo.prevPage}"><i class="fa-solid fa-angle-left"></i></a>
 		      </c:when>
 		      <c:otherwise>
 		         <a class="disabled"><i class="fa-solid fa-angle-left"></i></a>
@@ -263,7 +277,7 @@
 		      <c:choose>
 		         <c:when test="${vo.page == i}"><a class="on">${i}</a></c:when>
 		         <c:otherwise>
-		            <a href="list?${vo.parameter}&page=${i}">${i}</a>
+		            <a href="list?${vo.parameter}&sort=${vo.sort}&page=${i}">${i}</a>
 		         </c:otherwise>
 		      </c:choose>
 		   </c:forEach>
@@ -271,7 +285,7 @@
 		   <!-- 다음 -->
 		   <c:choose>
 		      <c:when test="${vo.next}">
-		         <a href="list?${vo.parameter}&page=${vo.nextPage}"><i class="fa-solid fa-angle-right"></i></a>
+		         <a href="list?${vo.parameter}&sort=${vo.sort}&page=${vo.nextPage}"><i class="fa-solid fa-angle-right"></i></a>
 		      </c:when>
 		      <c:otherwise>
 		         <a class="disabled"><i class="fa-solid fa-angle-right"></i></a>
@@ -284,7 +298,7 @@
 		         <a class="disabled"><i class="fa-solid fa-angles-right"></i></a>
 		      </c:when>
 		      <c:otherwise>
-		         <a href="list?${vo.parameter}&page=${vo.totalPage}"><i class="fa-solid fa-angles-right"></i></a>
+		         <a href="list?${vo.parameter}&sort=${vo.sort}&page=${vo.totalPage}"><i class="fa-solid fa-angles-right"></i></a>
 		      </c:otherwise>
 		   </c:choose>
 		</div>
@@ -310,7 +324,7 @@
 		
 		<!-- 검색창 -->
 		<div class="row center">
-		   <form action="list" method="get">
+		   <form action="list" method="get" name="search-form">
 		      <c:choose>
 		         <c:when test="${vo.column == 'member_nick'}">
 		            <select name="column" class="form-input">
@@ -332,8 +346,7 @@
 		         </c:otherwise>
 		      </c:choose>
 				
-		      <input type="search" name="keyword" placeholder="검색어" required
-		         class="form-input" value="${vo.keyword}">
+		      <input type="search" name="keyword" placeholder="검색어" class="form-input" value="${vo.keyword}">
 
 		      <button type="submit" class="form-btn qna">검색</button>
 		   </form>

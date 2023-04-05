@@ -12,11 +12,11 @@ $(function(){
 		var keyword = $("[name=search-form] [name=keyword]");
 		keyword.val(keyword.val().trim());
 		if (keyword.val() == ''){
-			confirm("검색어를 입력하세요");
+			alert("검색어를 입력하세요");
 			return false;	
 		}
 		else if (keyword.val().length >= 20){
-			confirm("검색어는 20글자 이하여야 합니다");
+			alert("검색어는 20글자 이하여야 합니다");
 			return false;
 		}
 		return true;
@@ -151,7 +151,7 @@ $(function(){
  	</c:choose>
  	
  	<!-- 페이징 숨김 -->
-	<c:if test="${vo.totalPage <= 5}">
+	<c:if test="${vo.totalPage <= 10}">
 		<script>
 			document.querySelectorAll('.pagination a.disabled').forEach(el => el.style.display = 'none');
 		</script>

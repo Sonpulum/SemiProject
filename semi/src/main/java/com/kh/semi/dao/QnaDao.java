@@ -86,28 +86,33 @@ public class QnaDao {
   
    //Q&A 목록
    public List<QnaDto> selectList(QnaPaginationVO vo) {
-//      if(vo.isSearch()) {//검색
-//         String sql = "SELECT * "
-//         		+ "FROM ( "
-//         		+ "  SELECT ROWNUM RN, TMP.*, M.member_nick "
-//         		+ "  FROM ( "
-//         		+ "    SELECT * "
-//         		+ "    FROM qna"
-//         		+ "    WHERE instr(#1, ?) > 0"
-//         		+ "    CONNECT BY PRIOR qna_no = qna_parent "
-//         		+ "    START WITH qna_parent IS NULL "
-//         		+ "    ORDER SIBLINGS BY qna_group DESC, qna_no ASC "
-//         		+ "  ) TMP"
-//         		+ "  LEFT OUTER JOIN member M ON TMP.qna_writer = M.member_id "
-//         		+ ") "
-//         		+ "WHERE RN BETWEEN ? AND ?";
-//         sql = sql.replace("#1", vo.getColumn());
-//         Object[] param = {vo.getKeyword(), vo.getBegin(), vo.getEnd()};
-//         return jdbcTemplate.query(sql, mapper2, param);
-//      }
+	   String sql = "";
+	   Object[] param = null;
+	      
+	   if(vo.getSort().equals("공지")) {
+           sql = "where qna_head = '공지'";
+	   }
+	   else if (vo.getSort().equals("질문")) {
+		   sql = "where qna_head = '질문'";
+	   }
+	   else if (vo.getSort().equals("회원")) {
+		   sql = "where qna_head = '회원'";
+	   }
+	   else if (vo.getSort().equals("혜택/이벤트")) {
+           sql = "where qna_head = '혜택/이벤트'";
+	   }
+	   else if (vo.getSort().equals("제휴/서비스")) {
+           sql = "where qna_head = '제휴/서비스'";
+	   }
+	   else if (vo.getSort().equals("기타")) {
+           sql = "where qna_head = '기타'";
+	   }
+	   else {
+           sql = "";
+	   }
 	   
-	  if(vo.isSearch()) {
-		  String sql = "select * from "
+	  if(vo.isSearch()) {//검색
+		  sql = "select * from "
 		  		+ "(select rownum rn, TMP.* from "
 		  		+ "(select Q.*, M.member_nick from "
 		  		+ "qna Q left outer join "
@@ -115,30 +120,30 @@ public class QnaDao {
 		  		+ "where instr(#1,?) >0 connect by prior Q.qna_no = Q.qna_parent "
 		  		+ "start with Q.qna_parent is null "
 		  		+ "order siblings by Q.qna_group desc, Q.qna_no asc) "
-		  		+ "TMP) "
+		  		+ "TMP "
+		  		//+ sql
+		  		+ " ) "
 		  		+ "where rn between ? and ?";
 		  sql = sql.replace("#1", vo.getColumn());
-		  Object[] param = {vo.getKeyword(), vo.getBegin(), vo.getEnd()};
-		  return jdbcTemplate.query(sql, mapper2, param);
+		  param = new Object[] {vo.getKeyword(), vo.getBegin(), vo.getEnd()};
 	  }
 	  
       else {//목록
-         String sql = "SELECT *"
-         		+ "FROM ("
-         		+ "  SELECT ROWNUM rn, TMP.*, M.MEMBER_NICK"
-         		+ "  FROM ("
-         		+ "    SELECT *"
-         		+ "    FROM qna"
-         		+ "    CONNECT BY PRIOR qna_no = qna_parent"
-         		+ "    START WITH qna_parent IS NULL"
-         		+ "    ORDER SIBLINGS BY qna_group DESC, qna_no ASC"
-         		+ "  ) TMP"
-         		+ "  LEFT OUTER JOIN member M ON TMP.qna_writer = M.member_id"
-         		+ ")"
-         		+ "WHERE rn BETWEEN ? AND ?";
-         Object[] param = {vo.getBegin(), vo.getEnd()};
-         return jdbcTemplate.query(sql, mapper2, param);   
+         sql = "select * from "
+         		+ "(select rownum rn, TMP.* from "
+         		+ "(select Q.*, M.member_nick from "
+         		+ "qna Q left outer join "
+         		+ "member M on Q.qna_writer = M.member_id "
+         		+ "connect by prior Q.qna_no = Q.qna_parent "
+         		+ "start with Q.qna_parent is null "
+         		+ "order siblings by Q.qna_group desc, Q.qna_no asc) "
+         		+ "TMP " 
+         		+ sql 
+         		+ ") "
+         		+ "where rn between ? and ?";
+         param = new Object[] {vo.getBegin(), vo.getEnd()};
       }
+	  return jdbcTemplate.query(sql, mapper2, param);   
    }
    
    //페이징 적용된 조회 및 카운트
@@ -201,17 +206,17 @@ public class QnaDao {
 	
 	//공지사항만 조회하는 기능
 	public List<QnaDto> selectNoticeList(int begin, int end) {
-		String sql = "SELECT *"
-				+ "FROM ("
-				+ "  SELECT ROWNUM rn, TMP.*, m.member_nick"
-				+ "  FROM ("
+		String sql = "SELECT * "
+				+ "FROM ( "
+				+ "  SELECT ROWNUM rn, TMP.*, m.member_nick "
+				+ "  FROM ( "
 				+ "    SELECT *"
-				+ "    FROM qna"
-				+ "    WHERE qna_head = '공지'"
-				+ "    ORDER BY qna_no DESC"
-				+ "  ) TMP\r\n"
-				+ "  LEFT OUTER JOIN member m ON TMP.qna_writer = m.member_id"
-				+ ")"
+				+ "    FROM qna "
+				+ "    WHERE qna_head = '공지' "
+				+ "    ORDER BY qna_no DESC "
+				+ "  ) TMP "
+				+ "  LEFT OUTER JOIN member m ON TMP.qna_writer = m.member_id "
+				+ " ) "
 				+ "WHERE rn BETWEEN ? AND ?";
 		Object[] param = {begin, end};
 		return jdbcTemplate.query(sql, mapper2, param);
