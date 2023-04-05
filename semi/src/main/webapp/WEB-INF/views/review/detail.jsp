@@ -25,6 +25,7 @@
 <script>
 	var memberId = "${sessionScope.memberId}";
 	var reviewWriter = "${reviewDto.reviewWriter}";
+	var memberLevel = "${sessionScope.memberLevel}";
 </script>
 
 <script>
