@@ -258,14 +258,14 @@
 		         <a class="disabled"><i class="fa-solid fa-angles-left"></i></a>
 		      </c:when>
 		      <c:otherwise>
-		         <a href="list?${vo.parameter}&sort=${vo.sort}&page=1"><i class="fa-solid fa-angles-left"></i></a>
+		         <a href="list?${vo.parameter}&page=1"><i class="fa-solid fa-angles-left"></i></a>
 		      </c:otherwise>
 		   </c:choose>
 		   
 		   <!-- 이전 -->
 		   <c:choose>
 		      <c:when test="${vo.prev}">
-		         <a href="list?${vo.parameter}&sort=${vo.sort}&page=${vo.prevPage}"><i class="fa-solid fa-angle-left"></i></a>
+		         <a href="list?${vo.parameter}&page=${vo.prevPage}"><i class="fa-solid fa-angle-left"></i></a>
 		      </c:when>
 		      <c:otherwise>
 		         <a class="disabled"><i class="fa-solid fa-angle-left"></i></a>
@@ -277,7 +277,7 @@
 		      <c:choose>
 		         <c:when test="${vo.page == i}"><a class="on">${i}</a></c:when>
 		         <c:otherwise>
-		            <a href="list?${vo.parameter}&sort=${vo.sort}&page=${i}">${i}</a>
+		            <a href="list?${vo.parameter}&page=${i}">${i}</a>
 		         </c:otherwise>
 		      </c:choose>
 		   </c:forEach>
@@ -285,7 +285,7 @@
 		   <!-- 다음 -->
 		   <c:choose>
 		      <c:when test="${vo.next}">
-		         <a href="list?${vo.parameter}&sort=${vo.sort}&page=${vo.nextPage}"><i class="fa-solid fa-angle-right"></i></a>
+		         <a href="list?${vo.parameter}&page=${vo.nextPage}"><i class="fa-solid fa-angle-right"></i></a>
 		      </c:when>
 		      <c:otherwise>
 		         <a class="disabled"><i class="fa-solid fa-angle-right"></i></a>
@@ -298,7 +298,7 @@
 		         <a class="disabled"><i class="fa-solid fa-angles-right"></i></a>
 		      </c:when>
 		      <c:otherwise>
-		         <a href="list?${vo.parameter}&sort=${vo.sort}&page=${vo.totalPage}"><i class="fa-solid fa-angles-right"></i></a>
+		         <a href="list?${vo.parameter}&page=${vo.totalPage}"><i class="fa-solid fa-angles-right"></i></a>
 		      </c:otherwise>
 		   </c:choose>
 		</div>

@@ -87,11 +87,8 @@ public class QnaController {
    //Q&A 목록
    @GetMapping("/list")
    public String list(@ModelAttribute("vo") QnaPaginationVO vo,
-		   @RequestParam(required = false, defaultValue = "") String sort,
          Model model) {
-	  //정렬 조건을 VO 객체에 설정
-	  vo.setSort(sort); 
-	  
+	  //정렬 조건을 VO 객체에 설정  
       int totalCount = qnaDao.selectCount(vo);
       vo.setCount(totalCount);
       

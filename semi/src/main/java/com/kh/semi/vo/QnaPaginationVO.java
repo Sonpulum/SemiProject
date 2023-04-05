@@ -10,7 +10,7 @@ public class QnaPaginationVO {
 	private int size = 10;
 	private int count;
 	private int blockSize = 10;
-	private String sort;
+	private String sort = "";
 	
 	//검색 여부 판정
 	public boolean isSearch() {
@@ -19,6 +19,10 @@ public class QnaPaginationVO {
 	
 	public boolean isList() {
 		return keyword.equals("");
+	}
+	
+	public boolean isSort() {
+		return sort.equals("") == false;
 	}
 
 	//파라미터 생성 메소드
@@ -33,6 +37,11 @@ public class QnaPaginationVO {
 			buffer.append(column);
 			buffer.append("&keyword=");
 			buffer.append(keyword);
+		}
+		
+		if(isSort()) {
+			buffer.append("&sort=");
+			buffer.append(sort);
 		}
 		
 		return buffer.toString();
