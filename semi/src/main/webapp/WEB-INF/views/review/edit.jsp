@@ -55,10 +55,29 @@
 	            }
 	       	}
         });
+        $(".write-form").submit(function(e){
+        	var titleValid = $("[name=reviewTitle]").val().length > 0;
+    		var contentValid = $("[name=reviewContent]").val().length > 0;
+    		var locationValid = $("[name=reviewLocation]").val().length > 0;
+    		var seasonValid = $("[name=reviewSeason]").val().length > 0;
+    		var themetValid = $("[name=reviewTheme]").val().length > 0;
+    		var isAllValid = titleValid && contentValid && locationValid && seasonValid && themetValid;
+    		
+    		if (isAllValid == false){
+    			alert("모든 항목을 입력하세요")
+    			return false;
+    		}
+    		
+    		if ($("[name=reviewTitle]").val().length >100){
+    			alert("제목은 100글자 이하로 작성하세요");
+    			return false;
+    		}
+    		return true;
+    	});
     });
 </script>
 
-<form action="edit" method="post" autocomplete="off">
+<form action="edit" class="write-form" method="post" autocomplete="off">
 <input type="hidden" name="reviewNo" value="${reviewDto.reviewNo}">
 
 <div class="container-800">

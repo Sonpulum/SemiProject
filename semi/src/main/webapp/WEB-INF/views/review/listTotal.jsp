@@ -8,7 +8,7 @@
  
  <div class="container-1000">
         <div class="row center">
-            <h1>나만의 여행지를 공유해보세요</h1>
+            <h2>후기 게시판 검색결과</h2>
         </div>
 
         <div class="row right">
@@ -53,23 +53,22 @@
         
 <!-- 페이지 네이게이터 - vo에 있는 데이터를 기반으로 구현 -->
 <div class="row">
-
 	<div class="pagination">
 	<c:choose>
 	<c:when test="${vo.first}">
-	<a class="disabled">&laquo;</a>
+	<a class="disabled"><i class="fa-solid fa-angles-left"></i></a>
 	</c:when>
 	<c:otherwise>
-	<a href="listTotal?${vo.parameter}&page=1">&laquo;</a>	
+	<a href="listTotal?${vo.parameter}&page=1"><i class="fa-solid fa-angles-left"></i></a>	
 	</c:otherwise>
 	</c:choose>
 	
 	<c:choose>
 		<c:when test="${vo.prev}">
-	<a href="listTotal?${vo.parameter}&page=${vo.prevPage}">&lt;</a>
+	<a href="listTotal?${vo.parameter}&page=${vo.prevPage}"><i class="fa-solid fa-angle-left"></i></a>
 		</c:when>
 	<c:otherwise>
-		<a class="disabled">&lt;</a>
+		<a class="disabled"><i class="fa-solid fa-angle-left"></i></a>
 	</c:otherwise>
 	</c:choose>
  		
@@ -84,21 +83,29 @@
  		
  	<c:choose>
  		<c:when test="${vo.next}">
- 			<a href="listTotal?${vo.parameter}&page=${vo.nextPage}">&gt;</a> 		
+ 			<a href="listTotal?${vo.parameter}&page=${vo.nextPage}"><i class="fa-solid fa-angle-right"></i></a> 		
  		</c:when>
  		<c:otherwise>
- 			<a class="disabled">&gt;</a>
+ 			<a class="disabled"><i class="fa-solid fa-angle-right"></i></a>
  		</c:otherwise>
  	</c:choose>	
  	
  	<c:choose>
- 		<c:when test="${vo.last }">
- 		<a class="disabled">&raquo;</a>
+ 		<c:when test="${vo.last}">
+ 		<a class="disabled"><i class="fa-solid fa-angles-right"></i></a>
  		</c:when>
  	<c:otherwise>
- 	<a href="listTotal?${vo.parameter}&page=${vo.totalPage}">&raquo;</a>
+ 	<a href="listTotal?${vo.parameter}&page=${vo.totalPage}"><i class="fa-solid fa-angles-right"></i></a>
  	</c:otherwise>
  	</c:choose>
+ 	
+ 	<!-- 페이징 숨김 -->
+	<c:if test="${vo.totalPage <= 10}">
+		<script>
+			document.querySelectorAll('.pagination a.disabled').forEach(el => el.style.display = 'none');
+		</script>
+	</c:if>
+ 	
 	</div>
 </div>
 </div>

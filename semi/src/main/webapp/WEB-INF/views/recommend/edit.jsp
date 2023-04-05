@@ -58,7 +58,7 @@
 </script>
 
 
-<form action="edit" method="post" autocomplete="off">
+<form action="edit" class="write-form" method="post" autocomplete="off">
 <input type="hidden" name="recoNo" value="${recoDto.recoNo}">
 <div class="container-800">
     <div class="row mb-40">      
