@@ -129,17 +129,6 @@ public class ReviewController {
 		return "/WEB-INF/views/review/write.jsp";
 	}
 	
-//	@PostMapping("/write")
-//	public String write(@ModelAttribute ReviewDto reviewDto,
-//			HttpSession session) {
-//		String memberId = (String)session.getAttribute("memberId");
-//		int reviewNo = reviewDao.sequence();
-//		reviewDto.setReviewNo(reviewNo);
-//		reviewDto.setReviewWriter(memberId);
-//		reviewDao.insert(reviewDto);
-//		return "redirect:detail";
-//	}
-	
 	@PostMapping("/write")
 	public String write(@ModelAttribute ReviewDto reviewDto,
 			HttpSession session, @RequestParam(required = false) List<Integer> attachmentNo,
@@ -154,7 +143,6 @@ public class ReviewController {
 		
 		return "redirect:detail";
 	}
-	
 	
 	//게시글 수정
 	@GetMapping("/edit")

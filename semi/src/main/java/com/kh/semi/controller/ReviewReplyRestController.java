@@ -62,14 +62,14 @@ public class ReviewReplyRestController {
 		public void delete(@PathVariable int reviewReplyNo, @ModelAttribute ReviewReplyDto reviewReplyDto) {
 
 			reviewReplyDto = reviewReplyDao.selectOne(reviewReplyNo);
-//			reviewReplyDto.setMemberNick(null);
+			reviewReplyDto.setMemberNick(null);
 			//삭제
 			reviewReplyDao.delete(reviewReplyNo);
 
 			//댓글 개수 갱신
 			reviewDao.updateReplycount(reviewReplyDto.getReviewReplyOrigin());
 		}
-		
+				
 		//일부 수정
 		@PatchMapping("/")
 		public void edit(@ModelAttribute ReviewReplyDto reviewReplyDto) {
