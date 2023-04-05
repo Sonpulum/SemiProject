@@ -4,6 +4,7 @@ $(function(){
 	//글 번호를 가져온다
 	var params = new URLSearchParams(location.search);
 	var reviewReplyOrigin = params.get("reviewNo");
+
 	
 	//댓글 목록 불러오기
 	loadList();
@@ -40,8 +41,8 @@ $(function(){
 			success:function(response){//response == List<ReplyDto>
 				//댓글 개수 변경
 				$(".reply-count").text(response.length);
-				console.log(response);
-				//console.log(reviewWriter);
+				
+				
 				for(var i=0; i < response.length; i++) {
 					//템플릿 불러와서 세팅하고 추가하는 코드
 					var template = $("#reply-template").html();//템플릿 불러와서
@@ -59,7 +60,7 @@ $(function(){
 					}
 					
 					//내가 쓴 댓글에는 수정/삭제 버튼을 추가 표시
-					if(memberId == response[i].reviewReplyWriter){
+					if(memberId == response[i].reviewReplyWriter || memberLevel == "관리자"){
 						var editButton = $("<i>").addClass("fa-solid fa-edit ms-20")
 													.attr("data-reply-no", response[i].reviewReplyNo)
 													.attr("data-reply-content", response[i].reviewReplyContent)
