@@ -218,7 +218,7 @@ public class QnaDao {
 				+ "    SELECT *"
 				+ "    FROM qna "
 				+ "    WHERE qna_head = '공지' "
-				+ "    ORDER BY qna_no DESC "
+				+ "    ORDER BY qna_no asc "
 				+ "  ) TMP "
 				+ "  LEFT OUTER JOIN member m ON TMP.qna_writer = m.member_id "
 				+ " ) "
