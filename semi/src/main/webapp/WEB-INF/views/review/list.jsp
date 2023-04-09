@@ -35,8 +35,8 @@ $(function(){
         </div>
         
         <div class="row">
-		    <a href="list?sort=latest" class="link">최신순</a>&nbsp|
-		    <a href="list?sort=read" class="link">조회수순</a>&nbsp|
+		    <a href="list?sort=latest" class="link">최신순</a>&nbsp;|
+		    <a href="list?sort=read" class="link">조회수순</a>&nbsp;|
 		    <a href="list?sort=like" class="link">좋아요순</a>
 		</div>
         
