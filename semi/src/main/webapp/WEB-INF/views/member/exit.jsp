@@ -11,14 +11,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원탈퇴</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/load.css">
+
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-    
-    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/layout.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/commons.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/test.css">
-    
+
     <!-- 링크 확인창 출력을 위한 CDN -->
     <script src="https://cdn.jsdelivr.net/gh/hiphop5782/confirm-link@latest/confirm-link.min.js"></script>
     
@@ -65,7 +60,7 @@
 	<form action="exit" method="post">
 			<div class="container-800">
 					<div class="row center">
-						<img src="/static/image/backpack.png"  width="70px" height="70px">
+						<img src="${pageContext.request.contextPath}/static/image/backpack.png"  width="70px" height="70px">
 						<h1>비밀번호 확인</h1>
 				</div>
 				<div class="row center">

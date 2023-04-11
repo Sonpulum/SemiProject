@@ -362,12 +362,10 @@ input.form-input.form-input-bg {
 }
 .valid {
     border-color: forestgreen;
-    background-image: url("image/valid.png");
 }
 
 .invalid, .invalid2, .invalid3 {
     border-color: red;
-    background-image: url("image/invalid.png");
 }
 
 /* 비활성 상태 디자인 */

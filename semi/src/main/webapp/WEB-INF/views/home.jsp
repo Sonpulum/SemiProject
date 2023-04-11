@@ -413,7 +413,7 @@ new Swiper('.swiper-container',{
                   
                   
                   kakao.maps.event.addListener(polygon, 'click', function(mouseEvent) {
-                               window.location.href = '/recommend/list?column=reco_location&keyword='+data.name ;
+                               window.location.href = '${pageContext.request.contextPath}/recommend/list?column=reco_location&keyword='+data.name ;
                            });
                   
                   polygon.setMap(map);

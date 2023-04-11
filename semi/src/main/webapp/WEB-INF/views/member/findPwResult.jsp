@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<link rel="stylesheet" type="text/css" href="/static/css/find.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/find.css">
     
 <div class="container-500">
    <div class="row center">

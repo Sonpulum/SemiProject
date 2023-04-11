@@ -21,6 +21,9 @@
     
     <!-- jquery cdn -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+    	const contextPath = "${pageContext.request.contextPath}";
+    </script>
     
     <!-- favicon 설정 -->
     <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/static/favicon.ico">
@@ -55,12 +58,12 @@
         <header>
             <div class="flex-box" style="margin:0 auto;">
                 <div class="row w-10 center">
-                   <a href="${pageContext.request.contextPath}">
+                   <a href="${pageContext.request.contextPath}/">
                     <img src="${pageContext.request.contextPath}/static/image/backpack.png" alt="배낭 챙겨" width="90px" height="80px"style="position:relative; top:-15px;">
                    </a>
                 </div>
                 <div class="row w-15 center">
-                    <h1 class="me-20"><a href="${pageContext.request.contextPath}" class="link" style="color:#2d3436">배낭챙겨</a></h1>
+                    <h1 class="me-20"><a href="${pageContext.request.contextPath}/" class="link" style="color:#2d3436">배낭챙겨</a></h1>
                 </div>
                 <div class="row center w-30">
                 	<form action="${pageContext.request.contextPath}/search" method="post" name="total-search-form">

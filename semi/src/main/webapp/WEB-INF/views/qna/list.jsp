@@ -124,7 +124,7 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th><a class="link" href="/qna/list">#전체</a></th>
+						<th><a class="link" href="${pageContext.request.contextPath}/qna/list">#전체</a></th>
                         <th><a class="link" href="list?sort=공지">#공지</a></th>
                         <th><a class="link" href="list?sort=질문">#질문</a></th>
                         <th><a class="link" href="list?sort=회원">#회원</a></th>

@@ -7,7 +7,7 @@
 
 <c:if test="${sessionScope.memberId != null}">
    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/qna-like.css">
-   <script src="/static/js/qna-like.js"></script>
+   <script src="${pageContext.request.contextPath}/static/js/qna-like.js"></script>
 </c:if>
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/reply.css">

@@ -9,7 +9,7 @@
 	</div>
 
 	<div class="row center mb-20">
-		<h3><a class="link" href="/">홈으로</a></h3>
+		<h3><a class="link" href="${pageContext.request.contextPath}">홈으로</a></h3>
 	</div>
 	<div class="row center">
 		<h3><a class="link" href="mypage">마이페이지</a></h3>

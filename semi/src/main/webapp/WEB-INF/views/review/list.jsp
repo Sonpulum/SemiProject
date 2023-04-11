@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<link rel="stylesheet" type="text/css" href="/static/css/list.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/list.css">
 
 <script>
 $(function(){

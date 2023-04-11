@@ -33,7 +33,7 @@
 				}
 				reader.readAsDataURL(input.files[0]);
 			} else {
-				$('#preview').attr('src', '/static/image/usericon.jpg');
+				$('#preview').attr('src', '${pageContext.request.contextPath}/static/image/usericon.jpg');
 			}
 		}
 		
@@ -47,6 +47,7 @@
 				}
 				else return true;
 			}
+			else return true;
 		}
 	});
 	
@@ -62,7 +63,7 @@
 	}
 </style>
 
-<form action="/member/edit" method="post" autocomplete="off" enctype="multipart/form-data">
+<form action="${pageContext.request.contextPath}/member/edit" method="post" autocomplete="off" enctype="multipart/form-data">
 <div class=container-500>
    <div class="row left mb-20">
       <h1>개인정보 변경</h1>

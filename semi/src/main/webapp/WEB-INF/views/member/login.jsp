@@ -16,7 +16,11 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/test.css">
     
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/login.css">
-
+    
+	<script>
+    	const contextPath = "${pageContext.request.contextPath}";
+    </script>
+    
     <title>배낭챙겨 로그인</title>
 
     <!-- 카카오 스크립트 -->
@@ -131,7 +135,7 @@
 <body>
 <div class="container pt-30">
     <div class="logo">
-        <a href="${pageContext.request.contextPath}/static"><img src="${pageContext.request.contextPath}/static/image/backpack.png" alt="배낭 챙겨"></a>
+        <a href="${pageContext.request.contextPath}"><img src="${pageContext.request.contextPath}/static/image/backpack.png" alt="배낭 챙겨"></a>
     </div>
     <form class="form center" style="padding: 0px;">
         <div class="line row center">

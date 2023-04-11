@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<link rel="stylesheet" type="text/css" href="/static/css/list.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/list.css">
  
  <div class="container-1000">
         <div class="row center">
@@ -12,7 +12,7 @@
         </div>
 
         <div class="row right">
-        	<a href="/review/write" class="form-btn bosung">글쓰기</a>
+        	<a href="${pageContext.request.contextPath}/review/write" class="form-btn bosung">글쓰기</a>
         </div>
         
         <table class="table table-hover table-border center">
