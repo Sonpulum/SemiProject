@@ -42,7 +42,7 @@ public class ReviewInterceptor implements HandlerInterceptor {
 		boolean isAdmin = memberLevel.equals("관리자");
 
 		if(isAdmin) {
-			if(request.getRequestURI().equals("/review/delete")) {
+			if(request.getRequestURI().equals(request.getContextPath()+"/review/delete")) {
 				return true;
 			}
 		}

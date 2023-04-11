@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<link rel="stylesheet" type="text/css" href="/static/css/recoList.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/recoList.css">
 
 
  <div class="container-900">
@@ -107,7 +107,7 @@
      <c:forEach var="recoDto" items="${list}">
      	<div class="post">
    			<a href="detail?recoNo=${recoDto.recoNo}">
-   				<img src=/rest/attachment/download/${recoDto.attachNo}>
+   				<img src="${pageContext.request.contextPath}/rest/attachment/download/${recoDto.attachNo}">
    			</a>
    			<div class="post-content">
        			<div class="post-header">

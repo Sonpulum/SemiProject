@@ -90,7 +90,7 @@
 						                	<td>${recoDto.recoSeason}</td>
 						                	<td>${recoDto.recoTheme}</td>
 						                    <td class="w-40 left">
-						                    <a class="link" href="/recommend/detail?recoNo=${recoDto.recoNo}">
+						                    <a class="link" href="${pageContext.request.contextPath}/recommend/detail?recoNo=${recoDto.recoNo}">
 						           					${recoDto.recoTitle}</a>
 						                    </td>
 						                    <td><i class="fa-regular fa-eye"></i>    ${recoDto.recoRead}</td>
@@ -108,7 +108,7 @@
 						                	<td>${recoList[i].recoSeason}</td>
 						                	<td>${recoList[i].recoTheme}</td>
 						                    <td class="w-40 left">
-						                    <a class="link" href="/recommend/detail?recoNo=${recoList[i].recoNo}">
+						                    <a class="link" href="${pageContext.request.contextPath}/recommend/detail?recoNo=${recoList[i].recoNo}">
 						           					${recoList[i].recoTitle}</a>
 						                    </td>
 						                    <td><i class="fa-regular fa-eye"></i>    ${recoList[i].recoRead}</td>
@@ -119,7 +119,7 @@
 			                	</tbody>
 		                	</table>
 			            			<div class="row right">
-			            				<a class="link search-detail" href="/recommend/listTotal?keyword=${keyword}">검색결과 상세보기 <i class="fa-solid fa-arrow-right"></i></a>
+			            				<a class="link search-detail" href="${pageContext.request.contextPath}/recommend/listTotal?keyword=${keyword}">검색결과 상세보기 <i class="fa-solid fa-arrow-right"></i></a>
 		            				</div>
 			            		</c:otherwise>
 	            			</c:choose>
@@ -163,7 +163,7 @@
 						                	<td>${reviewDto.reviewSeason}</td>
 						                	<td>${reviewDto.reviewTheme}</td>
 						                    <td class="w-40 left">
-						                    <a class="link" href="/review/detail?reviewNo=${reviewDto.reviewNo}">
+						                    <a class="link" href="${pageContext.request.contextPath}/review/detail?reviewNo=${reviewDto.reviewNo}">
 						           					${reviewDto.reviewTitle}</a>
 						           				<c:if test="${reviewDto.reviewReply > 0}">
 						           					[${reviewDto.reviewReply}]
@@ -184,7 +184,7 @@
 						                	<td>${reviewList[i].reviewSeason}</td>
 						                	<td>${reviewList[i].reviewTheme}</td>
 						                    <td class="w-40 left">
-						                    <a class="link" href="/review/detail?reviewNo=${reviewList[i].reviewNo}">
+						                    <a class="link" href="${pageContext.request.contextPath}/review/detail?reviewNo=${reviewList[i].reviewNo}">
 						           					${reviewList[i].reviewTitle}</a>
 						           				<c:if test="${reviewList[i].reviewReply > 0}">
 						           					[${reviewList[i].reviewReply}]
@@ -198,7 +198,7 @@
 									</tbody>
 									</table>
 									<div class="row right">
-										<a class="link search-detail" href="/review/listTotal?keyword=${keyword}">검색결과 상세보기<i class="fa-solid fa-arrow-right"></i></a>
+										<a class="link search-detail" href="${pageContext.request.contextPath}/review/listTotal?keyword=${keyword}">검색결과 상세보기<i class="fa-solid fa-arrow-right"></i></a>
 									</div>
 			            		</c:otherwise>
 			            	</c:choose>

@@ -15,7 +15,7 @@ $(function(){
 		if(content.trim().length == 0) return;//의미없는 값 차단
 		
 		$.ajax({
-			url:"/rest/review/reply/",
+			url:contextPath+"/rest/review/reply/",
 			method:"post",
 			data:{
 				reviewReplyOrigin: reviewReplyOrigin,

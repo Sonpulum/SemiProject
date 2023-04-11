@@ -42,7 +42,7 @@ public class QnaInterceptor implements HandlerInterceptor {
 		boolean isAdmin = memberLevel.equals("관리자");
 
 		if(isAdmin) {
-			if(request.getRequestURI().equals("/qna/delete")) {
+			if(request.getRequestURI().equals(request.getContextPath()+"/qna/delete")) {
 				return true;
 			}
 		}

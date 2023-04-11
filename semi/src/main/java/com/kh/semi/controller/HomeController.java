@@ -1,5 +1,7 @@
 package com.kh.semi.controller;
 
+import java.text.SimpleDateFormat;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,10 @@ public class HomeController {
 	
 	@GetMapping("/")
 	public String home(Model model) {
+		java.util.Date now = new java.util.Date();
+		SimpleDateFormat f = new SimpleDateFormat("M월");
+		String nowStr = f.format(now);
+		model.addAttribute("now",nowStr);
 		//인기 게시글 조회
 		model.addAttribute("reviewTop",reviewDao.selectTopList(6));
 		model.addAttribute("recoTop", recommendDao.selectTopList(6));

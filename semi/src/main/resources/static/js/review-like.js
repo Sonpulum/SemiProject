@@ -10,7 +10,7 @@
 	 
 	 $.ajax({
 		 
-		 url:"/rest/review/check",
+		 url:contextPath+"/rest/review/check",
 		 method:"post",
 		 data:{
 			 reviewNo : reviewNo

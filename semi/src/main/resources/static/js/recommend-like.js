@@ -4,7 +4,7 @@ $(function(){
 	var recoNo = params.get("recoNo");
 	
 	$.ajax({
-		url:"/rest/recommend/check",
+		url:contextPath+"/rest/recommend/check",
 		method:"post",
 		data:{
 			recoNo : recoNo
@@ -24,7 +24,7 @@ $(function(){
 	
 	$(".fa-thumbs-up").click(function(){
 		$.ajax({
-			url:"/rest/recommend/like",
+			url:contextPath+"/rest/recommend/like",
 			method:"post",
 			data:{
 				recoNo:recoNo

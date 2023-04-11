@@ -31,7 +31,7 @@ $(function(){
         </div>
 		
         <div class="row right">
-        	<a href="/review/write" class="form-btn bosung">글쓰기</a>
+        	<a href="${pageContext.request.contextPath}/review/write" class="form-btn bosung">글쓰기</a>
         </div>
         
         <div class="row">
