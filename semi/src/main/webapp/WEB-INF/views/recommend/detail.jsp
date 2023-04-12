@@ -7,7 +7,7 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <c:if test="${sessionScope.memberId != null}">
-<script src="/static/js/recommend-like.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/recommend-like.js"></script>
 </c:if>
 
 <style>

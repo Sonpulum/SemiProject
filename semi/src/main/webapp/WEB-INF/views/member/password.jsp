@@ -3,8 +3,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<link rel="stylesheet" type="text/css" href="/static/css/find.css">
-<script src="/static/js/change-password.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/find.css">
+<script src="${pageContext.request.contextPath}/static/js/change-password.js"></script>
 
 <style>
 	h2 {
@@ -46,7 +46,7 @@
 		</div>
 		
 		<div class="row">
-			<a type="submit" href="/member/mypage?memberId=${memberDto.memberId}" 
+			<a type="submit" href="${pageContext.request.contextPath}/member/mypage?memberId=${memberDto.memberId}" 
 			class="form-btn1 w-100">취소</a>
         </div>
 	</form>

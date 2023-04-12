@@ -3,10 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<script src="/static/js/member-join.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/member-join.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="/static/js/find-address.js"></script>
-<link rel="stylesheet" type="text/css" href="/static/css/memberEdit.css">
+<script src="${pageContext.request.contextPath}/static/js/find-address.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/memberEdit.css">
 
 <script>
 	$(function(){
@@ -33,7 +33,7 @@
 				}
 				reader.readAsDataURL(input.files[0]);
 			} else {
-				$('#preview').attr('src', '/static/image/usericon.jpg');
+				$('#preview').attr('src', '${pageContext.request.contextPath}/static/image/usericon.jpg');
 			}
 		}
 		
@@ -47,6 +47,7 @@
 				}
 				else return true;
 			}
+			else return true;
 		}
 	});
 	
@@ -62,7 +63,7 @@
 	}
 </style>
 
-<form action="/member/edit" method="post" autocomplete="off" enctype="multipart/form-data">
+<form action="${pageContext.request.contextPath}/member/edit" method="post" autocomplete="off" enctype="multipart/form-data">
 <div class=container-500>
    <div class="row left mb-20">
       <h1>개인정보 변경</h1>
@@ -108,10 +109,10 @@
    <div class="row writer">
    		<c:choose>
 			<c:when test="${profile.attachmentNo != null}">
-		   		<img id="preview" width="100" height="100" src="/attachment/download?attachmentNo=${profile.attachmentNo}" class="ms-70">
+		   		<img id="preview" width="100" height="100" src="${pageContext.request.contextPath}/attachment/download?attachmentNo=${profile.attachmentNo}" class="ms-70">
 			</c:when>
 			<c:otherwise>
-       			<img id="preview" width="100" height="100" src="/static/image/usericon.jpg" class="ms-70">
+       			<img id="preview" width="100" height="100" src="${pageContext.request.contextPath}/static/image/usericon.jpg" class="ms-70">
 			</c:otherwise>
 		</c:choose>
 		<label class="center form-btn neutral w-40 ms-20 me-10"> 사진 업로드

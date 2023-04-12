@@ -8,7 +8,9 @@
 <!-- summernote cdn -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
-
+<script>
+	const contextPath = "${pageContext.request.contextPath}";
+</script>
 <script type="text/javascript">
     $(function(){
         $('[name=qnaContent]').summernote({
@@ -36,7 +38,7 @@
                fd.append("attach", files[0]);
                
                $.ajax({
-                  url:"/rest/attachment/upload",
+                  url:contextPath+"/rest/attachment/upload",
                   method:"post",
                   data:fd,
                   processData:false,

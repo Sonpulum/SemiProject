@@ -6,11 +6,11 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>    
 
 <c:if test="${sessionScope.memberId != null}">
-   <link rel="stylesheet" type="text/css" href="/static/css/qna-like.css">
-   <script src="/static/js/qna-like.js"></script>
+   <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/qna-like.css">
+   <script src="${pageContext.request.contextPath}/static/js/qna-like.js"></script>
 </c:if>
 
-<link rel="stylesheet" type="text/css" href="/static/css/reply.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/reply.css">
 
 <style>
     .form-input {
@@ -58,11 +58,11 @@
 	<div class="row writer">
 		<c:choose>
 			<c:when test="${memberProfile.attachmentNo != null}">
-				<img class="me-10" width="90" height="90" src="/attachment/download?attachmentNo=${memberProfile.attachmentNo}">
+				<img class="me-10" width="90" height="90" src="${pageContext.request.contextPath}/attachment/download?attachmentNo=${memberProfile.attachmentNo}">
 				${qnaWriterNick}
 			</c:when>
 			<c:otherwise>
-				<img class="me-10" width="90" height="90" src="/static/image/usericon.jpg">
+				<img class="me-10" width="90" height="90" src="${pageContext.request.contextPath}/static/image/usericon.jpg">
 				   ${qnaWriterNick}
 			</c:otherwise>
 		</c:choose>
@@ -85,21 +85,21 @@
 	
 	<div class="row right">
 		<c:if test="${sessionScope.memberId != null}">
-			<a href="/qna/write" class="form-btn qna">글쓰기</a>
+			<a href="${pageContext.request.contextPath}/qna/write" class="form-btn qna">글쓰기</a>
 		</c:if>
 		<c:if test="${admin}">
-			<a href="/qna/write?qnaParent=${qnaDto.qnaNo}" class="form-btn qna">답글쓰기</a>
+			<a href="${pageContext.request.contextPath}/qna/write?qnaParent=${qnaDto.qnaNo}" class="form-btn qna">답글쓰기</a>
 		</c:if>
 		<!--  내가 작성한 글이라면 수정과 삭제 메뉴를 출력 -->
 		<c:if test="${owner}">
-			<a href="/qna/edit?qnaNo=${qnaDto.qnaNo}" class="form-btn qna">수정</a>
+			<a href="${pageContext.request.contextPath}/qna/edit?qnaNo=${qnaDto.qnaNo}" class="form-btn qna">수정</a>
 		</c:if>
 		
 		<c:if test="${owner || admin}">
-			<a href="/qna/delete?qnaNo=${qnaDto.qnaNo}" class="form-btn negative">삭제</a>
+			<a href="${pageContext.request.contextPath}/qna/delete?qnaNo=${qnaDto.qnaNo}" class="form-btn negative">삭제</a>
 		</c:if>
 		
-		<a href="/qna/list" class="form-btn neutral">목록보기</a>
+		<a href="${pageContext.request.contextPath}/qna/list" class="form-btn neutral">목록보기</a>
 	</div>
 </div>
 </form>

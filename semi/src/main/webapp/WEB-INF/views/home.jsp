@@ -165,55 +165,51 @@
    position: absolute;
    bottom: 10px;
 }
-<<<<<<< HEAD
 
-}
-=======
->>>>>>> refs/remotes/origin/main
 </style>
 <div class="row center">
-<h1>4월 SNS 인기 여행지 Top 5</h1>
+<h1 class="home-title">${now} SNS 인기 여행지 Top 5</h1>
 </div>
 <div class="wrapper">
   <div class="swiper-container">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
-        <a href="recommend/detail?recoNo=143"><img src="/static/image/hotel.jpg">
+        <a href="recommend/detail?recoNo=143"><img src="${pageContext.request.contextPath}/static/image/hotel.jpg">
            <div class="row">
               <strong class="image_text">고급스러운 인테리어와 최상의 서비스가 어우러진 메이필드호텔</strong>
            </div>
         </a>
       </div>
       <div class="swiper-slide">
-        <a href="recommend/detail?recoNo=123"><img src="/static/image/sakura.jpg">
+        <a href="recommend/detail?recoNo=123"><img src="${pageContext.request.contextPath}/static/image/sakura.jpg">
            <div class="row">
               <strong class="image_text">강원도의 아름다운 자연과 벚꽃이 만나는 경포 벚꽃축제, 봄의 아름다움을 만끽할 수 있는 멋진 장소입니다.</strong>
            </div>
         </a>
       </div>
       <div class="swiper-slide">
-        <a href="recommend/detail?recoNo=103"><img src="/static/image/bosan.jpg">
+        <a href="recommend/detail?recoNo=103"><img src="${pageContext.request.contextPath}/static/image/bosan.jpg">
            <div class="row">
               <strong class="image_text">역사적인 가치와 아름다운 해변 경관이 어우러져 있는 부산의 아름다운 사찰, 해동용궁사</strong>
            </div>
         </a>
       </div>
       <div class="swiper-slide">
-        <a href="recommend/detail?recoNo=144"><img src="/static/image/gyeongju.jpg">
+        <a href="recommend/detail?recoNo=144"><img src="${pageContext.request.contextPath}/static/image/gyeongju.jpg">
            <div class="row">
               <strong class="image_text">한국 고대 역사와 문화 유산을 담은 경주 대릉원, 아름다운 조경과 함께하는 역사 여행의 즐거움을 선사합니다.</strong>
            </div>
         </a>
       </div>
       <div class="swiper-slide">
-        <a href="recommend/detail?recoNo=108"><img src="/static/image/gangneung.jpg">
+        <a href="recommend/detail?recoNo=108"><img src="${pageContext.request.contextPath}/static/image/gangneung.jpg">
            <div class="row">
               <strong class="image_text">한국의 전통 아름다움과 우아함이 고스란히 담겨있는 아름다운 건축물, 오죽헌</strong>
            </div>
         </a>
       </div>
        <div class="swiper-slide">
-        <a href="recommend/detail?recoNo=103"><img src="/static/image/bosan.jpg">
+        <a href="recommend/detail?recoNo=103"><img src="${pageContext.request.contextPath}/static/image/bosan.jpg">
            <div class="row">
               <strong class="image_text">역사적인 가치와 아름다운 해변 경관이 어우러져 있는 부산의 아름다운 사찰, 해동용궁사</strong>
            </div>
@@ -247,7 +243,7 @@
       <table class="table table-border mt-10 mb-10">
          <thead>
             <tr >
-               <th colspan='3' class="center"><img style = "display:inline" width="25px" height="20px" src="/static/image/medal.png">추천 인기 게시글</th>
+               <th colspan='3' class="center"><img style = "display:inline" width="25px" height="20px" src="${pageContext.request.contextPath}/static/image/medal.png">추천 인기 게시글</th>
             </tr>      
          </thead>
          <tbody>
@@ -273,7 +269,7 @@
       <table class="table table-border mt-10 mb-10">
          <thead>
             <tr >
-               <th colspan='3' class="center"><img  style = "display:inline" width="25px" height="20px" src="/static/image/medal.png">후기 인기 게시글</th>
+               <th colspan='3' class="center"><img  style = "display:inline" width="25px" height="20px" src="${pageContext.request.contextPath}/static/image/medal.png">후기 인기 게시글</th>
             </tr>      
          </thead>
          <tbody>
@@ -417,7 +413,7 @@ new Swiper('.swiper-container',{
                   
                   
                   kakao.maps.event.addListener(polygon, 'click', function(mouseEvent) {
-                               window.location.href = '/recommend/list?column=reco_location&keyword='+data.name ;
+                               window.location.href = '${pageContext.request.contextPath}/recommend/list?column=reco_location&keyword='+data.name ;
                            });
                   
                   polygon.setMap(map);

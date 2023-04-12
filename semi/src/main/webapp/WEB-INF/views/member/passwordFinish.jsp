@@ -9,7 +9,7 @@
 	</div>
 	
 	<div class="row center">
-		<h2><a href="/" class="link">홈으로</a></h2><br>
+		<h2><a href="${pageContext.request.contextPath}" class="link">홈으로</a></h2><br>
 		<h2><a href="mypage" class="link">마이 페이지로</a></h2>
 	</div>
 

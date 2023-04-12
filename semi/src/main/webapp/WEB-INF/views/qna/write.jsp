@@ -5,11 +5,6 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-<link rel="stylesheet" type="text/css" href="css/load.css">
-<link rel="stylesheet" type="text/css" href="css/reset.css">
-<link rel="stylesheet" type="text/css" href="css/commons.css">
-<link rel="stylesheet" type="text/css" href="css/layout.css">
-<link rel="stylesheet" type="text/css" href="css/test.css">
 
 <!-- summernote cdn -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
@@ -61,7 +56,7 @@
                fd.append("attach", files[0]);
                
                $.ajax({
-                  url:"/rest/attachment/upload",
+                  url:"${pageContext.request.contextPath}/rest/attachment/upload",
                   method:"post",
                   data:fd,
                   processData:false,
@@ -75,7 +70,7 @@
                      $("form").prepend(input);
                      
                      //에디터에 추가할 이미지 생성
-                     var imgNode = $("<img>").attr("src", "/rest/attachment/download/" + response.attachmentNo);
+                     var imgNode = $("<img>").attr("src", "${pageContext.request.contextPath}/rest/attachment/download/" + response.attachmentNo);
                      //var imgNode = $("<img>").attr("src", "/rest/attachment/download?attachmentNo" + response.attachmentNo);
                      $("[name=qnaContent]").summernote("insertNode", imgNode.get(0));
                   },
@@ -158,7 +153,7 @@
 			<textarea name="qnaContent" class="form-input w-100"></textarea>
 		</div>
 		<div class="row right">
-			<a type="submit" href="/qna/list" class="form-btn neutral me-10">목록으로</a>
+			<a type="submit" href="${pageContext.request.contextPath}/qna/list" class="form-btn neutral me-10">목록으로</a>
 			<button type="submit" class="form-btn qna">등록</button>
 		</div>
 	</div>

@@ -52,7 +52,6 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 		//2. QnaInterceptor
 		registry.addInterceptor(qnaInterceptor)
 				.addPathPatterns(
-						"/qna/edit",
 						"/qna/delete"
 						);
 		

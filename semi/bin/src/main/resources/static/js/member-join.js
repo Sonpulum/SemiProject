@@ -27,7 +27,7 @@ $(function(){
 		
 		if(isValid) {
 			$.ajax({
-				url:"/rest/member/memberId/"+memberId,
+				url:contextPath+"/rest/member/memberId/"+memberId,
 				method:"get",
 				success:function(response){ //성공시 Y,N
 					if(response=="Y"){
@@ -101,7 +101,7 @@ $(function(){
 		}
 		
 		$.ajax({
-			url:"/rest/member/memberNick/"+memberNick,
+			url:contextPath+"/rest/member/memberNick/"+memberNick,
 			method:"get",
 			success:function(response){
 				if(response == "Y"){
@@ -137,7 +137,7 @@ $(function(){
 		}
 		
 		$.ajax({
-			url:"/rest/member/memberEmail/"+memberEmail,
+			url:contextPath+"/rest/member/memberEmail/"+memberEmail,
 			method:"get",
 			success:function(response){
 				if(response == "Y"){

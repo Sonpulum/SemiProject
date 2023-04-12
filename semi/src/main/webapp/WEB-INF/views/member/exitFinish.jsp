@@ -10,13 +10,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원탈퇴</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/load.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     
-    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/layout.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/commons.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/test.css">
     
     
     <!-- 링크 확인창 출력을 위한 CDN -->
@@ -35,7 +30,7 @@
 				<h4>그동안 이용해주셔서 감사합니다</h4>
 			</div>
 			<div class="row center">
-				<h2><a href="/" class="form-btn">메인페이지</a></h2>
+				<h2><a href="${pageContext.request.contextPath}" class="form-btn">메인페이지</a></h2>
 			</div>
 		</div>
 	</form>

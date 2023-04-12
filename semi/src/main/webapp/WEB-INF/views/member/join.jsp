@@ -10,21 +10,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>배낭챙겨</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/load.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/load.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/join.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/join.css">
   
     <script src="https://cdn.jsdelivr.net/gh/sonpulum/confirm-link@0.0.1/confirm-link.js"></script>
     
     <!-- jquery cdn -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+    	const contextPath = "${pageContext.request.contextPath}";
+    </script>
     
 </head>
 <body>
-<script src="/static/js/member-join.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/member-join.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="/static/js/find-address.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/find-address.js"></script>
 
 <style>
 	.writer {
@@ -42,6 +45,8 @@
 	}
 	
 </style>
+
+
 
 <script>
 	$(function(){
@@ -68,7 +73,7 @@
 				}
 				reader.readAsDataURL(input.files[0]);
 			} else {
-				$('#preview').attr('src', '/static/image/usericon.jpg');
+				$('#preview').attr('src', '${pageContext.request.contextPath}/static/image/usericon.jpg');
 			}
 		}
 		
@@ -90,7 +95,7 @@
 <form class="join-form" action="join" method="post" autocomplete="off" enctype="multipart/form-data">
 <div class="container container-500">
     <div class="row center mt-30">
-        <a href="/"><img class="logo" src="/static/image/backpack.png"></a>
+        <a href="${pageContext.request.contextPath}"><img class="logo" src="${pageContext.request.contextPath}/static/image/backpack.png"></a>
     </div>
     <div class="row">
         <label class="form-label w-100">아이디</label>
@@ -159,10 +164,10 @@
    <div class="writer">
    		<c:choose>
 			<c:when test="${profile.attachmentNo != null}">
-		   		<img id="preview" width="100" height="100" src="/attachment/download?attachmentNo=${profile.attachmentNo}">
+		   		<img id="preview" width="100" height="100" src="${pageContext.request.contextPath}/attachment/download?attachmentNo=${profile.attachmentNo}">
 			</c:when>
 			<c:otherwise>
-       			<img id="preview" width="100" height="100" src="/static/image/usericon.jpg">
+       			<img id="preview" width="100" height="100" src="${pageContext.request.contextPath}/static/image/usericon.jpg">
 			</c:otherwise>
 		</c:choose>
 		<label class="center form-btn neutral w-40 ms-40 me-10"> 사진 업로드

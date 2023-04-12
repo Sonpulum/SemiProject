@@ -22,7 +22,7 @@ public class RecommendInterceptor implements HandlerInterceptor{
 		boolean isAdmin = memberLevel.equals("관리자");
 		
 		if(isAdmin) {
-			if(request.getRequestURI().equals("/recommend/delete") || request.getRequestURI().equals("/recommend/write")) {
+			if(request.getRequestURI().equals(request.getContextPath()+"/recommend/delete") || request.getRequestURI().equals(request.getContextPath()+"/recommend/write")) {
 				return true;
 			}
 		}

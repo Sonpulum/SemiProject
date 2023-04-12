@@ -124,7 +124,7 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th><a class="link" href="/qna/list">#전체</a></th>
+						<th><a class="link" href="${pageContext.request.contextPath}/qna/list">#전체</a></th>
                         <th><a class="link" href="list?sort=공지">#공지</a></th>
                         <th><a class="link" href="list?sort=질문">#질문</a></th>
                         <th><a class="link" href="list?sort=회원">#회원</a></th>
@@ -168,13 +168,13 @@
 							${qnaDto.qnaTitle}
 							</a>
 						</td>
-						<td>${qnaDto.qnaWriter}</td>
+						<td>${qnaDto.memberNick}</td>
 						<td>${qnaDto.qnaTimeAuto}</td>
 						<td><i class="fa-regular fa-eye"></i>	${qnaDto.qnaRead}</td>
 						<c:if test="${sessionScope.memberLevel == '관리자'}">
 		                  <td>
-		                  	<a href="/qna/edit?qnaNo=${qnaDto.qnaNo}" class="edit-btn me-10"><i class="fa-sharp fa-solid fa-pen"></i></a>
-		                    <a href="/qna/delete?qnaNo=${qnaDto.qnaNo}" class="delete-btn"><i class="fa-sharp fa-solid fa-trash"></i></a>
+		                  	<a href="${pageContext.request.contextPath}/qna/edit?qnaNo=${qnaDto.qnaNo}" class="edit-btn me-10"><i class="fa-sharp fa-solid fa-pen"></i></a>
+		                    <a href="${pageContext.request.contextPath}/qna/delete?qnaNo=${qnaDto.qnaNo}" class="delete-btn"><i class="fa-sharp fa-solid fa-trash"></i></a>
 		                  </td>
 		              	</c:if>
 					</tr>
@@ -240,8 +240,8 @@
 	                  <td><i class="fa-regular fa-eye"></i>		${qnaDto.qnaRead}</td>
 	                  <c:if test="${sessionScope.memberLevel == '관리자'}">
 		                  <td>
-		                  	<a href="/qna/edit?qnaNo=${qnaDto.qnaNo}" class="edit-btn me-10"><i class="fa-sharp fa-solid fa-pen"></i></a>
-		                    <a href="/qna/delete?qnaNo=${qnaDto.qnaNo}" class="delete-btn"><i class="fa-sharp fa-solid fa-trash"></i></a>
+		                  	<a href="${pageContext.request.contextPath}/qna/edit?qnaNo=${qnaDto.qnaNo}" class="edit-btn me-10"><i class="fa-sharp fa-solid fa-pen"></i></a>
+		                    <a href="${pageContext.request.contextPath}/qna/delete?qnaNo=${qnaDto.qnaNo}" class="delete-btn"><i class="fa-sharp fa-solid fa-trash"></i></a>
 		                  </td>
 		              </c:if>
 	               </tr>
@@ -314,7 +314,7 @@
 	
 		<c:otherwise>
 			<div class="row center mb-30">
-				<img src="/static/image/search.png" width=150px; height=150px;>
+				<img src="${pageContext.request.contextPath}/static/image/search.png" width=150px; height=150px;>
 				<h2>' ${vo.keyword} '에 대한 검색결과가 없습니다.</h2>
 				<h1>다른 검색어를 입력하시거나 철자와 띄어쓰기를 확인해 보세요.</h1>
 			</div>

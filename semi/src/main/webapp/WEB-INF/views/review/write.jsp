@@ -24,13 +24,11 @@
 				onImageUpload: function(files) {
 					if(files.length != 1) return;
 					
-					//console.log("비동기 파일 업로드 시작");
-					//[1] FormData [2] processData [3] contentType
 					var fd = new FormData();
 					fd.append("attach", files[0]);
 					
 					$.ajax({
-						url:"/rest/attachment/upload",
+						url:"${pageContext.request.contextPath}/rest/attachment/upload",
 						method:"post",
 						data:fd,
 						processData:false,
@@ -41,7 +39,7 @@
 																.val(response.attachmentNo);
 							$("form").prepend(input);
 
-							var imgNode = $("<img>").attr("src", "/rest/attachment/download/"+response.attachmentNo);
+							var imgNode = $("<img>").attr("src", "${pageContext.request.contextPath}/rest/attachment/download/"+response.attachmentNo);
 							$("[name=reviewContent]").summernote('insertNode', imgNode.get(0));
 						},
 						error:function(){}

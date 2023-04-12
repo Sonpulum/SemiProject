@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<link rel="stylesheet" type="text/css" href="/static/css/list.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/list.css">
 
 <style>
 
@@ -58,10 +58,10 @@
                 	<td colspan="2">
 			        <c:choose>
 						<c:when test="${profile.attachmentNo != null}">
-					   		<img class="image image-circle" width="200" height="200" src="/attachment/download?attachmentNo=${profile.attachmentNo}">
+					   		<img class="image image-circle" width="200" height="200" src="${pageContext.request.contextPath}/attachment/download?attachmentNo=${profile.attachmentNo}">
 						</c:when>
 						<c:otherwise>
-			       			<img  width="200" height="200" src="/static/image/usericon.jpg" >
+			       			<img  width="200" height="200" src="${pageContext.request.contextPath}/static/image/usericon.jpg" >
 						</c:otherwise>
 					</c:choose>
 					</td>
@@ -103,12 +103,12 @@
         </div>
 
         <div class="row center mt-20">
-            <a href="/member/password" class="form-btn2">비밀번호 변경</a>
-            <a href="/member/edit" class="form-btn2">개인정보 변경</a>
+            <a href="${pageContext.request.contextPath}/member/password" class="form-btn2">비밀번호 변경</a>
+            <a href="${pageContext.request.contextPath}/member/edit" class="form-btn2">개인정보 변경</a>
         </div>
         
         <div class="row center">
-            <a href="/member/exit" class="form-btn negative">회원 탈퇴</a>
+            <a href="${pageContext.request.contextPath}/member/exit" class="form-btn negative">회원 탈퇴</a>
         </div>
 
 </div>

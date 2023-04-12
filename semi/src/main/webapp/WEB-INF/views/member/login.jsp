@@ -9,14 +9,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/load.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/commons.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/layout.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/test.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/load.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/commons.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/layout.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/test.css">
     
-    <link rel="stylesheet" type="text/css" href="/static/css/login.css">
-
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/login.css">
+    
+	<script>
+    	const contextPath = "${pageContext.request.contextPath}";
+    </script>
+    
     <title>배낭챙겨 로그인</title>
 
     <!-- 카카오 스크립트 -->
@@ -131,7 +135,7 @@
 <body>
 <div class="container pt-30">
     <div class="logo">
-        <a href="/"><img src="/static/image/backpack.png" alt="배낭 챙겨"></a>
+        <a href="${pageContext.request.contextPath}"><img src="${pageContext.request.contextPath}/static/image/backpack.png" alt="배낭 챙겨"></a>
     </div>
     <form class="form center" style="padding: 0px;">
         <div class="line row center">
@@ -139,19 +143,22 @@
         </div>
     </form>
     <div style="display: flex; justify-content: center; align-items: center; display: flex; flex-direction: row;">
-    <div onclick="kakaoLogin();" class="p-10">
+<!--     <div onclick="kakaoLogin();" class="p-10"> -->
+    <div class="p-10">
         <a href="javascript:void(0)">
-                <img src="/static/image/kakao.png" alt="카카오 로그인">
+                <img src="${pageContext.request.contextPath}/static/image/kakao.png" alt="카카오 로그인">
         </a>
       </div>
-      <div onclick="fnFbCustomLogin();" class="p-10">
+<!--       <div onclick="fnFbCustomLogin();" class="p-10"> -->
+      <div class="p-10">
         <a href="javascript:void(0)">
-               <img src="/static/image/facebook.png" alt="페이스북 로그인">    
+               <img src="${pageContext.request.contextPath}/static/image/facebook.png" alt="페이스북 로그인">    
         </a>
        </div>
-        <div id="GgCustomLogin" class="p-10">
+<!--         <div id="GgCustomLogin" class="p-10"> -->
+        <div class="p-10">
          <a href="javascript:void(0)">
-            <img src="/static/image/google.png" alt="구글 로그인">
+            <img src="${pageContext.request.contextPath}/static/image/google.png" alt="구글 로그인">
          </a>
         </div>
        </div>

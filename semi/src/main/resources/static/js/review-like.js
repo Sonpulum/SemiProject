@@ -10,7 +10,7 @@
 	 
 	 $.ajax({
 		 
-		 url:"/rest/review/check",
+		 url:contextPath+"/rest/review/check",
 		 method:"post",
 		 data:{
 			 reviewNo : reviewNo
@@ -31,7 +31,7 @@
 	 $(".fa-thumbs-up").click(function(){
 		 $.ajax({
 			 
-			 url:"/rest/review/like",
+			 url:contextPath+"/rest/review/like",
 			 method:"post",
 			 data:{
 				 reviewNo : reviewNo

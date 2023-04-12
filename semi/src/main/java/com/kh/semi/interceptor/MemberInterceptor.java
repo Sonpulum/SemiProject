@@ -24,7 +24,7 @@ public class MemberInterceptor implements HandlerInterceptor{
 		}
 		else {//비회원이라면 : 로그인 페이지로 이동시키면서 차단
 			//리다이렉트 코드
-			response.sendRedirect("/member/login");
+			response.sendRedirect(request.getContextPath()+"/member/login");
 			return false;
 			//throw new RequireLoginException("로그인 후 이용 가능합니다");
 		}
