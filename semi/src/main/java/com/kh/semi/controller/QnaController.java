@@ -87,14 +87,18 @@ public class QnaController {
    //Q&A 목록
    @GetMapping("/list")
    public String list(@ModelAttribute("vo") QnaPaginationVO vo,
+         HttpSession session,
          Model model) {
-	  //정렬 조건을 VO 객체에 설정  
+     //정렬 조건을 VO 객체에 설정  
       int totalCount = qnaDao.selectCount(vo);
       vo.setCount(totalCount);
       
       //공지사항
       model.addAttribute("noticeList", qnaDao.selectNoticeList(1, 3));
-         
+      
+      String memberNick = (String)session.getAttribute("memberNick");
+      model.addAttribute("memberNick", memberNick);
+      
       //게시글
       List<QnaDto> list = qnaDao.selectList(vo);
       model.addAttribute("list", list);

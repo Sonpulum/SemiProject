@@ -163,7 +163,7 @@ $(function(){
 
 	<c:otherwise>
 	<div class="row center mt-30 mb-30">
-	<img src="/static/image/search.png" width="90px" height="80px">
+	<img src="${pageContext.request.contextPath}/static/image/search.png" width="90px" height="80px">
 	<h2>' ${vo.keyword} '에 대한 검색 결과가 없습니다.</h2>
 	<h1>다른 검색어를 입력하시거나 철자와 띄어쓰기를 확인해 보세요.</h1>
 	</div>

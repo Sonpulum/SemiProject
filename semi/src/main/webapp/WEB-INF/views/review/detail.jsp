@@ -37,6 +37,12 @@ $(function(){
             window.location.href = $(this).attr("href"); // 링크 이동
         }
     });
+    $(".review-content").find("img").each(function(){
+		var origin = $(this).attr("src");
+		var begin = origin.indexOf('/rest');
+		var path = contextPath + (origin.substr(begin));
+		$(this).attr("src", path);
+	});
 });
 </script>
 
@@ -48,6 +54,7 @@ $(function(){
 		<div class="reviewReplyContent">?</div>
 		<div class="reviewReplyTime">?</div>
 	</div>
+
 </script>
 
 <div class="container-800">
@@ -80,7 +87,7 @@ $(function(){
 	
 	<hr>
 	
-	<div class="row"  style="min-height: 400px;">
+	<div class="row review-content"  style="min-height: 400px;">
 		${reviewDto.reviewContent}
 	</div>
 	<hr>

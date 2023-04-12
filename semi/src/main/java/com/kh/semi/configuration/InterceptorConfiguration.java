@@ -46,6 +46,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 						"/qna/list",
 						"/qna/detail",
 						"/review/list",
+						"/review/listTotal",
 						"/review/detail"
 						);
 
@@ -56,7 +57,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 						);
 		
 		//3. RecommendInterceptor
-		registry.addInterceptor(memberInterceptor)
+		registry.addInterceptor(recommendInterceptor)
 				.addPathPatterns(
 						"/recommend/write",
 						"/recommend/delete",
