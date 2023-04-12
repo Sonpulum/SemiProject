@@ -80,6 +80,7 @@ public class MemberController {
 	       
 	       session.setAttribute("memberId", findDto.getMemberId());
 	       session.setAttribute("memberLevel", findDto.getMemberLevel());
+	       session.setAttribute("memberNick", findDto.getMemberNick());
 	       
 	       return "redirect:/";
 	    }
@@ -89,6 +90,7 @@ public class MemberController {
 		public String logout(HttpSession session) {
 			session.removeAttribute("memberId");
 			session.removeAttribute("memberLevel");
+			session.removeAttribute("memberNick");
 			session.removeAttribute("recommendMemory");
 			session.removeAttribute("reviewMemory");
 			return "redirect:/";

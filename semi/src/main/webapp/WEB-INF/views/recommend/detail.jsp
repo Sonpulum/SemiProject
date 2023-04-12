@@ -91,6 +91,14 @@ $(function(){
 	    } 
 	});
 	
+	
+	//class=reco-content 에 있는 img를 찾아서 img 내부에 있는 src에 절대경로를 추가
+	$(".reco-content").find("img").each(function(){
+		var origin = $(this).attr("src");
+		var begin = origin.indexOf('/rest');
+		var path = contextPath + (origin.substr(begin));
+		$(this).attr("src", path);
+	});
   	
 });
 </script>
@@ -105,7 +113,7 @@ $(function(){
             <span class="tag">#${recoDto.recoTheme}</span>
         </div>
         <hr>
-        <div class="row">
+        <div class="row reco-content">
             ${recoDto.recoContent}
         </div>
         

@@ -5,7 +5,7 @@
 
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-<script src="/static/js/recommend-write.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/recommend-write.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script type="text/javascript">
@@ -33,7 +33,7 @@
 					fd.append("attach", files[0]);
 					
 					$.ajax({
-						url:"/rest/attachment/upload",
+						url:"${pageContext.request.contextPath}/rest/attachment/upload",
 						method:"post",
 						data:fd,
 						processData:false,
@@ -44,7 +44,7 @@
 																.val(response.attachmentNo);
 							$("form").prepend(input);
 
-							var imgNode = $("<img>").attr("src", "/rest/attachment/download/"+response.attachmentNo);
+							var imgNode = $("<img>").attr("src", "${pageContext.request.contextPath}/rest/attachment/download/"+response.attachmentNo);
 							$("[name=recoContent]").summernote('insertNode', imgNode.get(0));
 						},
 						error:function(){}
